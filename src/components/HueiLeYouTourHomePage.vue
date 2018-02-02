@@ -1,0 +1,89 @@
+<template>
+  <div>
+    <div id="homePageDomesticTour">
+      <div class="homePageDomesticTourTitle">
+        <h4>国内旅游</h4>
+      </div>
+      <div class="homePageDomesticTourContent">
+        <ul class="homePageDomesticTourContentList clearfix">
+          <li v-for="item,index in domesticDataList">
+            <a href="javascript:;">
+              <img src="../assets/img/homePageImage.jpg" width="280" height="125">
+            </a>
+            <div class="homePageImageContentBox">
+              <div class="homePageImageMoneyAndSatisfied clearfix">
+                <span class="homePageImageMoney">￥<strong>2839</strong> 起</span>
+                <span class="homePageImageSatisfied">满意度 96%</span>
+              </div>
+              <div class="homePageImageContent">
+                <a href="javascript:;">{{item.ta_tg_Title}}</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  import {mapGetters} from 'vuex'
+  import $ from 'jquery'
+  import HueiLeYouTourHomePage from '../assets/css/HueiLeYouTourHomePage.css'
+
+  export default {
+    name: '',
+    computed: mapGetters([
+      'domesticDataList',
+      'getTourSiteListImage'
+    ]),
+    data() {
+      return {
+        cityName: ''
+      }
+    },
+    created() {
+    },
+    methods: {
+       initCity(){
+        return new Promise((relove,reject)=>{
+          var city = ['北京', '上海', '重庆', '宁夏', '新疆', '台湾', '香港', '澳门'];
+          $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', () => {
+            let newCity=''
+            for (var i = 0; i < city.length; i++) {
+              if (city[i] == remote_ip_info.province) {
+                newCity = remote_ip_info.province + '市'
+              } else {
+                newCity = remote_ip_info.province + '省';
+              }
+            }
+            relove(newCity)
+          });
+        })
+      },
+      initData() {
+
+      },
+      search() {
+        this.initData()
+      }
+    },
+    mounted() {
+      this.initCity()
+        .then(name=>{
+          this.cityName = name;
+        })
+      //国内游数据
+      var getShowGood = {
+        "loginUserID": "huileyou",
+        "loginUserPass": "123",
+        "travelWay": "0",
+        "provice": "四川省",
+      };
+
+      console.log(this.cityName)
+      this.$store.dispatch('initDomesticData', getShowGood)
+    },
+  }
+</script>
+<style>
+</style>

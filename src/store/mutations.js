@@ -1,6 +1,12 @@
 import getters from './getters'
 
 const state = {
+  //-------------首页------------
+
+  domesticDataList:[],//国内跟团游数据
+  getTourSiteListImage:'',//展示图片
+
+
   productDetailsObj: {},
   lineScheduleObj: {},
   IncludeList: [],
@@ -12,8 +18,18 @@ const state = {
   navList:[],//导航套子导航
   getLineCityList:[],//获取城市列表
   pictureList:[],//获取图片
+  bookKnowObj:{},//景点开放时间
+  getTourSiteList:{},//景点介绍
 };
 const mutations = {
+  //---------首页--------
+  //国内跟团游数据
+  initDomesticData(state,data){
+    state.domesticDataList = data;
+  },
+
+
+
   initProductDetails(state, data) {
     state.productDetailsObj = data.filter(item => {
       if (Number(item.ta_tg_ID) == 13473699) {
@@ -76,8 +92,20 @@ const mutations = {
       return false;
     })[0];
     state.pictureList = pictureListObj.ta_tg_ShowImage.split(',')
-    console.log(state.pictureList)
+  },
+  //景点开放时间
+  initBookKnowObj(state,obj){
+    state.bookKnowObj = obj;
+  },
+  //景区介绍
+  initGetTourSite(state,data){
+    state.getTourSiteList = data;
+    state.getTourSiteListImage = data.filter(item=>{
+      var arr = item.ta_tg_ShowImage.slice(',')
+      console.log(arr)
+    })
   }
+
 
 }
 export default {

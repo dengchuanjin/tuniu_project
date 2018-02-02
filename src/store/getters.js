@@ -1,4 +1,19 @@
 export default {
+  //-----------首页-----------
+  domesticDataList: state => state.domesticDataList,
+  getTourSiteListImage:state => state.getTourSiteListImage,
+
+
+
+
+
+
+
+
+
+
+
+
   productDetailsObj: state => state.productDetailsObj,
   lineScheduleObj: state => state.lineScheduleObj,
   IncludeList: state => state.IncludeList,
@@ -10,4 +25,6 @@ export default {
   navList: state => state.navList,
   getLineCityList: state => state.getLineCityList,
   pictureList: state => state.pictureList,
+  bookKnowObj: state => state.bookKnowObj,
+  getTourSiteList: state => state.getTourSiteList,
 }

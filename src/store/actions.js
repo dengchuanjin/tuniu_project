@@ -1,5 +1,23 @@
 import axios from 'axios';
 export default {
+  //-------------------首页-----------------
+  //国内游
+  initDomesticData({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood',JSON.stringify(data),{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data=>{
+          var data = data.data;
+          console.log(data)
+          if( Number(data.resultcode) == 200 ){
+            commit('initDomesticData',data.data)
+          }
+        })
+    })
+  },
   //产品详情
   initProductDetails({commit},data){
     return new Promise(function (relove, reject) {
@@ -146,6 +164,43 @@ export default {
           var data = data.data;
           if(Number(data.resultcode) == 200){
             commit('initPictureList',data.data);
+          }
+        })
+    })
+  },
+
+  //---------------------   门票 ----------------
+
+  //预定需知景区开放时间
+  initBookKnowObj({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://hly.mp.1000da.com.cn/BookKnow/GetBookKnowList',JSON.stringify(data),{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data=>{
+          var data = data.data;
+          if( Number(data.resultcode) == 200 ){
+            commit('initBookKnowObj',data.data)
+            relove()
+          }
+        })
+    })
+  },
+  //景区介绍
+  initGetTourSite({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://hly.mp.1000da.com.cn/TourSite/GetTourSite',JSON.stringify(data),{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data=>{
+          var data = data.data;
+          if( Number(data.resultcode) == 200 ){
+            commit('initGetTourSite',data.data)
+            relove()
           }
         })
     })

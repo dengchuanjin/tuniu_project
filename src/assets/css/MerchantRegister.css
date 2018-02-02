@@ -1,0 +1,45 @@
+.MerchantRegisterWrapHeader {
+  width:1200px;
+  margin: 0 auto;
+}
+.MerchantRegisterWrapHeaderLogoBox {
+  float: left;
+  padding:10px 0;
+}
+.MerchantRegisterWrapHeaderHomePage {
+  float: right;
+  font:14px/24px "微软雅黑";
+  margin-top:30px;
+}
+.MerchantRegisterWrapHeaderHomePage>a {
+  color: #f60;
+  padding: 0 10px;
+  border:1px solid transparent;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+
+}
+.MerchantRegisterWrapHeaderHomePage>a:hover {
+  border-color: #f60;
+}
+.MerchantRegisterNavWrap {
+  width:100%;
+  background-color: #3d424e;
+  font: 14px/37px "微软雅黑";
+  border-bottom: 3px solid #fc821e;
+}
+.MerchantRegisterNav {
+  width:1200px;
+  margin: 0 auto;
+}
+.MerchantRegisterNavContent a {
+  float: left;
+  padding: 0 60px;
+  color: #fff;
+  background-color: #f60;
+}
+.MerchantRegisterTabel {
+  width:1200px;
+  margin: 0 auto;
+}
