@@ -4,10 +4,11 @@
     <section id="wrap" v-show="iswrap">
       <!--旅游内容-->
       <div class="productBody">
-        <h3>{{lineScheduleObj.ts_pt_Name}}</h3>
+        <h3>{{productDetailsObj.ts_pt_Name}}</h3>
         <div class="tourismType clearfix">
           <strong>跟团游</strong>
-          <span><i>编号300071416：</i>本产品由云南乐视国际旅行社有限公司直售，并提供咨询/预订/售后服务，合同需与商家直接签</span>
+          <!--本产品由云南乐视国际旅行社有限公司直售，并提供咨询/预订/售后服务，合同需与商家直接签-->
+          <span><i>编号{{productDetailsObj.ts_pt_GoodsListID}}：</i></span>
         </div>
         <div class="productBodyIntroduce clearfix">
           <div class="pictureShowAndTime">
@@ -15,8 +16,8 @@
               <div class="pictureShowList">
                 <div class="block">
                   <el-carousel height="280px">
-                    <el-carousel-item v-for="item in pictureList">
-                      <img :src="item" height="280" width="500">
+                    <el-carousel-item v-for="item,index in pictureList" :key="index">
+                      <img height="280" width="500" v-lazy="item">
                     </el-carousel-item>
                   </el-carousel>
                 </div>
@@ -468,8 +469,7 @@
       getNum(num) {
         return num < 10 ? '0' + num : '' + num;
       },
-      initData() {
-        this.isLoading = true
+      async initData() {
         let date = new Date()
         let m = date.getMonth() + 1;
         let y = date.getFullYear()
@@ -478,31 +478,28 @@
             name: y + '年' + this.getNum(m + i) + '月'
           })
         }
+        let tradeID = this.$route.params.id
         //产品详情
         var getTradeGoodInfo = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
-          "tradeID": "18111729770",
-          "page": 1,
-          "rows": 10
-        }
-        this.$store.dispatch('initProductDetails', getTradeGoodInfo)
+          "goodID": tradeID,
+        };
+        await this.$store.dispatch('initProductDetails', getTradeGoodInfo)
         //线路出发城市
         var getLineCityOptions = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "lineID": 3
-
-        }
-        this.$store.dispatch('initGetLineCity', getLineCityOptions)
+        };
+        await this.$store.dispatch('initGetLineCity', getLineCityOptions)
         //线路数据
         var getLineInfo = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "lineID": "1"
-        }
-        this.$store.dispatch('initLineSchedule', getLineInfo)
-
+        };
+        await this.$store.dispatch('initLineSchedule', getLineInfo)
 
         //线路菜单
         var getLineMenuInfo = {
@@ -510,7 +507,7 @@
           "loginUserPass": "123",
           "lineID": "1"
         }
-        this.$store.dispatch('initLineMenu', getLineMenuInfo)
+        await this.$store.dispatch('initLineMenu', getLineMenuInfo)
 
         //轮播图
         var getTopShow = {
@@ -518,10 +515,7 @@
           "loginUserPass": "123",
           "itemID": "1",
         }
-        this.$store.dispatch('initPictureList',getTopShow)
-        setTimeout(()=>{
-          this.isLoading = false;
-        },1000)
+        await this.$store.dispatch('initPictureList',getTopShow)
       },
       changeType(index) {
         let spans = this.$refs.headerNav.querySelectorAll('span');
@@ -652,7 +646,10 @@
 
   },
     created() {
-      this.initData()
+      this.$store.commit('showLoading')
+      this.initData().then(()=>{
+        this.$store.commit('hideLoading')
+      });
       this.data = cityOptions;
     },
     updated() {

@@ -7,8 +7,9 @@
       <div class="homePageDomesticTourContent">
         <ul class="homePageDomesticTourContentList clearfix">
           <li v-for="item,index in domesticDataList">
+
             <a href="javascript:;">
-              <img src="../assets/img/homePageImage.jpg" width="280" height="125">
+              <img v-lazy="item.oneImg" width="280" height="125">
             </a>
             <div class="homePageImageContentBox">
               <div class="homePageImageMoneyAndSatisfied clearfix">
@@ -16,7 +17,7 @@
                 <span class="homePageImageSatisfied">满意度 96%</span>
               </div>
               <div class="homePageImageContent">
-                <a href="javascript:;">{{item.ta_tg_Title}}</a>
+                <a href="javascript:;" @click="toDetail(item.ta_tg_ID)">{{item.ta_tg_Title}}</a>
               </div>
             </div>
           </li>
@@ -65,6 +66,10 @@
       },
       search() {
         this.initData()
+      },
+      //点击跳转到产品线路详情
+      toDetail(id){
+        this.$router.push({ name: 'HeelTour', params: { id: id }})
       }
     },
     mounted() {

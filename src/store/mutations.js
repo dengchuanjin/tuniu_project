@@ -2,7 +2,7 @@ import getters from './getters'
 
 const state = {
   //-------------首页------------
-
+  isLoading:false,//loading
   domesticDataList:[],//国内跟团游数据
   getTourSiteListImage:'',//展示图片
 
@@ -22,6 +22,13 @@ const state = {
   getTourSiteList:{},//景点介绍
 };
 const mutations = {
+  //loading设置
+  showLoading(state){
+    state.isLoading = true;
+  },
+  hideLoading(state){
+    state.isLoading = false;
+  },
   //---------首页--------
   //国内跟团游数据
   initDomesticData(state,data){
@@ -31,12 +38,7 @@ const mutations = {
 
 
   initProductDetails(state, data) {
-    state.productDetailsObj = data.filter(item => {
-      if (Number(item.ta_tg_ID) == 13473699) {
-        return true;
-      }
-      return false;
-    })[0]
+    state.productDetailsObj = data
   },
   initLineSchedule(state, obj) {
     state.lineScheduleObj = obj;

@@ -213,6 +213,7 @@
     computed: mapGetters([
       'navList',
       'lineScheduleObj',
+      'isLoading'
     ]),
     data() {
       return {
@@ -221,7 +222,6 @@
         getName: '获取动态验证码',
         smSiName: '所有产品',
         isShowMask: false,
-        isLoading: false,
         UserLoadingShow: true,
         UserRegisterBoxShow: false,
         isDisabled: false,
@@ -236,9 +236,12 @@
           "loginUserPass": "123",
           "isDelete": 0
         }
-        this.isLoading = true;
+        this.$store.commit('showLoading')
         this.$store.dispatch('initNavList', getSystemMenuInfo)
-        this.isLoading = false;
+        .then(()=>{
+          this.$store.commit('hideLoading')
+        })
+
       },
       //选择旅游类型
       changeTaualType(id) {

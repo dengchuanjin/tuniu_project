@@ -12,7 +12,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import store from './store/index'
 import axios from 'axios'
 import qs from 'qs'
-
+import VueLazyLoad from 'vue-lazyload'
+Vue.use(VueLazyLoad,{
+  error:'../static/img/error.jpeg',
+  loading:'../static/img/loading.gif'
+});
 Vue.use(ElementUI)
 Vue.config.productionTip = false;
 // axios.interceptors.request.use((config) => {

@@ -36,7 +36,7 @@ export default [
         name: 'HueiLeYouTourHomePage'
       },
       {
-        path: 'HeelTour',
+        path: 'HeelTour/:id',
         components: {
           default: Comment,
           User: HeelTour
@@ -65,6 +65,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'MerchantRegister'}
+    redirect: {name: 'HueiLeYouTourHomePage'}
   },
 ]

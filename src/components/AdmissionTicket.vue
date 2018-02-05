@@ -5,7 +5,7 @@
         <div class="pictureBox">
           <div class="block">
             <el-carousel height="300px">
-              <el-carousel-item v-for="item in pictureList">
+              <el-carousel-item v-for="item,index in pictureList" :key="index">
                 <img :src="item" height="300" width="500">
               </el-carousel-item>
             </el-carousel>

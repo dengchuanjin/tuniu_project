@@ -1,17 +1,10 @@
 export default {
+
+  //loading
+  isLoading: state => state.isLoading,
   //-----------首页-----------
   domesticDataList: state => state.domesticDataList,
-  getTourSiteListImage:state => state.getTourSiteListImage,
-
-
-
-
-
-
-
-
-
-
+  getTourSiteListImage: state => state.getTourSiteListImage,
 
 
   productDetailsObj: state => state.productDetailsObj,

@@ -11,8 +11,11 @@ export default {
       })
         .then(data=>{
           var data = data.data;
-          console.log(data)
           if( Number(data.resultcode) == 200 ){
+            let resulte = data.data;
+            for(var i=0;i<resulte.length;i++){
+              resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
+            }
             commit('initDomesticData',data.data)
           }
         })
@@ -21,7 +24,7 @@ export default {
   //产品详情
   initProductDetails({commit},data){
     return new Promise(function (relove, reject) {
-      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/getTradeGoodInfo',JSON.stringify(data),{
+      axios.post('http://hly.lxs.1000da.com.cn/LinePrepare/GetTradeLineByGood',JSON.stringify(data),{
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -29,7 +32,14 @@ export default {
         .then(data=>{
           var data = data.data;
             if( Number(data.resultcode) == 200 ){
-              commit('initProductDetails',data.data)
+              let resulte = data.data;
+              for(var i=0;i<resulte.length;i++){
+                if(!resulte[i].ts_tg_IntroduceReason){
+                  resulte[i].ts_tg_IntroduceReason = '<span></span>'
+                }
+              }
+              commit('initProductDetails',resulte)
+              relove()
             }
         })
     })
@@ -71,6 +81,7 @@ export default {
               return false
             })
             commit('noWrapMoney',arr2);
+            relove()
           }
 
         })
@@ -95,6 +106,7 @@ export default {
               }
             }
             commit('initLineMenu',data.data)
+            relove()
           }
         })
     })
@@ -131,6 +143,7 @@ export default {
           var data = data.data;
           if( Number(data.resultcode) == 200 ){
             commit('initNavList',data.data)
+            relove()
           }
         })
     })
@@ -164,6 +177,7 @@ export default {
           var data = data.data;
           if(Number(data.resultcode) == 200){
             commit('initPictureList',data.data);
+            relove()
           }
         })
     })
