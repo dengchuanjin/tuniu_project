@@ -45,11 +45,11 @@
     created() {
     },
     methods: {
-       initCity(){
-        return new Promise((relove,reject)=>{
+      initCity() {
+        return new Promise((relove, reject) => {
           var city = ['北京', '上海', '重庆', '宁夏', '新疆', '台湾', '香港', '澳门'];
           $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', () => {
-            let newCity=''
+            let newCity = ''
             for (var i = 0; i < city.length; i++) {
               if (city[i] == remote_ip_info.province) {
                 newCity = remote_ip_info.province + '市'
@@ -68,25 +68,27 @@
         this.initData()
       },
       //点击跳转到产品线路详情
-      toDetail(id){
-        this.$router.push({ name: 'HeelTour', params: { id: id }})
+      toDetail(id) {
+        this.$router.push({name: 'HeelTour', params: {id: id}})
       }
     },
     mounted() {
       this.initCity()
-        .then(name=>{
+        .then(name => {
           this.cityName = name;
         })
       //国内游数据
-      var getShowGood = {
-        "loginUserID": "huileyou",
-        "loginUserPass": "123",
-        "travelWay": "0",
-        "provice": "四川省",
-      };
+      let _this = this;
+      setTimeout(() => {
+        let getShowGood = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "travelWay": "0",
+          "provice": _this.cityName,
+        };
+        this.$store.dispatch('initDomesticData', getShowGood)
+      }, 200)
 
-      console.log(this.cityName)
-      this.$store.dispatch('initDomesticData', getShowGood)
     },
   }
 </script>

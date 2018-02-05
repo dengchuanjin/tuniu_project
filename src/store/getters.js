@@ -20,4 +20,10 @@ export default {
   pictureList: state => state.pictureList,
   bookKnowObj: state => state.bookKnowObj,
   getTourSiteList: state => state.getTourSiteList,
+
+
+  //商户注册
+  provinceDataList: state => state.provinceDataList,
+  cityDataList: state => state.cityDataList,
+  countyDataList: state => state.countyDataList,
 }

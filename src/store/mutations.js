@@ -20,6 +20,11 @@ const state = {
   pictureList:[],//获取图片
   bookKnowObj:{},//景点开放时间
   getTourSiteList:{},//景点介绍
+
+//----------商户注册-----------
+  provinceDataList:[],//获取省
+  cityDataList:[],//获取市
+  countyDataList:[],//获取县
 };
 const mutations = {
   //loading设置
@@ -106,8 +111,18 @@ const mutations = {
       var arr = item.ta_tg_ShowImage.slice(',')
       console.log(arr)
     })
+  },
+  //--------------商户注册----------
+  //获取省
+  initProvinceData(state,data){
+    state.provinceDataList = data;
+  },
+  initCityData(state,data){
+    state.cityDataList = data;
+  },
+  initCountyData(state,data){
+    state.countyDataList = data;
   }
-
 
 }
 export default {
