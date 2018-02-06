@@ -9,7 +9,7 @@
 
         </div>
         <ul class="homePageDomesticTourContentList clearfix">
-          <li v-for="item,index in domesticDataList">
+          <li v-for="item,index in domesticDataList"  @click="toDetail(item.ta_tg_ID)">
 
             <a href="javascript:;">
               <img v-lazy="item.oneImg" width="220" height="125">
@@ -20,7 +20,7 @@
                 <span class="homePageImageSatisfied">满意度 96%</span>
               </div>
               <div class="homePageImageContent">
-                <a href="javascript:;" @click="toDetail(item.ta_tg_ID)">{{item.ta_tg_Title}}</a>
+                <a href="javascript:;">{{item.ta_tg_Title}}</a>
               </div>
             </div>
           </li>
@@ -72,26 +72,28 @@
       },
       //点击跳转到产品线路详情
       toDetail(id) {
+        let arr = this.domesticDataList.filter(item=>{
+          if(item.ta_tg_ID==id){
+            return true;
+          }
+          return false;
+        });
+        let images = JSON.stringify(arr[0].ta_tg_ShowImage);
+        sessionStorage.setItem('images',images);
         this.$router.push({name: 'HeelTour', params: {id: id}})
       }
     },
     mounted() {
       this.initCity()
         .then(name => {
-          this.cityName = name;
+          let getShowGood = {
+            "loginUserID": "huileyou",
+            "loginUserPass": "123",
+            "travelWay": "0",
+            "provice": name,
+          };
+          this.$store.dispatch('initDomesticData', getShowGood)
         })
-      //国内游数据
-      let _this = this;
-      setTimeout(() => {
-        let getShowGood = {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "travelWay": "0",
-          "provice": _this.cityName,
-        };
-        this.$store.dispatch('initDomesticData', getShowGood)
-      }, 200)
-
     },
   }
 </script>

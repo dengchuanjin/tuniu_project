@@ -17,7 +17,7 @@ export default {
   newPriceDetail: state => state.newPriceDetail,
   navList: state => state.navList,
   getLineCityList: state => state.getLineCityList,
-  pictureList: state => state.pictureList,
+  // pictureList: state => state.pictureList,
   bookKnowObj: state => state.bookKnowObj,
   getTourSiteList: state => state.getTourSiteList,
 

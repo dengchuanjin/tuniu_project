@@ -17,7 +17,7 @@ const state = {
   newPriceDetail: {},//当前日期详情
   navList:[],//导航套子导航
   getLineCityList:[],//获取城市列表
-  pictureList:[],//获取图片
+  // pictureList:[],//获取图片
   bookKnowObj:{},//景点开放时间
   getTourSiteList:{},//景点介绍
 
@@ -98,16 +98,16 @@ const mutations = {
   initGetLineCity(state,data){
     state.getLineCityList = data;
   },
-  //轮播图
-  initPictureList(state,data){
-    var pictureListObj = data.filter(item=>{
-      if( Number(item.ta_tg_ID) == 13473699 ){
-        return true;
-      }
-      return false;
-    })[0];
-    state.pictureList = pictureListObj.ta_tg_ShowImage.split(',')
-  },
+  // //轮播图
+  // initPictureList(state,data){
+  //   var pictureListObj = data.filter(item=>{
+  //     if( Number(item.ta_tg_ID) == 13473699 ){
+  //       return true;
+  //     }
+  //     return false;
+  //   })[0];
+  //   state.pictureList = pictureListObj.ta_tg_ShowImage.split(',')
+  // },
   //景点开放时间
   initBookKnowObj(state,obj){
     state.bookKnowObj = obj;

@@ -177,7 +177,7 @@
       <!--主导航-->
       <div class="mainNavWrap">
         <nav class="mainNavWrapContent">
-          <ul class="mainNavWrapContentList  clearfix">
+          <ul class="mainNavWrapContentList  clearfix" ref="mainNavWrapContentList">
             <!--<li v-for="item in navList">-->
             <!--<a :href="'http://'+item.sm_si_GoURL" class="mainNavWrapContentListActive">{{item.sm_si_Name}}<em-->
             <!--v-show="item.sysChildList.length != 0"></em></a>-->
@@ -214,6 +214,11 @@
       'lineScheduleObj',
       'isLoading'
     ]),
+    watch: {
+      '$route' (to, from) {
+        this.$store.commit('hideLoading')
+      }
+    },
     data() {
       return {
         isLoginShow: false,
@@ -251,6 +256,18 @@
       this.initData();
     },
     mounted() {
+      let ul = this.$refs.mainNavWrapContentList;
+      let lis = ul.children;
+      lis[0].className = 'active'
+      for(let i=0;i<lis.length;i++){
+        lis[i].onclick=function () {
+          for(var j=0;j<lis.length;j++){
+            lis[j].className = ''
+          }
+          lis[i].className = 'active';
+        }
+      }
+
       if (sessionStorage.getItem('InformetionObj')) {
         var InformetionObj = JSON.parse(sessionStorage.getItem('InformetionObj'))
         this.isLogin = false;
@@ -260,6 +277,11 @@
     },
   }
 </script>
-<style>
-
+<style scoped>
+.active{
+  background-color: orange;
+}
+.active a{
+  color: #fff;
+}
 </style>

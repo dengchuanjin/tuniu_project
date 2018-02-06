@@ -42,41 +42,43 @@
                     <li>五</li>
                     <li>六</li>
                   </ul>
-                  <ul class="calendarContentList clearfix" id="calendarContentList">
+                  <ul class="calendarContentList clearfix" id="calendarContentList" v-loading="showCalendar">
                     <li style="color: #ccc" v-for="item in arr1">{{item}}</li>
                     <li v-for="item in arr4">{{item}}</li>
-                    <li v-for="item in arr3">{{"今天"}}
+                    <!--今天-->
+                    <li v-for="item in arr3"  @click="changeTime(item.day)">{{"今天"}}
                       <div v-show="item.isJ">
                         <span>充足</span>
-                        <strong>￥{{item.ts_pp_Price}}起</strong>
+                        <strong>￥{{item.day.ts_pp_Price}}起</strong>
                         <div class="mask">
                           <i></i>
                           <div class="maskContent clearfix">
                             <div>
                               <strong>成人票:</strong>
-                              <span>￥{{item.ts_pp_Price}}起</span>
+                              <span>￥{{item.day.ts_pp_Price}}起</span>
                             </div>
                             <div>
                               <strong>日期:</strong>
-                              <span>{{item.ts_pp_Date}}</span>
+                              <span>{{item.day.ts_pp_Date}}</span>
                             </div>
                             <div>
                               <strong>儿童票:</strong>
-                              <span>￥{{item.ts_pp_ChildPrice}}起</span>
+                              <span>￥{{item.day.ts_pp_ChildPrice}}起</span>
                             </div>
                             <div>
                               <strong>出发城市:</strong>
-                              <span>{{item.ts_pp_FromPlace}}</span>
+                              <span>{{item.day.ts_pp_FromPlace}}</span>
                             </div>
                             <div>
                               <strong>剩余票:</strong>
-                              <span>{{item.ts_pp_Person}}张</span>
+                              <span>{{item.day.ts_pp_Person}}张</span>
                             </div>
                           </div>
                         </div>
                       </div>
                     </li>
-                    <li v-for="item in arr5">{{item.n}}
+                    <!--有价格的-->
+                    <li v-for="item in arr5" @click="changeTime(item)">{{item.n}}
                       <div v-show="item.ts_pp_Price">
                         <span v-if="item.ts_pp_Person>10">充足</span>
                         <span v-else>不多</span>
@@ -120,7 +122,7 @@
             <div class="ticketPrice">
               <i></i>
               <div class="ticketPriceContent clearfix">
-                <span>促销价:<span>￥</span><strong>1788</strong>起<a href="javascript:;">起价说明</a></span>
+                <span>促销价:<span>￥</span><strong>{{productDetailsObj.money}}</strong>起<a href="javascript:;">起价说明</a></span>
                 <div class="evaluate">
                   <div class="satisfaction">
                     <span>满意度</span>
@@ -195,19 +197,39 @@
                     </div>
                   </li>
                   <li>
-                    <span>选择数量:</span>
+                    <span>选择数量:</span><i style="margin-left: 20px">成人:</i>
+                    <div class="bottom">
+                      <el-tooltip class="item" effect="light" content="此价格根据机票有浮动，详情请咨询客服." placement="bottom-start">
+                        <i class=" icon-info22"></i>
+                      </el-tooltip>
+                      <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.adultPrice">¥{{addOrderOptions.adultPrice}}</span>
+                    </div>
                     <el-input-number
-                      v-model="addOrderOptions.orderNumber"
+                      v-model="addOrderOptions.adultNumber"
                       @change="handleChange"
                       size="small"
-                      :min="1"
-                      :max="10"
+                      :min="0"
+                      :max="100"
                       label="描述文字"
                     ></el-input-number>
+                    <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.adultYu">余{{addOrderOptions.adultYu}}</span>
+                  </li>
+                  <li>
+                    <i style="margin-left:70px;margin-right: 30px">儿童:</i>
+                    <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.childPrice">¥{{addOrderOptions.childPrice}}</span>
+                    <el-input-number
+                      v-model="addOrderOptions.childNumber"
+                      @change="handleChange"
+                      size="small"
+                      :min="0"
+                      :max="100"
+                      label="描述文字"
+                    ></el-input-number>
+              <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.childYu">余{{addOrderOptions.childYu}}</span>
                   </li>
                 </ul>
                 <div class="button clearfix">
-                  <a href="javascript:;" @click="immediatelyReserveSubmit">立即预定</a>
+                  <a href="javascript:;" @click="immediatelyReserveSubmit">立即预订</a>
                   <a href="javascript:;">APP优惠<i></i></a>
                 </div>
               </div>
@@ -235,14 +257,14 @@
                     <span></span>
                     <h5>推荐理由</h5>
                   </div>
-                  <div class="reason" v-html="productDetailsObj.ts_tg_IntroduceReason"></div>
+                  <div class="reason" v-html="productDetailsObj.ts_pt_BookKnow"></div>
                 </div>
                 <div>
                   <div class="couponsActive clearfix">
                     <span></span>
                     <h5>产品介绍</h5>
                   </div>
-                  <div class="reason" v-html="productDetailsObj.ta_tg_Describe"></div>
+                  <div class="reason" v-html="productDetailsObj.ts_pt_ReturnRule"></div>
                 </div>
               </div>
             </div>
@@ -281,7 +303,7 @@
                   </div>
                 </div>
                 <div class="imgBox">
-                  <img :src="items" alt="" v-for="items in item.ts_pt_ShowImageList">
+                  <img v-lazy="items" alt="" v-for="items in item.ts_pt_ShowImageList">
                 </div>
               </li>
             </ul>
@@ -382,10 +404,11 @@
       'getCityList',
       'getCountyList',
       'getLineCityList',
-      'pictureList'
     ]),
     data() {
       return {
+        showCalendar:false,
+        pictureList:[],
         isActiveSearchMonth: false,
         isActive: false,
         iswrap: true,
@@ -407,16 +430,30 @@
         userSearch: {
           name: ''
         },
+        id:'',
         cityValue: '',
         countyValue: '',
         addOrderOptions:{
           provinceValue: '',
           DayValue:'',
-          orderNumber: 1,
+          adultNumber: 0,//成人
+          adultYu:'',//成人余票
+          adultPrice:'',//成人价格
+          childPrice:'',//儿童价格
+          childYu:'',//儿童余票
+          childNumber:0,//儿童
         },
       }
     },
     methods: {
+      //选中日历
+      changeTime(item){
+        this.addOrderOptions.DayValue = item.ts_pp_Date
+        this.addOrderOptions.adultYu = item.ts_pp_Person
+        this.addOrderOptions.childYu = item.ts_pp_Child
+        this.addOrderOptions.adultPrice = item.ts_pp_Price
+        this.addOrderOptions.childPrice = item.ts_pp_ChildPrice
+      },
       //日历选项卡
       changeSearchMonth(index) {
         let lis = this.$refs.monthSelecte.querySelectorAll('li');
@@ -426,16 +463,21 @@
         }
         lis[index].querySelector('a').className = 'active'
       },
-      getCitySearch(city) {
+      getCitySearch(id,city,isOne) {
+
         $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', () => {
           this.userSearch.name = remote_ip_info.city + '市';
+          if(isOne){
+            this.addOrderOptions.provinceValue = remote_ip_info.city + '市'
+          }
+//
           let options = {
             "loginUserID": "huileyou",
             "loginUserPass": "123",
             "operateUserID": "",
             "operateUserName": "",
             "pcName": "",
-            "goodID": "3",
+            "lineID": id,
             "city": city ? city : remote_ip_info.city + '市'//remote_ip_info.city +
           };
           this.$store.dispatch('initTimesPrice', options)
@@ -444,15 +486,16 @@
               var str = '';
               var year = new Date().getFullYear();
               var month = new Date().getMonth();
-
-              this.get(year, month, this, data);
+              this.showCalendar = true;
+              this.get(year, month, this, data).then(()=>{
+                this.showCalendar = false;
+              });
               let index = Infinity;
               for (var i = 0; i < data.length; i++) {
                 if (data[i].ts_pp_Price < index) {
                   index = data[i].ts_pp_Price
                 }
               }
-
               for (var i = 0; i < 4; i++) {
                 this.selectMonth.push({
                   year,
@@ -464,7 +507,14 @@
         });
       },
       getSearchCity() {
-        this.getCitySearch(this.provinceValue);
+        this.getCitySearch(this.id,this.addOrderOptions.provinceValue);
+        this.addOrderOptions.DayValue = '';
+        this.addOrderOptions.adultNumber=0,//成人
+        this.addOrderOptions.adultYu='',//成人余票
+        this.addOrderOptions.adultPrice='',//成人价格
+        this.addOrderOptions.childPrice='',//儿童价格
+        this.addOrderOptions.childYu='',//儿童余票
+        this.addOrderOptions.childNumber=''//儿童
       },
       getNum(num) {
         return num < 10 ? '0' + num : '' + num;
@@ -485,19 +535,21 @@
           "loginUserPass": "123",
           "goodID": tradeID,
         };
-        await this.$store.dispatch('initProductDetails', getTradeGoodInfo)
+        //获取产品线路id
+        let id = await this.$store.dispatch('initProductDetails', getTradeGoodInfo)
+
         //线路出发城市
         var getLineCityOptions = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
-          "lineID": 3
+          "lineID": id
         };
         await this.$store.dispatch('initGetLineCity', getLineCityOptions)
         //线路数据
         var getLineInfo = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
-          "lineID": "1"
+          "goodID": tradeID,
         };
         await this.$store.dispatch('initLineSchedule', getLineInfo)
 
@@ -505,17 +557,18 @@
         var getLineMenuInfo = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
-          "lineID": "1"
-        }
+          "lineID": id
+        };
         await this.$store.dispatch('initLineMenu', getLineMenuInfo)
+        return id
 
-        //轮播图
-        var getTopShow = {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "itemID": "1",
-        }
-        await this.$store.dispatch('initPictureList',getTopShow)
+//        //轮播图
+//        var getTopShow = {
+//          "loginUserID": "huileyou",
+//          "loginUserPass": "123",
+//          "itemID": "1",
+//        };
+//        await this.$store.dispatch('initPictureList',getTopShow)
       },
       changeType(index) {
         let spans = this.$refs.headerNav.querySelectorAll('span');
@@ -547,66 +600,88 @@
         return new Date(year, month + 1, 1, -1, 0, 0).getDate();
       },
       get(year, month, _this, data) {
-        year = Number(year);
-        month = Number(month);
-        var newArr = []
-        _this.arr1 = []
-        _this.arr4 = []
-        _this.arr2 = []
-        _this.arr5 = []
-        _this.arr3 = []
-        for (var i = 1; i <= 42; i++) {
-          var v = i - this.getWeek(year, month);
-          if (v < 1) {
-            var topMonth = this.getDates(year, month - 1);
+        return new Promise((relove,reject)=>{
+          year = Number(year);
+          month = Number(month);
+          var newArr = []
+          _this.arr1 = []
+          _this.arr4 = []
+          _this.arr2 = []
+          _this.arr5 = []
+          _this.arr3 = []
+          for (var i = 1; i <= 42; i++) {
+            var v = i - this.getWeek(year, month);
+            if (v < 1) {
+              var topMonth = this.getDates(year, month - 1);
 
-            _this.arr1.push(topMonth - (this.getWeek(year, month) - i))
-          } else if (v > this.getDates(year, month)) {
-            var booToomMonth = this.getDates(year, month + 1);
-            _this.arr2.push(v - this.getDates(year, month))
-          } else if (v == new Date().getDate() && year == new Date().getFullYear() && month == new Date().getMonth()) {
-            for (var n = 0; n < data.length; n++) {
-              if (data[n].day == new Date().getDate()) {
+              _this.arr1.push(topMonth - (this.getWeek(year, month) - i))
+            } else if (v > this.getDates(year, month)) {
+              var booToomMonth = this.getDates(year, month + 1);
+              _this.arr2.push(v - this.getDates(year, month))
+            } else if (v == new Date().getDate() && year == new Date().getFullYear() && month == new Date().getMonth()) {
 
-                data[0].n = v;
-                _this.arr3.push({
-                  isJ: true,
-                  day: data[v - new Date().getDate()]
-                })
+              for (var n = 0; n < data.length; n++) {
+                if (data[n].day == new Date().getDate()) {
+                  data[0].n = v;
+                  _this.arr3.push({
+                    isJ: true,
+                    day: data[v - new Date().getDate()]
+                  })
+//                _this.arr3.pop()
+                }
+              }
+              if( _this.arr3.length>1){
                 _this.arr3.shift()
               }
+              if(!_this.arr3.length){
+                _this.arr3.push({
+                  isJ: false,
+                  day: data[v - new Date().getDate()]
+                })
+              }
+//              if( _this.arr3.isJ){
+//                _this.arr3.push({
+//                  isJ: false,
+//                  day: data[v - new Date().getDate()]
+//                })
+//              }else{
+//                _this.arr3.push({
+//                  isJ: false,
+//                  day: data[v - new Date().getDate()]
+//                })
+//              }
+
+//              console.log( _this.arr3)
             }
-            _this.arr3.push({
-              isJ: false,
-              day: data[v - new Date().getDate()]
+            else {
+              if (v < new Date().getDate()) {
+
+                _this.arr4.push(v)
+              } else {
+                newArr.push(v)
+              }
+            }
+          }
+          for (var j = 0; j < newArr.length; j++) {
+            for (var m = 0; m < data.length; m++) {
+              if (data[m].day && data[m].day == newArr[j]) {
+
+                data[m].n = newArr[j];
+                _this.arr5.push(data[m])
+              }
+            }
+            _this.arr5.push({
+              n: newArr[j],
             })
           }
-          else {
-            if (v < new Date().getDate()) {
+          var hash = {};
 
-              _this.arr4.push(v)
-            } else {
-              newArr.push(v)
-            }
-          }
-        }
-        for (var j = 0; j < newArr.length; j++) {
-          for (var m = 0; m < data.length; m++) {
-            if (data[m].day && data[m].day == newArr[j]) {
-              data[m].n = newArr[j];
-              _this.arr5.push(data[m])
-            }
-          }
-          _this.arr5.push({
-            n: newArr[j],
-          })
-        }
-        var hash = {};
-
-        _this.arr5 = _this.arr5.reduce(function (item, next) {
-          hash[next.n] ? '' : hash[next.n] = true && item.push(next);
-          return item
-        }, [])
+          _this.arr5 = _this.arr5.reduce(function (item, next) {
+            hash[next.n] ? '' : hash[next.n] = true && item.push(next);
+            return item
+          }, [])
+          relove()
+        })
       },
       //累加器
       handleChange(value) {
@@ -616,38 +691,47 @@
       changeTaualType(id){
         this.smSiName = id.sm_si_Name
       },
+      //立即预订
       immediatelyReserveSubmit(){
-        var makeOrder = {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "operateUserID": "",
-          "operateUserName": "",
-          "pcName": "",
-          "data": [
-            {
-              "ts_to_od_TouristTraderID": 'qingchunzhilv',
-              "ts_to_od_TouristTraderName": "青春之旅",
-              "ts_to_od_GoodsListID": "001",
-              "ts_to_od_GoodsListName": "鸡一份",
-              "ts_to_od_SellID": "qingchun",
-              "ts_to_od_SellName": "青春",
-              "ts_to_od_SellPrice": 21,
-              "ts_to_od_UserID": "1111",
-              "ts_to_od_UserName": "正兴鸡排",
-              "ts_to_od_Phone": "18111729770",
-              "ts_to_od_CertNo": "身份证号码",
-              "ts_to_od_SellPrice": 21.00
-            }
-          ]
-
-        }
         console.log(this.addOrderOptions)
+//        var makeOrder = {
+//          "loginUserID": "huileyou",
+//          "loginUserPass": "123",
+//          "operateUserID": "",
+//          "operateUserName": "",
+//          "pcName": "",
+//          "data": [
+//            {
+//              "ts_to_od_TouristTraderID": 'qingchunzhilv',
+//              "ts_to_od_TouristTraderName": "青春之旅",
+//              "ts_to_od_GoodsListID": "001",
+//              "ts_to_od_GoodsListName": "鸡一份",
+//              "ts_to_od_SellID": "qingchun",
+//              "ts_to_od_SellName": "青春",
+//              "ts_to_od_SellPrice": 21,
+//              "ts_to_od_UserID": "1111",
+//              "ts_to_od_UserName": "正兴鸡排",
+//              "ts_to_od_Phone": "18111729770",
+//              "ts_to_od_CertNo": "身份证号码",
+//              "ts_to_od_SellPrice": 21.00
+//            }
+//          ]
+//
+//        }
       },
 
   },
     created() {
-      this.$store.commit('showLoading')
-      this.initData().then(()=>{
+      //获取轮播图
+      this.$store.commit('showLoading');
+      let images = JSON.parse(sessionStorage.getItem('images')).split(',')
+      if(!images[images.length-1]){
+        images.pop()
+      }
+      this.pictureList = images;
+      this.initData().then((id)=>{
+        this.id = id;
+        this.getCitySearch(id,'',true);
         this.$store.commit('hideLoading')
       });
       this.data = cityOptions;
@@ -669,7 +753,7 @@
       }
     },
     mounted() {
-      this.getCitySearch();
+
 //      固定的导航
       (function(){
         var sTop = $('#headerNavWrap').get(0).offsetTop+180;
@@ -695,8 +779,16 @@
     }
   }
 </script>
-<style>
+<style scoped>
+  .bottom {
+    clear: both;
+    display: inline-block;
+    text-align: center;
+  }
 
+  .item {
+    margin: 4px;
+  }
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }

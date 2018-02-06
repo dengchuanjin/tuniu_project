@@ -622,18 +622,16 @@ button {
   right: 0;
 }
 
-
-.loginMask .loginBox {
-  width: 345px;
+.loadingMask .loadingMaskBox {
   position: absolute;
-  top: 50%;
-  margin-top: -195px;
-  left: 50%;
-  margin-left: -172px;
-  background-color: #fff;
-  font: 16px/47px "微软雅黑";
-  z-index: 22;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #000;
+  opacity: .9;
 }
+
 
 .loginMask .loginBoxTitle {
   border-bottom: 1px solid #eaeaea;

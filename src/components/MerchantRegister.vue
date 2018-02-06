@@ -232,7 +232,7 @@
             <el-form :inline="true">
               <el-form-item label="经营范围名称:" :required="isOff">
                 <el-checkbox-group v-model="ScopeOfOperationType" @change="changeBox">
-                  <el-checkbox v-for="item in changeScopeOfOperationList" :label="item.sm_ts_Name"></el-checkbox>
+                  <el-checkbox v-for="item,index in changeScopeOfOperationList" :label="item.sm_ts_Name" :key="index"></el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
             </el-form>
@@ -259,7 +259,7 @@
           <el-form :inline="true">
             <el-form-item label="合作类型名称:" :required="isOff">
               <el-checkbox-group v-model="changeCooperationTypeDataList" @change="changeCooperationType">
-                <el-checkbox v-for="item,index in changeCooperationTypeList" :label="item.sm_cp_Name" ></el-checkbox>
+                <el-checkbox v-for="item,index in changeCooperationTypeList" :label="item.sm_cp_Name"  :key="index"></el-checkbox>
               </el-checkbox-group>
             </el-form-item>
           </el-form>

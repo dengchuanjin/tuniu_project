@@ -53,8 +53,10 @@ export default {
                 resulte[i].ts_tg_IntroduceReason = '<span></span>'
               }
             }
+            resulte.money = data.datastring;
+
             commit('initProductDetails', resulte)
-            relove()
+            relove(resulte.ts_pt_ID)
           }
         })
     })
@@ -62,14 +64,13 @@ export default {
   //产品线路
   initLineSchedule({commit}, data) {
     return new Promise(function (relove, reject) {
-      axios.post('http://hly.lxs.1000da.com.cn/LinePrepare/TradeLineInfo', JSON.stringify(data), {
+      axios.post('http://hly.lxs.1000da.com.cn/LinePrepare/GetTradeLineByGood', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
         .then(data => {
           var data = data.data;
-
           if (Number(data.resultcode) == 200) {
             let resulte = data.data;
             let resulte2 = resulte.prepareList
@@ -180,23 +181,24 @@ export default {
         })
     })
   },
-  //轮播图
-  initPictureList({commit}, data) {
-    return new Promise(function (relove, reject) {
-      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetTopShow', JSON.stringify(data), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-        .then(data => {
-          var data = data.data;
-          if (Number(data.resultcode) == 200) {
-            commit('initPictureList', data.data);
-            relove()
-          }
-        })
-    })
-  },
+  // //轮播图
+  // initPictureList({commit}, data) {
+  //   return new Promise(function (relove, reject) {
+  //     axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetTopShow', JSON.stringify(data), {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       }
+  //     })
+  //       .then(data => {
+  //         var data = data.data;
+  //         console.log(data)
+  //         if (Number(data.resultcode) == 200) {
+  //           commit('initPictureList', data.data);
+  //           relove()
+  //         }
+  //       })
+  //   })
+  // },
 
   //---------------------   门票 ----------------
 

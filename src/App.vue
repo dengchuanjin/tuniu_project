@@ -50,5 +50,7 @@ export default {
     background-color: #000;
     opacity: .9;
   }
-
+  .el-loading-spinner .circular {
+    margin-left: 50%;
+  }
 </style>
