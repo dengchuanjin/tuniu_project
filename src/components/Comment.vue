@@ -13,7 +13,7 @@
               <router-link to="/Register">游客注册</router-link>
             </li>
             <li>
-              <router-link to="/MerchantRegister">商户注册</router-link>
+              <router-link to="/MerchantRegister">供应商注册</router-link>
             </li>
             <li v-show="isLoginShow">
               <a href="javascript:;" style="color: #f60;">欢迎您:{{loginName ? loginName : ""}}</a>
@@ -199,14 +199,7 @@
       </div>
     </section>
     <router-view name="User"></router-view>
-    <!--loading加载-->
-    <div class="loadingMask" v-show="isLoading">
-      <div class="loadingMaskBox"></div>
-      <div class="loadingContentBox">
-        <i></i>
-        <p>拼命加载中</p>
-      </div>
-    </div>
+
   </div>
 </template>
 <script>

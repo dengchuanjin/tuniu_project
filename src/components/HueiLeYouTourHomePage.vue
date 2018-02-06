@@ -5,11 +5,14 @@
         <h4>国内旅游</h4>
       </div>
       <div class="homePageDomesticTourContent">
+        <div class="homePageHotPlaceTour">
+
+        </div>
         <ul class="homePageDomesticTourContentList clearfix">
           <li v-for="item,index in domesticDataList">
 
             <a href="javascript:;">
-              <img v-lazy="item.oneImg" width="280" height="125">
+              <img v-lazy="item.oneImg" width="220" height="125">
             </a>
             <div class="homePageImageContentBox">
               <div class="homePageImageMoneyAndSatisfied clearfix">

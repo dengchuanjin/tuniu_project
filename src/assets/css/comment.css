@@ -1,8 +1,10 @@
+
 #wrap {
   font: 14px/30px "微软雅黑";
   width: 1188px;
   margin: 0 auto;
   margin-top: 20px;
+  background-color: #ddd;
 }
 
 .headerNav .active a {
@@ -607,24 +609,7 @@ button {
   display: block;
 }
 
-/*加载遮罩*/
-.loadingMask .loadingContentBox {
-  width: 100%;
-  text-align: center;
-  color: #409eff;
-  position: absolute;
-  z-index: 22;
-  top: 50%;
-}
 
-.loadingMask .loadingContentBox i {
-  width: 31px;
-  height: 32px;
-  background: url("../img/loadingICon.png") no-repeat;
-  display: block;
-  margin: 0 auto 10px;
-  animation: rotating 2s linear infinite;
-}
 
 /*登录弹层*/
 .loginMask,
@@ -637,16 +622,6 @@ button {
   right: 0;
 }
 
-.loginMask .maskBox,
-.loadingMask .loadingMaskBox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: #000;
-  opacity: .3;
-}
 
 .loginMask .loginBox {
   width: 345px;

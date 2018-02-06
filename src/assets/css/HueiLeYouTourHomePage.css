@@ -1,12 +1,17 @@
 #homePageDomesticTour {
   width: 1188px;
   margin: 20px auto;
+  background-color: #fff;
 }
 
 .homePageDomesticTourTitle {
   font: bold 18px/28px "微软雅黑";
   color: #333;
-  border-bottom: 3px solid #eceef4;
+  border-bottom: 3px solid #e694a6;
+  border-bottom: 3px solid #e694a6;
+}
+.homePageDomesticTourTitle> h4 {
+  margin-left:10px;
 }
 .homePageDomesticTourContentList{
   display: inline-block;
@@ -14,7 +19,7 @@
 }
 .homePageDomesticTourContentList > li {
   vertical-align: top;
-  width: 280px;
+  width: 220px;
   position: relative;
   margin: 20px 8px 0;
   float: left;

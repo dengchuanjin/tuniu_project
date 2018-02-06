@@ -25,6 +25,14 @@ const state = {
   provinceDataList:[],//获取省
   cityDataList:[],//获取市
   countyDataList:[],//获取县
+  changeMineyTypeList:[],//获取币种
+  changeValueName:'',//筛选币种名称
+  changeNameID:'',
+  changeCompanyTypeList:[],//公司规模数据
+  changeCompanyTypeValue:'',
+  changeCompanyID:'',
+  changeCooperationTypeList:[],//合作类型
+  changeScopeOfOperationList:[],//经营范围
 };
 const mutations = {
   //loading设置
@@ -122,7 +130,55 @@ const mutations = {
   },
   initCountyData(state,data){
     state.countyDataList = data;
+  },
+  //获取币种
+  initChangeMineyType(state,data){
+    state.changeMineyTypeList = data;
+  },
+  //根据id查币种名
+  initChangeValue(state,id){
+    state.changeValueName = state.changeMineyTypeList.filter(item=>{
+      if( Number(item.sm_bc_ID) == id ){
+        return true;
+      }
+      return false;
+    })[0].sm_bc_Name;
+  },
+  //根据币种名查id
+  initChangeNameID(state,id){
+    state.changeNameID = state.changeMineyTypeList.filter(item=>{
+      if( Number(item.sm_bc_ID) == id ){
+        return true;
+      }
+      return false;
+    })[0].sm_bc_ID;
+  },
+  initChangeCompanyType(state,data){
+    state.changeCompanyTypeList = data;
+  },
+  initChangeCompanyTypeValue(state,id){
+    state.changeCompanyTypeValue = state.changeCompanyTypeList.filter(item=>{
+      if( Number(item.sm_cs_ID ) == id ){
+        return true;
+      }
+      return false;
+    })[0].sm_cs_Persons
+  },
+  initChangeCompanyID(state,id){
+    state.changeCompanyID = state.changeCompanyTypeList.filter(item=>{
+      if( Number(item.sm_cs_ID ) == id ){
+        return true;
+      }
+      return false;
+    })[0].sm_cs_ID
+  },
+  initChangeCooperationType(state,data){
+    state.changeCooperationTypeList = data;
+  },
+  initChangeScopeOfOperation(state,data){
+    state.changeScopeOfOperationList = data;
   }
+
 
 }
 export default {

@@ -26,4 +26,12 @@ export default {
   provinceDataList: state => state.provinceDataList,
   cityDataList: state => state.cityDataList,
   countyDataList: state => state.countyDataList,
+  changeMineyTypeList: state => state.changeMineyTypeList,
+  changeValueName: state => state.changeValueName,
+  changeNameID:state=>state.changeNameID,
+  changeCompanyTypeList:state=>state.changeCompanyTypeList,
+  changeCompanyTypeValue:state=>state.changeCompanyTypeValue,
+  changeCompanyID:state =>state.changeCompanyID,
+  changeCooperationTypeList:state=>state.changeCooperationTypeList,
+  changeScopeOfOperationList:state => state.changeScopeOfOperationList
 }

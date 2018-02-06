@@ -20,512 +20,366 @@
       </div>
       <!--注册表单-->
       <div class="MerchantRegisterTabel">
-        <!--公司信息-->
+        <!--联系人信息-->
         <div class="ContactsContent">
           <h5>联系人信息</h5>
           <div class="ContactsBox clearfix">
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="姓名:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
+                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_Name"></el-input>
                 </el-form-item>
               </el-form>
             </el-col>
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
-                <el-form-item label="性别:" :required="isOff">
-                  <el-radio-group v-model="sexType">
-                    <el-radio :label="0">男</el-radio>
-                    <el-radio :label="1">女</el-radio>
-                  </el-radio-group>
+                <el-form-item label="QQ:" :required="isOff">
+                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_QQ"></el-input>
                 </el-form-item>
               </el-form>
             </el-col>
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="手机:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="固定电话:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="QQ:">
-                  <el-input type="text" size="mini"></el-input>
+                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_Telephone"></el-input>
                 </el-form-item>
               </el-form>
             </el-col>
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="电子邮箱:" :required="isOff">
-                  <el-input type="text" size="mini" placeholder="非常重要！"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="传真:">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="品牌名:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="供应商编码:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="结算币种编号:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="公司规模编码:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="合作类型编码:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="经营范围编码:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
+                  <el-input type="text" size="mini" placeholder="非常重要！"  v-model="insertAgentInfo.data.sm_ai_Email"></el-input>
                 </el-form-item>
               </el-form>
             </el-col>
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="固定电话国际区号:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
+                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FixPhoneAreaCode"></el-input>
                 </el-form-item>
               </el-form>
             </el-col>
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="固定电话区号:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="传真区号:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
+                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FixPhoneContryCode"></el-input>
                 </el-form-item>
               </el-form>
             </el-col>
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="传真国际区号:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
+                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FaxAreaCode"></el-input>
+                </el-form-item>
+              </el-form>
+            </el-col>
+            <el-col :span="24" class="formSearch">
+              <el-form :inline="true">
+                <el-form-item label="传真区号:" :required="isOff">
+                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FaxContryCode"></el-input>
                 </el-form-item>
               </el-form>
             </el-col>
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="传真号:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
+                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FaxNo"></el-input>
                 </el-form-item>
               </el-form>
             </el-col>
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
-                <el-form-item label="国家:" :required="isOff">
-                  <el-select v-model="countryValue" placeholder="请选择国家" size="mini">
-                    <el-option
-                      v-for="item in countryData"
-                      :key="item.value"
-                      :label="item.Country"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="省:" :required="isOff">
-                  <el-select v-model="provinceValue" placeholder="请选择省" size="mini" @focus="changeProvince">
-                    <el-option
-                      v-for="item in provinceDataList"
-                      :key="item.sm_af_AreaID"
-                      :label="item.sm_af_AreaName"
-                      :value="item.sm_af_AreaID">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="市:" :required="isOff">
-                  <el-select v-model="cityValue" placeholder="请选择市" size="mini" @focus="changeCity">
-                    <el-option
-                      v-for="item in cityDataList"
-                      :key="item.sm_af_AreaID"
-                      :label="item.sm_af_AreaName"
-                      :value="item.sm_af_AreaID">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="县:" :required="isOff">
-                  <el-select v-model="countyValue" placeholder="请选择县" size="mini" @focus="changeCounty">
-                    <el-option
-                      v-for="item in countyDataList"
-                      :key="item.sm_af_AreaID"
-                      :label="item.sm_af_AreaName"
-                      :value="item.sm_af_AreaID">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="具体地址:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="注册成立时间:" :required="isOff">
-                  <div class="block">
-                    <el-date-picker
-                      v-model="creatRegisterTimeValue"
-                      type="date"
-                      placeholder="选择日期"
-                      size="mini"
-                    >
-                    </el-date-picker>
-                  </div>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="注册资金:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="优势产品说明:">
-                  <el-input type="textarea" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="已合作的网销渠道:">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="是否三证合一:" :required="isOff">
-                  <el-radio-group v-model="yesOrOn">
-                    <el-radio :label="0">否</el-radio>
-                    <el-radio :label="1">是</el-radio>
+                <el-form-item label="性别:" :required="isOff">
+                  <el-radio-group v-model="insertAgentInfo.data.sm_ai_Sex">
+                    <el-radio :label="0">男</el-radio>
+                    <el-radio :label="1">女</el-radio>
                   </el-radio-group>
                 </el-form-item>
               </el-form>
             </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="营业执照号:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="营业执照有效期从:" :required="isOff">
-                  <div class="block">
-                    <el-date-picker
-                      v-model="CreatScopeOfOperationTime"
-                      type="date"
-                      placeholder="选择日期"
-                      size="mini">
-                    </el-date-picker>
-                  </div>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="营业执照有效期到:" :required="isOff">
-                  <div class="block">
-                    <el-date-picker
-                      v-model="EndScopeOfOperationTime"
-                      type="date"
-                      placeholder="选择日期"
-                      size="mini">
-                    </el-date-picker>
-                  </div>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="营业执照扫描件:" :required="isOff">
-                  <a href="javascript:;" class="file">展示图片上传
-                    <input type="file" name="" ref="upload" accept="image/*" multiple>
-                  </a>
-                  <img
-                    style="display: block"
-                    v-for="item in ImageURL1"
-                    v-lazy="item"
-                    width="280"
-                    height="125"
-                    v-show="ImageURL1.length"
+          </div>
+        </div>
+        <!--公司信息-->
+        <div class="companyContent clearfix">
+          <h5>公司信息</h5>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="品牌名:" :required="isOff">
+                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_GoodName"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="国家:" :required="isOff">
+                <el-select v-model="insertAgentInfo.data.sm_ai_Contry" placeholder="请选择国家" size="mini">
+                  <el-option
+                    v-for="item in countryData"
+                    :key="item.value"
+                    :label="item.Country"
+                    :value="item.Country">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="省:" :required="isOff">
+                <el-select v-model="insertAgentInfo.data.sm_ai_Provice" placeholder="请选择省" size="mini"
+                           @focus="changeProvince">
+                  <el-option
+                    v-for="item in provinceDataList"
+                    :key="item.sm_af_AreaID"
+                    :label="item.sm_af_AreaName"
+                    :value="item.sm_af_AreaID">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="市:" :required="isOff">
+                <el-select v-model="insertAgentInfo.data.sm_ai_City" placeholder="请选择市" size="mini"
+                           @focus="changeCity">
+                  <el-option
+                    v-for="item in cityDataList"
+                    :key="item.sm_af_AreaID"
+                    :label="item.sm_af_AreaName"
+                    :value="item.sm_af_AreaID">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="县:" :required="isOff">
+                <el-select v-model="insertAgentInfo.data.sm_ai_County" placeholder="请选择县" size="mini"
+                           @focus="changeCounty">
+                  <el-option
+                    v-for="item in countyDataList"
+                    :key="item.sm_af_AreaID"
+                    :label="item.sm_af_AreaName"
+                    :value="item.sm_af_AreaID">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="具体地址:" :required="isOff">
+                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_Address"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="注册成立时间:" :required="isOff">
+                <div class="block">
+                  <el-date-picker
+                    v-model="insertAgentInfo.data.sm_ai_RegTime"
+                    type="date"
+                    placeholder="选择日期"
+                    value-format="yyyy-MM-dd"
+                    size="mini"
                   >
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="税务登记证号:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="税务登记证扫描件:" :required="isOff">
-                  <a href="javascript:;" class="file">展示图片上传
-                    <input type="file" name="" ref="upload1" accept="image/*" multiple>
-                  </a>
-                  <img
-                    style="display: block"
-                    v-for="item in ImageURL2"
-                    v-lazy="item"
-                    width="280"
-                    height="125"
-                    v-show="ImageURL2.length"
-                  >
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="是否通过审核:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="创建时间:" :required="isOff">
-                  <div class="block">
-                    <el-date-picker
-                      v-model="creatTimeValue"
-                      type="date"
-                      placeholder="选择日期"
-                      size="mini">
-                    </el-date-picker>
-                  </div>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="其他证件:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="其他证件扫描件:" :required="isOff">
-                  <a href="javascript:;" class="file">展示图片上传
-                    <input type="file" name="" ref="upload2" accept="image/*" multiple>
-                  </a>
-                  <img
-                    style="display: block"
-                    v-for="item in ImageURL3"
-                    v-lazy="item"
-                    width="280"
-                    height="125"
-                    v-show="ImageURL3.length"
-                  >
-                </el-form-item>
-              </el-form>
-            </el-col>
-          </div>
+                  </el-date-picker>
+                </div>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="注册资金:" :required="isOff">
+                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_RegMoney"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="公司规模编码:" :required="isOff">
+                <el-select v-model="insertAgentInfo.data.sm_cs_ID" placeholder="公司规模编码" size="mini"
+                           @focus="changeCompanyType" @change="changeCompanyValue">
+                  <el-option
+                    v-for="item in changeCompanyTypeList"
+                    :key="item.sm_cs_ID "
+                    :label="item.sm_cs_Persons"
+                    :value="item.sm_cs_ID ">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="结算币种编号:" :required="isOff">
+                <el-select v-model="insertAgentInfo.data.sm_bc_ID" placeholder="请选择币种编号" size="mini"
+                           @focus="changeMoneyType" @change="changeValue">
+                  <el-option
+                    v-for="item in changeMineyTypeList"
+                    :key="item.sm_bc_ID"
+                    :label="item.sm_bc_Name"
+                    :value="item.sm_bc_ID">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" id="ScopeOfOperationType" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="经营范围名称:" :required="isOff">
+                <el-checkbox-group v-model="ScopeOfOperationType" @change="changeBox">
+                  <el-checkbox v-for="item in changeScopeOfOperationList" :label="item.sm_ts_Name"></el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
+            </el-form>
+          </el-col>
         </div>
-        <!--结算币种-->
-        <div class="ContactsSettlementCurrencyContent">
-          <h5>结算币种</h5>
-          <div class="ContactsSettlementCurrencyContentBox clearfix">
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="结算币种编号:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="结算币种名称:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="是否有效:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-          </div>
+        <!--合作信息-->
+        <div class="cooperationContent clearfix">
+          <h5>合作信息</h5>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="优势产品说明:">
+                <el-input type="textarea" size="mini" v-model="insertAgentInfo.data.sm_ai_GoodIntroduce"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="已合作的网销渠道:">
+                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_PartnerWay"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch" id="ContactsTypeOfCooperationType">
+          <el-form :inline="true">
+            <el-form-item label="合作类型名称:" :required="isOff">
+              <el-checkbox-group v-model="changeCooperationTypeDataList" @change="changeCooperationType">
+                <el-checkbox v-for="item,index in changeCooperationTypeList" :label="item.sm_cp_Name" ></el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
+          </el-form>
+        </el-col>
         </div>
-        <!--公司规模-->
-        <div class="ContactsCompanySizeWrap">
-          <h5>公司规模</h5>
-          <div class="ContactsCompanySizeWrapBox clearfix">
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="公司规模编码:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="人数:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="是否有效:" :required="isOff">
-                  <el-select v-model="ContactsCompanySizeWrapBoxValue" placeholder="请选择" size="mini">
-                    <el-option
-                      v-for="item in ContactsCompanySizeWrapBoxData"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    >
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-            </el-col>
-          </div>
-        </div>
-        <!--合作类型-->
-        <div class="ContactsTypeOfCooperation">
-          <h5>合作类型</h5>
-          <div class="ContactsTypeOfCooperationBox clearfix">
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="合作类型编码:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="合作类型名称:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="是否有效:" :required="isOff">
-                  <el-select v-model="ContactsTypeOfCooperationBoxValue" placeholder="请选择" size="mini">
-                    <el-option
-                      v-for="item in ContactsTypeOfCooperationBoxData"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-            </el-col>
-          </div>
-        </div>
-        <!--经营范围-->
-        <div class="ContactsScopeOfOperationWrap">
-          <h5>经营范围</h5>
-          <div class="ContactsScopeOfOperationWrapBox clearfix">
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="经营范围编码:" :required="isOff">
-                  <el-input type="text" size="mini"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="是否有效:" :required="isOff">
-                  <el-select v-model="ContactsScopeOfOperationWrapBoxValue" placeholder="请选择" size="mini">
-                    <el-option
-                      v-for="item in ContactsScopeOfOperationWrapBoxData"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" id="ScopeOfOperationType" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="经营范围名称:" :required="isOff">
-                  <el-checkbox-group v-model="ScopeOfOperationType" @change="changeBox">
-                    <el-checkbox label="出境"></el-checkbox>
-                    <el-checkbox label="入境"></el-checkbox>
-                    <el-checkbox label="境内"></el-checkbox>
-                    <el-checkbox label="票务代理"></el-checkbox>
-                    <el-checkbox label="住宿"></el-checkbox>
-                    <el-checkbox label="赴台游"></el-checkbox>
-                    <el-checkbox label="边境"></el-checkbox>
-                    <el-checkbox label="汽车租赁"></el-checkbox>
-                    <el-checkbox label="邮轮"></el-checkbox>
-                    <el-checkbox label="运输服务"></el-checkbox>
-                    <el-checkbox label="其他"></el-checkbox>
-                  </el-checkbox-group>
-                </el-form-item>
-              </el-form>
-            </el-col>
-          </div>
+        <!--资质信息-->
+        <div class="qualificationsContent clearfix">
+          <h5>资质信息</h5>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="是否三证合一:" :required="isOff">
+                <el-radio-group v-model="insertAgentInfo.data.sm_ai_IncludeCert">
+                  <el-radio :label="0">否</el-radio>
+                  <el-radio :label="1">是</el-radio>
+                </el-radio-group>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="营业执照号:" :required="isOff">
+                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_CertNo"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="营业执照有效期从:" :required="isOff">
+                <div class="block">
+                  <el-date-picker
+                    v-model="insertAgentInfo.data.sm_ai_CertExpireFrom"
+                    type="date"
+                    placeholder="选择日期"
+                    value-format="yyyy-MM-dd"
+                    size="mini">
+                  </el-date-picker>
+                </div>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="营业执照有效期到:" :required="isOff">
+                <div class="block">
+                  <el-date-picker
+                    v-model="insertAgentInfo.data.sm_ai_CertExpireTo"
+                    type="date"
+                    placeholder="选择日期"
+                    value-format="yyyy-MM-dd"
+                    size="mini">
+                  </el-date-picker>
+                </div>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="营业执照扫描件:" :required="isOff">
+                <a href="javascript:;" class="file">展示图片上传
+                  <input type="file" name="" ref="upload" accept="image/*" multiple>
+                </a>
+                <img
+                  style="display: block"
+                  v-for="item in ImageURL1"
+                  v-lazy="item"
+                  width="280"
+                  height="125"
+                  v-show="ImageURL1.length"
+                >
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="税务登记证号:" :required="isOff">
+                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FeeNo"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="税务登记证扫描件:" :required="isOff">
+                <a href="javascript:;" class="file">展示图片上传
+                  <input type="file" name="" ref="upload1" accept="image/*" multiple>
+                </a>
+                <img
+                  style="display: block"
+                  v-for="item in ImageURL2"
+                  v-lazy="item"
+                  width="280"
+                  height="125"
+                  v-show="ImageURL2.length"
+                >
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="其他证件:" :required="isOff">
+                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_OtherCert"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
+              <el-form-item label="其他证件扫描件:" :required="isOff">
+                <a href="javascript:;" class="file">展示图片上传
+                  <input type="file" name="" ref="upload2" accept="image/*" multiple>
+                </a>
+                <img
+                  style="display: block"
+                  v-for="item in ImageURL3"
+                  v-lazy="item"
+                  width="280"
+                  height="125"
+                  v-show="ImageURL3.length"
+                >
+              </el-form-item>
+            </el-form>
+          </el-col>
         </div>
       </div>
       <!--信息提交-->
@@ -545,18 +399,21 @@
     computed: mapGetters([
       'provinceDataList',
       'cityDataList',
-      'countyDataList'
+      'countyDataList',
+      'changeMineyTypeList',
+      'changeValueName',
+      'changeNameID',
+      'changeCompanyTypeList',
+      'changeCompanyTypeValue',
+      'changeCompanyID',
+      'changeCooperationTypeList',
+      'changeScopeOfOperationList'
     ]),
     data() {
       return {
         isOff: true,
-        sexType: 0,
-        yesOrOn: 0,
-        creatTimeValue: '',
         ScopeOfOperationType: [],
-        ContactsScopeOfOperationWrapBoxValue: '',
-        ContactsTypeOfCooperationBoxValue: '',
-        ContactsCompanySizeWrapBoxValue: '',
+        changeCooperationTypeData: [],
         ContactsScopeOfOperationWrapBoxData: [
           {
             value: 0,
@@ -587,29 +444,84 @@
             label: '有效'
           }
         ],
-        CreatScopeOfOperationTime: '',
-        EndScopeOfOperationTime: '',
-        creatRegisterTimeValue: '',
-        countryValue: '',
-        provinceValue: '',
-        cityValue: '',
+        ContactsSettlementCurrencyContentData: [
+          {
+            value: 0,
+            label: '无效'
+          },
+          {
+            value: 1,
+            label: '有效'
+          }
+        ],
+        newArr: [],
         ImageURL1: [],
         ImageURL2: [],
         ImageURL3: [],
-        countyValue: '',
-        addOptions: {
-          MerchantName: '',//姓名
-          sexType: 0,//性别
-        },
         countryData: [
           {
             Country: '中国',
             value: 0
           }
         ],
+        insertAgentInfo: {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "data": {
+            "sm_bc_ID": '',
+            "sm_ai_BalanceCurrencyName": '',
+            "sm_cs_ID": '',
+            "sm_ai_CompanyPersons": '',
+            "sm_ai_Name": '',
+            "sm_ai_Sex": 0,
+            "sm_ai_Telephone": '',
+            "sm_ai_FixPhoneAreaCode": '',
+            "sm_ai_FixPhoneContryCode": '',
+            "sm_ai_FaxAreaCode": '',
+            "sm_ai_FaxContryCode": '',
+            "sm_ai_FaxNo": '',
+            "sm_ai_QQ": '',
+            "sm_ai_Email": '',
+            "sm_ai_GoodName": '',
+            "sm_ai_Contry": '',
+            "sm_ai_Provice": '',
+            "sm_ai_City": '',
+            "sm_ai_County": '',
+            "sm_ai_Address": '',
+            "sm_ai_RegTime": '',
+            "sm_ai_RegMoney": '',
+            "sm_ai_GoodIntroduce": '',
+            "sm_ai_PartnerWay": '',
+            "sm_ai_IncludeCert": 0,
+            "sm_ai_CertNo": '',
+            "sm_ai_CertExpireFrom": '',
+            "sm_ai_CertExpireTo": '',
+            "sm_ai_CertImage": '',
+            "sm_ai_FeeNo": '',
+            "sm_ai_FeeImage": '',
+            "sm_ai_OtherCert": '',
+            "sm_ai_OtherImage": '',
+          },
+          agentinfotype: [],
+          agentinfoscope: [],
+        },
+        changeCooperationTypeDataList: [],
+        ScopeOfOperationTypeList:[],
       }
     },
+    created() {
+      this.$store.commit('showLoading');
+      this.initData().then(() => {
+        this.$store.commit('hideLoading')
+      })
+    },
     methods: {
+      async initData() {
+        await this.changeMoneyType()
+        await this.changeCompanyType()
+        await this.changeCooperationTypeL()
+        await this.changeScopeOfOperation()
+      },
       //图片转二进制
       uploadImg(file) {
         return new Promise(function (relove, reject) {
@@ -687,10 +599,6 @@
           }
         }, 30)
       },
-      //选择经营范围
-      changeBox() {
-        console.log(this.ScopeOfOperationType)
-      },
       //选择省
       changeProvince() {
         let getAreaProvice = {
@@ -698,42 +606,152 @@
         }
         this.$store.dispatch('initProvinceData', getAreaProvice)
       },
+
       //选择市
       changeCity() {
-        if( !this.provinceValue ){
+        if (!this.insertAgentInfo.data.sm_ai_Provice) {
           this.$notify({
             message: '请先选择省!!',
-            type:'error'
+            type: 'error'
           });
           return
         }
         let getCity = {
-          "areaPid": this.provinceValue ? this.provinceValue : ''
+          "areaPid": this.insertAgentInfo.data.sm_ai_Provice ? this.insertAgentInfo.data.sm_ai_Provice : ''
         }
         this.$store.dispatch('initCityData', getCity)
       },
+
       //选择县
       changeCounty() {
-        if( !this.provinceValue && !this.cityValue ){
+        if (!this.insertAgentInfo.data.sm_ai_Provice && !this.insertAgentInfo.data.sm_ai_City) {
           this.$notify({
             message: '请先选择省和市!!',
-            type:'error'
+            type: 'error'
           });
           return
         }
         let getCounty = {
-          "areaPid": this.cityValue ? this.cityValue : ''
+          "areaPid": this.insertAgentInfo.data.sm_ai_City ? this.insertAgentInfo.data.sm_ai_City : ''
         }
         this.$store.dispatch('initCountyData', getCounty)
       },
-      //查询结算币种
-      changeMoneyType(){
-        var selectBalanceCurrency = {
 
+      //查询结算币种
+      changeMoneyType() {
+        var selectBalanceCurrency = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "sm_bc_ID": "",
+          "sm_bc_Name": "",
+          "sm_bc_IsDelete": 0
+        }
+        return this.$store.dispatch('initChangeMineyType', selectBalanceCurrency)
+      },
+      changeValue(id) {
+        this.$store.commit('initChangeValue', id)
+        this.insertAgentInfo.data.sm_bc_Name = this.changeValueName
+      },
+      changeName(id) {
+        this.$store.commit('initChangeNameID', id)
+        this.insertAgentInfo.data.sm_bc_ID = this.changeNameID
+      },
+
+
+      //公司规模
+      changeCompanyType() {
+        var selectCompanySize = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "sm_cs_ID": "",
+          "sm_cs_Persons": "",
+          "sm_cs_IsDelete": 0
+        };
+        return this.$store.dispatch('initChangeCompanyType', selectCompanySize)
+      },
+      changeCompanyValue(id) {
+        this.$store.commit('initChangeCompanyTypeValue', id)
+        this.insertAgentInfo.data.sm_ai_CompanyPersons = this.changeCompanyTypeValue
+      },
+      changeCompanyId(id) {
+        this.$store.commit('initChangeCompanyID', id)
+        this.insertAgentInfo.data.sm_cs_ID = this.changeCompanyID
+      },
+      //合作类型
+      changeCooperationTypeL() {
+        var selectCooperationType = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "sm_cp_ID": "",
+          "sm_cp_Name": "",
+          "sm_cp_IsDelete": 0
+        };
+        return this.$store.dispatch('initChangeCooperationType', selectCooperationType)
+      },
+      //选择合作类型
+      changeCooperationType() {
+        this.newArr = [];
+        let arr = this.changeCooperationTypeList;
+        let typeArr = this.changeCooperationTypeDataList
+        for (var i = 0; i < arr.length; i++) {
+          for (var j = 0; j < typeArr.length; j++) {
+            if (arr[i].sm_cp_Name == typeArr[j]) {
+              this.newArr.push({
+                sm_cp_ID: arr[i].sm_cp_ID,
+                sm_cp_PartnerTypeName: typeArr[j]
+              })
+            }
+          }
+        }
+      },
+
+      //经营范围
+      changeScopeOfOperation() {
+        var selectTradeScope = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "sm_ts_ID": "",
+          "sm_ts_Name": "",
+          "sm_ts_IsDelete": 0
+        };
+        this.$store.dispatch('initChangeScopeOfOperation', selectTradeScope)
+      },
+//      选择经营范围
+      changeBox() {
+        this.ScopeOfOperationTypeList = [];
+        let arr = this.changeScopeOfOperationList;
+        let typeArr = this.ScopeOfOperationType;
+        for (var i = 0; i < arr.length; i++) {
+          for (var j = 0; j < typeArr.length; j++) {
+            if (arr[i].sm_ts_Name == typeArr[j]) {
+              this.ScopeOfOperationTypeList.push({
+                sm_ts_ID: arr[i].sm_ts_ID,
+                sm_ts_Name: typeArr[j]
+              })
+            }
+          }
         }
       },
       //信息提交
       InformtionSubmit() {
+        this.insertAgentInfo.data.sm_ai_BalanceCurrencyName = this.insertAgentInfo.data.sm_bc_Name;
+        this.insertAgentInfo.data.sm_ai_CertImage = this.ImageURL1.join(',');
+        this.insertAgentInfo.data.sm_ai_FeeImage = this.ImageURL2.join(',');
+        this.insertAgentInfo.data.sm_ai_OtherImage = this.ImageURL3.join(',');
+        this.insertAgentInfo.agentinfotype = this.newArr;
+        this.insertAgentInfo.agentinfoscope = this.ScopeOfOperationTypeList;
+        this.$store.dispatch('initSubmitInformtionObj',this.insertAgentInfo)
+          .then(()=>{
+            this.$notify({
+              message: '注册成功！！',
+              type: 'success'
+            });
+          },err=>{
+            this.$notify({
+              message: err,
+              type: 'error'
+            });
+          })
       }
     },
     mounted() {
@@ -765,4 +783,8 @@
     opacity: 0;
   }
 
+  .MerchantRegisterTabel #ContactsTypeOfCooperationType,
+  #ContactsTypeOfCooperationType1{
+    width: 100%;
+  }
 </style>
