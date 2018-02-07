@@ -374,6 +374,18 @@
         </div>
       </section>
     </section>
+    <el-dialog
+      title="温馨提示"
+      :visible.sync="centerDialogVisible"
+      width="30%"
+      center>
+      <span style="color: #f60">请先登录!</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="centerDialogVisibleSubmit">确 定</el-button>
+  </span>
+    </el-dialog>
+
   </div>
 </template>
 <script>
@@ -407,6 +419,7 @@
     ]),
     data() {
       return {
+        centerDialogVisible:false,//登录弹窗
         showCalendar:false,
         pictureList:[],
         isActiveSearchMonth: false,
@@ -434,6 +447,7 @@
         cityValue: '',
         countyValue: '',
         addOrderOptions:{
+          ts_pp_ID:'',
           provinceValue: '',
           DayValue:'',
           adultNumber: 0,//成人
@@ -446,9 +460,10 @@
       }
     },
     methods: {
-      //选中日历
+      //选中日历,item日历信息
       changeTime(item){
-        this.addOrderOptions.DayValue = item.ts_pp_Date
+        this.addOrderOptions.ts_pp_ID = item.ts_pp_ID;
+        this.addOrderOptions.DayValue = item.ts_pp_Date;
         this.addOrderOptions.adultYu = item.ts_pp_Person
         this.addOrderOptions.childYu = item.ts_pp_Child
         this.addOrderOptions.adultPrice = item.ts_pp_Price
@@ -463,8 +478,8 @@
         }
         lis[index].querySelector('a').className = 'active'
       },
+      //获取搜索城市
       getCitySearch(id,city,isOne) {
-
         $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', () => {
           this.userSearch.name = remote_ip_info.city + '市';
           if(isOne){
@@ -506,6 +521,7 @@
             })
         });
       },
+      //选中出发城市
       getSearchCity() {
         this.getCitySearch(this.id,this.addOrderOptions.provinceValue);
         this.addOrderOptions.DayValue = '';
@@ -516,9 +532,11 @@
         this.addOrderOptions.childYu='',//儿童余票
         this.addOrderOptions.childNumber=''//儿童
       },
+      //补0
       getNum(num) {
         return num < 10 ? '0' + num : '' + num;
       },
+      //初始化数据
       async initData() {
         let date = new Date()
         let m = date.getMonth() + 1;
@@ -570,6 +588,7 @@
 //        };
 //        await this.$store.dispatch('initPictureList',getTopShow)
       },
+      //选中线路菜单
       changeType(index) {
         let spans = this.$refs.headerNav.querySelectorAll('span');
         let len = spans.length;
@@ -584,6 +603,7 @@
           this.isScheduleList = false
         }
       },
+      //选中日历
       changeDay(index) {
         let lis = this.$refs.scheduleList.querySelectorAll('li');
         let len = lis.length;
@@ -592,6 +612,7 @@
         }
         lis[index].children[0].className = 'active'
       },
+      //获取周数
       getWeek(year, month) {
         return new Date(year, month, 1, 0, 0, 0).getDay();
       },
@@ -599,7 +620,12 @@
       getDates(year, month) {
         return new Date(year, month + 1, 1, -1, 0, 0).getDate();
       },
+      //获取日历生成
       get(year, month, _this, data) {
+        //赋值day
+        for (var n = 0; n < data.length; n++) {
+          data[n].day = Number(data[n].ts_pp_Date.split('-')[2])
+        }
         return new Promise((relove,reject)=>{
           year = Number(year);
           month = Number(month);
@@ -636,7 +662,7 @@
               if(!_this.arr3.length){
                 _this.arr3.push({
                   isJ: false,
-                  day: data[v - new Date().getDate()]
+                  day: new Date().getDate()
                 })
               }
 //              if( _this.arr3.isJ){
@@ -691,8 +717,17 @@
       changeTaualType(id){
         this.smSiName = id.sm_si_Name
       },
+      //登录确定
+      centerDialogVisibleSubmit(){
+        this.$router.push({name:'AdminLogin'});
+      },
       //立即预订
       immediatelyReserveSubmit(){
+        let user = JSON.parse(sessionStorage.getItem('user'));
+        if(!user){
+          this.centerDialogVisible = true;
+          return;
+        }
         console.log(this.addOrderOptions)
 //        var makeOrder = {
 //          "loginUserID": "huileyou",

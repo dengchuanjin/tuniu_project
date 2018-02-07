@@ -4,6 +4,7 @@ const state = {
   //-------------首页------------
   isLoading:false,//loading
   domesticDataList:[],//国内跟团游数据
+  aroundList:[],//周边游
   getTourSiteListImage:'',//展示图片
 
 
@@ -48,7 +49,9 @@ const mutations = {
     state.domesticDataList = data;
   },
 
-
+  initAroundList(state,data){
+    state.aroundList = data;
+  },
 
   initProductDetails(state, data) {
     state.productDetailsObj = data

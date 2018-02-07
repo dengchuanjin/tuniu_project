@@ -20,6 +20,7 @@ export default {
   // pictureList: state => state.pictureList,
   bookKnowObj: state => state.bookKnowObj,
   getTourSiteList: state => state.getTourSiteList,
+  aroundList: state => state.aroundList,
 
 
   //商户注册
@@ -28,10 +29,10 @@ export default {
   countyDataList: state => state.countyDataList,
   changeMineyTypeList: state => state.changeMineyTypeList,
   changeValueName: state => state.changeValueName,
-  changeNameID:state=>state.changeNameID,
-  changeCompanyTypeList:state=>state.changeCompanyTypeList,
-  changeCompanyTypeValue:state=>state.changeCompanyTypeValue,
-  changeCompanyID:state =>state.changeCompanyID,
-  changeCooperationTypeList:state=>state.changeCooperationTypeList,
-  changeScopeOfOperationList:state => state.changeScopeOfOperationList
+  changeNameID: state => state.changeNameID,
+  changeCompanyTypeList: state => state.changeCompanyTypeList,
+  changeCompanyTypeValue: state => state.changeCompanyTypeValue,
+  changeCompanyID: state => state.changeCompanyID,
+  changeCooperationTypeList: state => state.changeCooperationTypeList,
+  changeScopeOfOperationList: state => state.changeScopeOfOperationList
 }

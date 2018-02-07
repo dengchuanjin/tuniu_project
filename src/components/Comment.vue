@@ -25,6 +25,9 @@
                 <li><a href="http://tuniu.1000da.com.cn/admin/index.html" target="view_window">旅行社管理系统</a></li>
               </ul>
             </li>
+            <li>
+              <a href="javascript:;" @click="Quit">退出</a>
+            </li>
           </ul>
           <!--注释-->
           <div>
@@ -233,6 +236,12 @@
       }
     },
     methods: {
+      //退出
+      Quit(){
+        //删除用户sessionStorage
+        sessionStorage.removeItem('user');
+        window.location.reload()
+      },
       initData() {
         //导航套自导航
         var getSystemMenuInfo = {
@@ -268,8 +277,8 @@
         }
       }
 
-      if (sessionStorage.getItem('InformetionObj')) {
-        var InformetionObj = JSON.parse(sessionStorage.getItem('InformetionObj'))
+      if (sessionStorage.getItem('user')) {
+        var InformetionObj = JSON.parse(sessionStorage.getItem('user'))
         this.isLogin = false;
         this.isLoginShow = true;
         this.loginName = InformetionObj.ui_Name

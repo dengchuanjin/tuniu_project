@@ -57,6 +57,7 @@
     computed: mapGetters([]),
     data() {
       return {
+        num:59,
         active: 1,
         registerInputBoxShow: true,
         successShow: false,
@@ -91,6 +92,13 @@
       },
       //获取动态验证码
       getNumbers() {
+        if(typeof this.num=='number'&&this.num!=59){
+//          this.$notify({
+//            message: '请确认时间！',
+//            type: 'error'
+//          });
+          return;
+        }
         if (this.addOptions.phone == '') {
           this.$notify({
             message: '请输入电话号码！！',
@@ -108,17 +116,21 @@
           .then(data => {
             var data = JSON.parse(data)
             if (Number(data.backCode) == 200) {
-              let _this = this;
-              let num = 59;
               let timer = setInterval(() => {
-                _this.getName = num + 's后重新获取'
-                num--;
-                if (num == 0) {
+                this.getName = this.num + 's后重新获取'
+                this.num--;
+                if (this.num == 0) {
                   this.isDisabled = false;
                   clearInterval(timer)
-                  _this.getName = '重新获取验证码'
+                  this.getName = '重新获取验证码';
+                  this.num = 59
                 }
               }, 1000)
+            }else{
+              this.$notify({
+                message: data.backResult,
+                type: 'error'
+              });
             }
           })
       },

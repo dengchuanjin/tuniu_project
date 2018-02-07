@@ -32,8 +32,30 @@ export default {
               resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
             }
             commit('initDomesticData', data.data)
+            relove()
           }
         })
+    })
+  },
+  //周边游
+  initAroundList({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          let resulte = data.data;
+          for (var i = 0; i < resulte.length; i++) {
+            resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
+          }
+          commit('initAroundList', data.data)
+          relove()
+        }
+      })
     })
   },
   //产品详情

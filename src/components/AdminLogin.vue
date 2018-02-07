@@ -129,8 +129,9 @@
                 message: '登录成功！！',
                 type: 'success'
               });
-              sessionStorage.setItem('InformetionObj',JSON.stringify(data.userInfo[0]))
+              sessionStorage.setItem('user',JSON.stringify(data.userInfo[0]))
               this.$router.push({name:'HeelTour'});
+              window.location.reload()
             }
           })
       },
