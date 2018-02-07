@@ -4,27 +4,30 @@
       <div class="homePageDomesticTourTitle">
         <h4>国内旅游</h4>
       </div>
-      <div class="homePageDomesticTourContent">
-        <div class="homePageHotPlaceTour">
-
+      <div class="clearfix">
+        <div class="homePageDomesticTourLeft">
         </div>
-        <ul class="homePageDomesticTourContentList clearfix">
-          <li v-for="item,index in domesticDataList"  @click="toDetail(item.ta_tg_ID)">
+        <div class="homePageDomesticTourContent">
+          <div class="homePageHotPlaceTour">
+          </div>
+          <ul class="homePageDomesticTourContentList clearfix">
+            <li v-for="item,index in domesticDataList" @click="toDetail(item.ta_tg_ID)">
 
-            <a href="javascript:;">
-              <img v-lazy="item.oneImg" width="220" height="125">
-            </a>
-            <div class="homePageImageContentBox">
-              <div class="homePageImageMoneyAndSatisfied clearfix">
-                <span class="homePageImageMoney">￥<strong>2839</strong> 起</span>
-                <span class="homePageImageSatisfied">满意度 96%</span>
+              <a href="javascript:;">
+                <img v-lazy="item.oneImg" width="220" height="125">
+              </a>
+              <div class="homePageImageContentBox">
+                <div class="homePageImageMoneyAndSatisfied clearfix">
+                  <span class="homePageImageMoney">￥<strong>2839</strong> 起</span>
+                  <span class="homePageImageSatisfied">满意度 96%</span>
+                </div>
+                <div class="homePageImageContent">
+                  <a href="javascript:;">{{item.ta_tg_Title}}</a>
+                </div>
               </div>
-              <div class="homePageImageContent">
-                <a href="javascript:;">{{item.ta_tg_Title}}</a>
-              </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -72,14 +75,14 @@
       },
       //点击跳转到产品线路详情
       toDetail(id) {
-        let arr = this.domesticDataList.filter(item=>{
-          if(item.ta_tg_ID==id){
+        let arr = this.domesticDataList.filter(item => {
+          if (item.ta_tg_ID == id) {
             return true;
           }
           return false;
         });
         let images = JSON.stringify(arr[0].ta_tg_ShowImage);
-        sessionStorage.setItem('images',images);
+        sessionStorage.setItem('images', images);
         this.$router.push({name: 'HeelTour', params: {id: id}})
       }
     },

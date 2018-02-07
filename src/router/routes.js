@@ -5,12 +5,18 @@ import AdminLogin from '@/components/AdminLogin'
 import Register from '@/components/Register'
 import HueiLeYouTourHomePage from '@/components/HueiLeYouTourHomePage'
 import MerchantRegister from '@/components/MerchantRegister'
+import MyOrder from '@/components/MyOrder'
 
 export default [
   {
     path: '/merchantRegister',
     name: 'MerchantRegister',
     component: MerchantRegister
+  },
+  {
+    path: '/myOrder',
+    name: 'MyOrder',
+    component: MyOrder
   },
   {
     path: '/adminLogin',

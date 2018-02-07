@@ -3,7 +3,6 @@
   margin: 20px auto;
   background-color: #fff;
 }
-
 .homePageDomesticTourTitle {
   font: bold 18px/28px "微软雅黑";
   color: #333;
@@ -13,6 +12,19 @@
 .homePageDomesticTourTitle> h4 {
   margin-left:10px;
 }
+.homePageDomesticTourLeft {
+  width:220px;
+  height:483px;
+  background: url("../img/guonei.png") no-repeat;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+  float: left;
+  margin: 0 20px 0 -20px;
+}
+.homePageDomesticTourContent {
+  width:968px;
+  float: left;
+}
 .homePageDomesticTourContentList{
   display: inline-block;
   vertical-align: middle;
@@ -21,7 +33,7 @@
   vertical-align: top;
   width: 220px;
   position: relative;
-  margin: 20px 8px 0;
+  margin: 20px 11px 0;
   float: left;
 }
 
