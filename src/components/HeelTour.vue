@@ -728,7 +728,9 @@
           this.centerDialogVisible = true;
           return;
         }
-        console.log(this.addOrderOptions)
+        this.addOrderOptions.title = this.productDetailsObj.ts_pt_Name
+        sessionStorage.setItem('orderInfo',JSON.stringify(this.addOrderOptions))
+        this.$router.push({name:'MyOrder'});
 //        var makeOrder = {
 //          "loginUserID": "huileyou",
 //          "loginUserPass": "123",

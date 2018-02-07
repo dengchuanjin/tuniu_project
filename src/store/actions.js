@@ -58,6 +58,49 @@ export default {
       })
     })
   },
+  //境外短线
+  initShortLineList({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          let resulte = data.data;
+          for (var i = 0; i < resulte.length; i++) {
+            resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
+          }
+
+          commit('initShortLineList', data.data)
+          relove()
+        }
+      })
+    })
+  },
+  //境外长线
+  initLongLineList({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          let resulte = data.data;
+          for (var i = 0; i < resulte.length; i++) {
+            resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
+          }
+          commit('initLongLineList', data.data)
+          relove()
+        }
+      })
+    })
+  },
   //产品详情
   initProductDetails({commit}, data) {
     return new Promise(function (relove, reject) {

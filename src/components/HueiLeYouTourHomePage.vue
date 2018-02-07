@@ -37,7 +37,7 @@
         <h4>周边旅游</h4>
       </div>
       <div class="clearfix">
-        <div class="homePageDomesticTourLeft">
+        <div class="Around">
         </div>
         <div class="homePageDomesticTourContent">
           <div class="homePageHotPlaceTour">
@@ -65,16 +65,47 @@
     <!--境外短线-->
     <div class="homePageDomesticTour">
       <div class="homePageDomesticTourTitle">
-        <h4>周边旅游</h4>
+        <h4>境外短线旅游</h4>
       </div>
       <div class="clearfix">
-        <div class="homePageDomesticTourLeft">
+        <div class="shortLong">
         </div>
         <div class="homePageDomesticTourContent">
           <div class="homePageHotPlaceTour">
           </div>
           <ul class="homePageDomesticTourContentList clearfix">
-            <li v-for="item,index in aroundList" @click="toAroundDetail(item.ta_tg_ID)">
+            <li v-for="item,index in shortLineList" @click="toShortLineDetail(item.ta_tg_ID)">
+
+              <a href="javascript:;">
+                <img v-lazy="item.oneImg" width="220" height="125">
+              </a>
+              <div class="homePageImageContentBox">
+                <div class="homePageImageMoneyAndSatisfied clearfix">
+                  <span class="homePageImageMoney">￥<strong>2839</strong> 起</span>
+                  <span class="homePageImageSatisfied">满意度 96%</span>
+                </div>
+                <div class="homePageImageContent">
+                  <a href="javascript:;">{{item.ta_tg_Title}}</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--境外长线-->
+    <div class="homePageDomesticTour">
+      <div class="homePageDomesticTourTitle">
+        <h4>境外长线旅游</h4>
+      </div>
+      <div class="clearfix">
+        <div class="longtLong">
+        </div>
+        <div class="homePageDomesticTourContent">
+          <div class="homePageHotPlaceTour">
+          </div>
+          <ul class="homePageDomesticTourContentList clearfix">
+            <li v-for="item,index in longLineList" @click="toLongLineDetail(item.ta_tg_ID)">
 
               <a href="javascript:;">
                 <img v-lazy="item.oneImg" width="220" height="125">
@@ -105,7 +136,9 @@
     computed: mapGetters([
       'domesticDataList',
       'getTourSiteListImage',
-      'aroundList'
+      'aroundList',
+      'shortLineList',
+      'longLineList'
     ]),
     data() {
       return {
@@ -158,7 +191,7 @@
           "provice": name,
         };
         await this.$store.dispatch('initAroundList',AroundOptions)
-        //周边游
+        //境外短线
         let ShortLineOptions = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
@@ -168,7 +201,16 @@
           "travelWay": "2",
         };
         await this.$store.dispatch('initShortLineList',ShortLineOptions)
-
+        //境外长线
+        let LongLineOptions = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "travelWay": "3",
+        };
+        await this.$store.dispatch('initLongLineList',LongLineOptions)
       },
       //点击跳转到产品线路详情
       toDetail(id) {
@@ -193,6 +235,30 @@
         let images = JSON.stringify(arr[0].ta_tg_ShowImage);
         sessionStorage.setItem('images', images);
         this.$router.push({name: 'HeelTour', params: {id: id}})
+      },
+      //境外短线跳转到产品线路详情
+      toShortLineDetail(id){
+        let arr = this.shortLineList.filter(item => {
+          if (item.ta_tg_ID == id) {
+            return true;
+          }
+          return false;
+        });
+        let images = JSON.stringify(arr[0].ta_tg_ShowImage);
+        sessionStorage.setItem('images', images);
+        this.$router.push({name: 'HeelTour', params: {id: id}})
+      },
+      //境外长线跳转到产品线路详情
+      toLongLineDetail(id){
+        let arr = this.longLineList.filter(item => {
+          if (item.ta_tg_ID == id) {
+            return true;
+          }
+          return false;
+        });
+        let images = JSON.stringify(arr[0].ta_tg_ShowImage);
+        sessionStorage.setItem('images', images);
+        this.$router.push({name: 'HeelTour', params: {id: id}})
       }
     },
     mounted() {
@@ -200,5 +266,32 @@
     },
   }
 </script>
-<style>
+<style scoped>
+  .Around {
+    width:220px;
+    height:483px;
+    background: url("../assets/img/zhoubian.png") no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    float: left;
+    margin: 0 20px 0 -20px;
+  }
+  .shortLong{
+    width:220px;
+    height:483px;
+    background: url("../assets/img/duanxian.png") no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    float: left;
+    margin: 0 20px 0 -20px;
+  }
+  .longtLong{
+    width:220px;
+    height:483px;
+    background: url("../assets/img/changxian.png") no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    float: left;
+    margin: 0 20px 0 -20px;
+  }
 </style>

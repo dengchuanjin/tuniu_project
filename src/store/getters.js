@@ -21,6 +21,8 @@ export default {
   bookKnowObj: state => state.bookKnowObj,
   getTourSiteList: state => state.getTourSiteList,
   aroundList: state => state.aroundList,
+  shortLineList: state => state.shortLineList,
+  longLineList: state => state.longLineList,
 
 
   //商户注册

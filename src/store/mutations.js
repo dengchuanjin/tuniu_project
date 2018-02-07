@@ -5,6 +5,8 @@ const state = {
   isLoading:false,//loading
   domesticDataList:[],//国内跟团游数据
   aroundList:[],//周边游
+  shortLineList:[],//境外短线
+  longLineList:[],//境外长线
   getTourSiteListImage:'',//展示图片
 
 
@@ -13,6 +15,7 @@ const state = {
   IncludeList: [],
   noWrapMoneyList: [],
   lineMenuList: [],
+
   timesPriceList: [],//产品价格
   priceObj: {},
   newPriceDetail: {},//当前日期详情
@@ -51,6 +54,12 @@ const mutations = {
 
   initAroundList(state,data){
     state.aroundList = data;
+  },
+  initShortLineList(state,data){
+    state.shortLineList = data;
+  },
+  initLongLineList(state,data){
+    state.longLineList = data;
   },
 
   initProductDetails(state, data) {

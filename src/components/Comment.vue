@@ -249,10 +249,10 @@
           "loginUserPass": "123",
           "isDelete": 0
         }
-        this.$store.commit('showLoading')
+//        this.$store.commit('showLoading')
         this.$store.dispatch('initNavList', getSystemMenuInfo)
         .then(()=>{
-          this.$store.commit('hideLoading')
+//          this.$store.commit('hideLoading')
         })
 
       },

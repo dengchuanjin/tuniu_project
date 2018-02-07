@@ -22,23 +22,23 @@
             <div class="MyOrderWrapContentDetailsInformtion">
               <h4><i></i>订单信息</h4>
               <div class="MyOrderWrapContentDetailsInformtionContent">
-                <h5>海南山崖海南山崖海南山崖海南山崖海南山崖海南山崖海南山崖海南山崖海南山崖海南山崖海南山崖海南山崖海南山崖</h5>
+                <h5>{{orderInfo.title}}</h5>
                 <ul class="MyOrderWrapContentDetailsInformtionContentList">
                   <li>
                     <strong>出发城市</strong>
-                    <span>成都</span>
+                    <span>{{orderInfo.provinceValue}}</span>
                   </li>
                   <li>
                     <strong>出发日期</strong>
-                    <span>2018-02-06</span>
+                    <span>{{orderInfo.DayValue}}</span>
                   </li>
                   <li>
                     <strong>成人</strong>
-                    <span class="money">2 x ￥10000</span>
+                    <span class="money">{{orderInfo.adultNumber}} x ￥{{orderInfo.adultPrice}}</span>
                   </li>
-                  <li>
+                  <li v-show="orderInfo.childPrice">
                     <strong>儿童</strong>
-                    <span class="money">2 x ￥10000</span>
+                    <span class="money">{{orderInfo.childNumber}} x ￥{{orderInfo.childPrice}}</span>
                   </li>
                 </ul>
               </div>
@@ -68,9 +68,9 @@
             <!--出游人信息-->
             <div class="MyOrderWrapContentDetailsExcursionInformtion">
               <h4><i></i>出游人信息<span>也可以下单后补充</span></h4>
-              <ul class="InformtionList">
+              <ul class="InformtionList" v-for="item in orderInfo.adultArr">
                 <li class="clearfix">
-                  <span>第1位</span>
+                  <span>第{{item+1}}位</span>
                   <div class="InformtionListDetails">
                     <ul class="InformtionListDetailsList">
                       <li>
@@ -152,7 +152,16 @@
   export default {
     computed: mapGetters([]),
     data() {
-      return {}
+      return {
+        orderInfo:{}
+      }
+    },
+    created(){
+      this.orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
+      this.orderInfo.adultArr = []
+      for(var i=0;i<this.orderInfo.adultNumber;i++){
+        this.orderInfo.adultArr.push(i)
+      }
     },
     methods: {
       initData() {
