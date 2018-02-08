@@ -6,12 +6,45 @@ import Register from '@/components/Register'
 import HueiLeYouTourHomePage from '@/components/HueiLeYouTourHomePage'
 import MerchantRegister from '@/components/MerchantRegister'
 import MyOrder from '@/components/MyOrder'
+import PersonalCenter from '@/components/PersonalCenter'
+import MyTourOrder from '@/components/PersonakCenterFolder/MyTourOrder'
+import PersonalDataDetails from '@/components/PersonakCenterFolder/PersonalDataDetails'
+import HuiLeYouCashier from '@/components/HuiLeYouCashier'
+
 
 export default [
+  {
+    path: '/huiLeYouCashier',
+    name: 'HuiLeYouCashier',
+    component: HuiLeYouCashier
+  },
   {
     path: '/merchantRegister',
     name: 'MerchantRegister',
     component: MerchantRegister
+  },
+  {
+    path: '/personalCenter',
+    name: 'PersonalCenter',
+    component: PersonalCenter,
+    children: [
+      {
+        path: 'myTourOrder',
+        components: {
+          default: Comment,
+          MyInformtion: MyTourOrder
+        },
+        name: 'MyTourOrder'
+      },
+      {
+        path: 'personalDataDetails',
+        components: {
+          default: Comment,
+          MyInformtion: PersonalDataDetails
+        },
+        name: 'PersonalDataDetails'
+      },
+    ]
   },
   {
     path: '/myOrder',
@@ -71,6 +104,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'HueiLeYouTourHomePage'}
+    redirect: {name: 'HuiLeYouCashier'}
   },
 ]
