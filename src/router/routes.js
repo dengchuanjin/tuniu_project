@@ -104,6 +104,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'HuiLeYouCashier'}
+    redirect: {name: 'PersonalDataDetails'}
   },
 ]
