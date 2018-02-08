@@ -438,4 +438,58 @@ export default {
         })
     })
   },
+  //提交订单
+  submitOrder(store,data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://hly.lxs.1000da.com.cn/TravelOrder/MakeOrder', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data=>{
+        var data = data.data;
+        if(Number(data.resultcode) == 200){
+          relove(data.data)
+        }else{
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //微信支付生成二维码字符串
+  payWechat({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://wechat.1000da.com.cn/Order/MakeWechatQRCode', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //获取微信支付状态
+  getOrderStatus(store,data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://wechat.1000da.com.cn/Order/QueryOrderStatus', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  }
 }

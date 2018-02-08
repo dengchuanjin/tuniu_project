@@ -130,8 +130,9 @@
                 type: 'success'
               });
               sessionStorage.setItem('user',JSON.stringify(data.userInfo[0]))
-              this.$router.push({name:'HeelTour'});
-              window.location.reload()
+              this.$router.go(-1)
+//              this.$router.push({name:'HeelTour'});
+//              window.location.reload()
             }else{
               this.$notify({
                 message: data.backResult,

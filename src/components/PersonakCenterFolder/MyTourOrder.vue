@@ -63,6 +63,17 @@
             </dl>
           </li>
         </ul>
+        <!--分页-->
+        <div class="block" style="float: right;">
+          <el-pagination
+            @current-change="handleCurrentChange"
+            :page-size="4"
+            layout="total, prev, pager, next"
+            :total="total"
+            v-show="total"
+          >
+          </el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -73,15 +84,24 @@
   export default {
     computed: mapGetters([]),
     data() {
-      return {}
+      return {
+        total:100
+      }
     },
     methods: {
-      initData() {
+      //分页
+      handleCurrentChange(num){
+
+      },
+      initData(page) {
       },
       search() {
         this.initData()
       }
     },
+    mounted(){
+      this.initData(1)
+    }
   }
 </script>
 <style scoped>

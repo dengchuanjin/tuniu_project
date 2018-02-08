@@ -33,7 +33,7 @@
     </div>
     <!--周边游-->
     <div class="homePageDomesticTour">
-      <div class="homePageDomesticTourTitle">
+      <div class="homePageDomesticTourTitle AroundTitle">
         <h4>周边旅游</h4>
       </div>
       <div class="clearfix">
@@ -64,7 +64,7 @@
     </div>
     <!--境外短线-->
     <div class="homePageDomesticTour">
-      <div class="homePageDomesticTourTitle">
+      <div class="homePageDomesticTourTitle shortLongTitle">
         <h4>境外短线旅游</h4>
       </div>
       <div class="clearfix">
@@ -95,7 +95,7 @@
     </div>
     <!--境外长线-->
     <div class="homePageDomesticTour">
-      <div class="homePageDomesticTourTitle">
+      <div class="homePageDomesticTourTitle longtLongTitle">
         <h4>境外长线旅游</h4>
       </div>
       <div class="clearfix">
@@ -108,7 +108,7 @@
             <li v-for="item,index in longLineList" @click="toLongLineDetail(item.ta_tg_ID)">
 
               <a href="javascript:;">
-                <img v-lazy="item.oneImg" width="220" height="125">
+                <img v-show="item.oneImg" v-lazy="item.oneImg" width="220" height="125">
               </a>
               <div class="homePageImageContentBox">
                 <div class="homePageImageMoneyAndSatisfied clearfix">
@@ -129,7 +129,6 @@
 <script>
   import {mapGetters} from 'vuex'
   import $ from 'jquery'
-  import HueiLeYouTourHomePage from '../assets/css/HueiLeYouTourHomePage.css'
 
   export default {
     name: '',
@@ -294,4 +293,93 @@
     float: left;
     margin: 0 20px 0 -20px;
   }
+  .homePageDomesticTour {
+    width: 1188px;
+    margin: 20px auto;
+    background-color: #fff;
+  }
+  .homePageDomesticTourTitle {
+    font: bold 18px/28px "微软雅黑";
+    color: #333;
+    border-bottom: 3px solid #e694a6;
+    border-bottom: 3px solid #e694a6;
+  }
+  .homePageDomesticTourTitle> h4 {
+    margin-left:10px;
+  }
+  .homePageDomesticTourLeft {
+    width:220px;
+    height:483px;
+    background: url("../assets/img/guonei.png") no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    float: left;
+    margin: 0 20px 0 -20px;
+  }
+  .homePageDomesticTourContent {
+    width:968px;
+    float: left;
+  }
+  .homePageDomesticTourContentList{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .homePageDomesticTourContentList > li {
+    vertical-align: top;
+    width: 220px;
+    position: relative;
+    margin: 20px 11px 0;
+    float: left;
+  }
+
+  .homePageDomesticTourContentList > li:hover {
+    box-shadow: 1px 1px 3px #f60;
+  }
+  .homePageImageContentBox {
+    background-color: #fff;
+    padding: 0 5px 5px;
+    height:100%;
+  }
+  .homePageImageContent {
+    height:40px;
+    width: 100%;
+    overflow: hidden;
+    font: bold 12px/20px "微软雅黑";
+  }
+  .homePageImageContent:hover a {
+    color: #f60;
+  }
+  .homePageImageContent > a {
+    color: #333;
+  }
+
+  .homePageImageMoneyAndSatisfied {
+    font: 12px/42px "微软雅黑";
+  }
+
+  .homePageImageMoneyAndSatisfied > .homePageImageMoney {
+    float: left;
+    color: #f60;
+  }
+
+  .homePageImageMoneyAndSatisfied > .homePageImageMoney > strong {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .homePageImageMoneyAndSatisfied > .homePageImageSatisfied {
+    float: right;
+    color: #999;
+    margin-right: 5px;
+  }
+  .AroundTitle{
+    border-bottom: 3px solid #66d1d2;
+  }
+  .shortLongTitle{
+    border-bottom: 3px solid #7fd3a8;
+  }
+  .longtLongTitle{
+    border-bottom: 3px solid #7fc7ef;
+  }
+
 </style>

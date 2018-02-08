@@ -5,12 +5,15 @@ import AdminLogin from '@/components/AdminLogin'
 import Register from '@/components/Register'
 import HueiLeYouTourHomePage from '@/components/HueiLeYouTourHomePage'
 import MerchantRegister from '@/components/MerchantRegister'
+//填写订单
 import MyOrder from '@/components/MyOrder'
 import PersonalCenter from '@/components/PersonalCenter'
 import MyTourOrder from '@/components/PersonakCenterFolder/MyTourOrder'
 import PersonalDataDetails from '@/components/PersonakCenterFolder/PersonalDataDetails'
 import HuiLeYouCashier from '@/components/HuiLeYouCashier'
 
+//微信支付
+import PayPage from '@/components/PayPage'
 
 export default [
   {
@@ -50,6 +53,11 @@ export default [
     path: '/myOrder',
     name: 'MyOrder',
     component: MyOrder
+  },
+  {
+    path: '/payPage',
+    name: 'PayPage',
+    component: PayPage
   },
   {
     path: '/adminLogin',
@@ -104,6 +112,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'HuiLeYouCashier'}
+    redirect: {name: 'HueiLeYouTourHomePage'}
   },
 ]

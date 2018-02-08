@@ -23,6 +23,7 @@ export default {
   aroundList: state => state.aroundList,
   shortLineList: state => state.shortLineList,
   longLineList: state => state.longLineList,
+  payStr: state => state.payStr,
 
 
   //商户注册

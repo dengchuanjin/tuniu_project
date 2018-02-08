@@ -37,6 +37,7 @@ const state = {
   changeCompanyID:'',
   changeCooperationTypeList:[],//合作类型
   changeScopeOfOperationList:[],//经营范围
+  payStr:'',
 };
 const mutations = {
   //loading设置
@@ -55,6 +56,7 @@ const mutations = {
   initAroundList(state,data){
     state.aroundList = data;
   },
+
   initShortLineList(state,data){
     state.shortLineList = data;
   },
@@ -189,6 +191,9 @@ const mutations = {
   },
   initChangeScopeOfOperation(state,data){
     state.changeScopeOfOperationList = data;
+  },
+  initPayStr(state,str){
+    state.payStr = str
   }
 
 

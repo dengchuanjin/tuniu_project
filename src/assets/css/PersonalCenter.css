@@ -88,12 +88,12 @@
 .personakCenterContentWrapLeftNavMyOrder>a {
   background: url("../img/order.png") no-repeat 35px 10px;
 }
-.personakCenterContentWrapLeftNavMyOrder>a:hover+.MyOrderDetailsList,
-.personakCenterType>a:hover+.MyOrderDetailsList{
-  display: block;
-}
+/*.personakCenterContentWrapLeftNavMyOrder>a:hover+.MyOrderDetailsList,*/
+/*.personakCenterType>a:hover+.MyOrderDetailsList{*/
+  /*display: block;*/
+/*}*/
 .MyOrderDetailsList {
-  display: none;
+  display: block;
 }
 .personakCenterType>a {
   background: url("../img/message.png") no-repeat 35px 10px;

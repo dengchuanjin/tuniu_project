@@ -5,7 +5,7 @@
       <header class="huiLeYouCashierWrapHeader">
         <div class="huiLeYouCashierWrapHeaderContent clearfix">
           <div class="huiLeYouCashierWrapHeaderContentFloat">
-            <strong>fdfsfdsfd</strong>
+            <strong>{{user.ui_Name}}</strong>
             <span></span>
             <a href="javaecript:;">注销</a>
           </div>
@@ -21,22 +21,22 @@
         <!--产品内容-->
         <div class="productContentDetails clearfix">
           <div class="productContentDetailsContent">
-            <strong>产品名称: 犯得上发射点发输入法撒旦范德萨打发飒飒人分发给而发生</strong>
+            <strong>产品名称: {{orderInfo.title}}</strong>
             <ul class="aboutPayment clearfix">
-              <li>订单号: 2423223232 <span></span></li>
-              <li>订单金额: 3434.00元 <span></span></li>
-              <li>已支付: 3434.00元</li>
+              <li>订单号: {{orderInfo.orderID}} <span></span></li>
+              <li>订单金额: {{orderInfo.adultNumber*orderInfo.adultPrice+orderInfo.childNumber*orderInfo.childPrice}}.00元 </li>
+              <!--<li>已支付: 3434.00元</li>-->
             </ul>
           </div>
           <div class="paymentMoney">
-            <strong>应付金额: <span>9100.00</span>元</strong>
+            <strong>应付金额: <span>{{orderInfo.adultNumber*orderInfo.adultPrice+orderInfo.childNumber*orderInfo.childPrice}}.00</span>元</strong>
           </div>
         </div>
         <!--支付平台-->
         <div class="paymentPlatform">
           <h4>支付平台</h4>
           <ul class="paymentPlatformList clearfix">
-            <li><a href="javascript:;">微信支付</a></li>
+            <li><a href="javascript:;" @click="wechatPay">微信支付</a></li>
           </ul>
         </div>
       </section>
@@ -49,13 +49,25 @@
   export default {
     computed: mapGetters([]),
     data() {
-      return {}
+      return {
+        user:{},
+        orderInfo:{}
+
+      }
+    },
+    created(){
+      this.user = JSON.parse(sessionStorage.getItem('user'))
+      this.orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'))
     },
     methods: {
       initData() {
       },
       search() {
         this.initData()
+      },
+      //微信支付
+      wechatPay(){
+        this.$router.push({name:'PayPage'})
       }
     },
   }
@@ -191,6 +203,9 @@
 
   .paymentPlatformList > li > a {
     color:#8d8d8d;
+  }
+  .paymentPlatformList > li > a:hover{
+    color: #f60;
   }
 
 </style>

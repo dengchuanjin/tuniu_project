@@ -728,6 +728,28 @@
           this.centerDialogVisible = true;
           return;
         }
+        if(this.addOrderOptions.DayValue==''){
+          this.$notify({
+            message: '请选择出发日期!',
+            type: 'error'
+          });
+          return
+        }
+        if(this.addOrderOptions.DayValue==''||this.addOrderOptions.adultPrice==''){
+          this.$notify({
+            message: '请选择左侧可选出发日期!',
+            type: 'error'
+          });
+          return
+        }
+        if(!this.addOrderOptions.adultNumber){
+          this.$notify({
+            message: '请选择人数!',
+            type: 'error'
+          });
+          return
+        }
+          console.log(this.addOrderOptions)
         this.addOrderOptions.title = this.productDetailsObj.ts_pt_Name
         sessionStorage.setItem('orderInfo',JSON.stringify(this.addOrderOptions))
         this.$router.push({name:'MyOrder'});
