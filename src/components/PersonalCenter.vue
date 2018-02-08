@@ -37,6 +37,7 @@
                 <a href="javascript:;"><strong>个人中心</strong><i></i></a>
                 <ul class="MyOrderDetailsList">
                   <li><router-link :to="{name:'PersonalDataDetails'}">个人资料</router-link></li>
+                  <li><router-link :to="{name:'UpdatePassword'}">修改密码</router-link></li>
                   <!--<li><a href="javascript:;">安全设置</a></li>-->
                   <!--<li><a href="javascript:;">密码设置</a></li>-->
                   <!--<li><a href="javascript:;">我的提问</a></li>-->

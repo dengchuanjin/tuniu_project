@@ -10,6 +10,7 @@ import MyOrder from '@/components/MyOrder'
 import PersonalCenter from '@/components/PersonalCenter'
 import MyTourOrder from '@/components/PersonakCenterFolder/MyTourOrder'
 import PersonalDataDetails from '@/components/PersonakCenterFolder/PersonalDataDetails'
+import UpdatePassword from '@/components/PersonakCenterFolder/UpdatePassword'
 import HuiLeYouCashier from '@/components/HuiLeYouCashier'
 import MyOrderQRCode from '@/components/MyOrderQRCode'
 
@@ -52,6 +53,14 @@ export default [
           MyInformtion: PersonalDataDetails
         },
         name: 'PersonalDataDetails'
+      },
+      {
+        path: 'updatePassword',
+        components: {
+          default: Comment,
+          MyInformtion: UpdatePassword
+        },
+        name: 'UpdatePassword'
       },
     ]
   },
@@ -118,6 +127,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'MyOrderQRCode'}
+    redirect: {name: 'UpdatePassword'}
   },
 ]
