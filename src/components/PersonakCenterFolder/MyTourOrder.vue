@@ -26,34 +26,16 @@
         </div>
         <!--所有订单内容-->
         <ul class="AllOrderInformtionContent">
-          <li>
+          <li v-for="item in myTourOrderList">
             <div class="AllOrderInformtionContentAboutTime clearfix">
-              <strong>下单时间: 2016-06-13 11:34:00</strong>
-              <span>订单号:  28103333</span>
+              <strong>下单时间: {{item.oi_CreateTime}}</strong>
+              <span>订单号:  {{item.oi_OrderID}}</span>
             </div>
             <dl class="AllOrderInformtionContentAboutDetails clearfix">
-              <dt>上海-泸州(单程)</dt>
+              <dt>{{item.oi_OrderName}}</dt>
               <dd class="ticketType">机票</dd>
-              <dd class="ticketSize">2张</dd>
-              <dd class="ticketTime">2016-01-01 08-22</dd>
-              <dd class="money">￥1474</dd>
-              <dd class="ticketState">
-                <span>已完成</span>
-                <a href="javascript:;">订单详情</a>
-              </dd>
-              <dd class="ticketDelete"><a href="javascript:;">删除</a></dd>
-            </dl>
-          </li>
-          <li>
-            <div class="AllOrderInformtionContentAboutTime clearfix">
-              <strong>下单时间: 2016-06-13 11:34:00</strong>
-              <span>订单号:  28103333</span>
-            </div>
-            <dl class="AllOrderInformtionContentAboutDetails clearfix">
-              <dt>上海-泸州(单程)</dt>
-              <dd class="ticketType">机票</dd>
-              <dd class="ticketSize">2张</dd>
-              <dd class="ticketTime">2016-01-01 08-22</dd>
+              <dd class="ticketSize">{{item.oi_Number}}张</dd>
+              <dd class="ticketTime">{{item.oi_UseTime}}</dd>
               <dd class="money">￥1474</dd>
               <dd class="ticketState">
                 <span>已完成</span>
@@ -82,25 +64,42 @@
   import {mapGetters} from 'vuex'
 
   export default {
-    computed: mapGetters([]),
+
     data() {
       return {
         total:100
       }
     },
+    computed: mapGetters([
+      'myTourOrderList'
+    ]),
+    created(){
+      this.initData(1)
+    },
     methods: {
       //分页
       handleCurrentChange(num){
-
+        this.initData(num)
       },
       initData(page) {
+        let userID = JSON.parse(sessionStorage.getItem('user')).ui_UserCode
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "huiuserid": userID,
+          "page": page?page:1,
+          "rows": "5"
+        };
+        this.$store.dispatch('initMyTourOrder',options)
       },
       search() {
-        this.initData()
+        this.initData(1)
       }
     },
     mounted(){
-      this.initData(1)
     }
   }
 </script>
@@ -218,4 +217,6 @@
     border: 1px solid #cdcdcd;
     margin-top: 15px;
   }
+
+
 </style>

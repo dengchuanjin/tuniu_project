@@ -491,5 +491,24 @@ export default {
         }
       })
     })
+  },
+  //初始化用户订单
+  initMyTourOrder({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post('http://hly.lxs.1000da.com.cn/UserOrder/Select', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          commit('initMyTourOrder',data.data)
+          relove(Number(data.totalrows))
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
   }
 }

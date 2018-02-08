@@ -38,6 +38,7 @@ const state = {
   changeCooperationTypeList:[],//合作类型
   changeScopeOfOperationList:[],//经营范围
   payStr:'',
+  myTourOrderList:[],//用户订单
 };
 const mutations = {
   //loading设置
@@ -62,6 +63,9 @@ const mutations = {
   },
   initLongLineList(state,data){
     state.longLineList = data;
+  },
+  initMyTourOrder(state,data){
+    state.myTourOrderList = data;
   },
 
   initProductDetails(state, data) {
