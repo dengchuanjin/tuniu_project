@@ -11,11 +11,17 @@ import PersonalCenter from '@/components/PersonalCenter'
 import MyTourOrder from '@/components/PersonakCenterFolder/MyTourOrder'
 import PersonalDataDetails from '@/components/PersonakCenterFolder/PersonalDataDetails'
 import HuiLeYouCashier from '@/components/HuiLeYouCashier'
+import MyOrderQRCode from '@/components/MyOrderQRCode'
 
 //微信支付
 import PayPage from '@/components/PayPage'
 
 export default [
+  {
+    path: '/myOrderQRCode',
+    name: 'MyOrderQRCode',
+    component: MyOrderQRCode
+  },
   {
     path: '/huiLeYouCashier',
     name: 'HuiLeYouCashier',
@@ -112,6 +118,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'HueiLeYouTourHomePage'}
+    redirect: {name: 'MyOrderQRCode'}
   },
 ]

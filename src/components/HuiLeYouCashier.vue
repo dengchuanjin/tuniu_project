@@ -119,12 +119,7 @@
   }
 </script>
 <style scoped>
-  .huiLeYouCashierWrap * {
-    /*box-sizing: none;*/
-  }
-
   .huiLeYouCashierWrap {
-
     background-color: #f0f0f0;
     width:100%;
     padding-bottom:30px;
