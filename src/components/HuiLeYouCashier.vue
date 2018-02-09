@@ -113,7 +113,7 @@
       },
       //微信支付
       wechatPay(){
-        this.$router.push({name:'PayPage'})
+        this.$router.push({name:'MyOrderQRCode'})
       }
     },
   }

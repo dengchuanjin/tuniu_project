@@ -127,6 +127,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'UpdatePassword'}
+    redirect: {name: 'HueiLeYouTourHomePage'}
   },
 ]

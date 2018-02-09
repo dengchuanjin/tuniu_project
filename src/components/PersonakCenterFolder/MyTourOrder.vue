@@ -14,7 +14,11 @@
             <dt>产品信息</dt>
             <dd>
               <select>
-                <option value="AllOrder">全部订单</option>
+                <option value="">全部订单</option>
+                <option value="0">旅行社订单</option>
+                <option value="1">车票订单</option>
+                <option value="2">门票订单</option>
+                <option value="3">美食订单</option>
               </select>
             </dd>
             <dd>数量</dd>
@@ -25,20 +29,22 @@
           </dl>
         </div>
         <!--所有订单内容-->
-        <ul class="AllOrderInformtionContent">
+        <ul class="AllOrderInformtionContent" v-loading="isLoading">
           <li v-for="item in myTourOrderList">
             <div class="AllOrderInformtionContentAboutTime clearfix">
-              <strong>下单时间: {{item.oi_CreateTime}}</strong>
+              <strong>下单时间: {{item.oi_CreateTime | getUseTime}}</strong>
               <span>订单号:  {{item.oi_OrderID}}</span>
             </div>
             <dl class="AllOrderInformtionContentAboutDetails clearfix">
-              <dt>{{item.oi_OrderName}}</dt>
-              <dd class="ticketType">机票</dd>
+              <dt style="overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap">{{item.oi_OrderName?item.oi_OrderName:"未知"}}</dt>
+              <dd class="ticketType">{{item.oi_OrderTypeID | getOrderType}}</dd>
               <dd class="ticketSize">{{item.oi_Number}}张</dd>
-              <dd class="ticketTime">{{item.oi_UseTime}}</dd>
-              <dd class="money">￥1474</dd>
+              <dd class="ticketTime">{{item.oi_UseTime | getUseTime}}</dd>
+              <dd class="money">￥{{item.oi_SellMoney?item.oi_SellMoney:0}}</dd>
               <dd class="ticketState">
-                <span>已完成</span>
+                <span>{{item.oi_OrderStatus | getTicketStatus}}</span>
                 <a href="javascript:;">订单详情</a>
               </dd>
               <dd class="ticketDelete"><a href="javascript:;">删除</a></dd>
@@ -67,7 +73,8 @@
 
     data() {
       return {
-        total:100
+        total:0,
+        isLoading:false
       }
     },
     computed: mapGetters([
@@ -91,9 +98,14 @@
           "pcName": "",
           "huiuserid": userID,
           "page": page?page:1,
-          "rows": "5"
+          "rows": "4"
         };
+        this.isLoading = true;
         this.$store.dispatch('initMyTourOrder',options)
+        .then(total=>{
+          this.total = total;
+          this.isLoading = false;
+        })
       },
       search() {
         this.initData(1)
@@ -143,7 +155,7 @@
   }
 
   .informationBarList dt {
-    width: 325px;
+    width: 290px;
     text-indent: 25px;
   }
 
@@ -179,7 +191,7 @@
   }
 
   .AllOrderInformtionContentAboutDetails > dt {
-    width: 325px;
+    width: 290px;
     text-indent: 50px;
   }
 

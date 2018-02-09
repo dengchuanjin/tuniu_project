@@ -510,5 +510,53 @@ export default {
         }
       })
     })
+  },
+  //修改用户信息
+  saveUserInfo(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/UserInfo/Update', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data.resultcontent)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //支付订单
+  wechatPayWay(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/TravelOrder/PayOrder', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data.resultcontent)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
   }
+  //修改用户信息
+  // updateUserInfo(store,data){
+  //   return new Promise((relove, reject) => {
+  //     postPromise('http://http://114.55.248.116:1001/Service.asmx/UpdateUserInfo', {
+  //       paramJson: JSON.stringify(data)
+  //     })
+  //     .then(data=>{
+  //       console.log(data)
+  //     })
+  //   })
+  //
+  // }
 }

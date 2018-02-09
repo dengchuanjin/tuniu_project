@@ -11,6 +11,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store/index'
 import axios from 'axios'
+import * as filters from './filters'
+
+Object.keys(filters).forEach((key) => {
+  Vue.filter(key, filters[key]);
+})
+
 import qs from 'qs'
 import VueLazyLoad from 'vue-lazyload'
 Vue.use(VueLazyLoad,{

@@ -209,7 +209,7 @@
                       @change="handleChange"
                       size="small"
                       :min="0"
-                      :max="100"
+                      :max="addOrderOptions.adultYu"
                       label="描述文字"
                     ></el-input-number>
                     <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.adultYu">余{{addOrderOptions.adultYu}}</span>
@@ -222,7 +222,7 @@
                       @change="handleChange"
                       size="small"
                       :min="0"
-                      :max="100"
+                      :max="addOrderOptions.childYu"
                       label="描述文字"
                     ></el-input-number>
               <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.childYu">余{{addOrderOptions.childYu}}</span>
@@ -451,10 +451,10 @@
           provinceValue: '',
           DayValue:'',
           adultNumber: 0,//成人
-          adultYu:'',//成人余票
+          adultYu:0,//成人余票
           adultPrice:'',//成人价格
           childPrice:'',//儿童价格
-          childYu:'',//儿童余票
+          childYu:0,//儿童余票
           childNumber:0,//儿童
         },
       }
@@ -497,6 +497,7 @@
           };
           this.$store.dispatch('initTimesPrice', options)
             .then((data) => {
+              console.log(data)
               var calendarContentList = document.getElementById("calendarContentList");
               var str = '';
               var year = new Date().getFullYear();

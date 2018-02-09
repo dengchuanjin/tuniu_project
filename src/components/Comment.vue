@@ -16,7 +16,7 @@
               <router-link to="/MerchantRegister">供应商注册</router-link>
             </li>
             <li v-show="isLoginShow">
-              <a href="javascript:;" style="color: #f60;">欢迎您:{{loginName ? loginName : ""}}</a>
+              <a href="javascript:;" style="color: #f60;" @click="toPersonalCenter">欢迎您:{{loginName ? loginName : ""}}</a>
             </li>
             <li class="AdminLoginList">
               <a href="javascript:;">管理员登录</a>
@@ -260,6 +260,10 @@
       changeTaualType(id) {
         this.smSiName = id.sm_si_Name
       },
+      //跳转个人中心
+      toPersonalCenter(){
+        this.$router.push({name:'MyTourOrder'})
+      }
     },
     created() {
       this.initData();

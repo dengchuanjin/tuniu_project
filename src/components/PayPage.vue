@@ -11,9 +11,7 @@
       return {
         i: false,
         isLoad: 0,
-        isLoad1: 0,
         timer: null,
-        timer1: null,
         hide: false,
       }
     },
@@ -29,28 +27,7 @@
           "money": '1'
         };
         return this.$store.dispatch('payWechat', payOptions)
-//          this.timer = setInterval(()=> {
-//            this.$store.dispatch('payWechat', payOptions)
-//            .then(data => {
-//              if(this.isLoad>0){
-//                return;
-//              }
-//              this.isLoad++;
-//              if(data.list){
-//                relove(data);
-//                clearInterval(this.timer)
-//              }
-//            }, err => {
-//              this.$notify({
-//                message: err,
-//                type: 'error'
-//              });
-//            })
-//          },30)
-//        })
-//      }
       },
-
     },
     mounted(){
       var qrcode = new QRCode(this.$refs.ewm, {

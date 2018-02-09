@@ -32,7 +32,7 @@
 
           <div class="sweepQRCodeBoxWrap">
             <div class="sweepQRCodeBox">
-              <div class="QRCode"></div>
+              <div class="QRCode" ref="ewm"></div>
             </div>
             <a href="javascript:;">>选择其他支付方式</a>
           </div>
@@ -41,21 +41,91 @@
     </div>
 </template>
 <script>
-    import {mapGetters} from 'vuex'
+  import {mapGetters} from 'vuex'
+  export default{
+    name: '',
+    data(){
+      return {
+        i: false,
+        isLoad: 0,
+        timer: null,
+        hide: false,
+      }
+    },
+    computed: mapGetters([
+      'payStr'
+    ]),
+    methods: {
+      initPay(){
+        let payOptions = {
+          "userID": "qianke",
+          "password": "qianke123",
+          "stationID": "qianlidagzh",
+          "money": '1'
+        };
+        return this.$store.dispatch('payWechat', payOptions)
+      },
+    },
+    mounted(){
+      var qrcode = new QRCode(this.$refs.ewm, {
+        width: 200,
+        height: 200
+      });
+      let orderID = JSON.parse(sessionStorage.getItem('orderInfo')).orderID
 
-    export default {
-        computed: mapGetters([]),
-        data() {
-            return {}
-        },
-        methods: {
-            initData() {
-            },
-            search() {
-                this.initData()
+      if (this.i == false) {
+        setTimeout(()=>{
+          this.initPay().then(data => {
+            qrcode.makeCode(data.list);
+            if (this.isLoad > 0) {
+              return;
             }
-        },
+            clearInterval(this.timer);
+            this.timer = setInterval(() => {
+              let options = {
+                "userID": "qianke",
+                "password": "qianke123",
+                "stationID": "qianlidagzh",
+                "orderNo": data.backstring
+              }
+              this.$store.dispatch('getOrderStatus', options)
+              .then(resulte => {
+                if (this.isLoad > 0) {
+                  return;
+                }
+
+                if (resulte.list == "SUCCESS") {
+                  clearInterval(this.timer);
+                  this.isLoad++;
+                  let wOptions = {
+                    "loginUserID": "huileyou",
+                    "loginUserPass": "123",
+                    "operateUserID": "",
+                    "operateUserName": "",
+                    "pcName": "",
+                    "orderID":  orderID,
+                    "payWay": "微信支付",
+                  }
+                  this.$store.dispatch('wechatPayWay',wOptions)
+                  .then(()=>{
+                    this.$router.push({name:'MyTourOrder'});
+                  },err=>{
+                    this.$notify({
+                      message: err,
+                      type: 'error'
+                    });
+                  })
+
+
+                }
+              })
+            }, 300)
+          })
+        },30)
+      }
+      this.i = true;
     }
+  }
 </script>
 <style scoped>
   .huiLeYouCashierWrap {

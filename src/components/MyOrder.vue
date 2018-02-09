@@ -238,6 +238,7 @@
             message: err,
             type: 'error'
           });
+          this.$router.push({name:'PersonalDataDetails'})
         })
       },
       //添加出游人
