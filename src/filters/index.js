@@ -96,11 +96,11 @@ export const getEatType = (val)=>{
 export const  getOutStatus = (val)=>{
   switch (Number(val)) {
     case 0:
-      return '出票中';
+      return '商家出单中';
     case 1:
-      return '出票成功';
+      return '商家出单成功';
     case 2:
-      return '出票失败';
+      return '商家出单失败';
     default:
       return '未知';
   }
@@ -184,7 +184,11 @@ export const getUseTime = val=>{
   if(!val){
     return date.getFullYear()+'-'+getNum((date.getMonth()+1))+'-'+getNum(date.getDate())+' '+getNum(date.getHours())+':'+getNum(date.getMinutes())+':'+getNum(date.getSeconds())
   }else{
-    return val.replace(/T/,' ')
+    if(!val.includes('.')){
+      return val.replace(/T/,' ')
+    }else{
+      return val.substring(0,val.indexOf('.')).replace(/T/,' ')
+    }
   }
 };
 //订单类型
@@ -201,4 +205,5 @@ export const getOrderType = val=>{
     default:
       return '未知';
   }
-}
+};
+

@@ -130,6 +130,7 @@
                 type: 'success'
               });
               sessionStorage.setItem('user',JSON.stringify(data.userInfo[0]))
+              this.$store.commit('showQuitButton')
               this.$router.go(-1)
 //              this.$router.push({name:'HeelTour'});
 //              window.location.reload()

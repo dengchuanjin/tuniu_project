@@ -4,7 +4,7 @@
         <header class="huiLeYouCashierWrapHeader">
           <div class="huiLeYouCashierWrapHeaderContent clearfix">
             <div class="huiLeYouCashierWrapHeaderContentFloat">
-              <strong>{{}}</strong>
+              <strong @click="toMy">{{user.ui_Name}}</strong>
               <span></span>
               <a href="javaecript:;">注销</a>
             </div>
@@ -22,10 +22,13 @@
           <div class="huiLeYouOrderRemind clearfix">
             <div class="huiLeYouOrderRemindLeft">
               <strong>请您及时付款，以便订单及时处理！订单号: 103343343</strong>
-              <span>请您在提交订单后<em>{{}}</em>内完成支付，否则订单会自动取消。</span>
+              <span>请您在提交订单后<em ref="timer">{{text}}</em>内完成支付，否则订单会自动取消。</span>
             </div>
-            <div class="huiLeYouOrderRemindRight">
-              <strong>应付金额:<span>9160.00</span>元</strong>
+            <div class="huiLeYouOrderRemindRight" v-if="orderInfo.oi_SellMoney">
+              <strong>应付金额:<span>{{orderInfo.oi_SellMoney}}.00</span>元</strong>
+            </div>
+            <div class="huiLeYouOrderRemindRight" v-else>
+              <strong>应付金额:<span>{{orderInfo.adultNumber*orderInfo.adultPrice+orderInfo.childNumber*orderInfo.childPrice}}.00</span>元</strong>
             </div>
           </div>
 
@@ -34,22 +37,47 @@
             <div class="sweepQRCodeBox">
               <div class="QRCode" ref="ewm"></div>
             </div>
-            <a href="javascript:;">>选择其他支付方式</a>
+            <a href="javascript:;" @click="changePay">>选择其他支付方式</a>
           </div>
         </section>
       </div>
+      <el-dialog
+        title="温馨提示"
+        :visible.sync="centerDialogVisible"
+        width="30%"
+        center>
+        <span style="color: #f60">请先登录!</span>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="centerDialogVisibleSubmit">确 定</el-button>
+  </span>
+      </el-dialog>
     </div>
 </template>
 <script>
   import {mapGetters} from 'vuex'
+  import {leftTimer} from '../assets/public'
   export default{
     name: '',
     data(){
       return {
+        centerDialogVisible:false,
         i: false,
         isLoad: 0,
+        text:'',
+        orderInfo:{},
         timer: null,
+        timer1:null,
         hide: false,
+        user:{}
+      }
+    },
+    created(){
+      let user = JSON.parse(sessionStorage.getItem('user'))
+      if(user){
+        this.user = user
+      }else{
+        this.centerDialogVisible = true;
       }
     },
     computed: mapGetters([
@@ -65,14 +93,43 @@
         };
         return this.$store.dispatch('payWechat', payOptions)
       },
+      toMy(){
+        this.$router.push({name:'MyTourOrder'})
+      },
+      //登录确定
+      centerDialogVisibleSubmit(){
+        this.$router.push({name:'AdminLogin'});
+      },
+      //选择其他方式支付
+      changePay(){
+        this.$router.push({name:'HuiLeYouCashier'})
+        window.location.reload()
+      }
     },
     mounted(){
+      if(this.user.ui_Name){
+        let date = new Date();
+        this.timer1 = setInterval(()=>{
+          leftTimer(this,date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes()+20,0,0).then(()=>{
+            clearInterval(this.timer1)
+            alert('time over')
+          })
+        },1000)
+      }
       var qrcode = new QRCode(this.$refs.ewm, {
         width: 200,
         height: 200
       });
-      let orderID = JSON.parse(sessionStorage.getItem('orderInfo')).orderID
-
+      let orderID;
+      let orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
+      if(orderInfo){
+        this.orderInfo = orderInfo;
+        if(orderInfo.orderID){
+          orderID = orderInfo.orderID
+        }else{
+          orderID = orderInfo.oi_OrderID
+        }
+      }
       if (this.i == false) {
         setTimeout(()=>{
           this.initPay().then(data => {

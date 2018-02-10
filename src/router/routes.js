@@ -1,22 +1,21 @@
-import Comment from '@/components/Comment'
-import HeelTour from '@/components/HeelTour'
-import AdmissionTicket from '@/components/AdmissionTicket'
+import Comment from '@/components/public/Comment'
+import AgenciesDetail from '@/components/Agencies/AgenciesDetail'
+import TicketsDetail from '@/components/Tickets/TicketsDetail'
 import AdminLogin from '@/components/AdminLogin'
 import Register from '@/components/Register'
-import HueiLeYouTourHomePage from '@/components/HueiLeYouTourHomePage'
-import MerchantRegister from '@/components/MerchantRegister'
+import AgenciesHome from '@/components/Agencies/AgenciesHome'
+import MerchantRegister from '@/components/VendorRegistration/MerchantRegister'
 //填写订单
-import MyOrder from '@/components/MyOrder'
-import PersonalCenter from '@/components/PersonalCenter'
+import FillInOrder from '@/components/Agencies/FillInOrder'
+import PersonalCenter from '@/components/PersonakCenterFolder/PersonalCenter'
 import MyTourOrder from '@/components/PersonakCenterFolder/MyTourOrder'
 import PersonalDataDetails from '@/components/PersonakCenterFolder/PersonalDataDetails'
 import UpdatePassword from '@/components/PersonakCenterFolder/UpdatePassword'
-import HuiLeYouCashier from '@/components/HuiLeYouCashier'
+import PaymentPlatform from '@/components/public/PaymentPlatform'
 import MyOrderQRCode from '@/components/MyOrderQRCode'
 import MyOrderDetails from '@/components/PersonakCenterFolder/MyOrderDetails'
 
 //微信支付
-import PayPage from '@/components/PayPage'
 
 //门票首页
 import AdmissionTicketHomePage from '@/components/AdmissionTicketHomePage'
@@ -37,9 +36,9 @@ export default [
     component: MyOrderDetails
   },
   {
-    path: '/huiLeYouCashier',
-    name: 'HuiLeYouCashier',
-    component: HuiLeYouCashier
+    path: '/paymentPlatform',
+    name: 'PaymentPlatform',
+    component: PaymentPlatform
   },
   {
     path: '/merchantRegister',
@@ -78,14 +77,9 @@ export default [
     ]
   },
   {
-    path: '/myOrder',
-    name: 'MyOrder',
-    component: MyOrder
-  },
-  {
-    path: '/payPage',
-    name: 'PayPage',
-    component: PayPage
+    path: '/fillInOrder',
+    name: 'FillInOrder',
+    component: FillInOrder
   },
   {
     path: '/adminLogin',
@@ -103,28 +97,28 @@ export default [
     component: Comment,
     children: [
       {
-        path: 'HueiLeYouTourHomePage',
+        path: 'agenciesHome',
         components: {
           default: Comment,
-          User: HueiLeYouTourHomePage
+          User: AgenciesHome
         },
-        name: 'HueiLeYouTourHomePage'
+        name: 'AgenciesHome'
       },
       {
-        path: 'HeelTour/:id',
+        path: 'agenciesDetail/:id',
         components: {
           default: Comment,
-          User: HeelTour
+          User: AgenciesDetail
         },
-        name: 'HeelTour'
+        name: 'AgenciesDetail'
       },
       {
-        path: 'AdmissionTicket',
+        path: 'ticketsDetail',
         components: {
           default: Comment,
-          User: AdmissionTicket
+          User: TicketsDetail
         },
-        name: 'AdmissionTicket'
+        name: 'TicketsDetail'
       },
       {
         path: 'admissionTicketHomePage',
@@ -142,10 +136,8 @@ export default [
         },
         name: 'HotelHomePage'
       },
-
     ]
   },
-
   {
     path: 'AdminLogin',
     components: {
@@ -157,6 +149,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'MyOrderDetails'}
+    redirect: {name: 'AgenciesHome'}
   },
 ]

@@ -13,23 +13,31 @@
           <dl class="informationBarList clearfix">
             <dt>产品信息</dt>
             <dd>
-              <select>
-                <option value="">全部订单</option>
-                <option value="0">旅行社订单</option>
-                <option value="1">车票订单</option>
-                <option value="2">门票订单</option>
-                <option value="3">美食订单</option>
-              </select>
+              <el-select v-model="orderType" placeholder="请选择订单" size="small" style="width: 120px" @change="changeOrderType">
+                <el-option key="" label="全部订单" value=""></el-option>
+                <el-option key="0" label="旅行社订单" value="0"></el-option>
+                <el-option key="1" label="车票订单" value="1"></el-option>
+                <el-option key="2" label="门票订单" value="2"></el-option>
+                <el-option key="3" label="美食订单" value="3"></el-option>
+              </el-select>
+              <!--<select>-->
+                <!--<option value="">全部订单</option>-->
+                <!--<option value="0">旅行社订单</option>-->
+                <!--<option value="1">车票订单</option>-->
+                <!--<option value="2">门票订单</option>-->
+                <!--<option value="3">美食订单</option>-->
+              <!--</select>-->
             </dd>
             <dd>数量</dd>
             <dd>时间</dd>
             <dd>订单金额</dd>
-            <dd>状态</dd>
+            <dd>支付状态</dd>
+            <dd>出票状态</dd>
             <dd>操作</dd>
           </dl>
         </div>
         <!--所有订单内容-->
-        <ul class="AllOrderInformtionContent" v-loading="isLoading">
+        <ul class="AllOrderInformtionContent" v-loading="isLoading"  v-if="myTourOrderList.length">
           <li v-for="item in myTourOrderList">
             <div class="AllOrderInformtionContentAboutTime clearfix">
               <strong>下单时间: {{item.oi_CreateTime | getUseTime}}</strong>
@@ -47,10 +55,13 @@
                 <span>{{item.oi_OrderStatus | getTicketStatus}}</span>
                 <a href="javascript:;">订单详情</a>
               </dd>
-              <dd class="ticketDelete"><a href="javascript:;">删除</a></dd>
+              <dd class="outticket">{{item.oi_OutStatus | getOutStatus}}</dd>
+              <dd v-if="item.oi_OrderStatus!=0"><el-button size="small" type="danger">删除</el-button></dd>
+              <dd class="ticketDelete" v-else><el-button size="small" type="primary" @click="goPay(item)">去支付</el-button></dd>
             </dl>
           </li>
         </ul>
+        <ul  class="AllOrderInformtionContent" v-else><li style="text-align: center">暂无数据</li></ul>
         <!--分页-->
         <div class="block" style="float: right;">
           <el-pagination
@@ -74,7 +85,8 @@
     data() {
       return {
         total:0,
-        isLoading:false
+        isLoading:false,
+        orderType:'',//订单类型
       }
     },
     computed: mapGetters([
@@ -88,7 +100,11 @@
       handleCurrentChange(num){
         this.initData(num)
       },
-      initData(page) {
+      //选中订单类型
+      changeOrderType(){
+        this.initData(1,this.orderType)
+      },
+      initData(page,orderType) {
         let userID = JSON.parse(sessionStorage.getItem('user')).ui_UserCode
         let options = {
           "loginUserID": "huileyou",
@@ -96,6 +112,7 @@
           "operateUserID": "",
           "operateUserName": "",
           "pcName": "",
+          orderType:orderType?orderType:'',
           "huiuserid": userID,
           "page": page?page:1,
           "rows": "4"
@@ -109,6 +126,11 @@
       },
       search() {
         this.initData(1)
+      },
+      //去支付
+      goPay(item){
+        sessionStorage.setItem('orderInfo',JSON.stringify(item))
+        this.$router.push({name:'HuiLeYouCashier'})
       }
     },
     mounted(){
@@ -155,7 +177,7 @@
   }
 
   .informationBarList dt {
-    width: 290px;
+    width: 140px;
     text-indent: 25px;
   }
 
@@ -191,7 +213,7 @@
   }
 
   .AllOrderInformtionContentAboutDetails > dt {
-    width: 290px;
+    width: 200px;
     text-indent: 50px;
   }
 
@@ -221,14 +243,21 @@
     color: #40a85d;
   }
 
-  .AllOrderInformtionContentAboutDetails > .ticketDelete > a {
-    display: block;
-    font: 12px/2 "微软雅黑";
-    color: #646466;
-    padding: 0 20px;
-    border: 1px solid #cdcdcd;
-    margin-top: 15px;
+  .AllOrderInformtionContentAboutDetails > .outticket {
+    width: 60px;
+    text-align: center;
+    font: 12px/20px "微软雅黑";
+    margin: 15px 30px 0 10px;
   }
+
+  /*.AllOrderInformtionContentAboutDetails > .ticketDelete > a {*/
+    /*display: block;*/
+    /*font: 12px/2 "微软雅黑";*/
+    /*color: #646466;*/
+    /*padding: 0 20px;*/
+    /*border: 1px solid #cdcdcd;*/
+    /*margin-top: 15px;*/
+  /*}*/
 
 
 </style>
