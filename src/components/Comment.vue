@@ -197,6 +197,9 @@
             <li>
               <router-link to="/Comment/AdmissionTicket">门票</router-link>
             </li>
+            <li>
+              <router-link to="/Comment/HotelHomePage">酒店 </router-link>
+            </li>
           </ul>
         </nav>
       </div>

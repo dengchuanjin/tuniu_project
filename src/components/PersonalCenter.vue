@@ -22,7 +22,8 @@
           </div>
         </div>
         <!--内容-->
-        <div class="personakCenterContentWrap clearfix">
+        <div class="personakCenterContentWrapP">
+          <div class="personakCenterContentWrap clearfix">
           <!--左边导航-->
           <div class="personakCenterContentWrapLeftNav">
             <ul>
@@ -48,6 +49,7 @@
           <div class="personakCenterContentWrapRightContent">
             <router-view name="MyInformtion"></router-view>
           </div>
+        </div>
         </div>
       </div>
     </div>

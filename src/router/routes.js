@@ -13,15 +13,28 @@ import PersonalDataDetails from '@/components/PersonakCenterFolder/PersonalDataD
 import UpdatePassword from '@/components/PersonakCenterFolder/UpdatePassword'
 import HuiLeYouCashier from '@/components/HuiLeYouCashier'
 import MyOrderQRCode from '@/components/MyOrderQRCode'
+import MyOrderDetails from '@/components/PersonakCenterFolder/MyOrderDetails'
 
 //微信支付
 import PayPage from '@/components/PayPage'
+
+//门票首页
+import AdmissionTicketHomePage from '@/components/AdmissionTicketHomePage'
+
+//酒店首页
+import HotelHomePage from '@/components/HotelHomePage'
+
 
 export default [
   {
     path: '/myOrderQRCode',
     name: 'MyOrderQRCode',
     component: MyOrderQRCode
+  },
+  {
+    path: '/myOrderDetails',
+    name: 'MyOrderDetails',
+    component: MyOrderDetails
   },
   {
     path: '/huiLeYouCashier',
@@ -113,6 +126,23 @@ export default [
         },
         name: 'AdmissionTicket'
       },
+      {
+        path: 'admissionTicketHomePage',
+        components: {
+          default: Comment,
+          User: AdmissionTicketHomePage
+        },
+        name: 'AdmissionTicketHomePage'
+      },
+      {
+        path: 'hotelHomePage',
+        components: {
+          default: Comment,
+          User: HotelHomePage
+        },
+        name: 'HotelHomePage'
+      },
+
     ]
   },
 
@@ -127,6 +157,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'HueiLeYouTourHomePage'}
+    redirect: {name: 'MyOrderDetails'}
   },
 ]
