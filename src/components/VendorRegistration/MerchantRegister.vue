@@ -14,12 +14,12 @@
       <div class="MerchantRegisterNavWrap">
         <div class="MerchantRegisterNav">
           <div class="MerchantRegisterNavContent clearfix">
-            <a href="javascript:;">注册信息</a>
+            <a href="javascript:;" v-for="item,index in options" :class="{active:index==n}" @click="changeOption(index)">{{item.name}}</a>
           </div>
         </div>
       </div>
       <!--注册表单-->
-      <div class="MerchantRegisterTabel">
+      <div class="MerchantRegisterTabel" v-show="off">
         <!--联系人信息-->
         <div class="ContactsContent">
           <h5>联系人信息</h5>
@@ -193,8 +193,8 @@
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="注册资金:" :required="isOff">
-                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_RegMoney"></el-input>
+              <el-form-item label="注册资金:" :required="isOff" >
+                <el-input style="width: 100px" type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_RegMoney"></el-input> 万元
               </el-form-item>
             </el-form>
           </el-col>
@@ -383,8 +383,26 @@
         </div>
       </div>
       <!--信息提交-->
-      <div class="ContactsSubmitWrap">
+      <div class="ContactsSubmitWrap" v-show="off">
         <a href="javascript:;" @click="InformtionSubmit">提交信息</a>
+      </div>
+      <div class="MerchantRegisterTabel" v-show="!off">
+
+        <div class="searchProgress">
+          <p>{{statusText}}</p>
+          <el-form ref="form" :model="searchProgressOptions" label-width="120px">
+            <el-form-item label="手机号码:">
+              <el-input v-model="searchProgressOptions.phone" style="width: 200px" placeholder="请输入手机号码"></el-input>
+            </el-form-item>
+            <!--<el-form-item label="手机验证码:" label-width="120px">-->
+              <!--<el-input v-model="searchProgressOptions.verificationCode" style="width: 200px" placeholder="请输入手机验证码"></el-input>-->
+              <!--<el-button @click="getCode" :disabled="disabledOff" size="small">{{text}}</el-button>-->
+            <!--</el-form-item>-->
+            <el-form-item label-width="120px">
+              <el-button type="warning" @click="searchStatus">查询</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
     </div>
   </div>
@@ -411,6 +429,24 @@
     ]),
     data() {
       return {
+        statusText:'审核中',
+        disabledOff:false,
+        num:60,
+        text:'获取动态密码',
+        searchProgressOptions:{
+          phone:'',
+          verificationCode:''
+        },
+        n:0,
+        off:true,
+        options:[
+          {
+            name:'注册信息'
+          },
+          {
+            name:'进度查询'
+          }
+        ],
         isOff: true,
         ScopeOfOperationType: [],
         changeCooperationTypeData: [],
@@ -516,6 +552,33 @@
       })
     },
     methods: {
+      //查询状态
+      searchStatus(){
+        console.log(this.searchProgressOptions)
+      },
+      //获取验证码
+      getCode(){
+        this.disabledOff = true;
+        let timer = setInterval(()=>{
+          this.num--;
+          this.text = this.num+'s';
+          if(this.num==0){
+            clearInterval(timer);
+            this.text = '重新获取验证码';
+            this.disabledOff = false;
+            this.num = 60;
+          }
+        },1000)
+      },
+      //选中菜单
+      changeOption(index){
+        this.n = index;
+        if(index==1){
+          this.off = false;
+        }else{
+          this.off = true;
+        }
+      },
       async initData() {
         await this.changeMoneyType()
         await this.changeCompanyType()
@@ -734,6 +797,13 @@
       },
       //信息提交
       InformtionSubmit() {
+        if(isNaN(this.insertAgentInfo.data.sm_ai_RegMoney)){
+          this.$notify({
+            message: '注册资金必须为数字！',
+            type: 'error'
+          });
+          return
+        }
         this.insertAgentInfo.data.sm_ai_BalanceCurrencyName = this.insertAgentInfo.data.sm_bc_Name;
         this.insertAgentInfo.data.sm_ai_CertImage = this.ImageURL1.join(',');
         this.insertAgentInfo.data.sm_ai_FeeImage = this.ImageURL2.join(',');
@@ -746,6 +816,8 @@
               message: '注册成功！！',
               type: 'success'
             });
+            this.n = 1;
+            this.off = false;
           },err=>{
             this.$notify({
               message: err,
@@ -760,6 +832,15 @@
   }
 </script>
 <style scoped>
+  .searchProgress{
+    padding: 0px 0 0 200px;
+    height: 800px;
+  }
+  .searchProgress p{
+    text-align: center;
+    font-size:30px;
+    padding: 100px 0;
+  }
   .file {
     position: relative;
     display: inline-block;

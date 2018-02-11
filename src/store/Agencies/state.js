@@ -26,6 +26,7 @@ export default  {
   bookKnowObj:{},//景点开放时间
   getTourSiteList:{},//景点介绍
   showQuit:false,//退出
+  orderDetail:{},//订单详情
 
 //----------商户注册-----------
   provinceDataList:[],//获取省

@@ -112,7 +112,6 @@
         this.timer1 = setInterval(()=>{
           leftTimer(this,date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes()+20,0,0).then(()=>{
             clearInterval(this.timer1)
-            alert('time over')
           })
         },1000)
       }

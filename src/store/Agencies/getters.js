@@ -26,6 +26,7 @@ export default {
   longLineList: state => state.longLineList,
   payStr: state => state.payStr,
   myTourOrderList: state => state.myTourOrderList,
+  orderDetail: state => state.orderDetail,
 
 
   //商户注册

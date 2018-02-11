@@ -21,8 +21,9 @@
             <li class="AdminLoginList">
               <a href="javascript:;">管理员登录</a>
               <ul>
-                <li><a href="http://hly.1000da.com.cn/user/#/" target="view_window">惠乐游后台管理系统</a></li>
-                <li><a href="http://tuniu.1000da.com.cn/admin/index.html" target="view_window">旅行社管理系统</a></li>
+                <!--<li><a href="http://hly.1000da.com.cn/user/#/" target="view_window">惠乐游后台管理系统</a></li>-->
+                <li><a href="http://tuniu.1000da.com.cn/admin/index.html" target="view_window">供应商管理系统</a></li>
+                <li><a href="http://tuniu.1000da.com.cn/manage/" target="view_window">旅行社审核系统</a></li>
               </ul>
             </li>
             <li v-show="showQuit">

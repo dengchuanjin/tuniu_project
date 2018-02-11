@@ -16,91 +16,124 @@ export default {
   },
 
   //-------------------首页-----------------
-  //国内游
-  initDomesticData({commit}, data) {
-    return new Promise(function (relove, reject) {
-      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
+  //首页内容
+  initAllHomeData({commit},data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetTravelPage', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
-        .then(data => {
-          var data = data.data;
-          if (Number(data.resultcode) == 200) {
-            let resulte = data.data;
-            for (var i = 0; i < resulte.length; i++) {
-              resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          let resulte = data.data;
+          for(let item in resulte){
+            let arr = resulte[item]
+            if(arr.length){
+              for(var i=0;i<arr.length;i++){
+                arr[i].oneImg = arr[i].ta_tg_ShowImage.split(',')[0]
+              }
             }
-            commit('initDomesticData', data.data)
-            relove()
           }
-        })
-    })
-  },
-  //周边游
-  initAroundList({commit},data){
-    return new Promise(function (relove, reject) {
-      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-      .then(data => {
-        var data = data.data;
-        if (Number(data.resultcode) == 200) {
-          let resulte = data.data;
-          for (var i = 0; i < resulte.length; i++) {
-            resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
-          }
-          commit('initAroundList', data.data)
+          commit('initDomesticData', resulte.contryList)
+          commit('initAroundList', resulte.nearList)
+          commit('initShortLineList', resulte.outShortList)
+          commit('initLongLineList', resulte.outLongList)
           relove()
         }
       })
     })
   },
-  //境外短线
-  initShortLineList({commit},data){
-    return new Promise(function (relove, reject) {
-      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-      .then(data => {
-        var data = data.data;
-        if (Number(data.resultcode) == 200) {
-          let resulte = data.data;
-          for (var i = 0; i < resulte.length; i++) {
-            resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
-          }
 
-          commit('initShortLineList', data.data)
-          relove()
-        }
-      })
-    })
-  },
-  //境外长线
-  initLongLineList({commit},data){
-    return new Promise(function (relove, reject) {
-      axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-      .then(data => {
-        var data = data.data;
-        if (Number(data.resultcode) == 200) {
-          let resulte = data.data;
-          for (var i = 0; i < resulte.length; i++) {
-            resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
-          }
-          commit('initLongLineList', data.data)
-          relove()
-        }
-      })
-    })
-  },
+
+
+
+  // //国内游
+  // initDomesticData({commit}, data) {
+  //   return new Promise(function (relove, reject) {
+  //     axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       }
+  //     })
+  //       .then(data => {
+  //         var data = data.data;
+  //         if (Number(data.resultcode) == 200) {
+  //           let resulte = data.data;
+  //           for (var i = 0; i < resulte.length; i++) {
+  //             resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
+  //           }
+  //           commit('initDomesticData', data.data)
+  //           relove()
+  //         }
+  //       })
+  //   })
+  // },
+  // //周边游
+  // initAroundList({commit},data){
+  //   return new Promise(function (relove, reject) {
+  //     axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       }
+  //     })
+  //     .then(data => {
+  //       var data = data.data;
+  //       if (Number(data.resultcode) == 200) {
+  //         let resulte = data.data;
+  //         for (var i = 0; i < resulte.length; i++) {
+  //           resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
+  //         }
+  //         commit('initAroundList', data.data)
+  //         relove()
+  //       }
+  //     })
+  //   })
+  // },
+  // //境外短线
+  // initShortLineList({commit},data){
+  //   return new Promise(function (relove, reject) {
+  //     axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       }
+  //     })
+  //     .then(data => {
+  //       var data = data.data;
+  //       if (Number(data.resultcode) == 200) {
+  //         let resulte = data.data;
+  //         for (var i = 0; i < resulte.length; i++) {
+  //           resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
+  //         }
+  //
+  //         commit('initShortLineList', data.data)
+  //         relove()
+  //       }
+  //     })
+  //   })
+  // },
+  // //境外长线
+  // initLongLineList({commit},data){
+  //   return new Promise(function (relove, reject) {
+  //     axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       }
+  //     })
+  //     .then(data => {
+  //       var data = data.data;
+  //       if (Number(data.resultcode) == 200) {
+  //         let resulte = data.data;
+  //         for (var i = 0; i < resulte.length; i++) {
+  //           resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
+  //         }
+  //         commit('initLongLineList', data.data)
+  //         relove()
+  //       }
+  //     })
+  //   })
+  // },
   //产品详情
   initProductDetails({commit}, data) {
     return new Promise(function (relove, reject) {
@@ -559,6 +592,61 @@ export default {
         var data = data.data;
         if (Number(data.resultcode) == 200) {
           relove(data.data)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //删除订单
+  DeleteOrder(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/UserOrder/DeleteStatus', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data.data)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //订单详情
+  initOrderDetail({commit},data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/TravelOrder/GetOrderInfo', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          commit('initOrderDetail',data.data[0])
+          relove(data.data[0])
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //取消订单
+  CancelOrder(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/UserOrder/Delete', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data.resultcontent)
         } else {
           reject(data.resultcontent)
         }

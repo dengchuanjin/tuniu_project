@@ -306,13 +306,13 @@
               </li>
             </ul>
           </div>
-          <!--左侧导航-->
-          <ul class="scheduleList" id="scheduleList" ref="scheduleList" v-show="isScheduleList">
-            <li v-for="item,index in lineScheduleObj.prepareList">
-              <a :href="'#LineSchedule'+ index" @click="changeDay(index)">{{item.ts_pt_Content}}</a>
-              <i></i>
-            </li>
-          </ul>
+          <!--&lt;!&ndash;左侧导航&ndash;&gt;-->
+          <!--<ul class="scheduleList" id="scheduleList" ref="scheduleList" v-show="isScheduleList">-->
+            <!--<li v-for="item,index in lineScheduleObj.prepareList">-->
+              <!--<a :href="'#LineSchedule'+ index" @click="changeDay(index)">{{item.ts_pt_Content}}</a>-->
+              <!--<i></i>-->
+            <!--</li>-->
+          <!--</ul>-->
         </div>
         <!--套餐说明-->
         <div class="packageDescription clearfix" id="h3">
@@ -643,16 +643,22 @@
           "operateUserName": "",
           "pcName": "",
           "productPriceID": item.ts_pp_ID
-        }
+        };
         this.addOrderOptions.ts_pp_ID = item.ts_pp_ID;
         this.addOrderOptions.DayValue = item.ts_pp_Date;
         this.addOrderOptions.adultPrice = item.ts_pp_Price
         this.addOrderOptions.childPrice = item.ts_pp_ChildPrice
-        this.$store.dispatch('GetFreeSeat', options)
-          .then((data) => {
-            this.addOrderOptions.adultYu = data.fullNo
-            this.addOrderOptions.childYu = data.childNo
-          })
+
+        this.$store.dispatch('GetFreeSeat',options)
+        .then((data)=>{
+          this.addOrderOptions.adultYu = data.fullNo
+          this.addOrderOptions.childYu = data.childNo
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+        })
       },
       //日历选项卡
       changeSearchMonth(item) {
@@ -819,14 +825,14 @@
         }
       },
       //选中日历
-      changeDay(index) {
-        let lis = this.$refs.scheduleList.querySelectorAll('li');
-        let len = lis.length;
-        for (let i = 0; i < len; i++) {
-          lis[i].children[0].className = ''
-        }
-        lis[index].children[0].className = 'active'
-      },
+//      changeDay(index) {
+//        let lis = this.$refs.scheduleList.querySelectorAll('li');
+//        let len = lis.length;
+//        for (let i = 0; i < len; i++) {
+//          lis[i].children[0].className = ''
+//        }
+//        lis[index].children[0].className = 'active'
+//      },
       //获取周数
       getWeek(year, month) {
         return new Date(year, month, 1, 0, 0, 0).getDay();
@@ -837,7 +843,6 @@
       },
       //获取日历生成
       get(year, month, _this, data) {
-        console.log(month)
         //赋值day
         for (var n = 0; n < data.length; n++) {
           data[n].day = Number(data[n].ts_pp_Date.split('-')[2])
@@ -904,7 +909,6 @@
               }
             }
           }
-          console.log(newArr)
           for (var j = 0; j < newArr.length; j++) {
             for (var m = 0; m < data.length; m++) {
               if (data[m].day && data[m].day == newArr[j]) {
@@ -923,7 +927,6 @@
             hash[next.n] ? '' : hash[next.n] = true && item.push(next);
             return item
           }, [])
-          console.log(_this.arr5)
           relove()
         })
       },
@@ -963,7 +966,6 @@
           });
           return
         }
-        console.log(this.addOrderOptions)
         this.addOrderOptions.title = this.productDetailsObj.ts_pt_Name
         sessionStorage.setItem('orderInfo', JSON.stringify(this.addOrderOptions))
         this.$router.push({name: 'FillInOrder'});
@@ -1010,13 +1012,13 @@
       this.data = cityOptions;
     },
     updated() {
-      let lis = this.$refs.scheduleList.querySelectorAll('li')
-      if (lis.length) {
-        for (var i = 0; i < lis.length; i++) {
-          lis[i].children[0].className = ''
-        }
-        lis[0].children[0].className = 'active'
-      }
+//      let lis = this.$refs.scheduleList.querySelectorAll('li')
+//      if (lis.length) {
+//        for (var i = 0; i < lis.length; i++) {
+//          lis[i].children[0].className = ''
+//        }
+//        lis[0].children[0].className = 'active'
+//      }
 //      let lisSearch = this.$refs.monthSelecte.querySelectorAll('li')
 //      if (lisSearch.length) {
 //        for( var i=0;i<lisSearch.length;i++ ){
@@ -1031,7 +1033,7 @@
       (function () {
         var sTop = $('#headerNavWrap').get(0).offsetTop + 180;
         var w = ($(window).width() - 1188) / 2
-        var bTop = $('#scheduleList').get(0).offsetTop + 180
+//        var bTop = $('#scheduleList').get(0).offsetTop + 180
         $(window).bind("scroll", function () {
           var top = $(this).scrollTop(); // 当前窗口的滚动距离
           if (top > sTop) {
@@ -1040,15 +1042,14 @@
           } else {
             $('#headerNavWrap').css({position: 'static', left: 'auto', top: 'auto',})
           }
-          if (top > bTop) {
-            $('#scheduleList').css({position: 'fixed', left: (w + 20) + 'px', top: '70px',})
-          } else {
-            $('#scheduleList').css({position: 'static', left: 'auto', top: 'auto',})
-          }
+          //日期选择
+//          if (top > bTop) {
+//            $('#scheduleList').css({position: 'fixed', left: (w + 20) + 'px', top: '70px',})
+//          } else {
+//            $('#scheduleList').css({position: 'static', left: 'auto', top: 'auto',})
+//          }
         });
       })()
-
-
     }
   }
 </script>

@@ -173,45 +173,55 @@
         })
       },
       async initData(name) {
-        //国内游
-        let getShowGood = {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "travelWay": "0",
-          "provice": name,
-        };
-        await this.$store.dispatch('initDomesticData', getShowGood)
-        //周边游
-        let AroundOptions = {
+        let options = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "operateUserID": "",
           "operateUserName": "",
           "pcName": "",
-          "travelWay": "1",
-          "provice": name,
+          "provice": name
         };
-        await this.$store.dispatch('initAroundList',AroundOptions)
-        //境外短线
-        let ShortLineOptions = {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "operateUserID": "",
-          "operateUserName": "",
-          "pcName": "",
-          "travelWay": "2",
-        };
-        await this.$store.dispatch('initShortLineList',ShortLineOptions)
-        //境外长线
-        let LongLineOptions = {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "operateUserID": "",
-          "operateUserName": "",
-          "pcName": "",
-          "travelWay": "3",
-        };
-        await this.$store.dispatch('initLongLineList',LongLineOptions)
+        await this.$store.dispatch('initAllHomeData',options);
+
+//        //国内游
+//        let getShowGood = {
+//          "loginUserID": "huileyou",
+//          "loginUserPass": "123",
+//          "travelWay": "0",
+//          "provice": name,
+//        };
+//        await this.$store.dispatch('initDomesticData', getShowGood)
+//        //周边游
+//        let AroundOptions = {
+//          "loginUserID": "huileyou",
+//          "loginUserPass": "123",
+//          "operateUserID": "",
+//          "operateUserName": "",
+//          "pcName": "",
+//          "travelWay": "1",
+//          "provice": name,
+//        };
+//        await this.$store.dispatch('initAroundList',AroundOptions)
+//        //境外短线
+//        let ShortLineOptions = {
+//          "loginUserID": "huileyou",
+//          "loginUserPass": "123",
+//          "operateUserID": "",
+//          "operateUserName": "",
+//          "pcName": "",
+//          "travelWay": "2",
+//        };
+//        await this.$store.dispatch('initShortLineList',ShortLineOptions)
+//        //境外长线
+//        let LongLineOptions = {
+//          "loginUserID": "huileyou",
+//          "loginUserPass": "123",
+//          "operateUserID": "",
+//          "operateUserName": "",
+//          "pcName": "",
+//          "travelWay": "3",
+//        };
+//        await this.$store.dispatch('initLongLineList',LongLineOptions)
       },
       //点击跳转到产品线路详情
       toDetail(id) {

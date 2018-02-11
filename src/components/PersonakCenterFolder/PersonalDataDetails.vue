@@ -5,25 +5,40 @@
           <li><a href="javascript:;" class="active">基本信息</a></li>
         </ul>
         <el-form ref="form" label-width="80px">
-          <el-form-item label="昵称:" label-width="80px">
+          <el-form-item label="昵称:" label-width="100px">
             <el-input
               style="width: 220px"
               placeholder="请输入昵称"
               v-model="userInfo.ui_Name"
-              clearable>
+              clearable
+              :disabled="isDisabled"
+            >
             </el-input>
           </el-form-item>
-          <el-form-item label="身份证:" label-width="80px" :required="isOff">
+          <el-form-item label="身份证:" label-width="100px" :required="isOff">
             <el-input
               style="width: 220px"
               placeholder="请输入身份证"
-              v-model="NoID"
+              v-model="userInfo.ui_CertNo"
+              :disabled="isDisabled"
               clearable>
             </el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item label="电话号码:" label-width="100px" :required="isOff">
+            <el-input
+              style="width: 220px"
+              placeholder="请输入电话号码"
+              v-model="userInfo.ui_Phone"
+              :disabled="isDisabled"
+              clearable>
+            </el-input>
+          </el-form-item>
+          <el-form-item v-show="!isDisabled">
             <el-button type="primary" @click="save">保存</el-button>
             <el-button @click="clear">清空</el-button>
+          </el-form-item>
+          <el-form-item v-show="isDisabled">
+            <el-button  type="primary" @click="Editor">编辑</el-button>
           </el-form-item>
         </el-form>
           <!--<el-form-item label="姓名:" label-width="80px">-->
@@ -105,60 +120,6 @@
               <!--clearable>-->
             <!--</el-input>-->
           <!--</el-form-item>-->
-
-        <!--<ul class="personalDataDetailsWrapContentList clearfix">-->
-          <!--<li>-->
-            <!--<strong><i>*</i> 昵称:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong><i>*</i> 姓名:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong><i>*</i> 手机号:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong><i>*</i> 身份证:</strong>-->
-            <!--<input type="text" v-model="NoID">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong>生日:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong><i>*</i> 性别:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong>邮箱:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong><i>*</i> 常住地:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong>详细地址:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong>婚姻:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong><i>*</i>职业:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<strong>学历:</strong>-->
-            <!--<input type="text">-->
-          <!--</li>-->
-          <!--<li style="margin-left: 400px">-->
-            <!--<el-button type="primary">提交</el-button>-->
-          <!--</li>-->
-        <!--</ul>-->
       </div>
     </div>
 </template>
@@ -168,6 +129,7 @@
   export default {
     data() {
       return {
+        isDisabled:true,
         value:'',
         sex:0,
         userInfo:{},
@@ -211,7 +173,7 @@
           userInfo:{
             "ui_Name":this.userInfo.ui_Name,
             "ui_ID": this.userInfo.ui_ID,
-            "ui_CertNo":this.NoID
+            "ui_CertNo":this.userInfo.ui_CertNo
           }
         };
         this.isLoading = true;
@@ -229,6 +191,10 @@
           });
           this.isLoading = false;
         })
+      },
+      //编辑
+      Editor(){
+        this.isDisabled = false
       },
       search() {
         let options = {

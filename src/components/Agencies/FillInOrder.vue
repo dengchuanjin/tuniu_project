@@ -202,6 +202,8 @@
           "operateUserID": "",
           "operateUserName": "",
           "pcName": "",
+          "fullPrice": obj.adultPrice,
+          "childPrice":obj.childPrice,
           "fullPerson":obj.adultNumber,
           "childPerson": obj.childNumber,
           "productPriceID": obj.ts_pp_ID,

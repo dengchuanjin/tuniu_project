@@ -53,10 +53,10 @@
               <dd class="money">￥{{item.oi_SellMoney?item.oi_SellMoney:0}}</dd>
               <dd class="ticketState">
                 <span>{{item.oi_OrderStatus | getTicketStatus}}</span>
-                <a href="javascript:;">订单详情</a>
+                <a href="javascript:;" @click="orderDetail(item.oi_OrderID)">订单详情</a>
               </dd>
               <dd class="outticket">{{item.oi_OutStatus | getOutStatus}}</dd>
-              <dd v-if="item.oi_OrderStatus!=0"><el-button size="small" type="danger">删除</el-button></dd>
+              <dd v-if="item.oi_OrderStatus!=0"><el-button size="small" type="danger" @click="deleteOrder(item.oi_OrderID)">删除</el-button></dd>
               <dd class="ticketDelete" v-else><el-button size="small" type="primary" @click="goPay(item)">去支付</el-button></dd>
             </dl>
           </li>
@@ -114,6 +114,7 @@
           "pcName": "",
           orderType:orderType?orderType:'',
           "huiuserid": userID,
+          isDelete:0,
           "page": page?page:1,
           "rows": "4"
         };
@@ -122,6 +123,11 @@
         .then(total=>{
           this.total = total;
           this.isLoading = false;
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
         })
       },
       search() {
@@ -130,7 +136,51 @@
       //去支付
       goPay(item){
         sessionStorage.setItem('orderInfo',JSON.stringify(item))
-        this.$router.push({name:'HuiLeYouCashier'})
+        this.$router.push({name:'PaymentPlatform'})
+      },
+      //删除订单
+      deleteOrder(orderID){
+        let deleteOptions = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "orderID": orderID
+        };
+        this.$store.dispatch('DeleteOrder',deleteOptions)
+        .then(()=>{
+          this.initData(1,this.orderType)
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+        })
+      },
+      //订单详情
+      orderDetail(orderID){
+        let orderDeatilOptions = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "orderID":orderID,
+          "page": 1,
+          "rows": 10
+        };
+        this.$store.dispatch('initOrderDetail',orderDeatilOptions)
+        .then((obj)=>{
+          let newObj = {isOff:false};
+          if( obj.ts_to_PayState==1|| obj.ts_to_PayState==2|| obj.ts_to_OutStatus==1){
+            newObj.isOff=  true
+          }else{
+            newObj.isOff =  false;
+          }
+          sessionStorage.setItem('payStatusObj',JSON.stringify(newObj))
+          this.$router.push({name:'MyOrderDetails'})
+        })
       }
     },
     mounted(){

@@ -165,6 +165,9 @@ export default {
   },
   initPayStr(state,str){
     state.payStr = str
+  },
+  initOrderDetail(state,obj){
+    state.orderDetail = obj
   }
 
 

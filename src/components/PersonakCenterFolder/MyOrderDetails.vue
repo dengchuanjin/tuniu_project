@@ -16,38 +16,38 @@
           <div class="MyOrderDetailsWrapContentDetalis clearfix">
             <div class="MyOrderDetailsWrapContentDetalisLeft">
               <div class="MyOrderDetailsWrapContentDetalisLeftTop">
-                <h5>覅数码科技我i到时看看申通快递发快递v的JFK士大夫艰苦的司法鉴定所开发空间的快速反击开始打飞机但是放射科大夫您收到甲方付款你的开发的</h5>
+                <h5>{{orderDetail.ts_to_GoodsListName}}</h5>
                 <div class="MyOrderDetailsWrapContentDetalisLeftParameter clearfix">
-                  <span>已选套餐: 江苏</span>
-                  <span>出发时间: 2018-01-01</span>
-                  <span>出发城市: 江苏</span>
-                  <span>成人: ￥10000x2</span>
-                  <span>儿童: ￥10000x2</span>
+                  <!--<span>已选套餐: 江苏</span>-->
+                  <span>出发时间: {{orderDetail.ts_to_TravelDate}}</span>
+                  <span>出发城市: {{orderDetail.ts_to_FromPlace}}</span>
+                  <span>成人: ￥ {{orderDetail.ts_to_FullPrice}}x{{orderDetail.ts_to_FullCount}}</span>
+                  <span v-show="orderDetail.ts_to_ChildCount">儿童: ￥ {{orderDetail.ts_to_ChildPrice}}x{{orderDetail.ts_to_ChildCount}}</span>
                 </div>
                 <div class="AllMoney">
-                  <strong>订单总金额: ￥10000</strong>
+                  <strong>订单总金额: ￥{{orderDetail.ts_to_SumPrice}}</strong>
                 </div>
               </div>
               <div class="orderContacts">
                 <h5>订单联系人</h5>
                 <ul class="orderContactsData">
-                  <li>联系人: 自己</li>
-                  <li>手机号: 1232323323</li>
-                  <li>邮箱: 1193021198@qq.com</li>
+                  <li>联系人: {{orderDetail.ts_to_ConnectName}}</li>
+                  <li>手机号: {{orderDetail.ts_to_TelePhone}}</li>
+                  <li>邮箱: {{orderDetail.ts_to_Email}}</li>
                 </ul>
               </div>
             </div>
             <div class="MyOrderDetailsWrapContentDetalisRight">
-              <h2><i></i>订单编号: 1234343434</h2>
+              <h2><i></i>订单编号: {{orderDetail.ts_to_OrderID}}</h2>
               <div class="MyOrderDetailsWrapContentDetalisRightContent">
-                <p>已取消</p>
+                <p :style="{display:payStatus?'none':'block'}">{{orderDetail.ts_to_OutStatus | getOutStatus}}</p>
                 <div class="pendingPayment">
-                  <strong>待付款</strong>
-                  <span class="time">请在02-18 00:00前完成支付 超时订单将关闭</span>
-                  <span class="pendingPaymentAllMoney">总价:￥22343</span>
-                  <span class="pendingPaymentAllMoneyOut">还需支付：<em>￥12960</em></span>
-                  <el-button class="button">去付款</el-button>
-                  <span class="cancelOrder">取消订单</span>
+                  <strong :style="{display:payStatus?'block':'none'}">{{orderDetail.ts_to_PayState | getTicketStatus}}</strong>
+                  <span class="time" :style="{display:payStatus?'none':'block'}">请在20分钟前完成支付 超时订单将关闭</span>
+                  <span class="pendingPaymentAllMoney" :style="{display:payStatus?'none':'block'}" >总价:￥{{orderDetail.ts_to_SumPrice}}</span>
+                  <!--<span class="pendingPaymentAllMoneyOut">还需支付：<em>￥12960</em></span>-->
+                  <el-button class="button" :style="{display:payStatus?'none':'block'}" @click="goPay(orderDetail)">去付款</el-button>
+                  <span class="cancelOrder" :style="{display:payStatus?'none':'block'}"  @click="cancelOrder(orderDetail.ts_to_OrderID)">取消订单</span>
                 </div>
               </div>
               <div class="contactInformation">
@@ -71,15 +71,57 @@
   import {mapGetters} from 'vuex'
 
   export default {
-    computed: mapGetters([]),
+    computed: Object.assign({},mapGetters([
+      'orderDetail'
+    ])),
     data() {
-      return {}
+      return {
+        payStatus:false
+      }
     },
+    created(){
+      let status = JSON.parse(sessionStorage.getItem('payStatusObj'))
+      this.payStatus = status.isOff;
+    },
+
     methods: {
       initData() {
       },
       search() {
         this.initData()
+      },
+      //去支付
+      goPay(item){
+        let orderInfo = {};
+        orderInfo.oi_OrderName = item.ts_to_GoodsListName;
+        orderInfo.oi_OrderID = item.ts_to_OrderID;
+        orderInfo.oi_SellMoney = item.ts_to_SumPrice;
+        sessionStorage.setItem('orderInfo',JSON.stringify(orderInfo));
+        this.$router.push({name:'PaymentPlatform'})
+      },
+      //取消订单
+      cancelOrder(orderID){
+        let cancelOrderOptions = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "orderID": orderID
+        };
+        this.$store.dispatch('CancelOrder',cancelOrderOptions)
+        .then(suc=>{
+          this.$notify({
+            message: suc,
+            type: 'success'
+          });
+          this.$router.push({name:'MyTourOrder'});
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+        })
       }
     },
   }

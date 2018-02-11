@@ -17,7 +17,6 @@ Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
 })
 
-import qs from 'qs'
 import VueLazyLoad from 'vue-lazyload'
 Vue.use(VueLazyLoad,{
   error:'../static/img/error.jpeg',
