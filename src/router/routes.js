@@ -1,55 +1,68 @@
-import Comment from '@/components/public/Comment'
-import AgenciesDetail from '@/components/Agencies/AgenciesDetail'
-import TicketsDetail from '@/components/Tickets/TicketsDetail'
-import AdminLogin from '@/components/AdminLogin'
-import Register from '@/components/Register'
-import AgenciesHome from '@/components/Agencies/AgenciesHome'
-import MerchantRegister from '@/components/VendorRegistration/MerchantRegister'
-//填写订单
-import FillInOrder from '@/components/Agencies/FillInOrder'
-import PersonalCenter from '@/components/PersonakCenterFolder/PersonalCenter'
-import MyTourOrder from '@/components/PersonakCenterFolder/MyTourOrder'
-import PersonalDataDetails from '@/components/PersonakCenterFolder/PersonalDataDetails'
-import UpdatePassword from '@/components/PersonakCenterFolder/UpdatePassword'
-import PaymentPlatform from '@/components/public/PaymentPlatform'
-import MyOrderQRCode from '@/components/MyOrderQRCode'
-import MyOrderDetails from '@/components/PersonakCenterFolder/MyOrderDetails'
+import Comment from '@/components/public/Comment'//公用页面
+import AgenciesDetail from '@/components/Agencies/AgenciesDetail'//跟团游详情页
+import AdminLogin from '@/components/AdminLogin'//登录
+import Register from '@/components/Register'//游客注册
+import AgenciesHome from '@/components/Agencies/AgenciesHome'//跟团游首页
+import MerchantRegister from '@/components/VendorRegistration/MerchantRegister'//供应商注册
+
+import FillInOrder from '@/components/Agencies/FillInOrder'//填写订单
+import PersonalCenter from '@/components/PersonakCenterFolder/PersonalCenter'//个人中心
+import MyTourOrder from '@/components/PersonakCenterFolder/MyTourOrder'//我的订单
+import PersonalDataDetails from '@/components/PersonakCenterFolder/PersonalDataDetails'//个人信息
+import UpdatePassword from '@/components/PersonakCenterFolder/UpdatePassword'//修改密码
+import PaymentPlatform from '@/components/public/PaymentPlatform'//订单支付的类型
+import MyOrderQRCode from '@/components/MyOrderQRCode'//二维码付款
+import MyOrderDetails from '@/components/PersonakCenterFolder/MyOrderDetails'//订单详情
 
 //微信支付
 
-//门票首页
-import AdmissionTicketHomePage from '@/components/AdmissionTicketHomePage'
 
-//酒店首页
-import HotelHomePage from '@/components/HotelHomePage'
+import AdmissionTicketHomePage from '@/components/Tickets/AdmissionTicketHomePage'//门票首页
+import TicketsDetail from '@/components/Tickets/TicketsDetail'//门票详情
+import TicketsReserve from '@/components/Tickets/TicketsReserve'//门票预定
+
+
+import HotelHomePage from '@/components/Hotel/HotelHomePage'//酒店首页
 
 
 export default [
-  {
-    path: '/myOrderQRCode',
-    name: 'MyOrderQRCode',
-    component: MyOrderQRCode
-  },
-  {
-    path: '/myOrderDetails',
-    name: 'MyOrderDetails',
-    component: MyOrderDetails
-  },
+  //订单支付的类型
   {
     path: '/paymentPlatform',
     name: 'PaymentPlatform',
     component: PaymentPlatform
   },
+  //门票预定
+  {
+    path: '/ticketsReserve',
+    name: 'TicketsReserve',
+    component: TicketsReserve
+  },
+  //二维码支付订单
+  {
+    path: '/myOrderQRCode',
+    name: 'MyOrderQRCode',
+    component: MyOrderQRCode
+  },
+  //订单详情
+  {
+    path: '/myOrderDetails',
+    name: 'MyOrderDetails',
+    component: MyOrderDetails
+  },
+  //供应商注册
   {
     path: '/merchantRegister',
     name: 'MerchantRegister',
     component: MerchantRegister
   },
+  //个人中心
   {
     path: '/personalCenter',
     name: 'PersonalCenter',
     component: PersonalCenter,
     children: [
+      //我的订单
       {
         path: 'myTourOrder',
         components: {
@@ -58,6 +71,7 @@ export default [
         },
         name: 'MyTourOrder'
       },
+      //个人信息
       {
         path: 'personalDataDetails',
         components: {
@@ -66,6 +80,7 @@ export default [
         },
         name: 'PersonalDataDetails'
       },
+      //修改密码
       {
         path: 'updatePassword',
         components: {
@@ -76,26 +91,25 @@ export default [
       },
     ]
   },
+  //填写订单
   {
     path: '/fillInOrder',
     name: 'FillInOrder',
     component: FillInOrder
   },
-  {
-    path: '/adminLogin',
-    name: 'AdminLogin',
-    component: AdminLogin
-  },
+  //游客注册
   {
     path: '/Register',
     name: 'Register',
     component: Register
   },
+  //公用页面
   {
     path: '/Comment',
     name: 'Comment',
     component: Comment,
     children: [
+      //跟团游首页
       {
         path: 'agenciesHome',
         components: {
@@ -104,6 +118,7 @@ export default [
         },
         name: 'AgenciesHome'
       },
+      //跟团游详情页
       {
         path: 'agenciesDetail/:id',
         components: {
@@ -112,6 +127,7 @@ export default [
         },
         name: 'AgenciesDetail'
       },
+      //门票详情页
       {
         path: 'ticketsDetail',
         components: {
@@ -120,6 +136,7 @@ export default [
         },
         name: 'TicketsDetail'
       },
+      //门票首页
       {
         path: 'admissionTicketHomePage',
         components: {
@@ -128,6 +145,7 @@ export default [
         },
         name: 'AdmissionTicketHomePage'
       },
+      //酒店首页
       {
         path: 'hotelHomePage',
         components: {
@@ -138,6 +156,7 @@ export default [
       },
     ]
   },
+  //登录
   {
     path: 'AdminLogin',
     components: {

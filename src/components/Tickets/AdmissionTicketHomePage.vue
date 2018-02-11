@@ -7,7 +7,7 @@
         <div class="AdmissionTickeHomePageWrapNav">
           <ul class="AdmissionTickeHomePageWrapNavList">
             <li class="seasonSelection">
-              <h5><img src="../assets/img/icon-star.png" width="14" height="14">当季精选</h5>
+              <h5><img src="../../assets/img/icon-star.png" width="14" height="14">当季精选</h5>
               <div class="clearfix">
                 <a href="javascript:;">新津花舞人间景区</a>
                 <a href="javascript:;">上海迪士尼乐园</a>
@@ -19,7 +19,7 @@
               </div>
             </li>
             <li class="surroundingCities">
-              <h5><img src="../assets/img/icon-location.png" width="12" height="15">周边城市</h5>
+              <h5><img src="../../assets/img/icon-location.png" width="12" height="15">周边城市</h5>
               <div class="clearfix">
                 <a href="javascript:;">阿坝</a>
                 <a href="javascript:;">绵阳</a>
@@ -34,7 +34,7 @@
               </div>
             </li>
             <li class="hotCities">
-              <h5><img src="../assets/img/icon-fire.png" width="12" height="15">热门城市</h5>
+              <h5><img src="../../assets/img/icon-fire.png" width="12" height="15">热门城市</h5>
               <div class="clearfix">
                 <a href="javascript:;">南京</a>
                 <a href="javascript:;">广州</a>
@@ -49,7 +49,7 @@
               </div>
             </li>
             <li class="themeOfPlay">
-              <h5><img src="../assets/img/icon-baloon.png" width="11" height="13">游玩主题</h5>
+              <h5><img src="../../assets/img/icon-baloon.png" width="11" height="13">游玩主题</h5>
               <div class="clearfix">
                 <a href="javascript:;">名胜风光</a>
                 <a href="javascript:;">赏花田园</a>
@@ -127,7 +127,7 @@
                   <a href="javascript:;">演出表演</a>
                 </li>
                 <li class="lookAtMore">
-                  <a href="javascript:;"><img src="../assets/img/icon-readmore.png" width="50" height="60">查看更多</a>
+                  <a href="javascript:;"><img src="../../assets/img/icon-readmore.png" width="50" height="60">查看更多</a>
                 </li>
               </ul>
             </div>
@@ -137,7 +137,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -150,7 +150,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -163,7 +163,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -176,7 +176,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -189,7 +189,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -202,7 +202,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -215,7 +215,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -228,7 +228,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -241,7 +241,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -254,7 +254,7 @@
                 <li>
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
@@ -276,32 +276,32 @@
           <div class="AdmissionTickeHotDestinationContent">
             <ul class="AdmissionTickeHotDestinationList clearfix">
               <li>
-                <img src="../assets/img/homePageImage.jpg" width="390" height="160">
+                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
                 <div></div>
                 <span>上海迪士尼</span>
               </li>
               <li>
-                <img src="../assets/img/homePageImage.jpg" width="390" height="160">
+                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
                 <div></div>
                 <span>上海迪士尼</span>
               </li>
               <li>
-                <img src="../assets/img/homePageImage.jpg" width="390" height="160">
+                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
                 <div></div>
                 <span>上海迪士尼</span>
               </li>
               <li>
-                <img src="../assets/img/homePageImage.jpg" width="390" height="160">
+                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
                 <div></div>
                 <span>上海迪士尼</span>
               </li>
               <li>
-                <img src="../assets/img/homePageImage.jpg" width="390" height="160">
+                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
                 <div></div>
                 <span>上海迪士尼</span>
               </li>
               <li>
-                <img src="../assets/img/homePageImage.jpg" width="390" height="160">
+                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
                 <div></div>
                 <span>上海迪士尼</span>
               </li>
@@ -330,7 +330,7 @@
             <ul class="overseasScenicSpotsContentList clearfix">
               <li>
                 <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                   <strong></strong>
                   <span>满意度:99%</span>
                 </div>
@@ -341,7 +341,7 @@
               </li>
               <li>
                 <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                   <strong></strong>
                   <span>满意度:99%</span>
                 </div>
@@ -352,7 +352,7 @@
               </li>
               <li>
                 <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                   <strong></strong>
                   <span>满意度:99%</span>
                 </div>
@@ -363,7 +363,7 @@
               </li>
               <li>
                 <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                   <strong></strong>
                   <span>满意度:99%</span>
                 </div>
@@ -374,7 +374,7 @@
               </li>
               <li>
                 <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                   <strong></strong>
                   <span>满意度:99%</span>
                 </div>
@@ -385,7 +385,7 @@
               </li>
               <li>
                 <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="110">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
                   <strong></strong>
                   <span>满意度:99%</span>
                 </div>
@@ -406,32 +406,32 @@
             <ul class="cooperativeScenicSpotContentList clearfix">
               <li>
                 <a href="javascript:;">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="98">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
                 </a>
               </li>
               <li>
                 <a href="javascript:;">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="98">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
                 </a>
               </li>
               <li>
                 <a href="javascript:;">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="98">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
                 </a>
               </li>
               <li>
                 <a href="javascript:;">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="98">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
                 </a>
               </li>
               <li>
                 <a href="javascript:;">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="98">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
                 </a>
               </li>
               <li>
                 <a href="javascript:;">
-                  <img src="../assets/img/homePageImage.jpg" width="188" height="98">
+                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
                 </a>
               </li>
             </ul>
@@ -630,7 +630,7 @@
     height: 95px;
     border-bottom: 1px dashed #166877;
     line-height: 1;
-    background: url("../assets/img/readmore-bg.png") no-repeat -40px -80px;
+    background: url("../../assets/img/readmore-bg.png") no-repeat -40px -80px;
   }
 
   .AdmissionTickeAsightsAroundContentType .lookAtMore a {

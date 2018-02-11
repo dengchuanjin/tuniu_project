@@ -42,11 +42,11 @@
                     <li>五</li>
                     <li>六</li>
                   </ul>
-                  <ul class="calendarContentList clearfix" id="calendarContentList"   v-loading="isSalendar">
+                  <ul class="calendarContentList clearfix" id="calendarContentList" v-loading="isSalendar">
                     <li style="color: #ccc" v-for="item in arr1">{{item}}</li>
                     <li v-for="item in arr4">{{item}}</li>
                     <!--今天-->
-                    <li v-for="item in arr3"  @click="changeTime(item.day)">{{"今天"}}
+                    <li v-for="item in arr3" @click="changeTime(item.day)">{{"今天"}}
                       <div v-show="item.isJ">
                         <span>充足</span>
                         <strong>￥{{item.day.ts_pp_Price}}起</strong>
@@ -69,10 +69,6 @@
                               <strong>出发城市:</strong>
                               <span>{{item.day.ts_pp_FromPlace}}</span>
                             </div>
-                            <!--<div>-->
-                              <!--<strong>剩余票:</strong>-->
-                              <!--<span>{{item.day.ts_pp_Person}}张</span>-->
-                            <!--</div>-->
                           </div>
                         </div>
                       </div>
@@ -102,10 +98,6 @@
                               <strong>出发城市:</strong>
                               <span>{{item.ts_pp_FromPlace}}</span>
                             </div>
-                            <!--<div>-->
-                              <!--<strong>剩余票:</strong>-->
-                              <!--<span>{{item.ts_pp_Person}}张</span>-->
-                            <!--</div>-->
                           </div>
                         </div>
                       </div>
@@ -122,7 +114,8 @@
             <div class="ticketPrice">
               <i></i>
               <div class="ticketPriceContent clearfix">
-                <span>促销价:<span>￥</span><strong>{{productDetailsObj.money}}</strong>起<a href="javascript:;">起价说明</a></span>
+                <span>促销价:<span>￥</span><strong>{{productDetailsObj.money}}</strong>起<a
+                  href="javascript:;">起价说明</a></span>
                 <div class="evaluate">
                   <div class="satisfaction">
                     <span>满意度</span>
@@ -202,7 +195,8 @@
                       <el-tooltip class="item" effect="light" content="此价格根据机票有浮动，详情请咨询客服." placement="bottom-start">
                         <i class=" icon-info22"></i>
                       </el-tooltip>
-                      <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.adultPrice">¥{{addOrderOptions.adultPrice}}</span>
+                      <span style="color: #f60;font-weight: bold;"
+                            v-show="addOrderOptions.adultPrice">¥{{addOrderOptions.adultPrice}}</span>
                     </div>
                     <el-input-number
                       v-model="addOrderOptions.adultNumber"
@@ -212,11 +206,13 @@
                       :max="addOrderOptions.adultYu"
                       label="描述文字"
                     ></el-input-number>
-                    <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.adultYu">余{{addOrderOptions.adultYu}}</span>
+                    <span style="color: #f60;font-weight: bold;"
+                          v-show="addOrderOptions.adultYu">余{{addOrderOptions.adultYu}}</span>
                   </li>
                   <li>
                     <i style="margin-left:70px;margin-right: 30px">儿童:</i>
-                    <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.childPrice">¥{{addOrderOptions.childPrice}}</span>
+                    <span style="color: #f60;font-weight: bold;"
+                          v-show="addOrderOptions.childPrice">¥{{addOrderOptions.childPrice}}</span>
                     <el-input-number
                       v-model="addOrderOptions.childNumber"
                       @change="handleChange"
@@ -225,7 +221,8 @@
                       :max="addOrderOptions.childYu"
                       label="描述文字"
                     ></el-input-number>
-              <span style="color: #f60;font-weight: bold;" v-show="addOrderOptions.childYu">余{{addOrderOptions.childYu}}</span>
+                    <span style="color: #f60;font-weight: bold;"
+                          v-show="addOrderOptions.childYu">余{{addOrderOptions.childYu}}</span>
                   </li>
                 </ul>
                 <div class="button clearfix">
@@ -244,8 +241,8 @@
         </nav>
       </header>
       <section id="content">
+        <!--产品详情-->
         <div class="productDetailsWrap" id="h1">
-          <!--产品详情-->
           <div class="productDetails clearfix">
             <div class="discountIcon">
               <h3>产品详情</h3>
@@ -278,7 +275,8 @@
           <div class="LineScheduleContent">
             <!--日程安排-->
             <ul>
-              <li v-for="item,index in lineScheduleObj.prepareList" :id="'LineSchedule'+ index" style="padding-top: 45px;">
+              <li v-for="item,index in lineScheduleObj.prepareList" :id="'LineSchedule'+ index"
+                  style="padding-top: 45px;">
                 <strong class="dayDetailedTitle">{{item.ts_pt_Content}} {{item.ts_pt_Name}}</strong>
                 <div class="dayDetailed">
                   <div v-for="ite in item.travelTimeList">
@@ -311,7 +309,7 @@
           <!--左侧导航-->
           <ul class="scheduleList" id="scheduleList" ref="scheduleList" v-show="isScheduleList">
             <li v-for="item,index in lineScheduleObj.prepareList">
-              <a :href="'#LineSchedule'+ index"  @click="changeDay(index)">{{item.ts_pt_Content}}</a>
+              <a :href="'#LineSchedule'+ index" @click="changeDay(index)">{{item.ts_pt_Content}}</a>
               <i></i>
             </li>
           </ul>
@@ -358,6 +356,7 @@
             </div>
           </div>
         </div>
+        <!--预定须知-->
         <div class="packageDescription clearfix" id="h4">
           <div class="buyNeedToKnow">
             <div class="discountIcon">
@@ -370,6 +369,176 @@
               </div>
               <div class="buyNeedToKnowContent" v-html="lineScheduleObj.ts_pt_BookKnow"></div>
             </div>
+          </div>
+        </div>
+        <!--游客点评-->
+        <div class="commentsOnTourists clearfix" id="h5">
+          <div class="discountIcon">
+            <h3>游客点评</h3>
+          </div>
+          <!--右边内容-->
+          <div class="commentsOnTouristsContentWrap">
+            <div class="commentsOnTouristsStatistics">
+              <!--点评统计-->
+              <div class="commentsOnTouristsStatisticsContent clearfix">
+                <div class="satisfaction">
+                  <span>满意度</span>
+                  <strong>96%</strong>
+                  <span>来自2240名游客的点评</span>
+                </div>
+                <div class="statisticalChart">
+                  <ul class="statisticalChartLeft">
+                    <li class="clearfix">
+                      <span>满意(2115)</span>
+                      <div class="statisticalChartLeftBar">
+                        <div class="statisticalChartLeftBarChild"></div>
+                      </div>
+                      <span>94%</span>
+                    </li>
+                    <li class="clearfix">
+                      <span>一般(110)</span>
+                      <div class="statisticalChartLeftBar">
+                        <div class="statisticalChartLeftBarChild"></div>
+                      </div>
+                      <span>5%</span>
+                    </li>
+                    <li class="clearfix">
+                      <span>不满意(15)</span>
+                      <div class="statisticalChartLeftBar">
+                        <div class="statisticalChartLeftBarChild"></div>
+                      </div>
+                      <span>1%</span>
+                    </li>
+                  </ul>
+                  <ul class="statisticalChartRight">
+                    <li>
+                      <strong>导游服务</strong>
+                      <span><i>4.9</i>/5</span>
+                    </li>
+                    <li>
+                      <strong>行程安排</strong>
+                      <span><i>4.9</i>/5</span>
+                    </li>
+                    <li>
+                      <strong>餐饮住宿</strong>
+                      <span><i>4.9</i>/5</span>
+                    </li>
+                    <li>
+                      <strong>旅行交通</strong>
+                      <span><i>4.9</i>/5</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="commentOnAComment">
+                  <strong>出游归来发点评返现金,<br>
+                    本产品已累计发放<i>19012</i>元</strong>
+                  <a href="javascript:;">发表点评</a>
+                </div>
+              </div>
+              <!--点评类型-->
+              <ul class="commentsOnTouristsStatisticsTypeList clearfix">
+                <li>
+                  <a href="javascript:;" class="active">全部(2240)</a>
+                </li>
+                <li>
+                  <a href="javascript:;">满意(2240)</a>
+                </li>
+                <li>
+                  <a href="javascript:;">一般(2240)</a>
+                </li>
+                <li>
+                  <a href="javascript:;">不满意(2240)</a>
+                </li>
+                <li>
+                  <a href="javascript:;">精华(2240)</a>
+                </li>
+                <li>
+                  <a href="javascript:;">家庭出游(2240)</a>
+                </li>
+                <li>
+                  <a href="javascript:;">情侣/朋友(2240)</a>
+                </li>
+                <li>
+                  <a href="javascript:;">独自出游(2240)</a>
+                </li>
+                <li>
+                  <a href="javascript:;">代人预定(2240)</a>
+                </li>
+                <li>
+                  <a href="javascript:;">有图(2240)</a>
+                </li>
+              </ul>
+            </div>
+            <!--评论列表-->
+            <ul class="evaluationContent">
+              <li class="clearfix">
+                <!--游客信息-->
+                <div class="touristInfromation">
+                  <img src="../../assets/img/center.png" width="60" height="60">
+                  <span class="touristInfromationName">2324343434</span>
+                  <strong class="touristInfromationType">家庭出游</strong>
+                </div>
+                <!--点评内容-->
+                <div class="touristComment">
+                  <ul class="touristCommentList clearfix">
+                    <li><span>总体评价：满意</span></li>
+                    <li><span>导游服务: 满意</span></li>
+                    <li><span>行程安排: 满意</span></li>
+                    <li><span>餐饮住宿: 满意</span></li>
+                    <li><span>旅行交通: 满意</span></li>
+                  </ul>
+                  <p class="touristCommentContent">
+                    自从11月12日始，我在朋友圈晒行程，受到所有好友的羡慕，目前已介绍好几个好友加入了途牛会员，得到了好友们的赞许。我自己的亲身体验是：线路好，吃住都好，导游周梦乔更是幽默风趣，知识渊博，不仅讲解景点，由景点又讲到人生，健康等等。总之，这是一次愉快的旅行！我还会跟着途牛去旅游。给途牛大大的赞！！！
+                  </p>
+                  <ul class="TypeCommentList">
+                    <li class="clearfix">
+                      <strong>导游服务 : </strong>
+                      <span>
+作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>
+                    </li>
+                    <li class="clearfix">
+                      <strong>行程安排 : </strong>
+                      <span>
+作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>
+                    </li>
+                    <li class="clearfix">
+                      <strong>餐饮住宿 : </strong>
+                      <span>
+作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>
+                    </li>
+                    <li class="clearfix">
+                      <strong>旅行交通 : </strong>
+                      <span>
+作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>
+                    </li>
+                  </ul>
+                  <ul class="uploadPictureList clearfix">
+                    <li>
+                      <img src="../../assets/img/center.png" width="100" height="100">
+                    </li>
+                    <li>
+                      <img src="../../assets/img/center.png" width="100" height="100">
+                    </li>
+                    <li>
+                      <img src="../../assets/img/center.png" width="100" height="100">
+                    </li>
+                    <li>
+                      <img src="../../assets/img/center.png" width="100" height="100">
+                    </li>
+                    <li>
+                      <img src="../../assets/img/center.png" width="100" height="100">
+                    </li>
+                  </ul>
+                  <div class="touristCommentTime">2018-02-02</div>
+                </div>
+                <!--点评赠送-->
+                <div class="commentGive">
+                  <strong>点评赠送</strong>
+                  <span>返现<em>￥12</em></span>
+                  <span>抵用券<em>￥100</em></span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -419,13 +588,13 @@
     ]),
     data() {
       return {
-        n:0,
-        centerDialogVisible:false,//登录弹窗
-        showCalendar:false,
-        pictureList:[],
+        n: 0,
+        centerDialogVisible: false,//登录弹窗
+        showCalendar: false,
+        pictureList: [],
         isActiveSearchMonth: false,
         isActive: false,
-        isSalendar:true,
+        isSalendar: true,
         iswrap: true,
         data: [],
         arr1: [],
@@ -435,7 +604,7 @@
         arr5: [],
         selectMonth: [],
         city: '',
-        isScheduleList:false,
+        isScheduleList: false,
         positions: {
           left: 0,
           top: 0
@@ -445,27 +614,27 @@
         userSearch: {
           name: ''
         },
-        id:'',
-        changeDate:'',//选中日期
+        id: '',
+        changeDate: '',//选中日期
         cityValue: '',
-        m:'',//月份
+        m: '',//月份
         countyValue: '',
-        addOrderOptions:{
-          ts_pp_ID:'',
+        addOrderOptions: {
+          ts_pp_ID: '',
           provinceValue: '',
-          DayValue:'',
+          DayValue: '',
           adultNumber: 0,//成人
-          adultYu:0,//成人余票
-          adultPrice:'',//成人价格
-          childPrice:'',//儿童价格
-          childYu:0,//儿童余票
-          childNumber:0,//儿童
+          adultYu: 0,//成人余票
+          adultPrice: '',//成人价格
+          childPrice: '',//儿童价格
+          childYu: 0,//儿童余票
+          childNumber: 0,//儿童
         },
       }
     },
     methods: {
       //选中日历,item日历信息
-      changeTime(item){
+      changeTime(item) {
         //获取余票
         let options = {
           "loginUserID": "huileyou",
@@ -479,20 +648,20 @@
         this.addOrderOptions.DayValue = item.ts_pp_Date;
         this.addOrderOptions.adultPrice = item.ts_pp_Price
         this.addOrderOptions.childPrice = item.ts_pp_ChildPrice
-        this.$store.dispatch('GetFreeSeat',options)
-        .then((data)=>{
-          this.addOrderOptions.adultYu = data.fullNo
-          this.addOrderOptions.childYu = data.childNo
-        })
+        this.$store.dispatch('GetFreeSeat', options)
+          .then((data) => {
+            this.addOrderOptions.adultYu = data.fullNo
+            this.addOrderOptions.childYu = data.childNo
+          })
       },
       //日历选项卡
       changeSearchMonth(item) {
         this.n = item.i;
         this.changeDate = item.date;
         this.m = item.m
-        if(this.addOrderOptions.provinceValue){
-          this.getCitySearch(this.id,this.addOrderOptions.provinceValue,'',item.date,item.m)
-        }else{
+        if (this.addOrderOptions.provinceValue) {
+          this.getCitySearch(this.id, this.addOrderOptions.provinceValue, '', item.date, item.m)
+        } else {
           this.$notify({
             message: '请选择出发出发城市!',
             type: 'error'
@@ -508,10 +677,10 @@
 //        lis[index].querySelector('a').className = 'active'
       },
       //获取搜索城市
-      getCitySearch(id,city,isOne,date,m) {
+      getCitySearch(id, city, isOne, date, m) {
         $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', () => {
           this.userSearch.name = remote_ip_info.city + '市';
-          if(isOne){
+          if (isOne) {
             this.addOrderOptions.provinceValue = remote_ip_info.city + '市'
           }
 //
@@ -522,24 +691,24 @@
             "operateUserName": "",
             "pcName": "",
             "lineID": id,
-            monthChose:date?date:'',
+            monthChose: date ? date : '',
             "city": city ? city : remote_ip_info.city + '市'//remote_ip_info.city +
           };
           this.isSalendar = true;
           this.$store.dispatch('initTimesPrice', options)
             .then((data) => {
-            this.isSalendar = false;
+              this.isSalendar = false;
               var calendarContentList = document.getElementById("calendarContentList");
               var str = '';
               var year = new Date().getFullYear();
               var month = new Date().getMonth();
               this.showCalendar = true;
-              if(!date){
-                this.get(year, month, this, data).then(()=>{
+              if (!date) {
+                this.get(year, month, this, data).then(() => {
                   this.showCalendar = false;
                 });
-              }else{
-                this.get(year, m, this, data).then(()=>{
+              } else {
+                this.get(year, m, this, data).then(() => {
                   this.showCalendar = false;
                 });
               }
@@ -562,18 +731,18 @@
       },
       //选中出发城市
       getSearchCity() {
-        if(this.changeDate){
-          this.getCitySearch(this.id,this.addOrderOptions.provinceValue,'',this.changeDate,this.m);
-        }else{
-          this.getCitySearch(this.id,this.addOrderOptions.provinceValue,'');
+        if (this.changeDate) {
+          this.getCitySearch(this.id, this.addOrderOptions.provinceValue, '', this.changeDate, this.m);
+        } else {
+          this.getCitySearch(this.id, this.addOrderOptions.provinceValue, '');
         }
         this.addOrderOptions.DayValue = '';
-        this.addOrderOptions.adultNumber=0;//成人
-        this.addOrderOptions.adultYu=0;//成人余票
-        this.addOrderOptions.adultPrice=0;//成人价格
-        this.addOrderOptions.childPrice=0;//儿童价格
-        this.addOrderOptions.childYu=0;//儿童余票
-        this.addOrderOptions.childNumber=0//儿童
+        this.addOrderOptions.adultNumber = 0;//成人
+        this.addOrderOptions.adultYu = 0;//成人余票
+        this.addOrderOptions.adultPrice = 0;//成人价格
+        this.addOrderOptions.childPrice = 0;//儿童价格
+        this.addOrderOptions.childYu = 0;//儿童余票
+        this.addOrderOptions.childNumber = 0//儿童
       },
       //补0
       getNum(num) {
@@ -587,9 +756,9 @@
         for (var i = 0; i < 4; i++) {
           this.searchMonth.push({
             i,
-            date:y+'-'+this.getNum(m+i)+'-01',
+            date: y + '-' + this.getNum(m + i) + '-01',
             name: y + '年' + this.getNum(m + i) + '月',
-            m:m+i
+            m: m + i
           })
         }
         let tradeID = this.$route.params.id
@@ -643,9 +812,9 @@
           spans[i].className = ''
         }
         spans[index].className = 'active'
-        if(index==1){
+        if (index == 1) {
           this.isScheduleList = true
-        }else{
+        } else {
           this.isScheduleList = false
         }
       },
@@ -673,7 +842,7 @@
         for (var n = 0; n < data.length; n++) {
           data[n].day = Number(data[n].ts_pp_Date.split('-')[2])
         }
-        return new Promise((relove,reject)=>{
+        return new Promise((relove, reject) => {
           year = Number(year);
           month = Number(month);
           var newArr = []
@@ -703,10 +872,10 @@
 //                _this.arr3.pop()
                 }
               }
-              if( _this.arr3.length>1){
+              if (_this.arr3.length > 1) {
                 _this.arr3.shift()
               }
-              if(!_this.arr3.length){
+              if (!_this.arr3.length) {
                 _this.arr3.push({
                   isJ: false,
                   day: new Date().getDate()
@@ -763,41 +932,41 @@
 
       },
       //登录确定
-      centerDialogVisibleSubmit(){
-        this.$router.push({name:'AdminLogin'});
+      centerDialogVisibleSubmit() {
+        this.$router.push({name: 'AdminLogin'});
       },
       //立即预订
-      immediatelyReserveSubmit(){
+      immediatelyReserveSubmit() {
         let user = JSON.parse(sessionStorage.getItem('user'));
-        if(!user){
+        if (!user) {
           this.centerDialogVisible = true;
           return;
         }
-        if(this.addOrderOptions.DayValue==''){
+        if (this.addOrderOptions.DayValue == '') {
           this.$notify({
             message: '请选择出发日期!',
             type: 'error'
           });
           return
         }
-        if(this.addOrderOptions.DayValue==''||this.addOrderOptions.adultPrice==''){
+        if (this.addOrderOptions.DayValue == '' || this.addOrderOptions.adultPrice == '') {
           this.$notify({
             message: '请选择左侧可选出发日期!',
             type: 'error'
           });
           return
         }
-        if(!this.addOrderOptions.adultNumber){
+        if (!this.addOrderOptions.adultNumber) {
           this.$notify({
             message: '请选择人数!',
             type: 'error'
           });
           return
         }
-          console.log(this.addOrderOptions)
+        console.log(this.addOrderOptions)
         this.addOrderOptions.title = this.productDetailsObj.ts_pt_Name
-        sessionStorage.setItem('orderInfo',JSON.stringify(this.addOrderOptions))
-        this.$router.push({name:'FillInOrder'});
+        sessionStorage.setItem('orderInfo', JSON.stringify(this.addOrderOptions))
+        this.$router.push({name: 'FillInOrder'});
 //        var makeOrder = {
 //          "loginUserID": "huileyou",
 //          "loginUserPass": "123",
@@ -824,18 +993,18 @@
 //        }
       },
 
-  },
+    },
     created() {
       //获取轮播图
       this.$store.commit('showLoading');
       let images = JSON.parse(sessionStorage.getItem('images')).split(',')
-      if(!images[images.length-1]){
+      if (!images[images.length - 1]) {
         images.pop()
       }
       this.pictureList = images;
-      this.initData().then((id)=>{
+      this.initData().then((id) => {
         this.id = id;
-        this.getCitySearch(id,'',true);
+        this.getCitySearch(id, '', true);
         this.$store.commit('hideLoading')
       });
       this.data = cityOptions;
@@ -843,7 +1012,7 @@
     updated() {
       let lis = this.$refs.scheduleList.querySelectorAll('li')
       if (lis.length) {
-        for( var i=0;i<lis.length;i++ ){
+        for (var i = 0; i < lis.length; i++) {
           lis[i].children[0].className = ''
         }
         lis[0].children[0].className = 'active'
@@ -859,21 +1028,21 @@
     mounted() {
 
 //      固定的导航
-      (function(){
-        var sTop = $('#headerNavWrap').get(0).offsetTop+180;
-        var w = ($(window).width()-1188)/2
-        var bTop = $('#scheduleList').get(0).offsetTop+180
-        $(window).bind("scroll", function(){
+      (function () {
+        var sTop = $('#headerNavWrap').get(0).offsetTop + 180;
+        var w = ($(window).width() - 1188) / 2
+        var bTop = $('#scheduleList').get(0).offsetTop + 180
+        $(window).bind("scroll", function () {
           var top = $(this).scrollTop(); // 当前窗口的滚动距离
-          if(top> sTop ){
-            $('#headerNavWrap').css({position: 'fixed', left: w+'px', top: 0,})
+          if (top > sTop) {
+            $('#headerNavWrap').css({position: 'fixed', left: w + 'px', top: 0,})
             var content = document.getElementById('content');
-          }else{
+          } else {
             $('#headerNavWrap').css({position: 'static', left: 'auto', top: 'auto',})
           }
-          if(top> bTop ){
-            $('#scheduleList').css({position: 'fixed', left: (w+20)+'px', top: '70px',})
-          }else{
+          if (top > bTop) {
+            $('#scheduleList').css({position: 'fixed', left: (w + 20) + 'px', top: '70px',})
+          } else {
             $('#scheduleList').css({position: 'static', left: 'auto', top: 'auto',})
           }
         });
@@ -893,6 +1062,7 @@
   .item {
     margin: 4px;
   }
+
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }

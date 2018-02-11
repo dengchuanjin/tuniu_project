@@ -195,7 +195,7 @@
               <router-link to="/Comment/HeelTour">跟团游</router-link>
             </li>
             <li>
-              <router-link to="/Comment/AdmissionTicket">门票</router-link>
+              <router-link to="/Comment/AdmissionTicketHomePage">门票</router-link>
             </li>
             <li>
               <router-link to="/Comment/HotelHomePage">酒店 </router-link>
