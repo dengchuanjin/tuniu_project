@@ -157,7 +157,7 @@
         this.NoID = ''
       },
       save(){
-        if(this.NoID == ''){
+        if(this.userInfo.ui_CertNo == ''){
           this.$notify({
             message: '请输入身份证号!',
             type: 'error'

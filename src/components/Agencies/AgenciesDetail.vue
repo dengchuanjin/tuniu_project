@@ -28,7 +28,7 @@
                   <li v-for="(item,i) in searchMonth" @click="changeSearchMonth(item)">
                     <a href="javascript:;" :class="{active:n==i}">
                       <strong>{{item.name}}</strong>
-                      <span>￥3788起</span>
+                      <span>￥{{price}}起</span>
                     </a>
                   </li>
                 </ul>
@@ -114,7 +114,7 @@
             <div class="ticketPrice">
               <i></i>
               <div class="ticketPriceContent clearfix">
-                <span>促销价:<span>￥</span><strong>{{productDetailsObj.money}}</strong>起<a
+                <span>促销价:<span>￥</span><strong>{{price}}</strong>起<a
                   href="javascript:;">起价说明</a></span>
                 <div class="evaluate">
                   <div class="satisfaction">
@@ -588,6 +588,7 @@
     ]),
     data() {
       return {
+        price:'',
         n: 0,
         centerDialogVisible: false,//登录弹窗
         showCalendar: false,
@@ -997,6 +998,7 @@
 
     },
     created() {
+      this.price = sessionStorage.getItem('money')
       //获取轮播图
       this.$store.commit('showLoading');
       let images = JSON.parse(sessionStorage.getItem('images')).split(',')

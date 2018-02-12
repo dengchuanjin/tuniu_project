@@ -158,11 +158,8 @@ export default [
   },
   //登录
   {
-    path: 'AdminLogin',
-    components: {
-      default: Comment,
-      User: AdminLogin
-    },
+    path: '/adminLogin',
+    component: AdminLogin,
     name: 'AdminLogin'
   },
   {

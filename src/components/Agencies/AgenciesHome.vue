@@ -12,14 +12,14 @@
           <div class="homePageHotPlaceTour">
           </div>
           <ul class="homePageDomesticTourContentList clearfix">
-            <li v-for="item,index in domesticDataList" @click="toDetail(item.ta_tg_ID)">
+            <li v-for="item,index in domesticDataList" @click="toDetail(item)">
 
               <a href="javascript:;">
                 <img v-lazy="item.oneImg" width="220" height="125">
               </a>
               <div class="homePageImageContentBox">
                 <div class="homePageImageMoneyAndSatisfied clearfix">
-                  <span class="homePageImageMoney">￥<strong>2839</strong> 起</span>
+                  <span class="homePageImageMoney">￥<strong>{{item.ts_tg_lowestPrice}}</strong> 起</span>
                   <span class="homePageImageSatisfied">满意度 96%</span>
                 </div>
                 <div class="homePageImageContent">
@@ -43,14 +43,14 @@
           <div class="homePageHotPlaceTour">
           </div>
           <ul class="homePageDomesticTourContentList clearfix">
-            <li v-for="item,index in aroundList" @click="toAroundDetail(item.ta_tg_ID)">
+            <li v-for="item,index in aroundList" @click="toAroundDetail(item)">
 
               <a href="javascript:;">
                 <img v-lazy="item.oneImg" width="220" height="125">
               </a>
               <div class="homePageImageContentBox">
                 <div class="homePageImageMoneyAndSatisfied clearfix">
-                  <span class="homePageImageMoney">￥<strong>2839</strong> 起</span>
+                  <span class="homePageImageMoney">￥<strong>{{item.ts_tg_lowestPrice}}</strong> 起</span>
                   <span class="homePageImageSatisfied">满意度 96%</span>
                 </div>
                 <div class="homePageImageContent">
@@ -74,14 +74,14 @@
           <div class="homePageHotPlaceTour">
           </div>
           <ul class="homePageDomesticTourContentList clearfix">
-            <li v-for="item,index in shortLineList" @click="toShortLineDetail(item.ta_tg_ID)">
+            <li v-for="item,index in shortLineList" @click="toShortLineDetail(item)">
 
               <a href="javascript:;">
                 <img v-lazy="item.oneImg" width="220" height="125">
               </a>
               <div class="homePageImageContentBox">
                 <div class="homePageImageMoneyAndSatisfied clearfix">
-                  <span class="homePageImageMoney">￥<strong>2839</strong> 起</span>
+                  <span class="homePageImageMoney">￥<strong>{{item.ts_tg_lowestPrice}}</strong> 起</span>
                   <span class="homePageImageSatisfied">满意度 96%</span>
                 </div>
                 <div class="homePageImageContent">
@@ -112,7 +112,7 @@
               </a>
               <div class="homePageImageContentBox">
                 <div class="homePageImageMoneyAndSatisfied clearfix">
-                  <span class="homePageImageMoney">￥<strong>2839</strong> 起</span>
+                  <span class="homePageImageMoney">￥<strong>{{item.ts_tg_lowestPrice}}</strong> 起</span>
                   <span class="homePageImageSatisfied">满意度 96%</span>
                 </div>
                 <div class="homePageImageContent">
@@ -224,52 +224,56 @@
 //        await this.$store.dispatch('initLongLineList',LongLineOptions)
       },
       //点击跳转到产品线路详情
-      toDetail(id) {
+      toDetail(obj) {
         let arr = this.domesticDataList.filter(item => {
-          if (item.ta_tg_ID == id) {
+          if (item.ta_tg_ID == obj.ta_tg_ID) {
             return true;
           }
           return false;
         });
+        sessionStorage.setItem('money',obj.ts_tg_lowestPrice)
         let images = JSON.stringify(arr[0].ta_tg_ShowImage);
         sessionStorage.setItem('images', images);
-        this.$router.push({name: 'AgenciesDetail', params: {id: id}})
+        this.$router.push({name: 'AgenciesDetail', params: {id: obj.ta_tg_ID}})
       },
       //周边游跳转到产品线路详情
-      toAroundDetail(id){
+      toAroundDetail(obj){
         let arr = this.aroundList.filter(item => {
-          if (item.ta_tg_ID == id) {
+          if (item.ta_tg_ID == obj.ta_tg_ID) {
             return true;
           }
           return false;
         });
+        sessionStorage.setItem('money',obj.ts_tg_lowestPrice)
         let images = JSON.stringify(arr[0].ta_tg_ShowImage);
         sessionStorage.setItem('images', images);
-        this.$router.push({name: 'AgenciesDetail', params: {id: id}})
+        this.$router.push({name: 'AgenciesDetail', params: {id: obj.ta_tg_ID}})
       },
       //境外短线跳转到产品线路详情
-      toShortLineDetail(id){
+      toShortLineDetail(obj){
         let arr = this.shortLineList.filter(item => {
-          if (item.ta_tg_ID == id) {
+          if (item.ta_tg_ID ==  obj.ta_tg_ID) {
             return true;
           }
           return false;
         });
+        sessionStorage.setItem('money',obj.ts_tg_lowestPrice)
         let images = JSON.stringify(arr[0].ta_tg_ShowImage);
         sessionStorage.setItem('images', images);
-        this.$router.push({name: 'AgenciesDetail', params: {id: id}})
+        this.$router.push({name: 'AgenciesDetail', params: {id:  obj.ta_tg_ID}})
       },
       //境外长线跳转到产品线路详情
-      toLongLineDetail(id){
+      toLongLineDetail(obj){
         let arr = this.longLineList.filter(item => {
-          if (item.ta_tg_ID == id) {
+          if (item.ta_tg_ID == obj.ta_tg_ID) {
             return true;
           }
           return false;
         });
+        sessionStorage.setItem('money',obj.ts_tg_lowestPrice)
         let images = JSON.stringify(arr[0].ta_tg_ShowImage);
         sessionStorage.setItem('images', images);
-        this.$router.push({name: 'AgenciesDetail', params: {id: id}})
+        this.$router.push({name: 'AgenciesDetail', params: {id: obj.ta_tg_ID}})
       }
     },
     mounted() {

@@ -386,6 +386,7 @@ export default {
         })
     })
   },
+  //查询结算币种
   initChangeMineyType({commit}, data) {
     return new Promise(function (relove, reject) {
       axios.post('http://hly.admin.1000da.com.cn/BalanceCurrency/Select', JSON.stringify(data), {
@@ -647,6 +648,24 @@ export default {
         var data = data.data;
         if (Number(data.resultcode) == 200) {
           relove(data.resultcontent)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //回去进度状态
+  getSearchStatus(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/AgentInfo/ProgressStatus', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data.data)
         } else {
           reject(data.resultcontent)
         }

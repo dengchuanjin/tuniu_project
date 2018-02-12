@@ -389,8 +389,11 @@
       <div class="MerchantRegisterTabel" v-show="!off">
 
         <div class="searchProgress">
-          <p>{{statusText}}</p>
-          <el-form ref="form" :model="searchProgressOptions" label-width="120px">
+          <p v-show="statusText">
+            {{statusText}}
+          </p>
+          <!--<div class="Failure">失败原因: <span>{{failureText}}</span></div>-->
+          <el-form ref="form" :model="searchProgressOptions" label-width="120px" style="margin-top: 100px">
             <el-form-item label="手机号码:">
               <el-input v-model="searchProgressOptions.phone" style="width: 200px" placeholder="请输入手机号码"></el-input>
             </el-form-item>
@@ -429,7 +432,8 @@
     ]),
     data() {
       return {
-        statusText:'审核中',
+        failureText:'长太帅',
+        statusText:'',
         disabledOff:false,
         num:60,
         text:'获取动态密码',
@@ -450,46 +454,6 @@
         isOff: true,
         ScopeOfOperationType: [],
         changeCooperationTypeData: [],
-        ContactsScopeOfOperationWrapBoxData: [
-          {
-            value: 0,
-            label: '无效'
-          },
-          {
-            value: 1,
-            label: '有效'
-          }
-        ],
-        ContactsTypeOfCooperationBoxData: [
-          {
-            value: 0,
-            label: '无效'
-          },
-          {
-            value: 1,
-            label: '有效'
-          }
-        ],
-        ContactsCompanySizeWrapBoxData: [
-          {
-            value: 0,
-            label: '无效'
-          },
-          {
-            value: 1,
-            label: '有效'
-          }
-        ],
-        ContactsSettlementCurrencyContentData: [
-          {
-            value: 0,
-            label: '无效'
-          },
-          {
-            value: 1,
-            label: '有效'
-          }
-        ],
         newArr: [],
         ImageURL1: [],
         ImageURL2: [],
@@ -554,7 +518,18 @@
     methods: {
       //查询状态
       searchStatus(){
-        console.log(this.searchProgressOptions)
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "phone": this.searchProgressOptions.phone,
+        };
+        this.$store.dispatch('getSearchStatus',options)
+        .then(text=>{
+          this.statusText = text
+        })
       },
       //获取验证码
       getCode(){
@@ -816,6 +791,7 @@
               message: '注册成功！！',
               type: 'success'
             });
+            //跳转到进度查询
             this.n = 1;
             this.off = false;
           },err=>{
@@ -833,13 +809,21 @@
 </script>
 <style scoped>
   .searchProgress{
-    padding: 0px 0 0 200px;
+    padding: 0 0 0 200px;
     height: 800px;
   }
   .searchProgress p{
+    margin-bottom: 100px;
     text-align: center;
     font-size:30px;
-    padding: 100px 0;
+    padding: 100px 0 0 0;
+  }
+  .searchProgress .Failure{
+    padding: 40px 0 60px 100px;
+    font-size:20px;
+  }
+  .searchProgress .Failure span{
+    color: #f60;
   }
   .file {
     position: relative;
