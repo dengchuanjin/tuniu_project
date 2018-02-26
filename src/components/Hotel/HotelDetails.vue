@@ -203,8 +203,6 @@
                 <el-checkbox>观塘区</el-checkbox>
                 <el-checkbox>屯门区</el-checkbox>
                 <el-checkbox>沙田区</el-checkbox>
-
-
               </div>
             </li>
           </ul>
@@ -241,10 +239,20 @@
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
                   </div>
-                  <p class="HotelRecommendDetalisListIntroduceBoxDescribe">离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】</p>
+                  <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
+                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】</p>
                   <a href="javascript:;">查看地图</a>
-                  <div class="HotelRecommendDetalisListIntroduceBoxIconList">
+                  <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
                     <i class="Restaurant"></i>
+                    <i class="ParkingLot"></i>
+                    <i class="meetPlaneService"></i>
+                    <i class="laundryService"></i>
+                    <i class="swimming"></i>
+                    <i class="Gym"></i>
+                    <i class="ConferenceRoom"></i>
+                    <i class="hotWater"></i>
+                    <i class="WiFi"></i>
+                    <i class="transit"></i>
                   </div>
                 </div>
               </li>
@@ -638,14 +646,23 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height:24px;
+    height: 24px;
     font: 12px/2 "微软雅黑";
     text-align: center;
     color: #fff;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0, 0, 0, .5);
   }
 
+  .HotelRecommendDetalisListIntroduceBoxIconList > i {
+    float: left;
+    width: 24px;
+    height: 24px;
+    background: url("../../assets/img/hotel-facility.png") no-repeat;
+  }
 
+  .HotelRecommendDetalisListIntroduceBoxIconList > .Restaurant {
+
+  }
 
   /*酒店地图*/
 

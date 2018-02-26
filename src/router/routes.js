@@ -193,6 +193,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'AgenciesHome'}
+    redirect: {name: 'HotelDetails'}
   },
 ]
