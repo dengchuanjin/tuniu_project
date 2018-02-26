@@ -14,7 +14,8 @@
       <div class="MerchantRegisterNavWrap">
         <div class="MerchantRegisterNav">
           <div class="MerchantRegisterNavContent clearfix">
-            <a href="javascript:;" v-for="item,index in options" :class="{active:index==n}" @click="changeOption(index)">{{item.name}}</a>
+            <a href="javascript:;" v-for="item,index in options" :class="{active:index==n}"
+               @click="changeOption(index)">{{item.name}}</a>
           </div>
         </div>
       </div>
@@ -69,7 +70,12 @@
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="电子邮箱:" :required="isOff">
+<<<<<<< HEAD
                   <el-input type="text" size="mini"  v-model="insertAgentInfo.data.sm_ai_Email"></el-input>
+=======
+                  <el-input type="text" size="mini" placeholder="非常重要！"
+                            v-model="insertAgentInfo.data.sm_ai_Email"></el-input>
+>>>>>>> a4c18d52f4ebfcd1cc9bcadb02ee2e421e500e4e
                 </el-form-item>
               </el-form>
             </el-col>
@@ -130,20 +136,6 @@
               </el-form-item>
             </el-form>
           </el-col>
-          <!--<el-col :span="24" class="formSearch">-->
-            <!--<el-form :inline="true">-->
-              <!--<el-form-item label="国家:" :required="isOff">-->
-                <!--<el-select v-model="insertAgentInfo.data.sm_ai_Contry" placeholder="请选择国家" size="mini">-->
-                  <!--<el-option-->
-                    <!--v-for="item in countryData"-->
-                    <!--:key="item.value"-->
-                    <!--:label="item.Country"-->
-                    <!--:value="item.Country">-->
-                  <!--</el-option>-->
-                <!--</el-select>-->
-              <!--</el-form-item>-->
-            <!--</el-form>-->
-          <!--</el-col>-->
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
               <el-form-item label="省:" :required="isOff">
@@ -215,8 +207,10 @@
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="注册资金:" :required="isOff" >
-                <el-input style="width: 100px" type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_RegMoney"></el-input> 万元
+              <el-form-item label="注册资金:" :required="isOff">
+                <el-input style="width: 100px" type="text" size="mini"
+                          v-model="insertAgentInfo.data.sm_ai_RegMoney"></el-input>
+                万元
               </el-form-item>
             </el-form>
           </el-col>
@@ -254,7 +248,8 @@
             <el-form :inline="true">
               <el-form-item label="经营范围名称:" :required="isOff">
                 <el-checkbox-group v-model="ScopeOfOperationType" @change="changeBox">
-                  <el-checkbox v-for="item,index in changeScopeOfOperationList" :label="item.sm_ts_Name" :key="index"></el-checkbox>
+                  <el-checkbox v-for="item,index in changeScopeOfOperationList" :label="item.sm_ts_Name"
+                               :key="index"></el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
             </el-form>
@@ -277,21 +272,11 @@
               </el-form-item>
             </el-form>
           </el-col>
-          <!--<el-col :span="24" class="formSearch" >-->
-            <!--<el-form :inline="true">-->
-              <!--<el-form-item label="协议:" :required="isOff">-->
-                <!--<span>协议</span>-->
-              <!--</el-form-item>-->
-            <!--</el-form>-->
-          <!--</el-col>-->
           <el-col :span="24" class="formSearch">
           </el-col>
-          <el-col :span="24" class="formSearch" >
+          <el-col :span="24" class="formSearch">
             <el-form :inline="true">
               <el-form-item label="合作类型名称:" :required="isOff">
-                <!--<el-checkbox-group v-model="changeCooperationTypeDataList" @change="changeCooperationType">-->
-                  <!--<el-checkbox v-for="item,index in changeCooperationTypeList" :label="item.sm_cp_Name"  :key="index"></el-checkbox>-->
-                <!--</el-checkbox-group>-->
                 <el-select v-model="changeCooperationTypeDataList" placeholder="请选择合作类型" @change="changeCooperation">
                   <el-option
                     v-for="item in changeCooperationTypeList"
@@ -302,7 +287,7 @@
                 </el-select>
               </el-form-item>
             </el-form>
-         </el-col>
+          </el-col>
 
         </div>
         <!--资质信息-->
@@ -344,14 +329,14 @@
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
               <el-form-item label="营业执照有效期到:" :required="isOff">
-                  <el-date-picker
-                    id="a"
-                    v-model="insertAgentInfo.data.sm_ai_CertExpireTo"
-                    type="date"
-                    placeholder="选择日期"
-                    value-format="yyyy-MM-dd"
-                    size="mini">
-                  </el-date-picker>
+                <el-date-picker
+                  id="a"
+                  v-model="insertAgentInfo.data.sm_ai_CertExpireTo"
+                  type="date"
+                  placeholder="选择日期"
+                  value-format="yyyy-MM-dd"
+                  size="mini">
+                </el-date-picker>
               </el-form-item>
             </el-form>
           </el-col>
@@ -439,8 +424,8 @@
               <el-input v-model="searchProgressOptions.phone" style="width: 200px" placeholder="请输入手机号码"></el-input>
             </el-form-item>
             <!--<el-form-item label="手机验证码:" label-width="120px">-->
-              <!--<el-input v-model="searchProgressOptions.verificationCode" style="width: 200px" placeholder="请输入手机验证码"></el-input>-->
-              <!--<el-button @click="getCode" :disabled="disabledOff" size="small">{{text}}</el-button>-->
+            <!--<el-input v-model="searchProgressOptions.verificationCode" style="width: 200px" placeholder="请输入手机验证码"></el-input>-->
+            <!--<el-button @click="getCode" :disabled="disabledOff" size="small">{{text}}</el-button>-->
             <!--</el-form-item>-->
             <el-form-item label-width="120px">
               <el-button type="warning" @click="searchStatus">查询</el-button>
@@ -487,23 +472,23 @@
     ]),
     data() {
       return {
-        isSubmitContent:false,//点击同意提交注册
-        showClose:false,
-        contentDialog:false,
-        failureText:'长太帅',
-        statusText:'',
-        disabledOff:false,
-        num:60,
-        text:'获取动态密码',
-        searchProgressOptions:{
-          phone:'',
-          verificationCode:''
+        isSubmitContent: false,//点击同意提交注册
+        showClose: false,
+        contentDialog: false,
+        failureText: '长太帅',
+        statusText: '',
+        disabledOff: false,
+        num: 60,
+        text: '获取动态密码',
+        searchProgressOptions: {
+          phone: '',
+          verificationCode: ''
         },
-        n:0,
-        off:true,
-        options:[
+        n: 0,
+        off: true,
+        options: [
           {
-            name:'注册信息'
+            name: '注册信息'
           },
 //          {
 //            name:'进度查询'
@@ -526,9 +511,9 @@
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "data": {
-            sm_ai_AgentID:'',
-            sm_ai_ParentID:'',
-            sm_ai_Password:'',
+            sm_ai_AgentID: '',
+            sm_ai_ParentID: '',
+            sm_ai_Password: '',
             "sm_bc_ID": '',
             "sm_ai_BalanceCurrencyName": '',
             "sm_cs_ID": '',
@@ -566,9 +551,9 @@
           agentinfotype: [],
           agentinfoscope: [],
         },
-        content:'',
+        content: '',
         changeCooperationTypeDataList: '',
-        ScopeOfOperationTypeList:[],
+        ScopeOfOperationTypeList: [],
       }
     },
     created() {
@@ -583,12 +568,12 @@
     },
     methods: {
       //服务条款协议提交
-      submitContent(){
+      submitContent() {
         this.contentDialog = false;
         this.isSubmitContent = true;
       },
       //查询状态
-      searchStatus(){
+      searchStatus() {
         let options = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
@@ -597,31 +582,31 @@
           "pcName": "",
           "phone": this.searchProgressOptions.phone,
         };
-        this.$store.dispatch('getSearchStatus',options)
-        .then(text=>{
-          this.statusText = text
-        })
+        this.$store.dispatch('getSearchStatus', options)
+          .then(text => {
+            this.statusText = text
+          })
       },
       //获取验证码
-      getCode(){
+      getCode() {
         this.disabledOff = true;
-        let timer = setInterval(()=>{
+        let timer = setInterval(() => {
           this.num--;
-          this.text = this.num+'s';
-          if(this.num==0){
+          this.text = this.num + 's';
+          if (this.num == 0) {
             clearInterval(timer);
             this.text = '重新获取验证码';
             this.disabledOff = false;
             this.num = 60;
           }
-        },1000)
+        }, 1000)
       },
       //选中菜单
-      changeOption(index){
+      changeOption(index) {
         this.n = index;
-        if(index==1){
+        if (index == 1) {
           this.off = false;
-        }else{
+        } else {
           this.off = true;
         }
       },
@@ -839,9 +824,9 @@
         }
       },
       //选中合作类型获取协议
-      changeCooperation(v){
-        this.content = this.changeCooperationTypeList.filter(item=>{
-          if(item.sm_cp_ID==v){
+      changeCooperation(v) {
+        this.content = this.changeCooperationTypeList.filter(item => {
+          if (item.sm_cp_ID == v) {
             return true
           }
           return false
@@ -852,29 +837,29 @@
       InformtionSubmit() {
         this.insertAgentInfo.data.sm_ai_AgentID = this.insertAgentInfo.data.sm_ai_Telephone;
         //省
-        this.insertAgentInfo.data.sm_ai_Provice = this.provinceDataList.filter(item=>{
-          if(item.sm_af_AreaID==this.insertAgentInfo.data.sm_ai_Provice){
+        this.insertAgentInfo.data.sm_ai_Provice = this.provinceDataList.filter(item => {
+          if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_Provice) {
             return true
           }
           return false;
         })[0].sm_af_AreaName
         //市
-        this.insertAgentInfo.data.sm_ai_City = this.cityDataList.filter(item=>{
-          if(item.sm_af_AreaID==this.insertAgentInfo.data.sm_ai_City){
+        this.insertAgentInfo.data.sm_ai_City = this.cityDataList.filter(item => {
+          if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_City) {
             return true
           }
           return false;
         })[0].sm_af_AreaName
         //县
-        this.insertAgentInfo.data.sm_ai_County = this.countyDataList.filter(item=>{
-          if(item.sm_af_AreaID==this.insertAgentInfo.data.sm_ai_County){
+        this.insertAgentInfo.data.sm_ai_County = this.countyDataList.filter(item => {
+          if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_County) {
             return true
           }
           return false;
         })[0].sm_af_AreaName
 
 
-        if(!this.isSubmitContent){
+        if (!this.isSubmitContent) {
           this.$notify({
             message: '请选择合作类型并同意条款！',
             type: 'error'
@@ -885,14 +870,14 @@
         let arr = this.changeCooperationTypeList;
 //        let typeArr = this.changeCooperationTypeDataList
         for (var i = 0; i < arr.length; i++) {
-          if(arr[i].sm_cp_ID==this.changeCooperationTypeDataList){
+          if (arr[i].sm_cp_ID == this.changeCooperationTypeDataList) {
             this.newArr.push({
               sm_cp_ID: arr[i].sm_cp_ID,
               sm_cp_PartnerTypeName: arr[i].sm_cp_Name
             })
           }
         }
-        if(isNaN(this.insertAgentInfo.data.sm_ai_RegMoney)){
+        if (isNaN(this.insertAgentInfo.data.sm_ai_RegMoney)) {
           this.$notify({
             message: '注册资金必须为数字！',
             type: 'error'
@@ -906,8 +891,8 @@
         this.insertAgentInfo.data.sm_ai_OtherImage = this.ImageURL3.join(',');
         this.insertAgentInfo.agentinfotype = this.newArr;
         this.insertAgentInfo.agentinfoscope = this.ScopeOfOperationTypeList;
-        this.$store.dispatch('initSubmitInformtionObj',this.insertAgentInfo)
-          .then(()=>{
+        this.$store.dispatch('initSubmitInformtionObj', this.insertAgentInfo)
+          .then(() => {
             this.$notify({
               message: '注册成功！！',
               type: 'success'
@@ -915,7 +900,7 @@
             //跳转到进度查询
 //            this.n = 1;
 //            this.off = false;
-          },err=>{
+          }, err => {
             this.$notify({
               message: err,
               type: 'error'
@@ -923,8 +908,8 @@
           })
       },
       //点击图标返回首页
-      toHome(){
-        this.$router.push({name:'AgenciesHome'})
+      toHome() {
+        this.$router.push({name: 'AgenciesHome'})
       }
     },
     mounted() {
@@ -933,37 +918,41 @@
   }
 </script>
 <style scoped>
-  .searchProgress{
+  .searchProgress {
     padding: 0 0 0 200px;
     height: 800px;
   }
-  .searchProgress p{
+
+  .searchProgress p {
     margin-bottom: 100px;
     text-align: center;
-    font-size:30px;
+    font-size: 30px;
     padding: 100px 0 0 0;
   }
-  .searchProgress .Failure{
+
+  .searchProgress .Failure {
     padding: 40px 0 60px 100px;
-    font-size:20px;
+    font-size: 20px;
   }
-  .searchProgress .Failure span{
+
+  .searchProgress .Failure span {
     color: #f60;
   }
+
   .file {
-    position: relative;
-    display: inline-block;
-    background: #000;
-    /*border: 1px solid #99D3F5;*/
-    border-radius: 4px;
-    padding: 4px 12px;
-    overflow: hidden;
-    color: #fff;
-    text-decoration: none;
-    text-indent: 0;
-    font-size: 12px;
-    line-height: 20px;
-  }
+     position: relative;
+     display: inline-block;
+     background: #000;
+     /*border: 1px solid #99D3F5;*/
+     border-radius: 4px;
+     padding: 4px 12px;
+     overflow: hidden;
+     color: #fff;
+     text-decoration: none;
+     text-indent: 0;
+     font-size: 12px;
+     line-height: 20px;
+   }
 
   .file input {
     position: absolute;
@@ -974,7 +963,7 @@
   }
 
   .MerchantRegisterTabel #ContactsTypeOfCooperationType,
-  #ContactsTypeOfCooperationType1{
+  #ContactsTypeOfCooperationType1 {
     width: 100%;
   }
 </style>
