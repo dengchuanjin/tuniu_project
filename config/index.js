@@ -43,7 +43,7 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../tuniu/tuniu.html'),
+    index: path.resolve(__dirname, '../tuniu/index.html'),
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../tuniu'),

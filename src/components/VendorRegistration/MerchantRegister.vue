@@ -38,13 +38,13 @@
                 </el-form-item>
               </el-form>
             </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="供应商账号:" :required="isOff">
-                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_AgentID"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
+            <!--<el-col :span="24" class="formSearch">-->
+              <!--<el-form :inline="true">-->
+                <!--<el-form-item label="供应商账号:" :required="isOff">-->
+                  <!--<el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_AgentID"></el-input>-->
+                <!--</el-form-item>-->
+              <!--</el-form>-->
+            <!--</el-col>-->
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="供应商密码:" :required="isOff">
@@ -61,7 +61,7 @@
             </el-col>
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
-                <el-form-item label="手机:" :required="isOff">
+                <el-form-item label="手机号码:" :required="isOff">
                   <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_Telephone"></el-input>
                 </el-form-item>
               </el-form>
@@ -69,7 +69,7 @@
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="电子邮箱:" :required="isOff">
-                  <el-input type="text" size="mini" placeholder="非常重要！"  v-model="insertAgentInfo.data.sm_ai_Email"></el-input>
+                  <el-input type="text" size="mini"  v-model="insertAgentInfo.data.sm_ai_Email"></el-input>
                 </el-form-item>
               </el-form>
             </el-col>
@@ -87,27 +87,27 @@
                 </el-form-item>
               </el-form>
             </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="传真国际区号:" :required="isOff">
-                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FaxAreaCode"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="传真区号:" :required="isOff">
-                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FaxContryCode"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="传真号:" :required="isOff">
-                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FaxNo"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
+            <!--<el-col :span="24" class="formSearch">-->
+              <!--<el-form :inline="true">-->
+                <!--<el-form-item label="传真国际区号:" :required="isOff">-->
+                  <!--<el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FaxAreaCode"></el-input>-->
+                <!--</el-form-item>-->
+              <!--</el-form>-->
+            <!--</el-col>-->
+            <!--<el-col :span="24" class="formSearch">-->
+              <!--<el-form :inline="true">-->
+                <!--<el-form-item label="传真区号:" :required="isOff">-->
+                  <!--<el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FaxContryCode"></el-input>-->
+                <!--</el-form-item>-->
+              <!--</el-form>-->
+            <!--</el-col>-->
+            <!--<el-col :span="24" class="formSearch">-->
+              <!--<el-form :inline="true">-->
+                <!--<el-form-item label="传真号:" :required="isOff">-->
+                  <!--<el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FaxNo"></el-input>-->
+                <!--</el-form-item>-->
+              <!--</el-form>-->
+            <!--</el-col>-->
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="性别:" :required="isOff">
@@ -469,6 +469,7 @@
   import $ from 'jquery'
   import MerchantRegister from '@/assets/css/MerchantRegister.css'
 
+
   export default {
     name: '',
     computed: mapGetters([
@@ -571,6 +572,10 @@
       }
     },
     created() {
+      if(window.location.href.includes('?')){
+        let id = window.location.href.split('?')[1].split('=')[1];
+        this.insertAgentInfo.data.sm_ai_ParentID = id;
+      }
       this.$store.commit('showLoading');
       this.initData().then(() => {
         this.$store.commit('hideLoading')
@@ -760,8 +765,6 @@
         this.$store.commit('initChangeNameID', id)
         this.insertAgentInfo.data.sm_bc_ID = this.changeNameID
       },
-
-
       //公司规模
       changeCompanyType() {
         var selectCompanySize = {
@@ -808,7 +811,6 @@
           }
         }
       },
-
       //经营范围
       changeScopeOfOperation() {
         var selectTradeScope = {
@@ -848,6 +850,7 @@
       },
       //信息提交
       InformtionSubmit() {
+        this.insertAgentInfo.data.sm_ai_AgentID = this.insertAgentInfo.data.sm_ai_Telephone;
         //省
         this.insertAgentInfo.data.sm_ai_Provice = this.provinceDataList.filter(item=>{
           if(item.sm_af_AreaID==this.insertAgentInfo.data.sm_ai_Provice){
@@ -896,6 +899,7 @@
           });
           return
         }
+
         this.insertAgentInfo.data.sm_ai_BalanceCurrencyName = this.insertAgentInfo.data.sm_bc_Name;
         this.insertAgentInfo.data.sm_ai_CertImage = this.ImageURL1.join(',');
         this.insertAgentInfo.data.sm_ai_FeeImage = this.ImageURL2.join(',');

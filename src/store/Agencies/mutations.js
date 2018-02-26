@@ -168,9 +168,10 @@ export default {
   },
   initOrderDetail(state,obj){
     state.orderDetail = obj
+  },
+  initCollection(state,data){
+    state.collectionList = data;
   }
-
-
 
 }
 

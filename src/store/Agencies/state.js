@@ -42,4 +42,5 @@ export default  {
   changeScopeOfOperationList:[],//经营范围
   payStr:'',
   myTourOrderList:[],//用户订单
+  collectionList:[],//用户收藏
 };

@@ -27,37 +27,29 @@
           <!--左边导航-->
           <div class="personakCenterContentWrapLeftNav">
             <ul>
-              <li class="personakCenterContentWrapLeftNavMyOrder">
-                <a href="javascript:;"><strong>我的订单</strong><i></i></a>
-                <ul class="MyOrderDetailsList">
-                  <li>
-                    <router-link :to="{name:'MyTourOrder'}">旅游订单</router-link>
+              <li :class="item.iconClass" v-for="item,index in data">
+                <a href="javascript:;" @click="toggle(index)"><strong>{{item.label}}</strong><i></i></a>
+                <ul class="MyOrderDetailsList" v-show="n==index">
+                  <li v-for="v in item.children">
+                    <router-link :to="{name:v.label.to}">{{v.label.name}}</router-link>
                   </li>
                   <!--<li><a href="javascript:;">旅游订单券</a></li>-->
                 </ul>
               </li>
-              <li class="personakCenterType">
-                <a href="javascript:;"><strong>个人中心</strong><i></i></a>
-                <ul class="MyOrderDetailsList">
-                  <li>
-                    <router-link :to="{name:'PersonalDataDetails'}">个人资料</router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{name:'UpdatePassword'}">修改密码</router-link>
-                  </li>
-                  <!--<li><a href="javascript:;">安全设置</a></li>-->
-                  <!--<li><a href="javascript:;">密码设置</a></li>-->
-                  <!--<li><a href="javascript:;">我的提问</a></li>-->
-                </ul>
-              </li>
-              <li class="commonTools">
-                <a href="JavaScript:;"><strong>常用工具</strong><i></i></a>
-                <ul class="commonToolsList">
-                  <li>
-                    <router-link :to="{name:'MyCollection'}">我的收藏</router-link>
-                  </li>
-                </ul>
-              </li>
+              <!--<li class="personakCenterType">-->
+              <!--<a href="javascript:;"><strong>个人中心</strong><i></i></a>-->
+              <!--<ul class="MyOrderDetailsList">-->
+              <!--<li>-->
+              <!--<router-link :to="{name:'PersonalDataDetails'}">个人资料</router-link>-->
+              <!--</li>-->
+              <!--<li>-->
+              <!--<router-link :to="{name:'UpdatePassword'}">修改密码</router-link>-->
+              <!--</li>-->
+              <!--&lt;!&ndash;<li><a href="javascript:;">安全设置</a></li>&ndash;&gt;-->
+              <!--&lt;!&ndash;<li><a href="javascript:;">密码设置</a></li>&ndash;&gt;-->
+              <!--&lt;!&ndash;<li><a href="javascript:;">我的提问</a></li>&ndash;&gt;-->
+              <!--</ul>-->
+              <!--</li>-->
             </ul>
           </div>
           <div class="personakCenterContentWrapRightContent">
@@ -75,9 +67,51 @@
   export default {
     computed: mapGetters([]),
     data() {
-      return {}
+      return {
+        n: 0,
+        data: [{
+          label: '我的订单',
+          iconClass: "personakCenterContentWrapLeftNavMyOrder",
+          children: [{
+            label: {
+              name: '旅游订单',
+              to: 'MyTourOrder'
+            },
+          }]
+        },
+          {
+            label: '个人中心',
+            iconClass: "personakCenterType",
+            children: [{
+              label: {
+                name: '个人资料',
+                to: 'PersonalDataDetails'
+              },
+            },
+              {
+                label: {
+                  name: '修改密码',
+                  to: 'UpdatePassword'
+                },
+              }]
+          },
+          {
+            label: '常用工具',
+            iconClass: "commonTools",
+            children: [{
+              label: {
+                name: '我的收藏',
+                to: 'MyCollection'
+              },
+            }]
+          }
+        ]
+      }
     },
     methods: {
+      toggle(index){
+        this.n = index;
+      },
       initData() {
       },
       search() {
@@ -86,7 +120,7 @@
     },
   }
 </script>
-<style scope>
+<style scoped>
   .commonTools > a {
     background: url("../../assets/img/commonTools.png") no-repeat 35px 10px;
   }

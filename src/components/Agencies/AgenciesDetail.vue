@@ -228,7 +228,7 @@
                 <div class="button clearfix">
                   <a href="javascript:;" @click="immediatelyReserveSubmit">立即预订</a>
                   <a href="javascript:;">APP优惠<i></i></a>
-                  <a href="javascript:;"><i class="icon"></i>收藏</a>
+                  <a href="javascript:;" @click="collection" :class="{active:collectionClass}"><i class="icon"></i>收藏</a>
                 </div>
               </div>
             </div>
@@ -450,24 +450,6 @@
                 <li>
                   <a href="javascript:;">不满意(2240)</a>
                 </li>
-                <li>
-                  <a href="javascript:;">精华(2240)</a>
-                </li>
-                <li>
-                  <a href="javascript:;">家庭出游(2240)</a>
-                </li>
-                <li>
-                  <a href="javascript:;">情侣/朋友(2240)</a>
-                </li>
-                <li>
-                  <a href="javascript:;">独自出游(2240)</a>
-                </li>
-                <li>
-                  <a href="javascript:;">代人预定(2240)</a>
-                </li>
-                <li>
-                  <a href="javascript:;">有图(2240)</a>
-                </li>
               </ul>
             </div>
             <!--评论列表-->
@@ -494,21 +476,6 @@
                   <ul class="TypeCommentList">
                     <li class="clearfix">
                       <strong>导游服务 : </strong>
-                      <span>
-作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>
-                    </li>
-                    <li class="clearfix">
-                      <strong>行程安排 : </strong>
-                      <span>
-作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>
-                    </li>
-                    <li class="clearfix">
-                      <strong>餐饮住宿 : </strong>
-                      <span>
-作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>
-                    </li>
-                    <li class="clearfix">
-                      <strong>旅行交通 : </strong>
                       <span>
 作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>
                     </li>
@@ -591,6 +558,8 @@
       return {
         price: '',
         n: 0,
+        isCollection:true,
+        collectionClass:false,
         centerDialogVisible: false,//登录弹窗
         showCalendar: false,
         pictureList: [],
@@ -601,9 +570,9 @@
         data: [],
         arr1: [],
         arr2: [],
-        arr3: [],
+        arr3: [],//今天
         arr4: [],
-        arr5: [],
+        arr5: [],//显示价格
         selectMonth: [],
         city: '',
         isScheduleList: false,
@@ -619,6 +588,7 @@
         id: '',
         changeDate: '',//选中日期
         cityValue: '',
+        submitCity:'',
         m: '',//月份
         countyValue: '',
         addOrderOptions: {
@@ -668,28 +638,26 @@
         this.changeDate = item.date;
         this.m = item.m
         if (this.addOrderOptions.provinceValue) {
-          this.getCitySearch(this.id, this.addOrderOptions.provinceValue, '', item.date, item.m)
+          this.getCitySearch(this.id, this.addOrderOptions.provinceValue, '', item.date, item.m-1)
         } else {
           this.$notify({
             message: '请选择出发出发城市!',
             type: 'error'
           });
         }
-
-//        this.n = index
-//        let lis = this.$refs.monthSelecte.querySelectorAll('li');
-//        let len = lis.length;
-//        for (let i = 0; i < len; i++) {
-//          lis[i].querySelector('a').className = ''
-//        }
-//        lis[index].querySelector('a').className = 'active'
       },
       //获取搜索城市
       getCitySearch(id, city, isOne, date, m) {
+
         $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', () => {
           this.userSearch.name = remote_ip_info.city + '市';
           if (isOne) {
             this.addOrderOptions.provinceValue = remote_ip_info.city + '市'
+          }
+          if(city){
+            this.submitCity = city
+          }else {
+            this.submitCity =  remote_ip_info.city
           }
 //
           let options = {
@@ -739,10 +707,13 @@
       },
       //选中出发城市
       getSearchCity() {
+        let date = new Date()
+        let str = date.getFullYear()+'-'+this.getNum(date.getMonth()+1)+'-01';
         if (this.changeDate) {
-          this.getCitySearch(this.id, this.addOrderOptions.provinceValue, '', this.changeDate, this.m);
+          //选中日历
+          this.getCitySearch(this.id, this.addOrderOptions.provinceValue, '', this.changeDate, this.m-1);
         } else {
-          this.getCitySearch(this.id, this.addOrderOptions.provinceValue, '');
+          this.getCitySearch(this.id, this.addOrderOptions.provinceValue, '',str,date.getMonth());
         }
         this.addOrderOptions.DayValue = '';
         this.addOrderOptions.adultNumber = 0;//成人
@@ -860,6 +831,7 @@
           _this.arr3 = []
           for (var i = 1; i <= 42; i++) {
             var v = i - this.getWeek(year, month);
+
             if (v < 1) {
               var topMonth = this.getDates(year, month - 1);
 
@@ -888,6 +860,7 @@
                   day: new Date().getDate()
                 })
               }
+
 //              if( _this.arr3.isJ){
 //                _this.arr3.push({
 //                  isJ: false,
@@ -903,12 +876,16 @@
 //              console.log( _this.arr3)
             }
             else {
-              if (v < new Date().getDate()) {
-
-                _this.arr4.push(v)
-              } else {
+              if(data.length){
+                if (v < data[0].day) {
+                  _this.arr4.push(v)
+                } else {
+                  newArr.push(v)
+                }
+              }else{
                 newArr.push(v)
               }
+
             }
           }
           for (var j = 0; j < newArr.length; j++) {
@@ -970,35 +947,51 @@
         this.addOrderOptions.title = this.productDetailsObj.ts_pt_Name
         sessionStorage.setItem('orderInfo', JSON.stringify(this.addOrderOptions))
         this.$router.push({name: 'FillInOrder'});
-//        var makeOrder = {
-//          "loginUserID": "huileyou",
-//          "loginUserPass": "123",
-//          "operateUserID": "",
-//          "operateUserName": "",
-//          "pcName": "",
-//          "data": [
-//            {
-//              "ts_to_od_TouristTraderID": 'qingchunzhilv',
-//              "ts_to_od_TouristTraderName": "青春之旅",
-//              "ts_to_od_GoodsListID": "001",
-//              "ts_to_od_GoodsListName": "鸡一份",
-//              "ts_to_od_SellID": "qingchun",
-//              "ts_to_od_SellName": "青春",
-//              "ts_to_od_SellPrice": 21,
-//              "ts_to_od_UserID": "1111",
-//              "ts_to_od_UserName": "正兴鸡排",
-//              "ts_to_od_Phone": "18111729770",
-//              "ts_to_od_CertNo": "身份证号码",
-//              "ts_to_od_SellPrice": 21.00
-//            }
-//          ]
-//
-//        }
       },
-
+      //收藏
+      collection(){
+        if(this.isCollection){
+          let user = JSON.parse(sessionStorage.getItem('user'))
+          if(!user){
+            this.$router.push({name:'AdminLogin'})
+            return;
+          }else{
+            let options = {
+              "loginUserID": "huileyou",
+              "loginUserPass": "123",
+              "operateUserID": "",
+              "operateUserName": "",
+              "pcName": "",
+              "data": {
+                "sm_mc_UserInfoID": user.ui_ID,
+                "sm_mc_ProductID": this.$route.params.id,
+                "sm_mc_ProductTitle": this.productDetailsObj.ts_pt_Name,
+                "sm_mc_ProductPrice": this.price,
+                "sm_mc_Image": this.pictureList[0],
+                sm_mc_FromCity:this.submitCity
+              }
+            }
+            this.$store.dispatch('addCollection',options)
+            .then(resultcontent=>{
+              this.collectionClass = true;
+              this.$notify({
+                message: resultcontent,
+                type: 'success'
+              });
+              this.isCollection = false;
+            },err=>{
+              this.$notify({
+                message: err,
+                type: 'error'
+              });
+              this.collectionClass = true;
+            })
+          }
+        }
+      }
     },
     created() {
-      this.price = sessionStorage.getItem('money')
+      this.price = sessionStorage.getItem('money');
       //获取轮播图
       this.$store.commit('showLoading');
       let images = JSON.parse(sessionStorage.getItem('images')).split(',')
@@ -1008,26 +1001,12 @@
       this.pictureList = images;
       this.initData().then((id) => {
         this.id = id;
-        this.getCitySearch(id, '', true);
+        let date = new Date()
+        let str = date.getFullYear()+'-'+this.getNum(date.getMonth()+1)+'-01'
+        this.getCitySearch(id, '', true,str,date.getMonth());
         this.$store.commit('hideLoading')
       });
       this.data = cityOptions;
-    },
-    updated() {
-//      let lis = this.$refs.scheduleList.querySelectorAll('li')
-//      if (lis.length) {
-//        for (var i = 0; i < lis.length; i++) {
-//          lis[i].children[0].className = ''
-//        }
-//        lis[0].children[0].className = 'active'
-//      }
-//      let lisSearch = this.$refs.monthSelecte.querySelectorAll('li')
-//      if (lisSearch.length) {
-//        for( var i=0;i<lisSearch.length;i++ ){
-//          lisSearch[i].querySelector('a').className = ''
-//        }
-//        lisSearch[0].querySelector('a').className = 'active'
-//      }
     },
     mounted() {
 
@@ -1090,6 +1069,14 @@
     margin-right: 5px;
   }
 
+  .setOut .button > a:nth-of-type(3):hover {
+    color: #f60;
+  }
+
+  .setOut .button > a:nth-of-type(3):hover i {
+    color: #000;
+    background: url("../../assets/img/dinei00w200.png") no-repeat -415px -302px;
+  }
   .setOut .button > a:nth-of-type(3).active {
     color: #f60;
   }
