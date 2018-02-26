@@ -1,47 +1,61 @@
 <template>
-    <div>
-      <div class="personakCenterWrap">
-        <!--头-->
-        <div class="personakCenterWrapHeader">
-          <div class="personakCenterWrapHeaderContent clearfix">
-            <div class="personakCenterWrapHeaderContentLogo">
-              <img src="../../assets/img/center.png" width="60" height="60">
-              <strong>惠乐游个人中心</strong>
-            </div>
-            <ul class="personakCenterWrapHeaderContentNav">
-              <li>
-                <a href="javascript:;">会员首页</a>
-              </li>
-              <li>
-                <a href="javascript:;">个人中心</a>
-              </li>
-            </ul>
-            <div class="goHomePage">
-              <router-link to="HueiLeYouTourHomePage">返回首页</router-link>
-            </div>
+  <div>
+    <div class="personakCenterWrap">
+      <!--头-->
+      <div class="personakCenterWrapHeader">
+        <div class="personakCenterWrapHeaderContent clearfix">
+          <div class="personakCenterWrapHeaderContentLogo">
+            <img src="../../assets/img/center.png" width="60" height="60">
+            <strong>惠乐游个人中心</strong>
+          </div>
+          <ul class="personakCenterWrapHeaderContentNav">
+            <li>
+              <a href="javascript:;">会员首页</a>
+            </li>
+            <li>
+              <a href="javascript:;">个人中心</a>
+            </li>
+          </ul>
+          <div class="goHomePage">
+            <router-link to="HueiLeYouTourHomePage">返回首页</router-link>
           </div>
         </div>
-        <!--内容-->
-        <div class="personakCenterContentWrapP">
-          <div class="personakCenterContentWrap clearfix">
+      </div>
+      <!--内容-->
+      <div class="personakCenterContentWrapP">
+        <div class="personakCenterContentWrap clearfix">
           <!--左边导航-->
           <div class="personakCenterContentWrapLeftNav">
             <ul>
               <li class="personakCenterContentWrapLeftNavMyOrder">
                 <a href="javascript:;"><strong>我的订单</strong><i></i></a>
                 <ul class="MyOrderDetailsList">
-                  <li><router-link :to="{name:'MyTourOrder'}">旅游订单</router-link></li>
+                  <li>
+                    <router-link :to="{name:'MyTourOrder'}">旅游订单</router-link>
+                  </li>
                   <!--<li><a href="javascript:;">旅游订单券</a></li>-->
                 </ul>
               </li>
               <li class="personakCenterType">
                 <a href="javascript:;"><strong>个人中心</strong><i></i></a>
                 <ul class="MyOrderDetailsList">
-                  <li><router-link :to="{name:'PersonalDataDetails'}">个人资料</router-link></li>
-                  <li><router-link :to="{name:'UpdatePassword'}">修改密码</router-link></li>
+                  <li>
+                    <router-link :to="{name:'PersonalDataDetails'}">个人资料</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{name:'UpdatePassword'}">修改密码</router-link>
+                  </li>
                   <!--<li><a href="javascript:;">安全设置</a></li>-->
                   <!--<li><a href="javascript:;">密码设置</a></li>-->
                   <!--<li><a href="javascript:;">我的提问</a></li>-->
+                </ul>
+              </li>
+              <li class="commonTools">
+                <a href="JavaScript:;"><strong>常用工具</strong><i></i></a>
+                <ul class="commonToolsList">
+                  <li>
+                    <router-link :to="{name:'MyCollection'}">我的收藏</router-link>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -50,37 +64,30 @@
             <router-view name="MyInformtion"></router-view>
           </div>
         </div>
-        </div>
       </div>
     </div>
+  </div>
 </template>
 <script>
-    import {mapGetters} from 'vuex'
-    import PersonalCenter from '@/assets/css/PersonalCenter.css'
+  import {mapGetters} from 'vuex'
+  import PersonalCenter from '@/assets/css/PersonalCenter.css'
 
-    export default {
-        computed: mapGetters([]),
-        data() {
-            return {
-              data:[{
-                label: '一级 1',
-                children: [{
-                  label: '二级 1-1',
-                  children: [{
-                    label: '三级 1-1-1'
-                  }]
-                }]
-              }]
-            }
-        },
-        methods: {
-            initData() {
-            },
-            search() {
-                this.initData()
-            }
-        },
-    }
+  export default {
+    computed: mapGetters([]),
+    data() {
+      return {}
+    },
+    methods: {
+      initData() {
+      },
+      search() {
+        this.initData()
+      }
+    },
+  }
 </script>
 <style scope>
+  .commonTools > a {
+    background: url("../../assets/img/commonTools.png") no-repeat 35px 10px;
+  }
 </style>

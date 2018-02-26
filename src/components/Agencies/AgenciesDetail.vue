@@ -228,6 +228,7 @@
                 <div class="button clearfix">
                   <a href="javascript:;" @click="immediatelyReserveSubmit">立即预订</a>
                   <a href="javascript:;">APP优惠<i></i></a>
+                  <a href="javascript:;"><i class="icon"></i>收藏</a>
                 </div>
               </div>
             </div>
@@ -308,10 +309,10 @@
           </div>
           <!--&lt;!&ndash;左侧导航&ndash;&gt;-->
           <!--<ul class="scheduleList" id="scheduleList" ref="scheduleList" v-show="isScheduleList">-->
-            <!--<li v-for="item,index in lineScheduleObj.prepareList">-->
-              <!--<a :href="'#LineSchedule'+ index" @click="changeDay(index)">{{item.ts_pt_Content}}</a>-->
-              <!--<i></i>-->
-            <!--</li>-->
+          <!--<li v-for="item,index in lineScheduleObj.prepareList">-->
+          <!--<a :href="'#LineSchedule'+ index" @click="changeDay(index)">{{item.ts_pt_Content}}</a>-->
+          <!--<i></i>-->
+          <!--</li>-->
           <!--</ul>-->
         </div>
         <!--套餐说明-->
@@ -432,7 +433,7 @@
                 <div class="commentOnAComment">
                   <strong>出游归来发点评返现金,<br>
                     本产品已累计发放<i>19012</i>元</strong>
-                  <a href="javascript:;">发表点评</a>
+                  <router-link to="/CommentOnAComment">发表点评</router-link>
                 </div>
               </div>
               <!--点评类型-->
@@ -588,7 +589,7 @@
     ]),
     data() {
       return {
-        price:'',
+        price: '',
         n: 0,
         centerDialogVisible: false,//登录弹窗
         showCalendar: false,
@@ -650,16 +651,16 @@
         this.addOrderOptions.adultPrice = item.ts_pp_Price
         this.addOrderOptions.childPrice = item.ts_pp_ChildPrice
 
-        this.$store.dispatch('GetFreeSeat',options)
-        .then((data)=>{
-          this.addOrderOptions.adultYu = data.fullNo
-          this.addOrderOptions.childYu = data.childNo
-        },err=>{
-          this.$notify({
-            message: err,
-            type: 'error'
-          });
-        })
+        this.$store.dispatch('GetFreeSeat', options)
+          .then((data) => {
+            this.addOrderOptions.adultYu = data.fullNo
+            this.addOrderOptions.childYu = data.childNo
+          }, err => {
+            this.$notify({
+              message: err,
+              type: 'error'
+            });
+          })
       },
       //日历选项卡
       changeSearchMonth(item) {
@@ -913,7 +914,6 @@
           for (var j = 0; j < newArr.length; j++) {
             for (var m = 0; m < data.length; m++) {
               if (data[m].day && data[m].day == newArr[j]) {
-
                 data[m].n = newArr[j];
                 _this.arr5.push(data[m])
               }
@@ -1072,5 +1072,30 @@
 
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
+  }
+
+  .setOut .button > a:nth-of-type(3) {
+    font: 14px/2 "微软雅黑";
+    color: #999999;
+    float: left;
+    margin-top:10px;
+    margin-left:10px;
+  }
+
+  .setOut .button > a:last-of-type i{
+    display: inline-block;
+    width:14px;
+    height:12px;
+    background: url("../../assets/img/dinei00w200.png") no-repeat -429px -302px;
+    margin-right: 5px;
+  }
+
+  .setOut .button > a:nth-of-type(3).active {
+    color: #f60;
+  }
+
+  .setOut .button > a:nth-of-type(3).active i {
+    color: #000;
+    background: url("../../assets/img/dinei00w200.png") no-repeat -415px -302px;
   }
 </style>

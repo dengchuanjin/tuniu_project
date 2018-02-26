@@ -13,6 +13,9 @@ import UpdatePassword from '@/components/PersonakCenterFolder/UpdatePassword'//�
 import PaymentPlatform from '@/components/public/PaymentPlatform'//订单支付的类型
 import MyOrderQRCode from '@/components/MyOrderQRCode'//二维码付款
 import MyOrderDetails from '@/components/PersonakCenterFolder/MyOrderDetails'//订单详情
+import MyCollection from '@/components/PersonakCenterFolder/MyCollection' //我的收藏
+import CommentOnAComment from '@/components/Agencies/CommentOnAComment' //发表评论
+
 
 //微信支付
 
@@ -23,9 +26,16 @@ import TicketsReserve from '@/components/Tickets/TicketsReserve'//门票预定
 
 
 import HotelHomePage from '@/components/Hotel/HotelHomePage'//酒店首页
+import HotelDetails from '@/components/Hotel/HotelDetails'//酒店详情页
 
 
 export default [
+  //发表评论
+  {
+    path: '/commentOnAComment',
+    name: 'CommentOnAComment',
+    component: CommentOnAComment
+  },
   //订单支付的类型
   {
     path: '/paymentPlatform',
@@ -89,6 +99,15 @@ export default [
         },
         name: 'UpdatePassword'
       },
+      //我的收藏
+      {
+        path: 'myCollection',
+        components: {
+          default: Comment,
+          MyInformtion: MyCollection
+        },
+        name: 'MyCollection'
+      }
     ]
   },
   //填写订单
@@ -154,6 +173,15 @@ export default [
         },
         name: 'HotelHomePage'
       },
+      //酒店详情页
+      {
+        path: 'hotelDetails',
+        components: {
+          default: Comment,
+          User: HotelDetails
+        },
+        name: 'HotelDetails'
+      }
     ]
   },
   //登录
