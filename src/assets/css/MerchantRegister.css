@@ -91,6 +91,7 @@
   width:100%;
 }
 .ContactsSubmitWrap {
+  padding-bottom: 50px;
   width: 1200px;
   margin: 10px auto;
   font: 16px/2 "微软雅黑";
@@ -98,6 +99,10 @@
 .ContactsSubmitWrap>a {
   display: inline-block;
   padding: 0 20px;
+  background-color: #f40;
+  color: #fff;
+}
+.ContactsSubmitWrap>a:hover {
   background-color: #f60;
   color: #fff;
 }

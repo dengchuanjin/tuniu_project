@@ -389,7 +389,7 @@ export default {
   //查询结算币种
   initChangeMineyType({commit}, data) {
     return new Promise(function (relove, reject) {
-      axios.post('http://hly.admin.1000da.com.cn/BalanceCurrency/Select', JSON.stringify(data), {
+      axios.post('http://hly.lxs.1000da.com.cn/BalanceCurrency/Select', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -406,7 +406,7 @@ export default {
   //公司规模
   initChangeCompanyType({commit}, data) {
     return new Promise(function (relove, reject) {
-      axios.post('http://hly.admin.1000da.com.cn/CompanySize/Select', JSON.stringify(data), {
+      axios.post('http://hly.lxs.1000da.com.cn/CompanySize/Select', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -423,7 +423,7 @@ export default {
   //类型
   initChangeCooperationType({commit}, data) {
     return new Promise(function (relove, reject) {
-      axios.post('http://hly.admin.1000da.com.cn/CooperationType/Select', JSON.stringify(data), {
+      axios.post('http://hly.lxs.1000da.com.cn/CooperationType/Select', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -440,7 +440,7 @@ export default {
   //经营范围
   initChangeScopeOfOperation({commit}, data) {
     return new Promise(function (relove, reject) {
-      axios.post('http://hly.admin.1000da.com.cn/TradeScope/Select', JSON.stringify(data), {
+      axios.post('http://hly.lxs.1000da.com.cn/TradeScope/Select', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -457,7 +457,7 @@ export default {
   //添加供应商提交
   initSubmitInformtionObj({commit}, data) {
     return new Promise(function (relove, reject) {
-      axios.post('http://hly.admin.1000da.com.cn/AgentInfo/Insert', JSON.stringify(data), {
+      axios.post('http://hly.lxs.1000da.com.cn/AgentInfo/Insert', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
