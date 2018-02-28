@@ -238,12 +238,12 @@
       <header id="headerNavWrap">
         <nav class="headerNav clearfix" ref="headerNav">
           <span @click="changeType(index)" v-for="item,index in lineMenuList" :class="{active:index==0}"><a
-            :href="'#h'+item.menuID">{{item.menuName}}</a></span>
+            href="javascript:;">{{item.ts_mu_Name}}</a></span>
         </nav>
       </header>
       <section id="content">
         <!--产品详情-->
-        <div class="productDetailsWrap" id="h1">
+        <div class="productDetailsWrap" id="h1" v-show="showList[0].isShow">
           <div class="productDetails clearfix">
             <div class="discountIcon">
               <h3>产品详情</h3>
@@ -269,7 +269,7 @@
           </div>
         </div>
         <!--线路日程-->
-        <div class="LineSchedule clearfix" id="h2">
+        <div class="LineSchedule clearfix" id="h2"  v-show="showList[1].isShow">
           <div class="discountIcon">
             <h3>行程线路</h3>
           </div>
@@ -316,7 +316,7 @@
           <!--</ul>-->
         </div>
         <!--套餐说明-->
-        <div class="packageDescription clearfix" id="h3">
+        <div class="packageDescription clearfix" id="h3" v-show="showList[2].isShow">
           <div class="discountIcon">
             <h3>费用说明</h3>
           </div>
@@ -358,7 +358,7 @@
           </div>
         </div>
         <!--预定须知-->
-        <div class="packageDescription clearfix" id="h4">
+        <div class="packageDescription clearfix" id="h4" v-show="showList[3].isShow">
           <div class="buyNeedToKnow">
             <div class="discountIcon">
               <h3>预定须知</h3>
@@ -373,7 +373,7 @@
           </div>
         </div>
         <!--游客点评-->
-        <div class="commentsOnTourists clearfix" id="h5">
+        <div class="commentsOnTourists clearfix" id="h6" v-show="showList[4].isShow">
           <div class="discountIcon">
             <h3>游客点评</h3>
           </div>
@@ -384,120 +384,97 @@
               <div class="commentsOnTouristsStatisticsContent clearfix">
                 <div class="satisfaction">
                   <span>满意度</span>
-                  <strong>96%</strong>
-                  <span>来自2240名游客的点评</span>
+                  <strong>{{Math.round(commentMXObj.satisfyCount/commentMXObj.totalCount*100)}}%</strong>
+                  <span>来自{{commentMXObj.userCount}}名游客的点评</span>
                 </div>
                 <div class="statisticalChart">
-                  <ul class="statisticalChartLeft">
+                  <div class="statisticalChartLeft">
                     <li class="clearfix">
-                      <span>满意(2115)</span>
+                      <span>满意</span>
                       <div class="statisticalChartLeftBar">
-                        <div class="statisticalChartLeftBarChild"></div>
+                        <div class="statisticalChartLeftBarChild" :style="{width: commentMXObj.satisfyCount/commentMXObj.totalCount*100+'%'}"></div>
                       </div>
-                      <span>94%</span>
+                      <span>{{Math.round(commentMXObj.satisfyCount/commentMXObj.totalCount*100)}}%</span>
                     </li>
                     <li class="clearfix">
-                      <span>一般(110)</span>
+                      <span>一般</span>
                       <div class="statisticalChartLeftBar">
-                        <div class="statisticalChartLeftBarChild"></div>
+                        <div class="statisticalChartLeftBarChild" :style="{width: parseInt((1-commentMXObj.notGoodCount/commentMXObj.totalCount-commentMXObj.satisfyCount/commentMXObj.totalCount).toFixed(2)*100)+'%'}"></div>
                       </div>
-                      <span>5%</span>
+                      <span>{{parseInt((1-commentMXObj.notGoodCount/commentMXObj.totalCount-commentMXObj.satisfyCount/commentMXObj.totalCount).toFixed(2)*100)}}%</span>
                     </li>
                     <li class="clearfix">
-                      <span>不满意(15)</span>
+                      <span>不满意</span>
                       <div class="statisticalChartLeftBar">
-                        <div class="statisticalChartLeftBarChild"></div>
+                        <div class="statisticalChartLeftBarChild" :style="{width: commentMXObj.notGoodCount/commentMXObj.totalCount*100+'%'}"></div>
                       </div>
-                      <span>1%</span>
+                      <span>{{Math.round(commentMXObj.notGoodCount/commentMXObj.totalCount*100)}}%</span>
                     </li>
-                  </ul>
+                  </div>
                   <ul class="statisticalChartRight">
                     <li>
                       <strong>导游服务</strong>
-                      <span><i>4.9</i>/5</span>
+                      <span><i>{{commentMXObj.guideAVG}}</i>/5</span>
                     </li>
                     <li>
                       <strong>行程安排</strong>
-                      <span><i>4.9</i>/5</span>
+                      <span><i>{{commentMXObj.travelAVG}}</i>/5</span>
                     </li>
                     <li>
                       <strong>餐饮住宿</strong>
-                      <span><i>4.9</i>/5</span>
+                      <span><i>{{commentMXObj.eatSleepAVG}}</i>/5</span>
                     </li>
                     <li>
                       <strong>旅行交通</strong>
-                      <span><i>4.9</i>/5</span>
+                      <span><i>{{commentMXObj.transportAVG}}</i>/5</span>
                     </li>
                   </ul>
                 </div>
                 <div class="commentOnAComment">
                   <strong>出游归来发点评返现金,<br>
                     本产品已累计发放<i>19012</i>元</strong>
-                  <router-link to="/CommentOnAComment">发表点评</router-link>
+                  <a href="javascript:;" @click="addComment">发表点评</a>
+                  <!--<router-link to="/CommentOnAComment">发表点评</router-link>-->
                 </div>
               </div>
               <!--点评类型-->
               <ul class="commentsOnTouristsStatisticsTypeList clearfix">
-                <li>
-                  <a href="javascript:;" class="active">全部(2240)</a>
-                </li>
-                <li>
-                  <a href="javascript:;">满意(2240)</a>
-                </li>
-                <li>
-                  <a href="javascript:;">一般(2240)</a>
-                </li>
-                <li>
-                  <a href="javascript:;">不满意(2240)</a>
+                <li v-for="item,index in typeList" @click="typeClick(item)">
+                  <a href="javascript:;" :class="{active:a==index}">{{item.name}}</a>
                 </li>
               </ul>
             </div>
             <!--评论列表-->
-            <ul class="evaluationContent">
-              <li class="clearfix">
+            <ul class="evaluationContent" v-loading="commentLoading"  v-if="newCommentData.length">
+              <li class="clearfix" v-for="item in newCommentData">
                 <!--游客信息-->
                 <div class="touristInfromation">
                   <img src="../../assets/img/center.png" width="60" height="60">
-                  <span class="touristInfromationName">2324343434</span>
+                  <span class="touristInfromationName">{{item.comment.userName}}</span>
                   <strong class="touristInfromationType">家庭出游</strong>
                 </div>
                 <!--点评内容-->
                 <div class="touristComment">
                   <ul class="touristCommentList clearfix">
-                    <li><span>总体评价：满意</span></li>
-                    <li><span>导游服务: 满意</span></li>
-                    <li><span>行程安排: 满意</span></li>
-                    <li><span>餐饮住宿: 满意</span></li>
-                    <li><span>旅行交通: 满意</span></li>
+                    <li><span>总体评价:{{item.allComment}}</span></li>
+                    <li v-for="v in item.satisfyList"><span>{{v.ts_ct_Name}}：{{v.satistyState}}</span></li>
                   </ul>
                   <p class="touristCommentContent">
-                    自从11月12日始，我在朋友圈晒行程，受到所有好友的羡慕，目前已介绍好几个好友加入了途牛会员，得到了好友们的赞许。我自己的亲身体验是：线路好，吃住都好，导游周梦乔更是幽默风趣，知识渊博，不仅讲解景点，由景点又讲到人生，健康等等。总之，这是一次愉快的旅行！我还会跟着途牛去旅游。给途牛大大的赞！！！
+                    {{item.comment.ts_ct_Content}}
                   </p>
-                  <ul class="TypeCommentList">
-                    <li class="clearfix">
-                      <strong>导游服务 : </strong>
-                      <span>
-作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>
+                  <!--<ul class="TypeCommentList">-->
+                    <!--<li class="clearfix">-->
+                      <!--<strong>导游服务 : </strong>-->
+                      <!--<span>-->
+<!--作为一个理科生，我特别特别佩服韩湘云导游，韩导对每个城市的历史人文都能详细的讲解，特别复杂的人物关系如数家珍。最重要是能把游客当亲人对待，做事细致，提醒我们各种注意事项，安排行程合理。</span>-->
+                    <!--</li>-->
+                  <!--</ul>-->
+                  <ul class="uploadPictureList clearfix" v-show="item.comment.ts_ct_Image.length">
+                    <li v-for="e in item.comment.ts_ct_Image">
+                      <img :src="e" width="100" height="100">
                     </li>
                   </ul>
-                  <ul class="uploadPictureList clearfix">
-                    <li>
-                      <img src="../../assets/img/center.png" width="100" height="100">
-                    </li>
-                    <li>
-                      <img src="../../assets/img/center.png" width="100" height="100">
-                    </li>
-                    <li>
-                      <img src="../../assets/img/center.png" width="100" height="100">
-                    </li>
-                    <li>
-                      <img src="../../assets/img/center.png" width="100" height="100">
-                    </li>
-                    <li>
-                      <img src="../../assets/img/center.png" width="100" height="100">
-                    </li>
-                  </ul>
-                  <div class="touristCommentTime">2018-02-02</div>
+                  <div class="touristCommentTime">{{item.comment.ts_ct_CreateTime}}</div>
                 </div>
                 <!--点评赠送-->
                 <div class="commentGive">
@@ -507,6 +484,19 @@
                 </div>
               </li>
             </ul>
+            <ul class="evaluationContent"  v-else><li style="text-align: center;padding: 40px 0;font-weight: bold;">暂无评论</li></ul>
+            <!--分页-->
+            <div class="block" style="float: right;">
+              <el-pagination
+                background
+                @current-change="handleCurrentChange"
+                :page-size="5"
+                layout="total, prev, pager, next"
+                :total="total"
+                v-show="total"
+              >
+              </el-pagination>
+            </div>
           </div>
         </div>
       </section>
@@ -553,11 +543,40 @@
       'getCityList',
       'getCountyList',
       'getLineCityList',
+      'commentMXObj',
+      'commentData',
+      'newCommentData'
     ]),
     data() {
       return {
+        commentLoading:false,//用户评论loading
+        typeList:[{name:'全部',id:1},{name:'一般',id:2},{name:'满意',id:3},{name:'不满意',id:4}],//点评类型
+        total:0,
         price: '',
+        showList:[
+          {
+            id:0,
+            isShow:true
+          },
+          {
+            id:1,
+            isShow:false
+          },
+          {
+            id:2,
+            isShow:false
+          },
+          {
+            id:3,
+            isShow:false
+          },
+          {
+            id:4,
+            isShow:false
+          }
+        ],
         n: 0,
+        a:0,
         isCollection:true,
         collectionClass:false,
         centerDialogVisible: false,//登录弹窗
@@ -605,6 +624,25 @@
       }
     },
     methods: {
+      //评分类型点击
+      typeClick(item){
+        this.a = item.id-1;
+        this.$store.commit('updateCommentData',item.name)
+        this.total = this.newCommentData.length
+      },
+      //评论分页
+      handleCurrentChange(num){
+        this.initComment(num)
+      },
+      //发表评论
+      addComment(){
+        let user = JSON.parse(sessionStorage.getItem('user'));
+        if (!user) {
+          this.centerDialogVisible = true;
+          return;
+        }
+        this.$router.push({name:'CommentOnAComment',params: {id: this.$route.params.id}})
+      },
       //选中日历,item日历信息
       changeTime(item) {
         //获取余票
@@ -648,7 +686,6 @@
       },
       //获取搜索城市
       getCitySearch(id, city, isOne, date, m) {
-
         $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', () => {
           this.userSearch.name = remote_ip_info.city + '市';
           if (isOne) {
@@ -659,7 +696,6 @@
           }else {
             this.submitCity =  remote_ip_info.city
           }
-//
           let options = {
             "loginUserID": "huileyou",
             "loginUserPass": "123",
@@ -773,17 +809,10 @@
         };
         await this.$store.dispatch('initLineMenu', getLineMenuInfo)
         return id
-
-//        //轮播图
-//        var getTopShow = {
-//          "loginUserID": "huileyou",
-//          "loginUserPass": "123",
-//          "itemID": "1",
-//        };
-//        await this.$store.dispatch('initPictureList',getTopShow)
       },
       //选中线路菜单
       changeType(index) {
+        console.log(index)
         let spans = this.$refs.headerNav.querySelectorAll('span');
         let len = spans.length;
 
@@ -796,16 +825,16 @@
         } else {
           this.isScheduleList = false
         }
+
+        for(var i=0;i<this.showList.length;i++){
+          if(this.showList[i].id==index){
+            this.showList[i].isShow=true
+          }else{
+            this.showList[i].isShow=false
+          }
+        }
+
       },
-      //选中日历
-//      changeDay(index) {
-//        let lis = this.$refs.scheduleList.querySelectorAll('li');
-//        let len = lis.length;
-//        for (let i = 0; i < len; i++) {
-//          lis[i].children[0].className = ''
-//        }
-//        lis[index].children[0].className = 'active'
-//      },
       //获取周数
       getWeek(year, month) {
         return new Date(year, month, 1, 0, 0, 0).getDay();
@@ -954,7 +983,7 @@
           let user = JSON.parse(sessionStorage.getItem('user'))
           if(!user){
             this.$router.push({name:'AdminLogin'})
-            return;
+            return false;
           }else{
             let options = {
               "loginUserID": "huileyou",
@@ -988,9 +1017,53 @@
             })
           }
         }
+      },
+      //初始化评论
+      initComment(page){
+        //用户评论list
+        let userOptions = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "ID": "",
+          "UserInfoID": "",
+          "GoodID": this.$route.params.id,
+          "createFrom": "",
+          "createTo": "",
+          "IsDelete": 0,
+          "page": page?page:1,
+          "rows": 5
+        };
+        this.commentLoading = true;
+        this.$store.dispatch('initCommentData',userOptions)
+        .then((total)=>{
+          this.commentLoading = false;
+          this.total = total;
+        },err=>{
+        });
       }
     },
     created() {
+      //获取评论信息
+      let options = {
+        "loginUserID": "huileyou",
+        "loginUserPass": "123",
+        "operateUserID": "",
+        "operateUserName": "",
+        "pcName": "",
+        "GoodID": this.$route.params.id,
+        "IsDelete": 0
+      };
+      this.$store.dispatch('initCommentMX',options)
+      .then(()=>{
+      },err=>{
+      });
+      //获取评论list
+      this.initComment();
+
+
       this.price = sessionStorage.getItem('money');
       //获取轮播图
       this.$store.commit('showLoading');
@@ -1009,7 +1082,6 @@
       this.data = cityOptions;
     },
     mounted() {
-
 //      固定的导航
       (function () {
         var sTop = $('#headerNavWrap').get(0).offsetTop + 180;

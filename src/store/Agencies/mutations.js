@@ -171,6 +171,25 @@ export default {
   },
   initCollection(state,data){
     state.collectionList = data;
+  },
+  initCommentMX(state,obj){
+    state.commentMXObj = obj;
+  },
+  initCommentData(state,data){
+    state.commentData = data;
+    state.newCommentData = data;
+  },
+  updateCommentData(state,name){
+    state.newCommentData = state.commentData.filter(item=>{
+      if(name=='全部'){
+        return true;
+      }else{
+        if(item.allComment==name){
+          return true
+        }
+      }
+      return false;
+    })
   }
 
 }

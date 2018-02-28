@@ -1,12 +1,15 @@
 <template>
   <div class="commentWrap">
-    <div class="commentHeaderWrap">
-      <div class="commentHeader">
+    <div class="commentHeaderWrap" style="cursor: pointer">
+      <router-link tag="div" class="commentHeader" to="/agenciesHome">
         <img src="../../assets/img/center.png" width="60" height="60">
         <strong>添加评论</strong>
-        <router-link to="AgenciesHome"></router-link>
-      </div>
+      </router-link>
     </div>
+    <!--<router-link tag="div" class="commentHeader">-->
+      <!--<img src="../../assets/img/center.png" width="60" height="60">-->
+      <!--<strong>添加评论</strong>-->
+    <!--</router-link>-->
     <div class="commentBox">
       <!--头像昵称-->
       <div class="HeadPortrait clearfix">
@@ -15,11 +18,17 @@
       </div>
       <!--评论内容-->
       <div class="commentContent">
-        <textarea id="commentContent"></textarea>
+        <el-input
+          type="textarea"
+          :rows="8"
+          placeholder="请输入内容"
+          v-model="addOptions.data.ts_ct_Content">
+        </el-input>
+        <!--<textarea id="commentContent" v-model="addOptions.data.ts_ct_Content"></textarea>-->
       </div>
       <!--上传图片-->
       <div class="uploadPicture">
-        <a href="javascript:;" class="file">上传文件
+        <a href="javascript:;" class="file">上传图片
           <input type="file" name="" ref="upload" accept="image/*" multiple>
         </a>
         <div class="uploadPictureBox clearfix">
@@ -35,45 +44,24 @@
       </div>
       <!--评分-->
       <ul class="scoreList">
-        <li>
-          <span>导游服务:</span>
+        <li v-for="item,index in typeList">
+          <span>{{item.sm_st_Name}}:</span>
           <el-rate
-            v-model="TourGuideService"
+            v-model="item['type'+index]"
             show-text>
           </el-rate>
         </li>
-        <li>
-          <span>行程安排:</span>
-          <el-rate
-            v-model="Scheduling"
-            show-text>
-          </el-rate>
-        </li>
-        <li>
-          <span>餐饮住宿:</span>
-          <el-rate
-            v-model="CateringAccommodation"
-            show-text>
-          </el-rate>
-        </li>
-        <li>
-          <span>旅行交通:</span>
-          <el-rate
-            v-model="TravelTraffic"
-            show-text>
-          </el-rate>
-        </li>
-        <li>
-          <span>总体评价:</span>
-          <el-rate
-            v-model="AllFraction"
-            show-text>
-          </el-rate>
-        </li>
+        <!--<li>-->
+          <!--<span>总体评价:</span>-->
+          <!--<el-rate-->
+            <!--v-model="AllFraction"-->
+            <!--show-text>-->
+          <!--</el-rate>-->
+        <!--</li>-->
       </ul>
       <!--提交-->
       <div class="submitComment clearfix">
-        <el-button type="primary" round>提交</el-button>
+        <el-button type="primary"  @click="submit">提交</el-button>
       </div>
     </div>
   </div>
@@ -85,15 +73,61 @@
     computed: mapGetters([]),
     data() {
       return {
+        typeList:[],
         TourGuideService: null,
         Scheduling: null,
         CateringAccommodation: null,
         TravelTraffic: null,
-        AllFraction: null,
         ImageURL: [],
+        user:{},
+        addOptions : {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "data": {
+            "ts_ct_UserInfoID": '',
+            "ts_ct_GoodID": '',
+            "ts_ct_Content": "",
+            "ts_ct_AfterContent": "",
+            "ts_ct_Image": ""
+          },
+          "commentScoreJson": []
+        }
       }
     },
+    created(){
+      this.user = JSON.parse(sessionStorage.getItem('user'));
+      //获取评分类型
+      let getTypeOptions = {
+        "loginUserID": "huileyou",
+        "loginUserPass": "123",
+        "operateUserID": "",
+        "operateUserName": "",
+        "pcName": "",
+        //"ID": 3,//评分类型编号
+        //"commentTypeName":"",//评分类型名称
+        //"page": 1,
+        //"rows":2
+      };
+      this.$store.dispatch('initRatingType',getTypeOptions)
+      .then(data=>{
+        for(var i=0;i<data.length;i++){
+          data[i]['type'+i] = null
+        }
+        this.typeList = data;
+      },err=>{
+        this.$notify({
+          message: err,
+          type: 'error'
+        });
+      })
+    },
     methods: {
+      toHome(){
+        this.$router.push({name:'AgenciesHome'})
+      },
       //图片转二进制
       uploadImg(file) {
         return new Promise(function (relove, reject) {
@@ -102,7 +136,6 @@
               relove(data.base64.split(',')[1])
             })
         })
-        console.log(this.ImageURL)
       },
       //添加图片
       uploaNode() {
@@ -130,6 +163,31 @@
           }
         }, 30)
       },
+      //提交
+      submit(){
+        for(var i=0;i<this.typeList.length;i++){
+          this.addOptions.commentScoreJson.push({
+            ts_cs_ScoreTypeID:this.typeList[i].sm_st_ID,
+            ts_cs_Score:this.typeList[i]['type'+i],
+          })
+        }
+        this.addOptions.data.ts_ct_GoodID = this.$route.params.id;
+        this.addOptions.data.ts_ct_UserInfoID = this.user.ui_ID;
+        this.addOptions.data.ts_ct_Image = this.ImageURL.join(',');
+        this.$store.dispatch('addComment',this.addOptions)
+        .then(suc=>{
+          this.$notify({
+            message: suc,
+            type: 'success'
+          });
+          this.$router.push({name:'AgenciesDetail',params: {id: this.$route.params.id}})
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+        })
+      }
     },
     mounted() {
       this.uploaNode()

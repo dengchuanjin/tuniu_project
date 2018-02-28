@@ -43,4 +43,7 @@ export default  {
   payStr:'',
   myTourOrderList:[],//用户订单
   collectionList:[],//用户收藏
+  commentMXObj:{},//评论信息
+  commentData:[],//旅行社用户评论
+  newCommentData:[]
 };

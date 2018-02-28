@@ -92,7 +92,6 @@
     },
     methods: {
       initData() {
-
         let selectOptions = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",

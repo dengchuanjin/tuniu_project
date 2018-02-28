@@ -46,94 +46,6 @@ export default {
     })
   },
 
-
-
-
-  // //国内游
-  // initDomesticData({commit}, data) {
-  //   return new Promise(function (relove, reject) {
-  //     axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded'
-  //       }
-  //     })
-  //       .then(data => {
-  //         var data = data.data;
-  //         if (Number(data.resultcode) == 200) {
-  //           let resulte = data.data;
-  //           for (var i = 0; i < resulte.length; i++) {
-  //             resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
-  //           }
-  //           commit('initDomesticData', data.data)
-  //           relove()
-  //         }
-  //       })
-  //   })
-  // },
-  // //周边游
-  // initAroundList({commit},data){
-  //   return new Promise(function (relove, reject) {
-  //     axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded'
-  //       }
-  //     })
-  //     .then(data => {
-  //       var data = data.data;
-  //       if (Number(data.resultcode) == 200) {
-  //         let resulte = data.data;
-  //         for (var i = 0; i < resulte.length; i++) {
-  //           resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
-  //         }
-  //         commit('initAroundList', data.data)
-  //         relove()
-  //       }
-  //     })
-  //   })
-  // },
-  // //境外短线
-  // initShortLineList({commit},data){
-  //   return new Promise(function (relove, reject) {
-  //     axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded'
-  //       }
-  //     })
-  //     .then(data => {
-  //       var data = data.data;
-  //       if (Number(data.resultcode) == 200) {
-  //         let resulte = data.data;
-  //         for (var i = 0; i < resulte.length; i++) {
-  //           resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
-  //         }
-  //
-  //         commit('initShortLineList', data.data)
-  //         relove()
-  //       }
-  //     })
-  //   })
-  // },
-  // //境外长线
-  // initLongLineList({commit},data){
-  //   return new Promise(function (relove, reject) {
-  //     axios.post('http://hly.lxs.1000da.com.cn/TradeGood/GetShowGood', JSON.stringify(data), {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded'
-  //       }
-  //     })
-  //     .then(data => {
-  //       var data = data.data;
-  //       if (Number(data.resultcode) == 200) {
-  //         let resulte = data.data;
-  //         for (var i = 0; i < resulte.length; i++) {
-  //           resulte[i].oneImg = resulte[i].ta_tg_ShowImage.split(',')[0]
-  //         }
-  //         commit('initLongLineList', data.data)
-  //         relove()
-  //       }
-  //     })
-  //   })
-  // },
   //产品详情
   initProductDetails({commit}, data) {
     return new Promise(function (relove, reject) {
@@ -721,6 +633,100 @@ export default {
         var data = data.data;
         if (Number(data.resultcode) == 200) {
           relove(data.resultcontent)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //获取评分类型
+  initRatingType(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/ScoreType/Select', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data.data)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //发表评论
+  addComment(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/Comment/Insert', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data.resultcontent)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //获取评论信息
+  initCommentMX({commit},data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/Comment/SelectMX', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          commit('initCommentMX',data.data)
+          relove(data.resultcontent)
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //获取用户评论list
+  initCommentData({commit},data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/Comment/Select', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          let resulte = data.data;
+          for(var i=0;i<resulte.length;i++){
+            if(resulte[i].comment.ts_ct_Image){
+              resulte[i].comment.ts_ct_Image = resulte[i].comment.ts_ct_Image.split(',')
+            }else{
+              resulte[i].comment.ts_ct_Image = []
+            }
+            let arr = resulte[i].satisfyList
+            for(var j =0;j<arr.length;j++){
+              if(arr[j].satistyState.includes('不满意')){
+                resulte[i].allComment = '不满意';
+                break
+              }else if(arr[j].satistyState.includes('一般')){
+                resulte[i].allComment = '一般'
+                break
+              }else{
+                resulte[i].allComment = '满意'
+              }
+            }
+          }
+          commit('initCommentData',resulte)
+          relove(Number(data.totalrows))
         } else {
           reject(data.resultcontent)
         }

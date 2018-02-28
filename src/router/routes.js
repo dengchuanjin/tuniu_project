@@ -32,7 +32,7 @@ import HotelDetails from '@/components/Hotel/HotelDetails'//酒店详情页
 export default [
   //发表评论
   {
-    path: '/commentOnAComment',
+    path: '/commentOnAComment/:id',
     name: 'CommentOnAComment',
     component: CommentOnAComment
   },
@@ -193,6 +193,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'HotelDetails'}
+    redirect: {name: 'AgenciesHome'}
   },
 ]

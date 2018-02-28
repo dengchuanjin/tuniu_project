@@ -28,6 +28,9 @@ export default {
   myTourOrderList: state => state.myTourOrderList,
   orderDetail: state => state.orderDetail,
   collectionList: state => state.collectionList,
+  commentMXObj: state => state.commentMXObj,
+  commentData: state => state.commentData,
+  newCommentData: state => state.newCommentData,
 
 
   //商户注册

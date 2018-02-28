@@ -70,12 +70,7 @@
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="电子邮箱:" :required="isOff">
-<<<<<<< HEAD
                   <el-input type="text" size="mini"  v-model="insertAgentInfo.data.sm_ai_Email"></el-input>
-=======
-                  <el-input type="text" size="mini" placeholder="非常重要！"
-                            v-model="insertAgentInfo.data.sm_ai_Email"></el-input>
->>>>>>> a4c18d52f4ebfcd1cc9bcadb02ee2e421e500e4e
                 </el-form-item>
               </el-form>
             </el-col>
@@ -305,14 +300,14 @@
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="营业执照号:" :required="isOff">
+              <el-form-item label="营业执照号:">
                 <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_CertNo"></el-input>
               </el-form-item>
             </el-form>
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="营业执照有效期从:" :required="isOff">
+              <el-form-item label="营业执照有效期从:" >
                 <div class="block">
                   <el-date-picker
                     id="b"
@@ -328,7 +323,7 @@
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="营业执照有效期到:" :required="isOff">
+              <el-form-item label="营业执照有效期到:" >
                 <el-date-picker
                   id="a"
                   v-model="insertAgentInfo.data.sm_ai_CertExpireTo"
@@ -342,7 +337,7 @@
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="营业执照扫描件:" :required="isOff">
+              <el-form-item label="营业执照扫描件:">
                 <a href="javascript:;" class="file">上传文件
                   <input type="file" name="" ref="upload" accept="image/*" multiple>
                 </a>
@@ -359,14 +354,14 @@
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="税务登记证号:" :required="isOff">
+              <el-form-item label="税务登记证号:">
                 <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FeeNo"></el-input>
               </el-form-item>
             </el-form>
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="税务登记证扫描件:" :required="isOff">
+              <el-form-item label="税务登记证扫描件:">
                 <a href="javascript:;" class="file">上传文件
                   <input type="file" name="" ref="upload1" accept="image/*" multiple>
                 </a>
@@ -383,14 +378,14 @@
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="其他证件:" :required="isOff">
+              <el-form-item label="其他证件:">
                 <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_OtherCert"></el-input>
               </el-form-item>
             </el-form>
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
-              <el-form-item label="其他证件扫描件:" :required="isOff">
+              <el-form-item label="其他证件扫描件:">
                 <a href="javascript:;" class="file">上传文件
                   <input type="file" name="" ref="upload2" accept="image/*" multiple>
                 </a>
@@ -440,7 +435,6 @@
       :visible.sync="contentDialog"
       width="50%"
       :close-on-click-modal="false"
-      :show-close="showClose"
     >
       <span v-html="content"></span>
       <span slot="footer" class="dialog-footer">
@@ -837,28 +831,33 @@
       InformtionSubmit() {
         this.insertAgentInfo.data.sm_ai_AgentID = this.insertAgentInfo.data.sm_ai_Telephone;
         //省
-        this.insertAgentInfo.data.sm_ai_Provice = this.provinceDataList.filter(item => {
-          if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_Provice) {
-            return true
-          }
-          return false;
-        })[0].sm_af_AreaName
+        if(this.provinceDataList.length){
+          this.insertAgentInfo.data.sm_ai_Provice = this.provinceDataList.filter(item => {
+            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_Provice) {
+              return true
+            }
+            return false;
+          })[0].sm_af_AreaName
+        }
         //市
-        this.insertAgentInfo.data.sm_ai_City = this.cityDataList.filter(item => {
-          if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_City) {
-            return true
-          }
-          return false;
-        })[0].sm_af_AreaName
+        if(this.cityDataList.length){
+          this.insertAgentInfo.data.sm_ai_City = this.cityDataList.filter(item => {
+            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_City) {
+              return true
+            }
+            return false;
+          })[0].sm_af_AreaName
+        }
+
         //县
-        this.insertAgentInfo.data.sm_ai_County = this.countyDataList.filter(item => {
-          if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_County) {
-            return true
-          }
-          return false;
-        })[0].sm_af_AreaName
-
-
+        if(this.countyDataList.length){
+          this.insertAgentInfo.data.sm_ai_County = this.countyDataList.filter(item => {
+            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_County) {
+              return true
+            }
+            return false;
+          })[0].sm_af_AreaName
+        }
         if (!this.isSubmitContent) {
           this.$notify({
             message: '请选择合作类型并同意条款！',
