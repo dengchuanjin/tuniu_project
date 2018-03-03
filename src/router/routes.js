@@ -3,6 +3,7 @@ import AgenciesDetail from '@/components/Agencies/AgenciesDetail'//跟团游详�
 import AdminLogin from '@/components/AdminLogin'//登录
 import Register from '@/components/Register'//游客注册
 import AgenciesHome from '@/components/Agencies/AgenciesHome'//跟团游首页
+import HeelTourSearchMore from '@/components/Agencies/HeelTourSearchMore' //跟团游查询更多
 import MerchantRegister from '@/components/VendorRegistration/MerchantRegister'//供应商注册
 import Agents from '@/components/VendorRegistration/Agents'//代理商注册
 
@@ -136,6 +137,16 @@ export default [
     name: 'Comment',
     component: Comment,
     children: [
+      //跟团游查询更多
+      {
+
+        path: 'heelTourSearchMore',
+        components: {
+          default: Comment,
+          User: HeelTourSearchMore
+        },
+        name: 'HeelTourSearchMore'
+      },
       //跟团游首页
       {
         path: 'agenciesHome',
@@ -210,6 +221,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'AdmissionTicketMore'}
+    redirect: {name: 'AgenciesHome'}
   },
 ]

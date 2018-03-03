@@ -19,7 +19,8 @@
               <router-link to="/agents">代理商注册</router-link>
             </li>
             <li v-show="isLoginShow">
-              <a href="javascript:;" style="color: #f60;" @click="toPersonalCenter">欢迎您:{{loginName ? loginName : ""}}</a>
+              <a href="javascript:;" style="color: #f60;"
+                 @click="toPersonalCenter">欢迎您:{{loginName ? loginName : ""}}</a>
             </li>
             <li class="AdminLoginList">
               <a href="javascript:;">管理员登录</a>
@@ -34,108 +35,6 @@
               <a href="javascript:;" @click="Quit">退出</a>
             </li>
           </ul>
-          <!--注释-->
-          <div>
-            <!--<ul class="operationNavIcon">-->
-            <!--<li class="microBlog"><a href="javascript:;"></a></li>-->
-            <!--<li class="APP">-->
-            <!--<a href="javascript:;"></a>-->
-            <!--<div>-->
-            <!--<img src="../assets/img/APPImage.png" height="310" width="274"/>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--<li class="weChat">-->
-            <!--<a href="javascript:;"></a>-->
-            <!--<div>-->
-            <!--<img src="../assets/img/erweima_v2.gif" height="209" width="299"/>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--<div class="operationNavFunction">-->
-            <!--<ul class="operationNavFunctionList">-->
-            <!--<li><a href="javascript:;">商旅</a></li>-->
-            <!--<li><a href="javascript:;">严选商城</a></li>-->
-            <!--<li><a href="javascript:;" class="active">企业频道</a></li>-->
-            <!--<li><a href="javascript:;" class="active">会员俱乐部</a></li>-->
-            <!--<li class="myOrder">-->
-            <!--<a href="javascript:;">我的订单<i></i></a>-->
-            <!--<ul class="myOrderList">-->
-            <!--<li><a href="javascript:;">全部订单</a></li>-->
-            <!--<li><a href="javascript:;">我的机票</a></li>-->
-            <!--<li><a href="javascript:;">我的火车票</a></li>-->
-            <!--<li><a href="javascript:;">积分商城</a></li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--<li class="websiteMap">-->
-            <!--<a href="javascript:;">网站地图<i></i></a>-->
-            <!--<ul class="websiteMapList">-->
-            <!--<li class="goForAtravel">-->
-            <!--<strong>去旅游</strong>-->
-            <!--<ul class="goForAtravelContent clearfix">-->
-            <!--<li>-->
-            <!--<ul>-->
-            <!--<li><a href="javascript:;">跟团游</a></li>-->
-            <!--<li><a href="javascript:;">自由行</a></li>-->
-            <!--<li><a href="javascript:;">酒+景</a></li>-->
-            <!--<li><a href="javascript:;">公司旅游</a></li>-->
-            <!--<li><a href="javascript:;">当地玩乐</a></li>-->
-            <!--<li><a href="javascript:;">首付出发<em></em></a></li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--<ul>-->
-            <!--<li><a href="javascript:;">专线</a></li>-->
-            <!--<li><a href="javascript:;">亲子游</a></li>-->
-            <!--<li><a href="javascript:;">蜜月游</a></li>-->
-            <!--<li><a href="javascript:;">海岛游</a></li>-->
-            <!--<li><a href="javascript:;">老于推荐</a></li>-->
-            <!--<li><a href="javascript:;">机票+酒店<em></em></a></li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--<ul>-->
-            <!--<li><a href="javascript:;">酒店</a></li>-->
-            <!--<li><a href="javascript:;">门票</a></li>-->
-            <!--<li><a href="javascript:;">邮轮</a></li>-->
-            <!--<li><a href="javascript:;">签证</a></li>-->
-            <!--<li><a href="javascript:;">机票</a></li>-->
-            <!--<li><a href="javascript:;">旅拍</a></li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--<li class="queryDiscount">-->
-            <!--<strong>寻优惠</strong>-->
-            <!--<ul>-->
-            <!--<li><a href="javascript:;">特卖</a></li>-->
-            <!--<li><a href="javascript:;">订酒店 返现金</a></li>-->
-            <!--<li><a href="javascript:;">积分商城</a></li>-->
-            <!--<li><a href="javascript:;">银行特惠游</a></li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--<li class="readRaiders">-->
-            <!--<strong>看攻略</strong>-->
-            <!--<ul>-->
-            <!--<li><a href="javascript:;">攻略</a></li>-->
-            <!--<li><a href="javascript:;">风向标</a></li>-->
-            <!--<li><a href="javascript:;">游记</a></li>-->
-            <!--<li><a href="javascript:;">达人玩法</a></li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--<li class="searchService">-->
-            <!--<strong>查服务</strong>-->
-            <!--<ul>-->
-            <!--<li><a href="javascript:;">帮助中心</a></li>-->
-            <!--<li><a href="javascript:;">会员俱乐部</a></li>-->
-            <!--<li><a href="javascript:;">阳光保障</a></li>-->
-            <!--<li><a href="javascript:;">火车时刻表</a></li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-          </div>
         </div>
       </div>
       <!--TitleLogoAndQuery-->
@@ -186,16 +85,6 @@
       <div class="mainNavWrap">
         <nav class="mainNavWrapContent">
           <ul class="mainNavWrapContentList  clearfix" ref="mainNavWrapContentList">
-            <!--<li v-for="item in navList">-->
-            <!--<a :href="'http://'+item.sm_si_GoURL" class="mainNavWrapContentListActive">{{item.sm_si_Name}}<em-->
-            <!--v-show="item.sysChildList.length != 0"></em></a>-->
-            <!--<div v-show="item.sysChildList.length != 0">-->
-            <!--<div class="childrenNav"></div>-->
-            <!--<div class="childrenNavContent">-->
-            <!--<a v-for="ite,index in item.sysChildList" :href="ite.sm_sc_GoURL">{{ite.sm_sc_Name}}</a>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</li>-->
             <li>
               <router-link to="/Comment/HeelTour">跟团游</router-link>
             </li>
@@ -209,6 +98,99 @@
         </nav>
       </div>
     </section>
+
+    <div class="FixedComment">
+
+      <ul class="FixedCommentTop">
+
+        <li class="App">
+
+          <a href="javascript:;"></a>
+
+          <img src="../../assets/img/APPImage.png" width="274" height="310">
+
+        </li>
+
+        <li class="goLogin">
+
+          <a href="javascript:;"></a>
+
+          <a href="javascript:;">前往登录</a>
+
+        </li>
+
+        <li class="myFocusOn">
+
+          <a href="javascript:;"></a>
+
+          <a href="javascript:;">我的关注</a>
+
+        </li>
+
+        <li class="myOrder">
+
+          <a href="javascript:;"></a>
+
+          <a href="javascript:;">我的订单</a>
+
+        </li>
+
+        <li class="myGiftCertificates">
+
+          <a href="javascript:;"></a>
+
+          <a href="javascript:;">我的礼券</a>
+
+        </li>
+
+        <li class="messageToRemind">
+
+          <a href="javascript:;"></a>
+
+          <a href="javascript:;">消息提醒</a>
+
+        </li>
+
+        <li class="onlineCustomerService">
+
+          <a href="javascript:;"></a>
+
+          <a href="javascript:;">在线客服</a>
+
+        </li>
+
+      </ul>
+
+      <ul class="FixedCommentBottom">
+
+        <li class="askTicketSurvey">
+
+          <a href="javascript:;"></a>
+
+          <a href="javascript:;">问券调查</a>
+
+        </li>
+
+        <li class="opinionSuggestion">
+
+          <a href="javascript:;"></a>
+
+          <a href="javascript:;">意见建议</a>
+
+        </li>
+
+        <li class="goTop">
+
+          <a href="javascript:;"></a>
+
+          <a href="javascript:;">返回顶部</a>
+
+        </li>
+
+      </ul>
+
+    </div>
+
     <router-view name="User"></router-view>
 
   </div>
@@ -227,7 +209,7 @@
       'showQuit'
     ]),
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         this.$store.commit('hideLoading')
       }
     },
@@ -246,10 +228,10 @@
     },
     methods: {
       //退出
-      Quit(){
+      Quit() {
         //删除用户sessionStorage
         let user = JSON.parse(sessionStorage.getItem('user'))
-        if(!user){
+        if (!user) {
           this.$store.commit('hideQuitButton')
           return
         }
@@ -265,9 +247,9 @@
         }
 //        this.$store.commit('showLoading')
         this.$store.dispatch('initNavList', getSystemMenuInfo)
-        .then(()=>{
+          .then(() => {
 //          this.$store.commit('hideLoading')
-        })
+          })
 
       },
       //选择旅游类型
@@ -275,8 +257,8 @@
         this.smSiName = id.sm_si_Name
       },
       //跳转个人中心
-      toPersonalCenter(){
-        this.$router.push({name:'MyTourOrder'})
+      toPersonalCenter() {
+        this.$router.push({name: 'MyTourOrder'})
       }
     },
     created() {
@@ -286,9 +268,9 @@
       let ul = this.$refs.mainNavWrapContentList;
       let lis = ul.children;
       lis[0].className = 'active'
-      for(let i=0;i<lis.length;i++){
-        lis[i].onclick=function () {
-          for(var j=0;j<lis.length;j++){
+      for (let i = 0; i < lis.length; i++) {
+        lis[i].onclick = function () {
+          for (var j = 0; j < lis.length; j++) {
             lis[j].className = ''
           }
           lis[i].className = 'active';
@@ -305,10 +287,159 @@
   }
 </script>
 <style scoped>
-.active{
-  background-color: orange;
-}
-.active a{
-  color: #fff;
-}
+  .active {
+    background-color: orange;
+  }
+
+  .active a {
+    color: #fff;
+  }
+
+  .FixedComment {
+    width: 40px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #000;
+    z-index: 999;
+  }
+
+  .FixedComment li {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .FixedComment li > a:first-of-type {
+    height: 40px;
+    background-image: url("../../assets/img/rc_icon_all.png");
+    background-repeat: no-repeat;
+    border-top: 1px solid #3c3c3c;
+  }
+
+  .FixedComment li > a:nth-of-type(2) {
+    position: absolute;
+    right: 50px;
+    top: 0;
+    transition: .3s linear;
+    width: 100px;
+    text-align: center;
+    font: 16px/40px "微软雅黑";
+    color: #ff8800;
+    background-color: #333333;
+    border-left: 4px solid #ff8800;
+    box-sizing: content-box;
+    opacity: .1;
+  }
+
+  .FixedCommentTop > .App > a {
+    background-position: 6px 14px;
+  }
+
+  .FixedCommentTop {
+    margin-top: 100px;
+  }
+
+  .FixedComment li:hover > a:nth-of-type(2) {
+    right: 39px;
+    opacity: 1;
+  }
+
+  .FixedComment li:hover {
+    overflow: visible;
+  }
+
+  .FixedCommentTop > .App:hover > a {
+    background-position: -62px 14px;
+  }
+
+  .FixedCommentTop > .App:hover > img {
+    right: 40px;
+    opacity: 1;
+  }
+
+  .FixedCommentTop > .App > img {
+    position: absolute;
+    right: 50px;
+    top: 0px;
+    transition: .3s linear;
+    opacity: .1;
+  }
+
+  .FixedCommentTop > .goLogin > a:first-of-type {
+    background-position: 5px -36px;
+  }
+
+  .FixedCommentTop > .goLogin:hover > a:first-of-type {
+    background-position: -64px -36px;
+  }
+
+  .FixedCommentTop > .myFocusOn > a:first-of-type {
+    background-position: 6px -97px;
+  }
+
+  .FixedCommentTop > .myFocusOn:hover > a:first-of-type {
+    background-position: -61px -97px;
+  }
+
+  .FixedCommentTop > .myOrder > a:first-of-type {
+    background-position: 8px -224px;
+  }
+
+  .FixedCommentTop > .myOrder:hover > a:first-of-type {
+    background-position: -61px -224px;
+  }
+
+  .FixedCommentTop > .myGiftCertificates > a:first-of-type {
+    background-position: 10px -288px;
+  }
+
+  .FixedCommentTop > .myGiftCertificates:hover > a:first-of-type {
+    background-position: -58px -288px;
+  }
+
+  .FixedCommentTop > .messageToRemind > a:first-of-type {
+    background-position: 8px -785px;
+  }
+
+  .FixedCommentTop > .messageToRemind:hover > a:first-of-type {
+    background-position: -60px -785px;
+  }
+
+  .FixedCommentTop > .onlineCustomerService > a:first-of-type {
+    background-position: 8px -728px;
+  }
+
+  .FixedCommentTop > .onlineCustomerService:hover > a:first-of-type {
+    background-position: -60px -728px;
+  }
+
+  .FixedCommentBottom {
+    margin-top: 100px;
+  }
+
+  .FixedCommentBottom > .askTicketSurvey > a:first-of-type {
+    background-position: 8px -846px;
+  }
+
+  .FixedCommentBottom > .askTicketSurvey:hover > a:first-of-type {
+    background-position: -60px -846px;
+  }
+
+  .FixedCommentBottom > .opinionSuggestion > a:first-of-type {
+    background-position: 9px -544px;
+  }
+
+  .FixedCommentBottom > .opinionSuggestion:hover > a:first-of-type {
+    background-position: -60px -544px;
+  }
+
+  .FixedCommentBottom > .goTop > a:first-of-type {
+    background-position: 9px -600px;
+  }
+
+  .FixedCommentBottom > .goTop:hover > a:first-of-type {
+    background-position: -60px -600px;
+  }
+
 </style>

@@ -39,13 +39,6 @@
                 </el-form-item>
               </el-form>
             </el-col>
-            <!--<el-col :span="24" class="formSearch">-->
-              <!--<el-form :inline="true">-->
-                <!--<el-form-item label="供应商账号:" :required="isOff">-->
-                  <!--<el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_AgentID"></el-input>-->
-                <!--</el-form-item>-->
-              <!--</el-form>-->
-            <!--</el-col>-->
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="供应商密码:" :required="isOff">
