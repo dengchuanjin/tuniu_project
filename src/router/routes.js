@@ -24,6 +24,7 @@ import CommentOnAComment from '@/components/Agencies/CommentOnAComment' //发表
 import AdmissionTicketHomePage from '@/components/Tickets/AdmissionTicketHomePage'//门票首页
 import TicketsDetail from '@/components/Tickets/TicketsDetail'//门票详情
 import TicketsReserve from '@/components/Tickets/TicketsReserve'//门票预定
+import AdmissionTicketMore from '@/components/Tickets/AdmissionTicketMore' //更多门票
 
 
 import HotelHomePage from '@/components/Hotel/HotelHomePage'//酒店首页
@@ -188,6 +189,15 @@ export default [
           User: HotelDetails
         },
         name: 'HotelDetails'
+      },
+      //更多门票
+      {
+        path: 'admissionTicketMore',
+        components: {
+          default: Comment,
+          User: AdmissionTicketMore
+        },
+        name: 'AdmissionTicketMore'
       }
     ]
   },
@@ -200,6 +210,6 @@ export default [
   {
     path: '*',
     hidden: true,
-    redirect: {name: 'AgenciesHome'}
+    redirect: {name: 'AdmissionTicketMore'}
   },
 ]

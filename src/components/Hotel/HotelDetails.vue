@@ -233,27 +233,182 @@
                   <em class="HotelRecommendDetalisListImgBoxsMask">查看更多图片</em>
                 </a>
                 <div class="HotelRecommendDetalisListIntroduceBox">
-                  <div class="HotelRecommendDetalisListIntroduceBoxTitle">
+                  <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">1</span>
-                    <h4> 香港迪士尼乐园酒店(Disneyland Hotel)</h4>
+                    <h4><a href="javascript:;">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
                   </div>
                   <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
-                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】</p>
+                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】
+                  </p>
                   <a href="javascript:;">查看地图</a>
                   <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
-                    <i class="Restaurant"></i>
-                    <i class="ParkingLot"></i>
-                    <i class="meetPlaneService"></i>
-                    <i class="laundryService"></i>
-                    <i class="swimming"></i>
-                    <i class="Gym"></i>
-                    <i class="ConferenceRoom"></i>
-                    <i class="hotWater"></i>
-                    <i class="WiFi"></i>
-                    <i class="transit"></i>
+                    <i class="Restaurant" title="餐厅"></i>
+                    <i class="ParkingLot" title="停车场"></i>
+                    <i class="meetPlaneService" title="接机服务"></i>
+                    <i class="swimmingPool" title="游泳池"></i>
+                    <i class="Gym" title="健身房"></i>
+                    <i class="ConferenceRoom" title="会议室"></i>
+                    <i class="hotWater" title="24小时热水"></i>
+                    <i class="WiFi" title="公共区域免费wifi"></i>
+                    <i class="transit" title="公交"></i>
                   </div>
+                </div>
+                <div class="HotelRecommendPrice">
+                  <strong class="HotelRecommendPriceMoney">¥<span>1642</span>起</strong>
+                  <div class="scoreDetails clearfix">
+                    <span class="score">4.7/5分</span>
+                    <div class="scoreDetailsContent">
+                      <i></i>
+                      <div class="clearfix">
+                        <span>环境卫生 : <em>4.3</em></span>
+                        <span>服务质量 : <em>4.3</em></span>
+                        <span>设备设施 : <em>4.3</em></span>
+                        <span>位置交通 : <em>4.3</em></span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="commentNumber">来自<em>1111</em>条评论</span>
+                  <a href="javascript:;">查看详情</a>
+                </div>
+              </li>
+              <li>
+                <a href="javascript:;" class="HotelRecommendDetalisListImgBox">
+                  <img src="../../assets/img/homePageImage.jpg" width="262" height="175">
+                  <em class="HotelRecommendDetalisListImgBoxsMask">查看更多图片</em>
+                </a>
+                <div class="HotelRecommendDetalisListIntroduceBox">
+                  <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">1</span>
+                    <h4><a href="javascript:;">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
+                  </div>
+                  <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
+                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】
+                  </p>
+                  <a href="javascript:;">查看地图</a>
+                  <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
+                    <i class="Restaurant" title="餐厅"></i>
+                    <i class="ParkingLot" title="停车场"></i>
+                    <i class="meetPlaneService" title="接机服务"></i>
+                    <i class="swimmingPool" title="游泳池"></i>
+                    <i class="Gym" title="健身房"></i>
+                    <i class="ConferenceRoom" title="会议室"></i>
+                    <i class="hotWater" title="24小时热水"></i>
+                    <i class="WiFi" title="公共区域免费wifi"></i>
+                    <i class="transit" title="公交"></i>
+                  </div>
+                </div>
+                <div class="HotelRecommendPrice">
+                  <strong class="HotelRecommendPriceMoney">¥<span>1642</span>起</strong>
+                  <div class="scoreDetails clearfix">
+                    <span class="score">4.7/5分</span>
+                    <div class="scoreDetailsContent">
+                      <i></i>
+                      <div class="clearfix">
+                        <span>环境卫生 : <em>4.3</em></span>
+                        <span>服务质量 : <em>4.3</em></span>
+                        <span>设备设施 : <em>4.3</em></span>
+                        <span>位置交通 : <em>4.3</em></span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="commentNumber">来自<em>1111</em>条评论</span>
+                  <a href="javascript:;">查看详情</a>
+                </div>
+              </li>
+              <li>
+                <a href="javascript:;" class="HotelRecommendDetalisListImgBox">
+                  <img src="../../assets/img/homePageImage.jpg" width="262" height="175">
+                  <em class="HotelRecommendDetalisListImgBoxsMask">查看更多图片</em>
+                </a>
+                <div class="HotelRecommendDetalisListIntroduceBox">
+                  <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">1</span>
+                    <h4><a href="javascript:;">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
+                  </div>
+                  <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
+                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】
+                  </p>
+                  <a href="javascript:;">查看地图</a>
+                  <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
+                    <i class="Restaurant" title="餐厅"></i>
+                    <i class="ParkingLot" title="停车场"></i>
+                    <i class="meetPlaneService" title="接机服务"></i>
+                    <i class="swimmingPool" title="游泳池"></i>
+                    <i class="Gym" title="健身房"></i>
+                    <i class="ConferenceRoom" title="会议室"></i>
+                    <i class="hotWater" title="24小时热水"></i>
+                    <i class="WiFi" title="公共区域免费wifi"></i>
+                    <i class="transit" title="公交"></i>
+                  </div>
+                </div>
+                <div class="HotelRecommendPrice">
+                  <strong class="HotelRecommendPriceMoney">¥<span>1642</span>起</strong>
+                  <div class="scoreDetails clearfix">
+                    <span class="score">4.7/5分</span>
+                    <div class="scoreDetailsContent">
+                      <i></i>
+                      <div class="clearfix">
+                        <span>环境卫生 : <em>4.3</em></span>
+                        <span>服务质量 : <em>4.3</em></span>
+                        <span>设备设施 : <em>4.3</em></span>
+                        <span>位置交通 : <em>4.3</em></span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="commentNumber">来自<em>1111</em>条评论</span>
+                  <a href="javascript:;">查看详情</a>
+                </div>
+              </li>
+              <li>
+                <a href="javascript:;" class="HotelRecommendDetalisListImgBox">
+                  <img src="../../assets/img/homePageImage.jpg" width="262" height="175">
+                  <em class="HotelRecommendDetalisListImgBoxsMask">查看更多图片</em>
+                </a>
+                <div class="HotelRecommendDetalisListIntroduceBox">
+                  <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">1</span>
+                    <h4><a href="javascript:;">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
+                  </div>
+                  <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
+                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】
+                  </p>
+                  <a href="javascript:;">查看地图</a>
+                  <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
+                    <i class="Restaurant" title="餐厅"></i>
+                    <i class="ParkingLot" title="停车场"></i>
+                    <i class="meetPlaneService" title="接机服务"></i>
+                    <i class="swimmingPool" title="游泳池"></i>
+                    <i class="Gym" title="健身房"></i>
+                    <i class="ConferenceRoom" title="会议室"></i>
+                    <i class="hotWater" title="24小时热水"></i>
+                    <i class="WiFi" title="公共区域免费wifi"></i>
+                    <i class="transit" title="公交"></i>
+                  </div>
+                </div>
+                <div class="HotelRecommendPrice">
+                  <strong class="HotelRecommendPriceMoney">¥<span>1642</span>起</strong>
+                  <div class="scoreDetails clearfix">
+                    <span class="score">4.7/5分</span>
+                    <div class="scoreDetailsContent">
+                      <i></i>
+                      <div class="clearfix">
+                        <span>环境卫生 : <em>4.3</em></span>
+                        <span>服务质量 : <em>4.3</em></span>
+                        <span>设备设施 : <em>4.3</em></span>
+                        <span>位置交通 : <em>4.3</em></span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="commentNumber">来自<em>1111</em>条评论</span>
+                  <a href="javascript:;">查看详情</a>
                 </div>
               </li>
             </ul>
@@ -635,6 +790,18 @@
     border: 1px solid #e6e6e6;
   }
 
+  .HotelRecommendDetalisList > li:hover {
+    box-shadow: 0 0 5px #f60;
+  }
+
+  .HotelRecommendDetalisList > li:hover .HotelRecommendDetalisListIntroduceBoxTitle a {
+    color: #f60;
+  }
+
+  .HotelRecommendDetalisList > li:hover .HotelRecommendDetalisListIntroduceBoxTitleNum {
+    background-position-x: -322px;
+  }
+
   .HotelRecommendDetalisListImgBox {
     float: left;
     position: relative;
@@ -658,14 +825,245 @@
     width: 24px;
     height: 24px;
     background: url("../../assets/img/hotel-facility.png") no-repeat;
+    margin-right: 5px;
   }
 
+  .HotelRecommendDetalisListIntroduceBox {
+    width: 426px;
+    float: left;
+    margin-top: 9px;
+  }
+
+  .HotelRecommendDetalisListIntroduceBoxTitle > * {
+    float: left;
+  }
+
+  .HotelRecommendDetalisListIntroduceBoxTitle {
+    line-height: 22px;
+    margin-bottom: 8px;
+    font-family: "微软雅黑";
+  }
+
+  .HotelRecommendDetalisListIntroduceBoxTitleNum {
+    width: 18px;
+    height: 21px;
+    background: url("../../assets/img/hotelDatelisIcon.png") no-repeat -298px -40px;
+    color: #fff;
+    text-align: center;
+    font: 12px/21px "microsoft yahei";
+  }
+
+  .HotelRecommendDetalisListIntroduceBoxTitle > h4 > a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #4c5a65;
+    margin-left: 5px;
+  }
+
+  .HotelRecommendDetalisListIntroduceBoxTitleType {
+    font-size: 14px;
+    color: #999999;
+    margin: 0 15px;
+  }
+
+  .HotelRecommendDetalisListIntroduceBoxTitleRenovation {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .HotelRecommendDetalisListIntroduceBoxDescribe {
+    font: 14px/21px "微软雅黑";
+    color: #666666;
+  }
+
+  .HotelRecommendDetalisListIntroduceBox > a {
+    font: 12px/26px "微软雅黑";
+    color: #2dbb55;
+    margin-bottom: 8px;
+  }
+
+  /*餐厅*/
   .HotelRecommendDetalisListIntroduceBoxIconList > .Restaurant {
-
+    background-position: -432px 0;
   }
 
-  /*酒店地图*/
+  /*停车场*/
 
+  .HotelRecommendDetalisListIntroduceBoxIconList > .ParkingLot {
+    background-position: -192px 0;
+  }
+
+  /*接机服务*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .meetPlaneService {
+    background-position: -240px 0;
+  }
+
+  /*洗衣服务*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .laundryService {
+    background-position: -312px 0;
+  }
+
+  /*游泳池*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .swimmingPool {
+    background-position: -336px 0;
+  }
+
+  /*健身房*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .Gym {
+    background-position: -96px 0;
+  }
+
+  /*会议室*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .ConferenceRoom {
+    background-position: -552px 0;
+  }
+
+  /*24小时热水*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .hotWater {
+    background-position: -504px 0;
+  }
+
+  /*WIFI*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .WiFi {
+    background-position: -168px 0;
+  }
+
+  /*spa*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .spa {
+    background-position: -72px 0;
+  }
+
+  /*公交*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .transit {
+    background-position: -408px 0;
+  }
+
+  .HotelRecommendPrice {
+    padding-top:3px;
+    float: left;
+    width: 179px;
+    border-left:1px dashed #ccc;
+    margin-top:10px;
+    height: 140px;
+  }
+
+  .HotelRecommendPriceMoney {
+    font: 14px/38px "微软雅黑";
+    color: #f60;
+    display: block;
+    text-align: center;
+  }
+
+  .HotelRecommendPriceMoney > span {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .HotelRecommendPrice > .scoreDetails {
+    transform: translateX(65px);
+  }
+
+  .HotelRecommendPrice > .scoreDetails > span {
+    float: left;
+    font: 12px/20px "微软雅黑";
+    color: #999;
+  }
+
+  .scoreDetailsContent {
+    float: left;
+    position: relative;
+    margin-left: 3px;
+  }
+
+  .scoreDetailsContent:hover div {
+    display: block;
+  }
+
+  .scoreDetailsContent:hover i {
+    cursor: pointer;
+  }
+
+  .scoreDetailsContent > div {
+    display: none;
+    position: absolute;
+    left: -7px;
+    top: 20px;
+    width: 280px;
+    font: 16px/30px "微软雅黑";
+    padding: 8px 22px;
+    background-color: #fff;
+    border: 1px solid #ffdbb2;
+    color: #999999;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  .scoreDetailsContent > div::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-left: 1px solid #ffdbb2;
+    border-top: 1px solid #ffdbb2;
+    top: -5px;
+    left: 10px;
+    transform: rotate(45deg);
+    background-color: #fff;
+  }
+
+  .scoreDetailsContent > div em {
+    color: #fe9010;
+  }
+
+  .scoreDetailsContent > div > span {
+    float: left;
+  }
+
+  .scoreDetailsContent > div > span:nth-of-type(2n) {
+    margin-left: 30px;
+  }
+
+  .scoreDetailsContent > i {
+    display: block;
+    width: 15px;
+    height: 16px;
+    background: url("../../assets/img/hotelDatelisIcon.png") no-repeat -75px -49px;
+  }
+
+  .commentNumber {
+    display: block;
+    text-align: center;
+    font: 14px/22px "微软雅黑";
+    color: #cccccc;
+    margin-bottom: 4px;
+  }
+
+  .commentNumber > em {
+    color: #2dbb55;
+  }
+
+  .HotelRecommendPrice > a {
+    width: 100px;
+    font: bold 14px/2.3 "微软雅黑";
+    background-color: #f60;
+    color: #fff;
+    text-align: center;
+    margin:0 auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+    /*酒店地图*/
   .HotelRecommendMap {
     float: right;
   }
