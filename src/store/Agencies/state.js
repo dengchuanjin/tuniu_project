@@ -27,6 +27,7 @@ export default  {
   getTourSiteList:{},//景点介绍
   showQuit:false,//退出
   orderDetail:{},//订单详情
+  getAreaInfoList:[],//区域
 
 //----------商户注册-----------
   provinceDataList:[],//获取省
@@ -45,5 +46,7 @@ export default  {
   collectionList:[],//用户收藏
   commentMXObj:{},//评论信息
   commentData:[],//旅行社用户评论
-  newCommentData:[]
+  newCommentData:[],
+  jobList:[],//个人中心职业
+  educationList:[],//个人中心学历
 };

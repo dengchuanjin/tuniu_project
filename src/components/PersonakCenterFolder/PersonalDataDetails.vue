@@ -9,7 +9,7 @@
             <el-input
               style="width: 220px"
               placeholder="请输入昵称"
-              v-model="userInfo.ui_Name"
+              v-model="saveUser.ui_Name"
               clearable
               :disabled="isDisabled"
             >
@@ -19,7 +19,7 @@
             <el-input
               style="width: 220px"
               placeholder="请输入身份证"
-              v-model="userInfo.ui_CertNo"
+              v-model="saveUser.ui_CertNo"
               :disabled="isDisabled"
               clearable>
             </el-input>
@@ -28,10 +28,104 @@
             <el-input
               style="width: 220px"
               placeholder="请输入电话号码"
-              v-model="userInfo.ui_Phone"
+              v-model="saveUser.ui_Phone"
               :disabled="isDisabled"
               clearable>
             </el-input>
+          </el-form-item>
+          <el-form-item label="生日:" label-width="100px">
+            <el-select v-model="yearValue" placeholder="请选择年" style="width: 120px" size="small" :disabled="isDisabled">
+              <el-option
+                v-for="item in years"
+                :key="item.value"
+                :label="item.name"
+                :value="item.value">
+              </el-option>
+            </el-select>
+            <el-select v-model="monthValue" placeholder="请选择月" style="width: 120px" size="small" @change="changeMonth" :disabled="isDisabled">
+              <el-option
+                v-for="item in months"
+                :key="item.value"
+                :label="item.name"
+                :value="item.value">
+              </el-option>
+            </el-select>
+            <el-select v-model="dateValue" placeholder="请选择日" style="width: 120px" size="small" :disabled="isDisabled">
+              <el-option
+                v-for="item in dates"
+                :key="item.value"
+                :label="item.name"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="性别:" label-width="100px">
+            <el-radio v-model="saveUser.ts_ui_Sex" label="0" :disabled="isDisabled">男</el-radio>
+            <el-radio v-model="saveUser.ts_ui_Sex" label="1" :disabled="isDisabled">女</el-radio>
+          </el-form-item>
+          <el-form-item label="邮箱:" label-width="100px">
+            <el-input
+              style="width: 220px"
+              placeholder="请输入邮箱"
+              v-model="saveUser.ts_ui_Email"
+              :disabled="isDisabled"
+              clearable>
+            </el-input>
+          </el-form-item>
+          <el-form-item label="常住地:" label-width="100px">
+            <el-select v-model="saveUser.ui_Provice" placeholder="请选择省" size="mini"
+                       @focus="changeProvince" :disabled="isDisabled">
+              <el-option
+                v-for="item in provinceDataList"
+                :key="item.sm_af_AreaID"
+                :label="item.sm_af_AreaName"
+                :value="item.sm_af_AreaID">
+              </el-option>
+            </el-select>
+            <el-select v-model="saveUser.ui_City" placeholder="请选择市" size="mini"
+                       @focus="changeCity" :disabled="isDisabled">
+              <el-option
+                v-for="item in cityDataList"
+                :key="item.sm_af_AreaID"
+                :label="item.sm_af_AreaName"
+                :value="item.sm_af_AreaID">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="详细地址:" label-width="100px">
+            <el-input
+              style="width: 220px"
+              placeholder="请输入详细地址"
+              v-model="saveUser.ui_Address"
+              :disabled="isDisabled"
+              clearable>
+            </el-input>
+          </el-form-item>
+          <el-form-item label="婚姻:" label-width="100px">
+            <el-select v-model="saveUser.ui_MarryStatus" placeholder="请选择婚姻" :disabled="isDisabled">
+              <el-option label="未婚" value="0"></el-option>
+              <el-option label="已婚" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="职业:" label-width="100px" :required="isOff">
+            <el-select v-model="saveUser.ts_ui_JobID" placeholder="请选择职业" :disabled="isDisabled">
+              <el-option
+                v-for="item in jobList"
+                :key="item.ts_jb_ID"
+                :label="item.ts_jb_Name"
+                :value="item.ts_jb_ID">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="学历:" label-width="100px" :required="isOff">
+            <el-select v-model="saveUser.ts_ui_EducationID" placeholder="请选择学历" :disabled="isDisabled">
+              <el-option
+                v-for="item in educationList"
+                :key="item.oi_en_ID"
+                :label="item.oi_en_Name"
+                :value="item.oi_en_ID">
+              </el-option>
+            </el-select>
           </el-form-item>
           <el-form-item v-show="!isDisabled">
             <el-button type="primary" @click="save">保存</el-button>
@@ -41,85 +135,6 @@
             <el-button  type="primary" @click="Editor">编辑</el-button>
           </el-form-item>
         </el-form>
-          <!--<el-form-item label="姓名:" label-width="80px">-->
-            <!--<el-input-->
-              <!--style="width: 220px"-->
-              <!--placeholder="请输入内容"-->
-              <!--v-model="input10"-->
-              <!--clearable>-->
-            <!--</el-input>-->
-          <!--</el-form-item>-->
-          <!--<el-form-item label="手机号:" label-width="80px">-->
-            <!--<el-input-->
-              <!--style="width: 220px"-->
-              <!--placeholder="请输入内容"-->
-              <!--v-model="input10"-->
-              <!--clearable>-->
-            <!--</el-input>-->
-          <!--</el-form-item>-->
-          <!--<el-form-item label="生日:" label-width="80px">-->
-            <!--<el-date-picker-->
-              <!--v-model="input10"-->
-              <!--type="year"-->
-              <!--placeholder="选择年">-->
-            <!--</el-date-picker>-->
-            <!--<el-date-picker-->
-              <!--v-model="input10"-->
-              <!--type="month"-->
-              <!--placeholder="选择月">-->
-            <!--</el-date-picker>-->
-            <!--<el-date-picker-->
-              <!--v-model="input10"-->
-              <!--type="date"-->
-              <!--placeholder="选择日">-->
-            <!--</el-date-picker>-->
-          <!--</el-form-item>-->
-          <!--<el-form-item label="性别:" label-width="80px">-->
-            <!--<el-radio-group v-model="sex">-->
-              <!--<el-radio :label="0">男</el-radio>-->
-              <!--<el-radio :label="1">女</el-radio>-->
-            <!--</el-radio-group>-->
-          <!--</el-form-item>-->
-
-          <!--<el-form-item label="邮箱:" label-width="80px">-->
-            <!--<el-input-->
-              <!--style="width: 220px"-->
-              <!--placeholder="请输入内容"-->
-              <!--v-model="input10"-->
-              <!--clearable>-->
-            <!--</el-input>-->
-          <!--</el-form-item>-->
-          <!--<el-form-item label="婚姻:" label-width="80px">-->
-            <!--<el-select v-model="value" placeholder="请选择婚姻状态">-->
-              <!--<el-option key="0" label="已婚" value="0"></el-option>-->
-              <!--<el-option key="1" label="未婚" value="1"></el-option>-->
-            <!--</el-select>-->
-          <!--</el-form-item>-->
-          <!--&lt;!&ndash;<el-form-item label="职业:" label-width="80px">&ndash;&gt;-->
-            <!--&lt;!&ndash;<el-select v-model="value" placeholder="请选择职业">&ndash;&gt;-->
-              <!--&lt;!&ndash;<el-option key="0" label="白领/一般职员" value="0"></el-option>&ndash;&gt;-->
-              <!--&lt;!&ndash;<el-option key="1" label="公务员/事业单位" value="1"></el-option>&ndash;&gt;-->
-              <!--&lt;!&ndash;<el-option key="2" label="工业/服务业人员" value="1"></el-option>&ndash;&gt;-->
-              <!--&lt;!&ndash;<el-option key="1" label="公务员/事业单位" value="1"></el-option>&ndash;&gt;-->
-              <!--&lt;!&ndash;<el-option key="1" label="公务员/事业单位" value="1"></el-option>&ndash;&gt;-->
-            <!--&lt;!&ndash;</el-select>&ndash;&gt;-->
-          <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
-          <!--<el-form-item label="常住地:" label-width="80px">-->
-            <!--<el-input-->
-              <!--style="width: 220px"-->
-              <!--placeholder="请输入内容"-->
-              <!--v-model="input10"-->
-              <!--clearable>-->
-            <!--</el-input>-->
-          <!--</el-form-item>-->
-          <!--<el-form-item label="详细地址:" label-width="80px">-->
-            <!--<el-input-->
-              <!--style="width: 220px"-->
-              <!--placeholder="请输入内容"-->
-              <!--v-model="input10"-->
-              <!--clearable>-->
-            <!--</el-input>-->
-          <!--</el-form-item>-->
       </div>
     </div>
 </template>
@@ -129,6 +144,12 @@
   export default {
     data() {
       return {
+        yearValue:'',//年
+        monthValue:'',//月
+        dateValue:'',//日
+        years: [],
+        months:[],
+        dates:[],
         isDisabled:true,
         value:'',
         sex:0,
@@ -136,28 +157,145 @@
         NoID:'',
         width:'120px',
         input10:'',
-        isOff:true
+        isOff:true,
+        saveUser:{
+          "ui_Name":'',
+          "ui_ID": '',
+          "ui_CertNo":'',
+          "ts_ui_JobID": "",
+          "ts_ui_JobName": "",
+          "ts_ui_EducationID": "",
+          "ts_ui_EducationName": "",
+          "ui_Phone": "",
+          "ui_Birthday": "",
+          "ts_ui_Sex": "0",
+          "ts_ui_Email": "",
+          "ui_Provice": "",
+          "ui_City": "",
+          "ui_Contry": "",
+          "ui_Address": "",
+          "ui_MarryStatus": "",
+          "ts_ui_CancelReason": "",
+          "ts_ui_CancelerID": "",
+          "s_ui_CancelerName": "",
+          "s_ui_CancelerTime": "",
+          "ui_IsDelete": "",
+          "ui_CreateTime": "",
+          "ui_Remark": ""
+        }
       }
     },
-    computed: mapGetters([]),
+    computed: mapGetters([
+      'provinceDataList',
+      'cityDataList',
+      'jobList',
+      'educationList'
+    ]),
     created(){
+      //初始化职业
+      let jobOptions = {
+        "loginUserID": "huileyou",
+        "loginUserPass": "123",
+        "operateUserID": "",
+        "operateUserName": "",
+        "pcName": "",
+        "ts_jb_ID": "",
+        "ts_jb_Name": "",
+      };
+      this.$store.dispatch('initJob',jobOptions)
+      .then(()=>{},()=>{})
+      //初始化学历
+      let educationOptions = {
+        "loginUserID": "huileyou",
+        "loginUserPass": "123",
+        "operateUserID": "",
+        "operateUserName": "",
+        "pcName": "",
+        "oi_en_ID": "",
+        "oi_en_Name": "",
+      };
+      this.$store.dispatch('initEducation',educationOptions)
+      .then(()=>{},()=>{})
+
+      //设置年
+      let year = new Date().getFullYear();
+      for(var i=1900;i<=year;i++){
+        this.years.push({
+          value:i,
+          name:i+'年'
+        })
+      }
+      for(var i=1;i<13;i++){
+        this.months.push({
+          value:i,
+          name:i+'月'
+        })
+      }
+      this.years.sort((a,b)=>{
+        return b.value-a.value;
+      });
       let user = JSON.parse(sessionStorage.getItem('user'));
       if(user){
         this.userInfo = user;
+        this.saveUser.ui_Name =this.userInfo.ui_Name
+        this.saveUser.ui_ID =  this.userInfo.ui_ID
+        this.saveUser.ui_CertNo =this.userInfo.ui_CertNo
       }else{
         this.$router.push({name:'AdminLogin'})
       }
     },
     methods: {
+      //选择省
+      changeProvince(v) {
+        let getAreaProvice = {
+          "areaPid": 0
+        }
+        this.$store.dispatch('initProvinceData', getAreaProvice)
+      },
+      //选择市
+      changeCity() {
+        if (!this.saveUser.ui_Provice) {
+          this.$notify({
+            message: '请先选择省!!',
+            type: 'error'
+          });
+          return
+        }
+        let getCity = {
+          "areaPid": this.saveUser.ui_Provice ? this.saveUser.ui_Provice : ''
+        }
+        this.$store.dispatch('initCityData', getCity)
+      },
+      //选中月
+      changeMonth(){
+        this.dates = []
+        let newDate = new Date(this.yearValue,this.monthValue)
+        let month = newDate.getMonth()
+        newDate.setMonth(month );
+        newDate.setDate(0);
+        let date = newDate.getDate()
+
+        for(var i=1;i<=date;i++){
+          this.dates.push({
+            value:i,
+            name:i
+          })
+        }
+      },
       initData() {
       },
       //清空
       clear(){
-        this.userInfo.ui_Name = '';
-        this.NoID = ''
+       for(var attr in this.saveUser){
+         this.saveUser[attr] = ''
+       }
+      },
+      getNum(num){
+        return num<10?'0'+num:''+num;
       },
       save(){
-        if(this.userInfo.ui_CertNo == ''){
+        this.saveUser.ui_Birthday = this.yearValue+'-'+this.getNum(this.monthValue)+'-'+this.getNum(this.dateValue)
+        if(this.saveUser.ui_CertNo == ''){
           this.$notify({
             message: '请输入身份证号!',
             type: 'error'
@@ -170,11 +308,7 @@
           "operateUserID": "",
           "operateUserName": "",
           "pcName": "",
-          userInfo:{
-            "ui_Name":this.userInfo.ui_Name,
-            "ui_ID": this.userInfo.ui_ID,
-            "ui_CertNo":this.userInfo.ui_CertNo
-          }
+          userInfo:this.saveUser
         };
         this.isLoading = true;
         this.$store.dispatch('saveUserInfo',saveOptions)

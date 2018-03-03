@@ -243,7 +243,7 @@
       </header>
       <section id="content">
         <!--产品详情-->
-        <div class="productDetailsWrap" id="h1" v-show="showList[0].isShow">
+        <div class="productDetailsWrap" id="h1" v-show="showList[0].isShow" style="padding-bottom: 100px">
           <div class="productDetails clearfix">
             <div class="discountIcon">
               <h3>产品详情</h3>
@@ -812,7 +812,6 @@
       },
       //选中线路菜单
       changeType(index) {
-        console.log(index)
         let spans = this.$refs.headerNav.querySelectorAll('span');
         let len = spans.length;
 
@@ -852,12 +851,12 @@
         return new Promise((relove, reject) => {
           year = Number(year);
           month = Number(month);
-          var newArr = []
-          _this.arr1 = []
-          _this.arr4 = []
-          _this.arr2 = []
-          _this.arr5 = []
-          _this.arr3 = []
+          var newArr = [];
+          _this.arr1 = [];
+          _this.arr4 = [];
+          _this.arr2 = [];
+          _this.arr5 = [];
+          _this.arr3 = [];
           for (var i = 1; i <= 42; i++) {
             var v = i - this.getWeek(year, month);
 
@@ -1062,8 +1061,6 @@
       });
       //获取评论list
       this.initComment();
-
-
       this.price = sessionStorage.getItem('money');
       //获取轮播图
       this.$store.commit('showLoading');
@@ -1084,9 +1081,8 @@
     mounted() {
 //      固定的导航
       (function () {
-        var sTop = $('#headerNavWrap').get(0).offsetTop + 180;
+        var sTop = $('#headerNavWrap').get(0).offsetTop + 170;
         var w = ($(window).width() - 1188) / 2
-//        var bTop = $('#scheduleList').get(0).offsetTop + 180
         $(window).bind("scroll", function () {
           var top = $(this).scrollTop(); // 当前窗口的滚动距离
           if (top > sTop) {
@@ -1107,6 +1103,9 @@
   }
 </script>
 <style scoped>
+  /*#h1{*/
+    /*padding-bottom: 100px;*/
+  /*}*/
   .bottom {
     clear: both;
     display: inline-block;

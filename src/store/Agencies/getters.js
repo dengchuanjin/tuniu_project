@@ -31,6 +31,9 @@ export default {
   commentMXObj: state => state.commentMXObj,
   commentData: state => state.commentData,
   newCommentData: state => state.newCommentData,
+  jobList: state => state.jobList,
+  educationList: state => state.educationList,
+  getAreaInfoList: state => state.getAreaInfoList,
 
 
   //商户注册

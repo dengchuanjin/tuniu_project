@@ -46,6 +46,7 @@
   position: absolute;
   top: 30px;
   left: 0;
+  z-index: 12;
   box-shadow: 0 0 1px #ccc;
   background-color: #fff;
   display: none;

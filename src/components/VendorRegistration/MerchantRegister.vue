@@ -482,11 +482,8 @@
         off: true,
         options: [
           {
-            name: '注册信息'
+            name: '供应商注册信息'
           },
-//          {
-//            name:'进度查询'
-//          }
         ],
         isOff: true,
         ScopeOfOperationType: [],
@@ -825,39 +822,46 @@
           }
           return false
         })[0].sm_cp_Agreement
-        this.contentDialog = true;
+        if(this.content){
+          this.contentDialog = true;
+        }else{
+          this.$notify({
+            message: '服务条款协议不存在!',
+            type: 'error'
+          });
+        }
       },
       //信息提交
       InformtionSubmit() {
         this.insertAgentInfo.data.sm_ai_AgentID = this.insertAgentInfo.data.sm_ai_Telephone;
         //省
-        if(this.provinceDataList.length){
-          this.insertAgentInfo.data.sm_ai_Provice = this.provinceDataList.filter(item => {
-            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_Provice) {
-              return true
-            }
-            return false;
-          })[0].sm_af_AreaName
-        }
-        //市
-        if(this.cityDataList.length){
-          this.insertAgentInfo.data.sm_ai_City = this.cityDataList.filter(item => {
-            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_City) {
-              return true
-            }
-            return false;
-          })[0].sm_af_AreaName
-        }
-
-        //县
-        if(this.countyDataList.length){
-          this.insertAgentInfo.data.sm_ai_County = this.countyDataList.filter(item => {
-            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_County) {
-              return true
-            }
-            return false;
-          })[0].sm_af_AreaName
-        }
+//        if(this.provinceDataList.length){
+//          this.insertAgentInfo.data.sm_ai_Provice = this.provinceDataList.filter(item => {
+//            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_Provice) {
+//              return true
+//            }
+//            return false;
+//          })[0].sm_af_AreaName
+//        }
+//        //市
+//        if(this.cityDataList.length){
+//          this.insertAgentInfo.data.sm_ai_City = this.cityDataList.filter(item => {
+//            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_City) {
+//              return true
+//            }
+//            return false;
+//          })[0].sm_af_AreaName
+//        }
+//
+//        //县
+//        if(this.countyDataList.length){
+//          this.insertAgentInfo.data.sm_ai_County = this.countyDataList.filter(item => {
+//            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_County) {
+//              return true
+//            }
+//            return false;
+//          })[0].sm_af_AreaName
+//        }
         if (!this.isSubmitContent) {
           this.$notify({
             message: '请选择合作类型并同意条款！',

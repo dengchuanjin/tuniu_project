@@ -190,7 +190,15 @@ export default {
       }
       return false;
     })
+  },
+  initJob(state,data){
+    state.jobList = data;
+  },
+  initEducation(state,data){
+    state.educationList = data;
+  },
+  getAreaInfo(state,data){
+    state.getAreaInfoList = data;
   }
-
 }
 

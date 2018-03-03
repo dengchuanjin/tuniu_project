@@ -29,12 +29,15 @@
             <ul>
               <li :class="item.iconClass" v-for="item,index in data">
                 <a href="javascript:;" @click="toggle(index)"><strong>{{item.label}}</strong><i></i></a>
-                <ul class="MyOrderDetailsList" v-show="n==index">
-                  <li v-for="v in item.children">
-                    <router-link :to="{name:v.label.to}">{{v.label.name}}</router-link>
-                  </li>
-                  <!--<li><a href="javascript:;">旅游订单券</a></li>-->
-                </ul>
+                <el-collapse-transition>
+                  <ul class="MyOrderDetailsList" v-show="n==index">
+                    <li v-for="v in item.children">
+                      <router-link :to="{name:v.label.to}">{{v.label.name}}</router-link>
+                    </li>
+                    <!--<li><a href="javascript:;">旅游订单券</a></li>-->
+                  </ul>
+                </el-collapse-transition>
+
               </li>
               <!--<li class="personakCenterType">-->
               <!--<a href="javascript:;"><strong>个人中心</strong><i></i></a>-->
@@ -68,7 +71,7 @@
     computed: mapGetters([]),
     data() {
       return {
-        n: 0,
+        n: 6,
         data: [{
           label: '我的订单',
           iconClass: "personakCenterContentWrapLeftNavMyOrder",

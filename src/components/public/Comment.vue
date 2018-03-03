@@ -15,6 +15,9 @@
             <li>
               <router-link to="/MerchantRegister">供应商注册</router-link>
             </li>
+            <li>
+              <router-link to="/agents">代理商注册</router-link>
+            </li>
             <li v-show="isLoginShow">
               <a href="javascript:;" style="color: #f60;" @click="toPersonalCenter">欢迎您:{{loginName ? loginName : ""}}</a>
             </li>
@@ -22,8 +25,9 @@
               <a href="javascript:;">管理员登录</a>
               <ul>
                 <!--<li><a href="http://hly.1000da.com.cn/user/#/" target="view_window">惠乐游后台管理系统</a></li>-->
-                <li><a href="http://tuniu.1000da.com.cn/agencies" target="view_window">供应商管理系统</a></li>
-                <li><a href="http://tuniu.1000da.com.cn/admin" target="view_window">旅行社审核系统</a></li>
+                <li><a href="http://tuniu.1000da.com.cn/supplier" target="view_window">供应商管理系统</a></li>
+                <li><a href="http://tuniu.1000da.com.cn/agents" target="view_window">代理商管理系统</a></li>
+                <li><a href="http://tuniu.1000da.com.cn/admin" target="view_window">惠乐游管理系统</a></li>
               </ul>
             </li>
             <li v-show="showQuit">

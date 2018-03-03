@@ -4,6 +4,7 @@ import AdminLogin from '@/components/AdminLogin'//登录
 import Register from '@/components/Register'//游客注册
 import AgenciesHome from '@/components/Agencies/AgenciesHome'//跟团游首页
 import MerchantRegister from '@/components/VendorRegistration/MerchantRegister'//供应商注册
+import Agents from '@/components/VendorRegistration/Agents'//代理商注册
 
 import FillInOrder from '@/components/Agencies/FillInOrder'//填写订单
 import PersonalCenter from '@/components/PersonakCenterFolder/PersonalCenter'//个人中心
@@ -65,6 +66,12 @@ export default [
     path: '/merchantRegister',
     name: 'MerchantRegister',
     component: MerchantRegister
+  },
+  //代理商注册
+  {
+    path: '/agents',
+    name: 'Agents',
+    component: Agents
   },
   //个人中心
   {
