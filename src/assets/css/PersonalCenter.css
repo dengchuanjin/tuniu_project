@@ -110,7 +110,10 @@
 }
 
 .personakCenterContentWrapLeftNavMyOrder > a {
-  background: url("../img/order.png") no-repeat 35px 10px;
+   background: url("../img/order.png") no-repeat 35px 10px;
+ }
+.personakCenterContentWrapLeftNavCash > a {
+  background: url("../img/cash.png") no-repeat 35px 10px;
 }
 
 .MyOrderDetailsList {

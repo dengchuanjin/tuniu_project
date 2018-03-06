@@ -114,24 +114,21 @@
         <li class="goLogin">
 
           <a href="javascript:;"></a>
-
-          <a href="javascript:;">前往登录</a>
-
+          <router-link to="/adminLogin">前往登录</router-link>
         </li>
 
         <li class="myFocusOn">
 
           <a href="javascript:;"></a>
 
-          <a href="javascript:;">我的关注</a>
+          <router-link to="/personalCenter/myCollection">我的关注</router-link>
 
         </li>
 
         <li class="myOrder">
 
           <a href="javascript:;"></a>
-
-          <a href="javascript:;">我的订单</a>
+          <router-link to="/personalCenter/myTourOrder">我的订单</router-link>
 
         </li>
 

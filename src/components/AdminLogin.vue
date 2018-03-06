@@ -116,31 +116,60 @@
         var GetValidateByPassword = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
           "userID": this.loginOptions.loginNumber,
           "password": this.loginOptions.loginPassword
         }
-        postPromise('http://114.55.248.116:1001/Service.asmx/GetValidateByPassword', {
-          paramJson: JSON.stringify(GetValidateByPassword)
+
+        this.$http.post('http://hly.lxs.1000da.com.cn/UserInfo/Login', JSON.stringify(GetValidateByPassword), {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         })
-          .then(data=>{
-            var data = JSON.parse(data);
-            if(Number(data.backCode) == 200){
-              this.$notify({
-                message: '登录成功！！',
-                type: 'success'
-              });
-              sessionStorage.setItem('user',JSON.stringify(data.userInfo[0]))
-              this.$store.commit('showQuitButton')
-              this.$router.go(-1)
-//              this.$router.push({name:'HeelTour'});
-//              window.location.reload()
-            }else{
-              this.$notify({
-                message: data.backResult,
-                type: 'error'
-              });
-            }
-          })
+        .then(data=>{
+          console.log(data)
+          var data = data.data;
+          if(Number(data.resultcode)==200){
+            this.$notify({
+              message: '登录成功！！',
+              type: 'success'
+            });
+            console.log(data.data)
+            sessionStorage.setItem('user',JSON.stringify(data.data))
+            this.$store.commit('showQuitButton')
+            this.$router.go(-1)
+          }else{
+            this.$notify({
+              message: data.backResult,
+              type: 'error'
+            });
+          }
+        })
+
+//        postPromise('http://114.55.248.116:1001/Service.asmx/GetValidateByPassword', {
+//          paramJson: JSON.stringify(GetValidateByPassword)
+//        })
+//          .then(data=>{
+//            var data = JSON.parse(data);
+//            if(Number(data.backCode) == 200){
+//              this.$notify({
+//                message: '登录成功！！',
+//                type: 'success'
+//              });
+//              sessionStorage.setItem('user',JSON.stringify(data.userInfo[0]))
+//              this.$store.commit('showQuitButton')
+//              this.$router.go(-1)
+////              this.$router.push({name:'HeelTour'});
+////              window.location.reload()
+//            }else{
+//              this.$notify({
+//                message: data.backResult,
+//                type: 'error'
+//              });
+//            }
+//          })
       },
       initData() {
 

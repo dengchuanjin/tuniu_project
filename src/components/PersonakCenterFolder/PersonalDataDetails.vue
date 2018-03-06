@@ -237,9 +237,20 @@
       let user = JSON.parse(sessionStorage.getItem('user'));
       if(user){
         this.userInfo = user;
-        this.saveUser.ui_Name =this.userInfo.ui_Name
-        this.saveUser.ui_ID =  this.userInfo.ui_ID
-        this.saveUser.ui_CertNo =this.userInfo.ui_CertNo
+        if(user.newUserInfo){
+          this.saveUser = user.newUserInfo
+          this.yearValue = user.newUserInfo.ui_Birthday.split('-')[0]
+          this.monthValue = Number(user.newUserInfo.ui_Birthday.split('-')[1])
+          this.dateValue = Number(user.newUserInfo.ui_Birthday.split('-')[2])
+        }else{
+          this.saveUser.ui_Name =this.userInfo.ui_Name
+          this.saveUser.ui_ID =  this.userInfo.ui_ID
+          this.saveUser.ui_CertNo =this.userInfo.ui_CertNo
+        }
+
+//        this.saveUser.ui_Name =this.userInfo.ui_Name
+//        this.saveUser.ui_ID =  this.userInfo.ui_ID
+//        this.saveUser.ui_CertNo =this.userInfo.ui_CertNo
       }else{
         this.$router.push({name:'AdminLogin'})
       }
@@ -294,6 +305,7 @@
         return num<10?'0'+num:''+num;
       },
       save(){
+        let user = JSON.parse(sessionStorage.getItem('user'))
         this.saveUser.ui_Birthday = this.yearValue+'-'+this.getNum(this.monthValue)+'-'+this.getNum(this.dateValue)
         if(this.saveUser.ui_CertNo == ''){
           this.$notify({
@@ -317,6 +329,23 @@
             message: suc,
             type: 'success'
           });
+          this.saveUser.ui_ProviceID = this.saveUser.ui_Provice
+          this.saveUser.ui_Provice = this.provinceDataList.filter(item=>{
+            if(item.sm_af_AreaID==this.saveUser.ui_Provice){
+              return true
+            }
+            return false
+          })[0].sm_af_AreaName
+          this.saveUser.ui_CityID = this.saveUser.ui_City
+          this.saveUser.ui_City = this.cityDataList.filter(item=>{
+            if(item.sm_af_AreaID==this.saveUser.ui_City){
+              return true
+            }
+            return false
+          })[0].sm_af_AreaName
+          user.newUserInfo = this.saveUser;
+          sessionStorage.setItem('user',JSON.stringify(user))
+
           this.isLoading = false;
         },err=>{
           this.$notify({

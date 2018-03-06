@@ -171,19 +171,22 @@
         <!--合作信息-->
         <div class="cooperationContent clearfix">
           <h5>合作信息</h5>
-          <el-col :span="24" class="formSearch">
-          </el-col>
-          <el-col :span="24" class="formSearch">
+          <!--<el-col :span="24" class="formSearch">-->
+          <!--</el-col>-->
+          <el-col :span="24" class="formSearch" style="width: 100%">
             <el-form :inline="true">
               <el-form-item label="合作类型名称:" :required="isOff">
-                <el-select v-model="changeCooperationTypeDataList" placeholder="请选择合作类型" @change="changeCooperation">
-                  <el-option
-                    v-for="item in changeCooperationTypeList"
-                    :key="item.sm_cp_ID"
-                    :label="item.sm_cp_Name"
-                    :value="item.sm_cp_ID">
-                  </el-option>
-                </el-select>
+                <!--<el-select v-model="changeCooperationTypeDataList" placeholder="请选择合作类型" @change="changeCooperation">-->
+                  <!--<el-option-->
+                    <!--v-for="item in changeCooperationTypeList"-->
+                    <!--:key="item.sm_cp_ID"-->
+                    <!--:label="item.sm_cp_Name"-->
+                    <!--:value="item.sm_cp_ID">-->
+                  <!--</el-option>-->
+                <!--</el-select>-->
+                <el-checkbox-group v-model="changeCooperationTypeDataList" >
+                  <el-checkbox v-for="item in changeCooperationTypeList" :label="item.sm_cp_Name" :key="item.sm_cp_ID">{{item.sm_cp_Name}}</el-checkbox>
+                </el-checkbox-group>
               </el-form-item>
             </el-form>
           </el-col>
@@ -471,7 +474,7 @@
           proxyType: {},
         },
         content: '',
-        changeCooperationTypeDataList: '',
+        changeCooperationTypeDataList: [],
         ScopeOfOperationTypeList: [],
       }
     },
@@ -761,7 +764,7 @@
         this.insertAgentInfo.data.sm_pi_CertImage = this.ImageURL1.join(',');
         this.insertAgentInfo.data.sm_pi_FeeImage = this.ImageURL2.join(',');
         this.insertAgentInfo.proxyType.sm_pt_CooperationTypeID =this.newArr[0].sm_cp_ID;
-          this.insertAgentInfo.proxyType.sm_pt_ProxyID = this.insertAgentInfo.data.sm_pi_ProxyInfoID
+        this.insertAgentInfo.proxyType.sm_pt_ProxyID = this.insertAgentInfo.data.sm_pi_ProxyInfoID;
         this.$store.dispatch('initInsertProxyInfo', this.insertAgentInfo)
         .then(() => {
           this.$notify({

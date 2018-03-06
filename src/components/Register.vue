@@ -30,6 +30,10 @@
               <span>确认密码:</span>
               <input type="password" v-model="addOptions.repeatPassword">
             </div>
+            <div class="repeatPassword">
+              <span>推广员ID:</span>
+              <input type="text" v-model="addOptions.extensionID">
+            </div>
             <div class="verificationCode">
               <span>验证码:</span>
               <input type="text" v-model="addOptions.validateNo">
@@ -50,7 +54,7 @@
 <script>
   import {mapGetters} from 'vuex'
   import Register from '../assets/css/Register.css'
-  import {postPromise} from '../assets/public'
+  import {postPromise,isPhone} from '../assets/public'
 
   export default {
     name: '',
@@ -67,7 +71,8 @@
           phone: '',
           password: '',
           repeatPassword: '',
-          validateNo: ''
+          validateNo: '',
+          extensionID:''
         }
       }
     },
@@ -106,88 +111,130 @@
           });
           return;
         }
-        postPromise('http://114.55.248.116:1001/Service.asmx/SendMessage', {
-          paramJson: JSON.stringify({
-            "loginUserID": "huileyou",
-            "loginUserPass": "123",
-            "phone": this.addOptions.phone,
-          })
+        this.$http.post('http://hly.lxs.1000da.com.cn/UserInfo/SendMessage', JSON.stringify({
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "phone": this.addOptions.phone,
+        }), {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         })
-          .then(data => {
-            var data = JSON.parse(data)
-            if (Number(data.backCode) == 200) {
-              let timer = setInterval(() => {
-                this.getName = this.num + 's后重新获取'
-                this.num--;
-                if (this.num == 0) {
-                  this.isDisabled = false;
-                  clearInterval(timer)
-                  this.getName = '重新获取验证码';
-                  this.num = 59
-                }
-              }, 1000)
-            }else{
-              this.$notify({
-                message: data.backResult,
-                type: 'error'
-              });
-            }
-          })
+        .then((data)=>{
+          var data = data.data;
+          if(Number(data.resultcode)==200){
+            let timer = setInterval(() => {
+              this.getName = this.num + 's后重新获取'
+              this.num--;
+              if (this.num == 0) {
+                this.isDisabled = false;
+                clearInterval(timer)
+                this.getName = '重新获取验证码';
+                this.num = 59
+              }
+            }, 1000)
+          }else{
+            this.$notify({
+              message: data.resultcontent,
+              type: 'error'
+            });
+          }
+        })
       },
 
       //注册提交
       UserRegisterBoxSubmit() {
-        if (this.phon == '') {
+        if (this.addOptions.phone == '') {
           this.$notify({
-            message: '请输入电话号码',
+            message: '请输入电话号码！！',
             type: 'error'
           });
           return;
         }
-        if (this.password != this.repeatPassword) {
+        if(!isPhone(this.addOptions.phone)){
+          this.$notify({
+            message: '电话号码格式有误！！',
+            type: 'error'
+          });
+          return;
+        }
+        if (this.addOptions.password != this.addOptions.repeatPassword) {
           this.$notify({
             message: '两次输入的密码不一致',
             type: 'error'
           });
           return;
         }
-        if (this.password == '') {
+        if (this.addOptions.password == '') {
           this.$notify({
             message: '请输入密码',
             type: 'error'
           });
           return;
         }
-        if (this.validateNo == '') {
+        if (this.addOptions.validateNo == '') {
           this.$notify({
             message: '请输入验证码',
             type: 'error'
           });
           return;
         }
-        postPromise('http://114.55.248.116:1001/Service.asmx/RegByCode', {
-          paramJson: JSON.stringify({
-            "loginUserID": "huileyou",
-            "loginUserPass": "123",
-            "phone": this.addOptions.phone,
-            "password": this.addOptions.password,
-            "validateNo": this.addOptions.validateNo
-          })
-        })
-          .then(data => {
-            var data = JSON.parse(data);
-            if (Number(data.backCode) == 200) {
-              this.$notify({
-                message: '注册成功!',
-                type: 'success'
-              });
-              this.active = 2;
-              this.registerInputBoxShow = false;
-              this.successShow = true;
-              this.nextShow = false;
 
-            }
-          })
+        this.$http.post('http://hly.lxs.1000da.com.cn/UserInfo/RegByCode', JSON.stringify({
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "phone": this.addOptions.phone,
+          extensionID:this.addOptions.extensionID,
+          "password": this.addOptions.password,
+          "validateNo": this.addOptions.validateNo
+        }), {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .then(data=>{
+          var data = data.data;
+          if(Number(data.resultcode)==200){
+            this.$notify({
+              message: '注册成功!',
+              type: 'success'
+            });
+            this.active = 2;
+            this.registerInputBoxShow = false;
+            this.successShow = true;
+            this.nextShow = false;
+          }
+        })
+
+//        postPromise('http://114.55.248.116:1001/Service.asmx/RegByCode', {
+//          paramJson: JSON.stringify({
+//            "loginUserID": "huileyou",
+//            "loginUserPass": "123",
+//            "phone": this.addOptions.phone,
+//            "password": this.addOptions.password,
+//            "validateNo": this.addOptions.validateNo
+//          })
+//        })
+//          .then(data => {
+//            var data = JSON.parse(data);
+//            if (Number(data.backCode) == 200) {
+//              this.$notify({
+//                message: '注册成功!',
+//                type: 'success'
+//              });
+//              this.active = 2;
+//              this.registerInputBoxShow = false;
+//              this.successShow = true;
+//              this.nextShow = false;
+//
+//            }
+//          })
       },
     },
   }

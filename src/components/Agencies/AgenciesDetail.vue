@@ -119,11 +119,11 @@
                 <div class="evaluate">
                   <div class="satisfaction">
                     <span>满意度</span>
-                    <a href="javascript:;">96<i>%</i></a>
+                    <a href="javascript:;">{{Math.round(commentMXObj.satisfyCount/commentMXObj.totalCount*100)}}<i>%</i></a>
                   </div>
                   <div class="comment">
                     <span>出游人数：<a href="javascript:;">70437</a></span>
-                    <span>点评人数：<a href="javascript:;">7956</a></span>
+                    <span>点评人数：<a href="javascript:;">{{commentMXObj.userCount}}</a></span>
                   </div>
                 </div>
               </div>
@@ -414,19 +414,19 @@
                   <ul class="statisticalChartRight">
                     <li>
                       <strong>导游服务</strong>
-                      <span><i>{{commentMXObj.guideAVG}}</i>/5</span>
+                      <span><i>{{commentMXObj.guideAVG?commentMXObj.guideAVG.toFixed(1):commentMXObj.guideAVG}}</i>/5</span>
                     </li>
                     <li>
                       <strong>行程安排</strong>
-                      <span><i>{{commentMXObj.travelAVG}}</i>/5</span>
+                      <span><i>{{commentMXObj.travelAVG?commentMXObj.travelAVG.toFixed(1):commentMXObj.travelAVG}}</i>/5</span>
                     </li>
                     <li>
                       <strong>餐饮住宿</strong>
-                      <span><i>{{commentMXObj.eatSleepAVG}}</i>/5</span>
+                      <span><i>{{commentMXObj.eatSleepAVG?commentMXObj.eatSleepAVG.toFixed(1):commentMXObj.eatSleepAVG}}</i>/5</span>
                     </li>
                     <li>
                       <strong>旅行交通</strong>
-                      <span><i>{{commentMXObj.transportAVG}}</i>/5</span>
+                      <span><i>{{commentMXObj.transportAVG?commentMXObj.transportAVG.toFixed(1):commentMXObj.transportAVG}}</i>/5</span>
                     </li>
                   </ul>
                 </div>

@@ -72,16 +72,26 @@
     data() {
       return {
         n: 6,
-        data: [{
-          label: '我的订单',
-          iconClass: "personakCenterContentWrapLeftNavMyOrder",
-          children: [{
-            label: {
-              name: '旅游订单',
-              to: 'MyTourOrder'
-            },
-          }]
-        },
+          data: [{
+            label: '我的订单',
+            iconClass: "personakCenterContentWrapLeftNavMyOrder",
+            children: [{
+              label: {
+                name: '旅游订单',
+                to: 'MyTourOrder'
+              },
+            }]
+          },
+          {
+            label: '我的资产',
+            iconClass: "personakCenterContentWrapLeftNavCash",
+            children: [{
+              label: {
+                name: '我的积分',
+                to: 'MyPoints'
+              },
+            }]
+          },
           {
             label: '个人中心',
             iconClass: "personakCenterType",
@@ -111,9 +121,24 @@
         ]
       }
     },
+    created(){
+      let user = JSON.parse(sessionStorage.getItem('user'))
+      if(!user){
+        this.$router.push({name:'AdminLogin'})
+        this.$notify({
+          message: '请先登录!',
+          type: 'error'
+        });
+        return
+      }
+    },
     methods: {
       toggle(index){
-        this.n = index;
+        if(this.n==index){
+          this.n = 100
+        }else{
+          this.n = index;
+        }
       },
       initData() {
       },

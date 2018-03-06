@@ -23,7 +23,6 @@ Vue.use(VueLazyLoad,{
   loading:'../static/img/loading.gif'
 });
 Vue.use(ElementUI)
-Vue.config.productionTip = false;
 // axios.interceptors.request.use((config) => {
 //   config.data = qs.stringify(config.data);
 //   return config;

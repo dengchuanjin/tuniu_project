@@ -139,5 +139,8 @@ export const leftTimer = (el,year,month,day,hour,minute,second)=>{
     el.text = days + "天" + hours + "小时" + minutes + "分" + seconds + "秒";
   })
 }
-
+//判断手机号码
+export const isPhone = id=>{
+  return /^1[0-9]{10}$/.test(id);
+};
 

@@ -24,7 +24,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in playRouteData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in playRouteData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -44,7 +44,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in tartsTheCityData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in tartsTheCityData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -100,7 +100,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in recommendScenicSpotData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in recommendScenicSpotData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -120,7 +120,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in placeOfFormationData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in placeOfFormationData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -140,7 +140,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in productBrandData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in productBrandData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -160,7 +160,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in uitableCrowdData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in uitableCrowdData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -180,7 +180,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in lineCharacteristicsData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in lineCharacteristicsData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -200,7 +200,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in groupModeData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in groupModeData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -220,7 +220,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in themeOfPlayData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in themeOfPlayData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -240,7 +240,7 @@
             </div>
             <div class="selectMore">
               <el-checkbox-group v-model="checkList" @change="changeType">
-                <el-checkbox v-for="item,index in hotelGradeData" :label="item"></el-checkbox>
+                <el-checkbox v-for="item,index in hotelGradeData" :label="item" :key="index"></el-checkbox>
               </el-checkbox-group>
               <div class="selectMoreSubmitBox">
                 <el-button size="mini">确定</el-button>
@@ -260,7 +260,7 @@
           </div>
           <div class="searchType">
             <el-checkbox-group v-model="searchTypeList">
-              <el-checkbox v-for="item,index in searchType" :label="item"></el-checkbox>
+              <el-checkbox v-for="item,index in searchType" :label="item" :key="index"></el-checkbox>
             </el-checkbox-group>
           </div>
         </div>
@@ -1114,7 +1114,7 @@
     font: 12px/2 "微软雅黑";
     color: #666;
   }
-  
+
   .satisfaction {
     color: #f80;
   }

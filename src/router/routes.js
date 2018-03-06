@@ -18,7 +18,7 @@ import MyOrderDetails from '@/components/PersonakCenterFolder/MyOrderDetails'//�
 import MyCollection from '@/components/PersonakCenterFolder/MyCollection' //我的收藏
 import CommentOnAComment from '@/components/Agencies/CommentOnAComment' //发表评论
 
-
+import MyPoints from '@/components/PersonakCenterFolder/MyPoints'//我的积分
 //微信支付
 
 
@@ -89,6 +89,15 @@ export default [
           MyInformtion: MyTourOrder
         },
         name: 'MyTourOrder'
+      },
+      //我的积分
+      {
+        path: 'myPoints',
+        components: {
+          default: Comment,
+          MyInformtion: MyPoints
+        },
+        name: 'MyPoints'
       },
       //个人信息
       {
