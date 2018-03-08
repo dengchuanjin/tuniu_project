@@ -126,6 +126,13 @@
           </el-col>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
+              <el-form-item label="公司名称:" :required="isOff">
+                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_CompanyName"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
               <el-form-item label="省:" :required="isOff">
                 <el-select v-model="insertAgentInfo.data.sm_ai_Provice" placeholder="请选择省" size="mini"
                            @focus="changeProvince">
@@ -431,7 +438,7 @@
     >
       <span v-html="content"></span>
       <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="submitContent">同意条款并继续</el-button>
+      <el-button type="primary" @click="submitContent">同意条款并继续</el-button>
   </span>
     </el-dialog>
   </div>
@@ -495,6 +502,7 @@
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "data": {
+            sm_ai_CompanyName:'',
             sm_ai_AgentID: '',
             sm_ai_ParentID: '',
             sm_ai_Password: '',
@@ -809,20 +817,58 @@
       },
       //选中合作类型获取协议
       changeCooperation(v) {
-        this.content = this.changeCooperationTypeList.filter(item => {
-          if (item.sm_cp_ID == v) {
-            return true
-          }
-          return false
-        })[0].sm_cp_Agreement
-        if(this.content){
-          this.contentDialog = true;
-        }else{
+        if(this.insertAgentInfo.data.sm_ai_Provice==''){
           this.$notify({
-            message: '服务条款协议不存在!',
+            message: '请选择省!',
             type: 'error'
           });
+          return
         }
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "sm_cp_ID": "",
+          "sm_cp_Name": "",
+          "sm_cp_IsDelete": 0,
+          "provice": this.insertAgentInfo.data.sm_ai_Provice,
+//          "city": this.insertAgentInfo.data.sm_ai_City,insertAgentInfo.data.sm_ai_CompanyName
+          "partnerTypeID": v,
+        };
+        this.$store.dispatch('initAgreementContent',options)
+        .then(content=>{
+          if(content){
+            this.contentDialog = true;
+            this.content = content
+          }else{
+            this.$notify({
+              message: '服务条款协议不存在!',
+              type: 'error'
+            });
+          }
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+        })
+
+//        this.content = this.changeCooperationTypeList.filter(item => {
+//          if (item.sm_cp_ID == v) {
+//            return true
+//          }
+//          return false
+//        })[0].sm_cp_Agreement
+//        if(this.content){
+//          this.contentDialog = true;
+//        }else{
+//          this.$notify({
+//            message: '服务条款协议不存在!',
+//            type: 'error'
+//          });
+//        }
       },
       //信息提交
       InformtionSubmit() {

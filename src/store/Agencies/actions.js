@@ -807,5 +807,23 @@ export default {
         }
       })
     })
+  },
+  //查询供应商协议
+  initAgreementContent(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://hly.lxs.1000da.com.cn/CooperationType/Select', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data=>{
+        var data = data.data;
+        if(Number(data.resultcode) == 200){
+          relove(data.data[0].sm_cp_Agreement)
+        }else{
+          reject(data.resultcontent)
+        }
+      })
+    })
   }
 }

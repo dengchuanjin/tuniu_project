@@ -129,14 +129,12 @@
           }
         })
         .then(data=>{
-          console.log(data)
           var data = data.data;
           if(Number(data.resultcode)==200){
             this.$notify({
               message: '登录成功！！',
               type: 'success'
             });
-            console.log(data.data)
             sessionStorage.setItem('user',JSON.stringify(data.data))
             this.$store.commit('showQuitButton')
             this.$router.go(-1)

@@ -46,7 +46,7 @@
                     <li style="color: #ccc" v-for="item in arr1">{{item}}</li>
                     <li v-for="item in arr4">{{item}}</li>
                     <!--今天-->
-                    <li v-for="item in arr3" @click="changeTime(item.day)">{{"今天"}}
+                    <li v-for="item in arr3" @click="changeTime(item.day)" v-show="arr3.length">{{"今天"}}
                       <div v-show="item.isJ">
                         <span>充足</span>
                         <strong>￥{{item.day.ts_pp_Price}}起</strong>
@@ -74,7 +74,7 @@
                       </div>
                     </li>
                     <!--有价格的-->
-                    <li v-for="item in arr5" @click="changeTime(item)">{{item.n}}
+                    <li v-for="item in arr5" @click="changeTime(item)">{{item.n==day.d?"今天":item.n}}
                       <div v-show="item.ts_pp_Price">
                         <span v-if="item.ts_pp_Person>10">充足</span>
                         <span v-else>不多</span>
@@ -549,6 +549,7 @@
     ]),
     data() {
       return {
+        day:{},
         commentLoading:false,//用户评论loading
         typeList:[{name:'全部',id:1},{name:'一般',id:2},{name:'满意',id:3},{name:'不满意',id:4}],//点评类型
         total:0,
@@ -672,6 +673,11 @@
       },
       //日历选项卡
       changeSearchMonth(item) {
+        if((this.day.m+1)==item.m){
+          this.day.d = new Date().getDate()
+        }else{
+          this.day.d = '今天'
+        }
         this.n = item.i;
         this.changeDate = item.date;
         this.m = item.m
@@ -743,6 +749,11 @@
       },
       //选中出发城市
       getSearchCity() {
+        if((this.day.m+1)==new Date().getMonth()+1){
+          this.day.d = new Date().getDate()
+        }else{
+          this.day.d = '今天'
+        }
         let date = new Date()
         let str = date.getFullYear()+'-'+this.getNum(date.getMonth()+1)+'-01';
         if (this.changeDate) {
@@ -868,26 +879,26 @@
               var booToomMonth = this.getDates(year, month + 1);
               _this.arr2.push(v - this.getDates(year, month))
             } else if (v == new Date().getDate() && year == new Date().getFullYear() && month == new Date().getMonth()) {
-
-              for (var n = 0; n < data.length; n++) {
-                if (data[n].day == new Date().getDate()) {
-                  data[0].n = v;
-                  _this.arr3.push({
-                    isJ: true,
-                    day: data[v - new Date().getDate()]
-                  })
-//                _this.arr3.pop()
-                }
-              }
-              if (_this.arr3.length > 1) {
-                _this.arr3.shift()
-              }
-              if (!_this.arr3.length) {
-                _this.arr3.push({
-                  isJ: false,
-                  day: new Date().getDate()
-                })
-              }
+                _this.arr3 = []
+//              for (var n = 0; n < data.length; n++) {
+//                if (data[n].day == new Date().getDate()) {
+//                  data[0].n = v;
+//                  _this.arr3.push({
+//                    isJ: true,
+//                    day: data[v - new Date().getDate()]
+//                  })
+////                _this.arr3.pop()
+//                }
+//              }
+//              if (_this.arr3.length > 1) {
+//                _this.arr3.shift()
+//              }
+//              if (!_this.arr3.length) {
+//                _this.arr3.push({
+//                  isJ: false,
+//                  day: new Date().getDate()
+//                })
+//              }
 
 //              if( _this.arr3.isJ){
 //                _this.arr3.push({
@@ -913,13 +924,15 @@
               }else{
                 newArr.push(v)
               }
-
             }
           }
           for (var j = 0; j < newArr.length; j++) {
             for (var m = 0; m < data.length; m++) {
               if (data[m].day && data[m].day == newArr[j]) {
                 data[m].n = newArr[j];
+                _this.arr5.push(data[m])
+              }else{
+                data[m].n = data[m].day;
                 _this.arr5.push(data[m])
               }
             }
@@ -1045,6 +1058,8 @@
       }
     },
     created() {
+      this.day.m = new Date().getMonth()
+      this.day.d = new Date().getDate()
       //获取评论信息
       let options = {
         "loginUserID": "huileyou",

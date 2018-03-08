@@ -237,11 +237,13 @@
       let user = JSON.parse(sessionStorage.getItem('user'));
       if(user){
         this.userInfo = user;
-        if(user.newUserInfo){
-          this.saveUser = user.newUserInfo
-          this.yearValue = user.newUserInfo.ui_Birthday.split('-')[0]
-          this.monthValue = Number(user.newUserInfo.ui_Birthday.split('-')[1])
-          this.dateValue = Number(user.newUserInfo.ui_Birthday.split('-')[2])
+        if(user){
+          this.saveUser = user
+          if(user.ui_Birthday){
+            this.yearValue = user.ui_Birthday.split('-')[0]
+            this.monthValue = Number(user.ui_Birthday.split('-')[1])
+            this.dateValue = Number(user.ui_Birthday.split('-')[2])
+          }
         }else{
           this.saveUser.ui_Name =this.userInfo.ui_Name
           this.saveUser.ui_ID =  this.userInfo.ui_ID
@@ -306,6 +308,7 @@
       },
       save(){
         let user = JSON.parse(sessionStorage.getItem('user'))
+        this.saveUser.ui_UserCode = user.ui_UserCode
         this.saveUser.ui_Birthday = this.yearValue+'-'+this.getNum(this.monthValue)+'-'+this.getNum(this.dateValue)
         if(this.saveUser.ui_CertNo == ''){
           this.$notify({
@@ -343,7 +346,7 @@
             }
             return false
           })[0].sm_af_AreaName
-          user.newUserInfo = this.saveUser;
+          user = this.saveUser;
           sessionStorage.setItem('user',JSON.stringify(user))
 
           this.isLoading = false;

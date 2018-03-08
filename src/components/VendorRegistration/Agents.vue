@@ -91,6 +91,13 @@
           <h5>公司信息</h5>
           <el-col :span="24" class="formSearch">
             <el-form :inline="true">
+              <el-form-item label="公司名称:" :required="isOff">
+                <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_pi_CompanyName"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="formSearch">
+            <el-form :inline="true">
               <el-form-item label="省:" :required="isOff">
                 <el-select v-model="insertAgentInfo.data.sm_pi_Provice" placeholder="请选择省" size="mini"
                            @focus="changeProvince">
@@ -184,7 +191,7 @@
                     <!--:value="item.sm_cp_ID">-->
                   <!--</el-option>-->
                 <!--</el-select>-->
-                <el-checkbox-group v-model="changeCooperationTypeDataList" >
+                <el-checkbox-group v-model="changeCooperationTypeDataList" @change="changeCooperationType">
                   <el-checkbox v-for="item in changeCooperationTypeList" :label="item.sm_cp_Name" :key="item.sm_cp_ID">{{item.sm_cp_Name}}</el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
@@ -345,7 +352,7 @@
       </div>
       <!--信息提交-->
       <div class="ContactsSubmitWrap" v-show="off">
-        <!--<p>协议</p>-->
+       <p><el-checkbox v-model="isSubmitContent"></el-checkbox><span style="font-size: 12px;cursor:pointer;padding-left: 5px" @click="consentAgreement">同意服务条款协议</span></p>
         <a href="javascript:;" @click="InformtionSubmit">提交信息</a>
       </div>
       <div class="MerchantRegisterTabel" v-show="!off">
@@ -403,6 +410,7 @@
     ]),
     data() {
       return {
+        checked:true,
         proviceID:'',//省
         areaInfoList:[],
         proxy:'',//代理范围
@@ -464,14 +472,15 @@
             "sm_pi_CertImage": "",
             "sm_pi_FeeNo": "",
             "sm_pi_FeeImage": "",
-            sm_pi_Level:'',
-            sm_ai_ProxyParentID:''
+            "sm_pi_Level":'',
+            "sm_ai_ProxyParentID":'',
+            "sm_pi_CompanyName":''
           },
-          areaData:[    //代理区域
+          'areaData':[    //代理区域
           ],
           "proviceData": [],
           "cityData": [],
-          proxyType: {},
+          'proxyType': [],
         },
         content: '',
         changeCooperationTypeDataList: [],
@@ -503,6 +512,10 @@
       })
     },
     methods: {
+      //点击同意协议
+      consentAgreement(){
+        this.contentDialog = true;
+      },
       //选择等级
       changeLevel(v){
         this.insertAgentInfo.areaData = []
@@ -680,8 +693,7 @@
           for (var j = 0; j < typeArr.length; j++) {
             if (arr[i].sm_cp_Name == typeArr[j]) {
               this.newArr.push({
-                sm_cp_ID: arr[i].sm_cp_ID,
-                sm_cp_PartnerTypeName: typeArr[j]
+                sm_pt_CooperationTypeID: arr[i].sm_cp_ID,
               })
             }
           }
@@ -706,52 +718,24 @@
       },
       //信息提交
       InformtionSubmit() {
+        if(this.insertAgentInfo.data.sm_pi_Telephone==''){
+          this.$notify({
+            message: '请输入手机号码！',
+            type: 'error'
+          });
+          return
+        }
         this.insertAgentInfo.data.sm_pi_ProxyInfoID = this.insertAgentInfo.data.sm_pi_Telephone;
-        //省
-//        if(this.provinceDataList.length){
-//          this.insertAgentInfo.data.sm_pi_Provice = this.provinceDataList.filter(item => {
-//            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_pi_Provice) {
-//              return true
-//            }
-//            return false;
-//          })[0].sm_af_AreaName
-//        }
-//        //市
-//        if(this.cityDataList.length){
-//          this.insertAgentInfo.data.sm_pi_City = this.cityDataList.filter(item => {
-//            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_pi_City) {
-//              return true
-//            }
-//            return false;
-//          })[0].sm_af_AreaName
-//        }
-//
-//        //县
-//        if(this.countyDataList.length){
-//          this.insertAgentInfo.data.sm_pi_County = this.countyDataList.filter(item => {
-//            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_pi_County) {
-//              return true
-//            }
-//            return false;
-//          })[0].sm_af_AreaName
-//        }
+
+        for(var i=0;i<this.newArr.length;i++){
+          this.newArr[i].sm_pt_ProxyID =  this.insertAgentInfo.data.sm_pi_ProxyInfoID
+        }
         if (!this.isSubmitContent) {
           this.$notify({
             message: '请选择合作类型并同意条款！',
             type: 'error'
           });
           return
-        }
-        this.newArr = [];
-        let arr = this.changeCooperationTypeList;
-//        let typeArr = this.changeCooperationTypeDataList
-        for (var i = 0; i < arr.length; i++) {
-          if (arr[i].sm_cp_ID == this.changeCooperationTypeDataList) {
-            this.newArr.push({
-              sm_cp_ID: arr[i].sm_cp_ID,
-              sm_cp_PartnerTypeName: arr[i].sm_cp_Name
-            })
-          }
         }
         if (isNaN(this.insertAgentInfo.data.sm_pi_RegMoney)) {
           this.$notify({
@@ -763,8 +747,7 @@
 
         this.insertAgentInfo.data.sm_pi_CertImage = this.ImageURL1.join(',');
         this.insertAgentInfo.data.sm_pi_FeeImage = this.ImageURL2.join(',');
-        this.insertAgentInfo.proxyType.sm_pt_CooperationTypeID =this.newArr[0].sm_cp_ID;
-        this.insertAgentInfo.proxyType.sm_pt_ProxyID = this.insertAgentInfo.data.sm_pi_ProxyInfoID;
+        this.insertAgentInfo.proxyType = this.newArr;
         this.$store.dispatch('initInsertProxyInfo', this.insertAgentInfo)
         .then(() => {
           this.$notify({
