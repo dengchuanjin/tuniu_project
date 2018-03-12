@@ -29,7 +29,8 @@ import AdmissionTicketMore from '@/components/Tickets/AdmissionTicketMore' //更
 
 
 import HotelHomePage from '@/components/Hotel/HotelHomePage'//酒店首页
-import HotelDetails from '@/components/Hotel/HotelDetails'//酒店详情页
+import HotelSearchMore from '@/components/Hotel/HotelSearchMore'//酒店查询更多
+import HotelDetalis from '@/components/Hotel/HotelDetalis'//酒店详情页
 
 
 export default [
@@ -203,12 +204,21 @@ export default [
       },
       //酒店详情页
       {
-        path: 'hotelDetails',
+        path: 'hotelSearchMore',
         components: {
           default: Comment,
-          User: HotelDetails
+          User: HotelSearchMore
         },
-        name: 'HotelDetails'
+        name: 'HotelSearchMore'
+      },
+      //酒店详情页
+      {
+        path: 'hotelDetalis',
+        components: {
+          default: Comment,
+          User: HotelDetalis
+        },
+        name: 'HotelDetalis'
       },
       //更多门票
       {

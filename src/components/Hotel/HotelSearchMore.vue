@@ -122,8 +122,6 @@
                 <el-checkbox>观塘区</el-checkbox>
                 <el-checkbox>屯门区</el-checkbox>
                 <el-checkbox>沙田区</el-checkbox>
-
-
               </div>
             </li>
             <!--热门推荐-->
@@ -149,8 +147,6 @@
                 <el-checkbox>观塘区</el-checkbox>
                 <el-checkbox>屯门区</el-checkbox>
                 <el-checkbox>沙田区</el-checkbox>
-
-
               </div>
             </li>
             <!--热门推荐-->
@@ -176,8 +172,6 @@
                 <el-checkbox>观塘区</el-checkbox>
                 <el-checkbox>屯门区</el-checkbox>
                 <el-checkbox>沙田区</el-checkbox>
-
-
               </div>
             </li>
             <!--热门推荐-->
@@ -235,7 +229,7 @@
                 <div class="HotelRecommendDetalisListIntroduceBox">
                   <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">1</span>
-                    <h4><a href="javascript:;">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
+                    <h4><a href="javascript:;" @click="goHotelDetails">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
                   </div>
@@ -486,10 +480,8 @@
       }
     },
     methods: {
-      initData() {
-      },
-      search() {
-        this.initData()
+      goHotelDetails(){
+        this.$router.push({name:'HotelDetalis'})
       },
       changeCity() {
 
