@@ -36,6 +36,7 @@ Vue.prototype.$http = axios;
 new Vue({
   el: '#app',
   router,
+  filters,
   store,
   template: '<App/>',
   components: { App },

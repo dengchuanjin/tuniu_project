@@ -7,5 +7,20 @@ export default {
   },
   initNearList(state,data){
     state.nearList = data;
+  },
+  initThemeTypeNameList(state,data){
+    state.themeTypeNameList = data;
+  },
+  setAdminNearTickeFilterObj(state,obj){
+    state.adminNearTickeFilterObj = obj
+  },
+  initAdminNearTickeFilterObj(state,obj){
+    state.adminNearTickeFilterObj = obj
+  },
+  initHotList(state,data){
+    state.hotList = data;
+  },
+  initOutList(state,data){
+    state.outList =data;
   }
 }
