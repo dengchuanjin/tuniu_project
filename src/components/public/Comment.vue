@@ -230,6 +230,10 @@
             name:'酒店',
             to:'/Comment/HotelHomePage'
           },
+          {
+            name:'酒店详情',
+            to:'/Comment/HotelSearchMore'
+          },
         ]
       }
     },
