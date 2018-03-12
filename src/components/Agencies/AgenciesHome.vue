@@ -575,13 +575,6 @@
             <img :src="item" alt=""/>
           </el-carousel-item>
         </el-carousel>
-        <div class="block">
-          <el-carousel height="100%">
-            <el-carousel-item v-for="item in imgs" :key="item">
-              <img :src="item" width="990"  />
-            </el-carousel-item>
-          </el-carousel>
-        </div>
       </div>
     </div>
 
@@ -735,13 +728,7 @@
           'https://m3.tuniucdn.com/fb2/t1/G5/M00/82/35/Cii-slqfkUOITMiUAAMTI0E7wUIAAD94AGHIycAAxM718.jpeg',
           'https://m4.tuniucdn.com/fb2/t1/G5/M00/78/99/Cii-tFqWXo-Ib6cEAAMKGxjhV-AAADvkwBj05UAAwoz83.jpeg',
           'https://m.tuniucdn.com/fb2/t1/G5/M00/5F/05/Cii-s1p9EzuID3bDAAPTV0ruXhQAADTPQEqPtYAA9Nv34.jpeg'
-        ],
-        imgs:[
-          'https://m1.tuniucdn.com/fb2/t1/G5/M00/79/FF/Cii-s1qXlO2IeUIeAAQGPu8doA8AADxdACH95gABAZW78.jpeg',
-          'https://m1.tuniucdn.com/fb2/t1/G5/M00/79/FF/Cii-s1qXlO2IeUIeAAQGPu8doA8AADxdACH95gABAZW78.jpeg',
-          'https://m1.tuniucdn.com/fb2/t1/G5/M00/79/FF/Cii-s1qXlO2IeUIeAAQGPu8doA8AADxdACH95gABAZW78.jpeg',
-          'https://m1.tuniucdn.com/fb2/t1/G5/M00/79/FF/Cii-s1qXlO2IeUIeAAQGPu8doA8AADxdACH95gABAZW78.jpeg'
-        ],
+        ]
       }
     },
     created() {
