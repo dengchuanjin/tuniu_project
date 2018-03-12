@@ -569,14 +569,20 @@
           <!--菜单详情-->
         </li>
       </ul>
-      <div class="carousel"></div>
+      <div class="carousel">
+        <el-carousel height="365px">
+          <el-carousel-item v-for="item,index in images" :key="index">
+            <img :src="item" alt=""/>
+          </el-carousel-item>
+        </el-carousel>
+      </div>
     </div>
 
 
     <!--国内游-->
     <div class="homePageDomesticTour">
       <div class="homePageDomesticTourTitle">
-        <h4>国内旅游</h4>
+        <h4 style="float: left;padding-right: 980px">国内旅游</h4>
         <router-link to="HeelTourSearchMore">查询更多>></router-link>
       </div>
       <div class="clearfix">
@@ -716,7 +722,13 @@
     }),
     data() {
       return {
-        cityName: ''
+        cityName: '',
+        images:[
+          'https://m4.tuniucdn.com/fb2/t1/G5/M00/73/0F/Cii-slqRLoKIPikTAAMQgvrp_I8AADocAJjRFMAAxCa93.jpeg',
+          'https://m3.tuniucdn.com/fb2/t1/G5/M00/82/35/Cii-slqfkUOITMiUAAMTI0E7wUIAAD94AGHIycAAxM718.jpeg',
+          'https://m4.tuniucdn.com/fb2/t1/G5/M00/78/99/Cii-tFqWXo-Ib6cEAAMKGxjhV-AAADvkwBj05UAAwoz83.jpeg',
+          'https://m.tuniucdn.com/fb2/t1/G5/M00/5F/05/Cii-s1p9EzuID3bDAAPTV0ruXhQAADTPQEqPtYAA9Nv34.jpeg'
+        ]
       }
     },
     created() {
@@ -756,7 +768,6 @@
           "provice": name
         };
         await this.$store.dispatch('initAllHomeData', options);
-
 //        //国内游
 //        let getShowGood = {
 //          "loginUserID": "huileyou",
@@ -1004,6 +1015,8 @@
   .continer ul {
     height: 365px;
     width: 200px;
+    position: relative;
+    z-index: 999;
     list-style: none;
   }
 
@@ -1024,7 +1037,6 @@
 
   .continer ul li .menu {
     width: 200px;
-    height: 73px;
     /*background-color: red;*/
   }
 
@@ -1033,6 +1045,9 @@
     font-size: 15px;
     font-weight: normal;
     padding-left: 20px;
+    padding-top: 6px;
+    padding-bottom: 3px;
+    box-sizing: content-box;
     /*background-color: aquamarine;*/
     height: 23px;
     position: relative;
@@ -1045,7 +1060,7 @@
     background-repeat: no-repeat;
     background-position: 2px -607px;
     position: absolute;
-    top: 8px;
+    top: 5px;
   }
 
   .continer ul li .menu h4 .ico_2 {
@@ -1084,13 +1099,13 @@
     display: block;
     height: 16px;
     width: 150px;
-    margin-left: 18px;
+    margin-left: 22px;
     padding-top: 5px;
   }
 
   .continer ul li .menu h4 .pointer {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-left: 1px solid #fff;
     border-top: 1px solid #fff;
     position: absolute;
@@ -1108,7 +1123,7 @@
 
   .continer ul li .menu .local a {
     height: 20px;
-    font-size: 13px;
+    font-size: 12px;
     color: rgb(187, 187, 187);
     font-weight: normal;
     margin-right: 4px;
@@ -1159,7 +1174,9 @@
   .continer ul li:hover .detail {
     display: block;
   }
-
+.box{
+  border:none
+}
   .continer ul li:hover .detail .box {
     width: 250px;
     height: 122px;
@@ -1199,7 +1216,6 @@
   .carousel {
     width: 990px;
     height: 100px;
-    background-color: #000;
     float: left;
   }
 

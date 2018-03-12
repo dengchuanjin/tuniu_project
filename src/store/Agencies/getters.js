@@ -34,6 +34,7 @@ export default {
   jobList: state => state.jobList,
   educationList: state => state.educationList,
   getAreaInfoList: state => state.getAreaInfoList,
+  showFixedComment: state => state.showFixedComment,
 
 
   //商户注册

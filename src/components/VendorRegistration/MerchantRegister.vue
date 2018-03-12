@@ -763,7 +763,7 @@
       },
       //合作类型
       changeCooperationTypeL() {
-        var selectCooperationType = {
+        let selectCooperationType = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "sm_cp_ID": "",

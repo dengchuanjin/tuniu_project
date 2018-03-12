@@ -2,6 +2,7 @@
  * Created by leibo on 18/2/10.
  */
 export default  {
+  showFixedComment:true,//右边导航
   //-------------首页------------
   isLoading:false,//loading
   domesticDataList:[],//国内跟团游数据

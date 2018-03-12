@@ -85,21 +85,15 @@
       <div class="mainNavWrap">
         <nav class="mainNavWrapContent">
           <ul class="mainNavWrapContentList  clearfix" ref="mainNavWrapContentList">
-            <li>
-              <router-link to="/Comment/HeelTour">跟团游</router-link>
-            </li>
-            <li>
-              <router-link to="/Comment/AdmissionTicketHomePage">门票</router-link>
-            </li>
-            <li>
-              <router-link to="/Comment/HotelHomePage">酒店 </router-link>
+            <li v-for="item,index in mainNavWrapContentList" @click="clickMainNavWrapContent(index)" :class="{active:index==n}">
+              <router-link :to="item.to">{{item.name}}</router-link>
             </li>
           </ul>
         </nav>
       </div>
     </section>
 
-    <div class="FixedComment">
+    <div class="FixedComment" v-show="showFixedComment">
 
       <ul class="FixedCommentTop">
 
@@ -203,7 +197,8 @@
       'navList',
       'lineScheduleObj',
       'isLoading',
-      'showQuit'
+      'showQuit',
+      'showFixedComment'
     ]),
     watch: {
       '$route'(to, from) {
@@ -212,6 +207,7 @@
     },
     data() {
       return {
+        n:0,
         isLoginShow: false,
         isLogin: true,
         getName: '获取动态验证码',
@@ -220,10 +216,32 @@
         UserLoadingShow: true,
         UserRegisterBoxShow: false,
         isDisabled: false,
-        loginName: ''
+        loginName: '',
+        mainNavWrapContentList:[
+          {
+            name:'跟团游',
+            to:'/Comment/HeelTour'
+          },
+          {
+            name:'门票',
+            to:'/Comment/AdmissionTicketHomePage'
+          },
+          {
+            name:'酒店',
+            to:'/Comment/HotelHomePage'
+          },
+        ]
       }
     },
     methods: {
+      clickMainNavWrapContent(index){
+        this.n = index;
+        if(index==2){
+          this.$store.commit('hideShowFixedComment')
+        }else{
+          this.$store.commit('showShowFixedComment')
+        }
+      },
       //退出
       Quit() {
         //删除用户sessionStorage
@@ -262,17 +280,7 @@
       this.initData();
     },
     mounted() {
-      let ul = this.$refs.mainNavWrapContentList;
-      let lis = ul.children;
-      lis[0].className = 'active'
-      for (let i = 0; i < lis.length; i++) {
-        lis[i].onclick = function () {
-          for (var j = 0; j < lis.length; j++) {
-            lis[j].className = ''
-          }
-          lis[i].className = 'active';
-        }
-      }
+
 
       if (sessionStorage.getItem('user')) {
         var InformetionObj = JSON.parse(sessionStorage.getItem('user'))

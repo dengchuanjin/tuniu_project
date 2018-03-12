@@ -123,7 +123,7 @@
           "password": this.loginOptions.loginPassword
         }
 
-        this.$http.post('http://hly.lxs.1000da.com.cn/UserInfo/Login', JSON.stringify(GetValidateByPassword), {
+        this.$http.post('http://webservice.1000da.com.cn/UserInfo/Login', JSON.stringify(GetValidateByPassword), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }

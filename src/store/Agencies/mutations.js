@@ -199,6 +199,12 @@ export default {
   },
   getAreaInfo(state,data){
     state.getAreaInfoList = data;
+  },
+  showShowFixedComment(state){
+    state.showFixedComment = true
+  },
+  hideShowFixedComment(state){
+    state.showFixedComment = false
   }
 }
 

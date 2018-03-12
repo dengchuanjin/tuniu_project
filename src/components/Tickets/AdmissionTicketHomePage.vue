@@ -65,7 +65,9 @@
         <div class="AdmissionTickeHomePageWrapPicture">
           <div class="block">
             <el-carousel height="370px">
-              <el-carousel-item v-for="item in 4" :key="item"></el-carousel-item>
+              <el-carousel-item v-for="item,index in images" :key="index">
+                <img :src="item" alt=""/>
+              </el-carousel-item>
             </el-carousel>
           </div>
         </div>
@@ -81,23 +83,8 @@
               <li>
                 <a href="javascript:;" class="active">精选</a>
               </li>
-              <li>
-                <a href="javascript:;">成都</a>
-              </li>
-              <li>
-                <a href="javascript:;">重庆</a>
-              </li>
-              <li>
-                <a href="javascript:;">阿坝</a>
-              </li>
-              <li>
-                <a href="javascript:;">乐山</a>
-              </li>
-              <li>
-                <a href="javascript:;">南充</a>
-              </li>
-              <li>
-                <a href="javascript:;">甘孜</a>
+              <li v-show="nearList.tourSiteMXList.length" v-for="item,index in nearList.tourSiteMXList" @click="clickTourSiteMXList(index)">
+                <a href="javascript:;" :class="{active:index==n}">{{item.hotcity}}</a>
               </li>
             </ul>
             <div class="AdmissionTickeAsightsAroundTitelMore">
@@ -110,21 +97,21 @@
             <div class="AdmissionTickeAsightsAroundContentType">
               <ul>
                 <li class="hotSpring">
-                  <a href="javascript:;">温泉</a>
+                  <a href="javascript:;">{{nearList.themeTypeNameList[0]}}</a>
                 </li>
                 <li class="ancientTownGarden">
-                  <a href="javascript:;">古镇园林</a>
+                  <a href="javascript:;">{{nearList.themeTypeNameList[1]}}</a>
                 </li>
                 <li class="aScenicSpot">
-                  <a href="javascript:;">名胜风光</a>
+                  <a href="javascript:;">{{nearList.themeTypeNameList[2]}}</a>
                 </li>
               </ul>
               <ul>
                 <li class="themePark">
-                  <a href="javascript:;">主题乐园</a>
+                  <a href="javascript:;">{{nearList.themeTypeNameList[3]}}</a>
                 </li>
                 <li class="performance">
-                  <a href="javascript:;">演出表演</a>
+                  <a href="javascript:;">{{nearList.themeTypeNameList[4]}}</a>
                 </li>
                 <li class="lookAtMore">
                   <a href="javascript:;"><img src="../../assets/img/icon-readmore.png" width="50" height="60">查看更多</a>
@@ -445,12 +432,63 @@
   import {mapGetters} from 'vuex'
 
   export default {
-    computed: mapGetters([]),
+    computed: mapGetters([
+      'admissionTicketHomePageObj',
+      'nearList'
+    ]),
     data() {
-      return {}
+      return {
+        n:0,
+        images:[
+          'https://m4.tuniucdn.com/fb2/t1/G5/M00/73/0F/Cii-slqRLoKIPikTAAMQgvrp_I8AADocAJjRFMAAxCa93.jpeg',
+          'https://m3.tuniucdn.com/fb2/t1/G5/M00/82/35/Cii-slqfkUOITMiUAAMTI0E7wUIAAD94AGHIycAAxM718.jpeg',
+          'https://m4.tuniucdn.com/fb2/t1/G5/M00/78/99/Cii-tFqWXo-Ib6cEAAMKGxjhV-AAADvkwBj05UAAwoz83.jpeg',
+          'https://m.tuniucdn.com/fb2/t1/G5/M00/5F/05/Cii-s1p9EzuID3bDAAPTV0ruXhQAADTPQEqPtYAA9Nv34.jpeg'
+        ]
+      }
+    },
+    created(){
+      this.$store.commit('showLoading')
+      this.initData().then(()=>{
+        this.$store.commit('hideLoading')
+      })
+      this.initCity()
+      .then(name => {
+        this.initData(name).then(() => {
+          this.$store.commit('hideLoading');
+        })
+      })
     },
     methods: {
-      initData() {
+      initCity() {
+        return new Promise((relove, reject) => {
+          var city = ['北京', '上海', '重庆', '宁夏', '新疆', '台湾', '香港', '澳门'];
+          $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', () => {
+            let newCity = '';
+            for (var i = 0; i < city.length; i++) {
+              if (city[i] == remote_ip_info.province) {
+                newCity = remote_ip_info.province + '市'
+              } else {
+                newCity = remote_ip_info.province;
+              }
+            }
+            relove(newCity)
+          });
+        })
+      },
+      async initData(name) {
+        let initOptions = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "provice": name
+        }
+        await this.$store.dispatch('initAdmissionTicketHomePage',initOptions)
+      },
+      clickTourSiteMXList(index){
+        this.n = index
       },
       search() {
         this.initData()
