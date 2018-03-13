@@ -80,10 +80,7 @@
           <div class="AdmissionTickeAsightsAroundTitel clearfix">
             <h2>身边景点</h2>
             <ul class="AdmissionTickeAsightsAroundTitelList">
-              <li>
-                <a href="javascript:;" class="active">精选</a>
-              </li>
-              <li v-show="nearList.tourSiteMXList.length" v-for="item,index in nearList.tourSiteMXList" @click="clickTourSiteMXList(index)">
+              <li v-show="nearList.length" v-for="item,index in nearList" @mouseover="clickTourSiteMXList(item,index)">
                 <a href="javascript:;" :class="{active:index==n}">{{item.hotcity}}</a>
               </li>
             </ul>
@@ -97,21 +94,21 @@
             <div class="AdmissionTickeAsightsAroundContentType">
               <ul>
                 <li class="hotSpring">
-                  <a href="javascript:;">{{nearList.themeTypeNameList[0]}}</a>
+                  <a href="javascript:;">{{themeTypeNameList[0]}}</a>
                 </li>
                 <li class="ancientTownGarden">
-                  <a href="javascript:;">{{nearList.themeTypeNameList[1]}}</a>
+                  <a href="javascript:;">{{themeTypeNameList[1]}}</a>
                 </li>
                 <li class="aScenicSpot">
-                  <a href="javascript:;">{{nearList.themeTypeNameList[2]}}</a>
+                  <a href="javascript:;">{{themeTypeNameList[2]}}</a>
                 </li>
               </ul>
               <ul>
                 <li class="themePark">
-                  <a href="javascript:;">{{nearList.themeTypeNameList[3]}}</a>
+                  <a href="javascript:;">{{themeTypeNameList[3]}}</a>
                 </li>
                 <li class="performance">
-                  <a href="javascript:;">{{nearList.themeTypeNameList[4]}}</a>
+                  <a href="javascript:;">{{themeTypeNameList[4]}}</a>
                 </li>
                 <li class="lookAtMore">
                   <a href="javascript:;"><img src="../../assets/img/icon-readmore.png" width="50" height="60">查看更多</a>
@@ -121,134 +118,17 @@
             <!--门票展示-->
             <div class="AdmissionTickeAsightsAroundContentShow">
               <ul class="AdmissionTickeAsightsAroundContentShowList clearfix">
-                <li>
+                <li v-for="item in adminNearTickeFilterObj.hcTourSiteList">
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
+                    <img  width="188" height="110" v-lazy="item.tm_ts_ShowImage[0]">
                     <div></div>
                     <span>满意度:100%</span>
                   </div>
                   <!--简介-->
                   <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
-                  </div>
-                </li>
-                <li>
-                  <!--img部分-->
-                  <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                    <div></div>
-                    <span>满意度:100%</span>
-                  </div>
-                  <!--简介-->
-                  <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
-                  </div>
-                </li>
-                <li>
-                  <!--img部分-->
-                  <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                    <div></div>
-                    <span>满意度:100%</span>
-                  </div>
-                  <!--简介-->
-                  <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
-                  </div>
-                </li>
-                <li>
-                  <!--img部分-->
-                  <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                    <div></div>
-                    <span>满意度:100%</span>
-                  </div>
-                  <!--简介-->
-                  <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
-                  </div>
-                </li>
-                <li>
-                  <!--img部分-->
-                  <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                    <div></div>
-                    <span>满意度:100%</span>
-                  </div>
-                  <!--简介-->
-                  <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
-                  </div>
-                </li>
-                <li>
-                  <!--img部分-->
-                  <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                    <div></div>
-                    <span>满意度:100%</span>
-                  </div>
-                  <!--简介-->
-                  <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
-                  </div>
-                </li>
-                <li>
-                  <!--img部分-->
-                  <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                    <div></div>
-                    <span>满意度:100%</span>
-                  </div>
-                  <!--简介-->
-                  <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
-                  </div>
-                </li>
-                <li>
-                  <!--img部分-->
-                  <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                    <div></div>
-                    <span>满意度:100%</span>
-                  </div>
-                  <!--简介-->
-                  <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
-                  </div>
-                </li>
-                <li>
-                  <!--img部分-->
-                  <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                    <div></div>
-                    <span>满意度:100%</span>
-                  </div>
-                  <!--简介-->
-                  <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
-                  </div>
-                </li>
-                <li>
-                  <!--img部分-->
-                  <div class="AdmissionTickeAsightsAroundContentShowImgBox">
-                    <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                    <div></div>
-                    <span>满意度:100%</span>
-                  </div>
-                  <!--简介-->
-                  <div class="AdmissionTickeAsightsAroundContentShowContentBox">
-                    <strong>西岭雪山</strong>
-                    <span>￥20起</span>
+                    <strong>{{item.tm_ts_Name}}</strong>
+                    <span>￥{{item.tm_ts_SuggestPrice}}起</span>
                   </div>
                 </li>
               </ul>
@@ -262,35 +142,10 @@
           </div>
           <div class="AdmissionTickeHotDestinationContent">
             <ul class="AdmissionTickeHotDestinationList clearfix">
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
+              <li v-for="item in hotList">
+                <img width="390" height="160" v-lazy="item.tm_ts_ShowImage[0]">
                 <div></div>
-                <span>上海迪士尼</span>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
-                <div></div>
-                <span>上海迪士尼</span>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
-                <div></div>
-                <span>上海迪士尼</span>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
-                <div></div>
-                <span>上海迪士尼</span>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
-                <div></div>
-                <span>上海迪士尼</span>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="160">
-                <div></div>
-                <span>上海迪士尼</span>
+                <span>{{item.tm_ts_Name}}</span>
               </li>
             </ul>
           </div>
@@ -300,13 +155,7 @@
           <div class="overseasScenicSpotsTitle clearfix">
             <h2>境外景点</h2>
             <ul class="overseasScenicSpotsTitleNavList">
-              <li><a href="javascript:;" class="active">港澳台</a></li>
-              <li><a href="javascript:;">日本</a></li>
-              <li><a href="javascript:;">东南亚</a></li>
-              <li><a href="javascript:;">美洲</a></li>
-              <li><a href="javascript:;">澳新</a></li>
-              <li><a href="javascript:;">欧洲</a></li>
-              <li><a href="javascript:;">中东非</a></li>
+              <li @mouseover="clickOutList(item,index)" v-for="item,index in outList"><a href="javascript:;" :class="{active:index==m}">港澳台</a></li>
             </ul>
             <div class="overseasScenicSpotsTitleMore">
               <a href="javascript:;">更多景点></a>
@@ -434,10 +283,15 @@
   export default {
     computed: mapGetters([
       'admissionTicketHomePageObj',
-      'nearList'
+      'nearList',
+      'themeTypeNameList',
+      'adminNearTickeFilterObj',
+      'hotList',
+      'outList'
     ]),
     data() {
       return {
+        m:0,
         n:0,
         images:[
           'https://m4.tuniucdn.com/fb2/t1/G5/M00/73/0F/Cii-slqRLoKIPikTAAMQgvrp_I8AADocAJjRFMAAxCa93.jpeg',
@@ -449,9 +303,6 @@
     },
     created(){
       this.$store.commit('showLoading')
-      this.initData().then(()=>{
-        this.$store.commit('hideLoading')
-      })
       this.initCity()
       .then(name => {
         this.initData(name).then(() => {
@@ -460,6 +311,10 @@
       })
     },
     methods: {
+      //选中境外景点
+      clickOutList(item,index){
+        this.m = index;
+      },
       initCity() {
         return new Promise((relove, reject) => {
           var city = ['北京', '上海', '重庆', '宁夏', '新疆', '台湾', '香港', '澳门'];
@@ -477,6 +332,9 @@
         })
       },
       async initData(name) {
+        let cityOptions = {
+
+        }
         let initOptions = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
@@ -484,11 +342,12 @@
           "operateUserName": "",
           "pcName": "",
           "provice": name
-        }
+        };
         await this.$store.dispatch('initAdmissionTicketHomePage',initOptions)
       },
-      clickTourSiteMXList(index){
+      clickTourSiteMXList(item,index){
         this.n = index
+        this.$store.commit('setAdminNearTickeFilterObj',item)
       },
       search() {
         this.initData()

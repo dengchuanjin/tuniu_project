@@ -3,5 +3,9 @@
  */
 export default {
   admissionTicketHomePageObj: state => state.admissionTicketHomePageObj,
-  nearList:state=>state.nearList,
+  nearList: state => state.nearList,
+  themeTypeNameList: state => state.themeTypeNameList,
+  adminNearTickeFilterObj: state => state.adminNearTickeFilterObj,
+  hotList: state => state.hotList,
+  outList: state => state.outList,
 }

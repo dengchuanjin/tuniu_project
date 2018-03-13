@@ -45,7 +45,7 @@
       <!--评分-->
       <ul class="scoreList">
         <li v-for="item,index in typeList">
-          <span>{{item.sm_st_Name}}:</span>
+          <span>{{item.sm_st_CommentType}}:</span>
           <el-rate
             v-model="item['type'+index]"
             show-text>
