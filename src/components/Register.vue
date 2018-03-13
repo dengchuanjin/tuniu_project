@@ -111,7 +111,7 @@
           });
           return;
         }
-        this.$http.post('http://tuniu.1000da.com.cn/UserInfo/SendMessage', JSON.stringify({
+        this.$http.post('http://webservice.1000da.com.cn/UserInfo/SendMessage', JSON.stringify({
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "operateUserID": "",
@@ -183,7 +183,7 @@
           return;
         }
 
-        this.$http.post('http://tuniu.1000da.com.cn/UserInfo/RegByCode', JSON.stringify({
+        this.$http.post('http://webservice.1000da.com.cn/UserInfo/RegByCode', JSON.stringify({
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "operateUserID": "",

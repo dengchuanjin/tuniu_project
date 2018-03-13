@@ -825,5 +825,23 @@ export default {
         }
       })
     })
+  },
+  //消费积分
+  InsertUseScoreDetailInfo(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://webservice.1000da.com.cn/UseScoreDetail/Insert', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data=>{
+        var data = data.data;
+        if(Number(data.resultcode) == 200){
+          relove(data.resultcontent)
+        }else{
+          reject(data.resultcontent)
+        }
+      })
+    })
   }
 }

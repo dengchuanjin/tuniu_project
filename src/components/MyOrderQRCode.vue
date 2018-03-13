@@ -164,7 +164,29 @@
                   }
                   this.$store.dispatch('wechatPayWay',wOptions)
                   .then(()=>{
-                    this.$router.push({name:'MyTourOrder'});
+                    let options = {"loginUserID": "huileyou",//授权码
+                      "loginUserPass": "123",//授权密码
+                      "operateUserID": "",//操作员编码
+                      "operateUserName": "",//操作员名称
+                      "pcName": "",//机器码
+                      "userCode": this.user.ui_UserCode,//用户编码
+                      "costMoney": orderInfo.adultPrice,//消费金额  如果是其它类型可留空
+                      "scoreTypeID": 0//0消费积分  1消费次数积分 2分享次数 3评论收录积分
+                    };
+                    this.$store.dispatch('InsertUseScoreDetailInfo',options)
+                    .then(()=>{
+                      let newOptions = {}
+                      for(let item in options){
+                        newOptions[item] = options[item]
+                      }
+                      delete  newOptions.costMoney;
+                      newOptions.scoreTypeID = 1;
+                      this.$store.dispatch('InsertUseScoreDetailInfo',newOptions)
+                      .then(()=>{
+                        //支付成功
+                        this.$router.push({name:'MyTourOrder'});
+                      })
+                    })
                   },err=>{
                     this.$notify({
                       message: err,

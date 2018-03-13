@@ -198,7 +198,6 @@
       'navList',
       'lineScheduleObj',
       'isLoading',
-      'showQuit',
       'showFixedComment'
     ]),
     watch: {
@@ -208,7 +207,8 @@
     },
     data() {
       return {
-        n: 0,
+        'showQuit':false,
+        n:0,
         isLoginShow: false,
         isLogin: true,
         getName: '获取动态验证码',
@@ -284,6 +284,10 @@
       }
     },
     created() {
+      let user = JSON.parse(sessionStorage.getItem('user'))
+      if(user){
+        this.showQuit = true;
+      }
       this.initData();
       //当前选中导航
       let id = JSON.parse(sessionStorage.getItem('commentNavNum'));

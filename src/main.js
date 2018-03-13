@@ -12,6 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import store from './store/index'
 import axios from 'axios'
 import * as filters from './filters'
+import $ from 'jquery'
 
 Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
@@ -31,6 +32,42 @@ Vue.use(ElementUI)
 // });
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
+
+
+Vue.directive('move', {
+  inserted: function (el) {
+    el.onmousedown = function(e) {
+      var X = e.clientX - el.offsetLeft
+      document.onmousemove = function(e) {
+        var endx = e.clientX - X;
+        el.className = 'move moveBefore';
+        el.style.left = endx + 'px';
+        // console.log(el.parentNode.children[0])
+        var width = $('.movebox').width() - $('.move').width();
+        el.parentNode.children[0].style.width = endx + 'px';
+        el.parentNode.children[1].innerHTML = '拖动滑块验证';
+        //临界值小于
+        if (endx <= 0) {
+          el.style.left = 0 + 'px';
+          el.parentNode.children[0].style.width = 0 + 'px'
+          //$('.movego').width(0)
+        }
+        //临界值大于
+        // console.log(el.style.left)
+        if (parseInt(el.style.left) >= width) {
+          el.style.left = width + 'px'
+          el.parentNode.children[0].style.width = width + 'px'
+          el.parentNode.children[1].innerHTML = '验证通过'
+          el.className = 'move moveSuccess';
+          el.onmousedown = null
+        }
+      }
+    }
+    document.onmouseup = function() {
+      document.onmousemove = null
+    }
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

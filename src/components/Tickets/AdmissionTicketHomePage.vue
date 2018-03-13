@@ -9,54 +9,26 @@
             <li class="seasonSelection">
               <h5><img src="../../assets/img/icon-star.png" width="14" height="14">当季精选</h5>
               <div class="clearfix">
-                <a href="javascript:;">新津花舞人间景区</a>
-                <a href="javascript:;">上海迪士尼乐园</a>
-                <a href="javascript:;">成都欢乐谷</a>
-                <a href="javascript:;">文成公主</a>
-                <a href="javascript:;">都江堰</a>
-                <a href="javascript:;">成都海昌极地海洋世界</a>
-                <a href="javascript:;">会仙楼暑期特惠</a>
+                <a href="javascript:;" v-show="featuredList.length" v-for="item in featuredList">{{item.tm_ts_Name}}</a>
               </div>
             </li>
             <li class="surroundingCities">
               <h5><img src="../../assets/img/icon-location.png" width="12" height="15">周边城市</h5>
               <div class="clearfix">
-                <a href="javascript:;">阿坝</a>
-                <a href="javascript:;">绵阳</a>
-                <a href="javascript:;">乐山</a>
-                <a href="javascript:;">甘孜</a>
-                <a href="javascript:;">宜宾</a>
-                <a href="javascript:;">自贡</a>
-                <a href="javascript:;">广元</a>
-                <a href="javascript:;">凉山</a>
-                <a href="javascript:;">雅安</a>
-                <a href="javascript:;">广安</a>
+                <a href="javascript:;" v-for="item in cityList">{{item.sm_af_AreaName}}</a>
               </div>
             </li>
             <li class="hotCities">
               <h5><img src="../../assets/img/icon-fire.png" width="12" height="15">热门城市</h5>
               <div class="clearfix">
-                <a href="javascript:;">南京</a>
-                <a href="javascript:;">广州</a>
-                <a href="javascript:;">香港</a>
-                <a href="javascript:;">成都</a>
-                <a href="javascript:;">深圳</a>
-                <a href="javascript:;">北京</a>
-                <a href="javascript:;">沈阳</a>
-                <a href="javascript:;">苏州</a>
-                <a href="javascript:;">杭州</a>
+                <a href="javascript:;" v-for="item in hotCityList">{{item.sm_af_AreaName}}</a>
                 <a href="javascript:;">更多城市>></a>
               </div>
             </li>
             <li class="themeOfPlay">
               <h5><img src="../../assets/img/icon-baloon.png" width="11" height="13">游玩主题</h5>
               <div class="clearfix">
-                <a href="javascript:;">名胜风光</a>
-                <a href="javascript:;">赏花田园</a>
-                <a href="javascript:;">古镇园林</a>
-                <a href="javascript:;">主题乐园</a>
-                <a href="javascript:;">家庭亲子</a>
-                <a href="javascript:;">演出表演</a>
+                <a href="javascript:;" v-for="item in themeTypeNameList">{{item}}</a>
               </div>
             </li>
           </ul>
@@ -118,7 +90,7 @@
             <!--门票展示-->
             <div class="AdmissionTickeAsightsAroundContentShow">
               <ul class="AdmissionTickeAsightsAroundContentShowList clearfix">
-                <li v-for="item in adminNearTickeFilterObj.hcTourSiteList">
+                <router-link tag="li" to="TicketsDetail" v-for="item,index in adminNearTickeFilterObj.hcTourSiteList" :key="index">
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
                     <img  width="188" height="110" v-lazy="item.tm_ts_ShowImage[0]">
@@ -130,7 +102,20 @@
                     <strong>{{item.tm_ts_Name}}</strong>
                     <span>￥{{item.tm_ts_SuggestPrice}}起</span>
                   </div>
-                </li>
+                </router-link>
+                <!--<li v-for="item in adminNearTickeFilterObj.hcTourSiteList">-->
+                  <!--&lt;!&ndash;img部分&ndash;&gt;-->
+                  <!--<div class="AdmissionTickeAsightsAroundContentShowImgBox">-->
+                    <!--<img  width="188" height="110" v-lazy="item.tm_ts_ShowImage[0]">-->
+                    <!--<div></div>-->
+                    <!--<span>满意度:100%</span>-->
+                  <!--</div>-->
+                  <!--&lt;!&ndash;简介&ndash;&gt;-->
+                  <!--<div class="AdmissionTickeAsightsAroundContentShowContentBox">-->
+                    <!--<strong>{{item.tm_ts_Name}}</strong>-->
+                    <!--<span>￥{{item.tm_ts_SuggestPrice}}起</span>-->
+                  <!--</div>-->
+                <!--</li>-->
               </ul>
             </div>
           </div>
@@ -155,7 +140,7 @@
           <div class="overseasScenicSpotsTitle clearfix">
             <h2>境外景点</h2>
             <ul class="overseasScenicSpotsTitleNavList">
-              <li @mouseover="clickOutList(item,index)" v-for="item,index in outList"><a href="javascript:;" :class="{active:index==m}">港澳台</a></li>
+              <li @mouseover="clickOutList(item,index)" v-for="item,index in outList"><a href="javascript:;" :class="{active:index==m}">{{item.greatName}}</a></li>
             </ul>
             <div class="overseasScenicSpotsTitleMore">
               <a href="javascript:;">更多景点></a>
@@ -164,70 +149,15 @@
           <!--境外景点展示-->
           <div class="overseasScenicSpotsContent">
             <ul class="overseasScenicSpotsContentList clearfix">
-              <li>
+              <li v-for="item in outListObj.gtTourSiteList">
                 <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
+                  <img  width="188" height="110" v-lazy="item.tm_ts_ShowImage[0]">
                   <strong></strong>
                   <span>满意度:99%</span>
                 </div>
                 <div class="overseasScenicSpotsContentcontentBox">
-                  <strong>香港迪士尼乐园</strong>
-                  <span>￥66起</span>
-                </div>
-              </li>
-              <li>
-                <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                  <strong></strong>
-                  <span>满意度:99%</span>
-                </div>
-                <div class="overseasScenicSpotsContentcontentBox">
-                  <strong>香港迪士尼乐园</strong>
-                  <span>￥66起</span>
-                </div>
-              </li>
-              <li>
-                <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                  <strong></strong>
-                  <span>满意度:99%</span>
-                </div>
-                <div class="overseasScenicSpotsContentcontentBox">
-                  <strong>香港迪士尼乐园</strong>
-                  <span>￥66起</span>
-                </div>
-              </li>
-              <li>
-                <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                  <strong></strong>
-                  <span>满意度:99%</span>
-                </div>
-                <div class="overseasScenicSpotsContentcontentBox">
-                  <strong>香港迪士尼乐园</strong>
-                  <span>￥66起</span>
-                </div>
-              </li>
-              <li>
-                <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                  <strong></strong>
-                  <span>满意度:99%</span>
-                </div>
-                <div class="overseasScenicSpotsContentcontentBox">
-                  <strong>香港迪士尼乐园</strong>
-                  <span>￥66起</span>
-                </div>
-              </li>
-              <li>
-                <div class="overseasScenicSpotsContentImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="110">
-                  <strong></strong>
-                  <span>满意度:99%</span>
-                </div>
-                <div class="overseasScenicSpotsContentcontentBox">
-                  <strong>香港迪士尼乐园</strong>
-                  <span>￥66起</span>
+                  <strong>{{item.tm_ts_Name}}</strong>
+                  <span>￥{{item.tm_ts_SuggestPrice}}起</span>
                 </div>
               </li>
             </ul>
@@ -240,34 +170,9 @@
           </div>
           <div class="cooperativeScenicSpotContent">
             <ul class="cooperativeScenicSpotContentList clearfix">
-              <li>
+              <li v-for="item in cooperationList">
                 <a href="javascript:;">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <img src="../../assets/img/homePageImage.jpg" width="188" height="98">
+                  <img  width="188" height="98" v-lazy="item.tm_cs_ShowImage[0]">
                 </a>
               </li>
             </ul>
@@ -287,7 +192,12 @@
       'themeTypeNameList',
       'adminNearTickeFilterObj',
       'hotList',
-      'outList'
+      'outList',
+      'cityList',
+      'outListObj',
+      'featuredList',
+      'hotCityList',
+      'cooperationList'
     ]),
     data() {
       return {
@@ -302,9 +212,32 @@
       }
     },
     created(){
+      //获取所有省
+      let options = {
+        "areaPid": 0
+      };
+
       this.$store.commit('showLoading')
       this.initCity()
       .then(name => {
+        this.$store.dispatch('initProvice',options)
+        .then(data=>{
+          let id = data.filter(item=>{
+            if(item.sm_af_AreaName==(name+'省')){
+              return true
+            }
+            return false
+          })[0].sm_af_AreaID
+          let cityOptions = {
+            "areaPid": id
+          };
+          this.$store.dispatch('initProvice',cityOptions)
+          .then(data=>{
+            this.$store.commit('initCityList',data)
+          })
+        })
+
+
         this.initData(name).then(() => {
           this.$store.commit('hideLoading');
         })
@@ -314,6 +247,7 @@
       //选中境外景点
       clickOutList(item,index){
         this.m = index;
+        this.$store.commit('setOutList',item)
       },
       initCity() {
         return new Promise((relove, reject) => {
@@ -346,7 +280,7 @@
         await this.$store.dispatch('initAdmissionTicketHomePage',initOptions)
       },
       clickTourSiteMXList(item,index){
-        this.n = index
+        this.n = index;
         this.$store.commit('setAdminNearTickeFilterObj',item)
       },
       search() {
@@ -739,7 +673,12 @@
     border-color: #f60;
     cursor: pointer;
   }
-
+  .overseasScenicSpotsContentcontentBox strong{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   .overseasScenicSpotsContentList li:hover .overseasScenicSpotsContentcontentBox strong {
     color: #f60;
   }

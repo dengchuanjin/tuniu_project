@@ -180,7 +180,23 @@
             message: suc,
             type: 'success'
           });
-          this.$router.push({name:'AgenciesDetail',params: {id: this.$route.params.id}})
+
+          //积分添加
+          let options = {
+            "loginUserID": "huileyou",//授权码
+            "loginUserPass": "123",//授权密码
+            "operateUserID": "",//操作员编码
+            "operateUserName": "",//操作员名称
+            "pcName": "",//机器码
+            "userCode": this.user.ui_UserCode,//用户编码
+//            "costMoney": orderInfo.adultPrice,//消费金额  如果是其它类型可留空
+            "scoreTypeID": 3//0消费积分  1消费次数积分 2分享次数 3评论收录积分
+          };
+          this.$store.dispatch('InsertUseScoreDetailInfo',options)
+          .then(()=>{
+            //评论成功
+            this.$router.push({name:'AgenciesDetail',params: {id: this.$route.params.id}})
+          })
         },err=>{
           this.$notify({
             message: err,

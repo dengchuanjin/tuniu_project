@@ -8,4 +8,9 @@ export default {
   adminNearTickeFilterObj: state => state.adminNearTickeFilterObj,
   hotList: state => state.hotList,
   outList: state => state.outList,
+  cityList: state => state.cityList,
+  outListObj: state => state.outListObj,
+  featuredList: state => state.featuredList,
+  hotCityList: state => state.hotCityList,
+  cooperationList: state => state.cooperationList,
 }

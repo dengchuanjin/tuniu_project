@@ -22,5 +22,23 @@ export default {
   },
   initOutList(state,data){
     state.outList =data;
+  },
+  initCityList(state,data){
+    state.cityList = data.slice(0,8);
+  },
+  initOutListObj(state,obj){
+    state.outListObj = obj
+  },
+  setOutList(state,obj){
+    state.outListObj = obj
+  },
+  initFeatured(state,data){
+    state.featuredList = data;
+  },
+  initHotCityList(state,data){
+    state.hotCityList = data;
+  },
+  initCooperationList(state,data){
+    state.cooperationList = data;
   }
 }

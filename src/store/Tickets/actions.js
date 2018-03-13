@@ -42,25 +42,60 @@ export default {
           let outList =  data.data.outList;
 
           for(var i=0;i<outList.length;i++){
-            if(outList[i].tm_ts_ShowImage){
-              outList[i].tm_ts_ShowImage = outList[i].tm_ts_ShowImage.split(',')
-            }else{
-              outList[i].tm_ts_ShowImage = []
+            let arr3 = outList[i].gtTourSiteList;
+            for(var j=0;j<arr3.length;j++){
+              if(arr3[j].tm_ts_ShowImage){
+                arr3[j].tm_ts_ShowImage = arr3[j].tm_ts_ShowImage.split(',')
+              }else{
+                arr3[j].tm_ts_ShowImage = []
+              }
             }
           }
+          //合作景区
+          let cooperationList =data.data.cooperationList;
+          for(var i=0;i<cooperationList.length;i++){
+            if(cooperationList[i].tm_cs_ShowImage){
+              cooperationList[i].tm_cs_ShowImage = cooperationList[i].tm_cs_ShowImage.split(',')
+            }else{
+              cooperationList[i].tm_cs_ShowImage = []
+            }
+          }
+          commit('initCooperationList',cooperationList)
+          //境外景点初始化景点obj
+          commit('initOutListObj',outList[0])
 
           commit('initOutList',outList)
+          //热门城市
+          commit('initHotCityList',data.data.hotCityList.slice(0,6))
 
           commit('initAdmissionTicketHomePage',data.data);
-
+          commit('initFeatured',data.data.nearList[0].hcTourSiteList)
 
           commit('initNearList',data.data.nearList);
-          commit('initThemeTypeNameList',data.data.nearList[0].themeTypeNameList);
+          commit('initThemeTypeNameList',data.data.nearList[0].themeTypeNameList.slice(0,6));
           relove(data.resultcontent)
         }else{
           reject(data.resultcontent)
         }
       })
     })
-  }
+  },
+  //获取省
+  initProvice(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://webservice.1000da.com.cn/AreaFull/SelectProvice', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data=>{
+        var data = data.data;
+        if(Number(data.resultcode)==200) {
+          relove(data.data)
+        }else{
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
 }
