@@ -5,16 +5,13 @@
       <div class="HotelHomePageWrapHeader">
         <!--轮播图-->
         <div class="HotelHomePageWrapHeaderCarouselFigure">
-          <ul class="HotelHomePageWrapHeaderCarouselFigureList">
-            <li>
-              <a href="javascript:;"></a>
-            </li>
-          </ul>
-        </div>
-        <!--轮播图切换-->
-        <div class="transformCarouselFigure">
-          <div class="transformCarouselFigureProp"></div>
-          <div class="transformCarouselFigureNext"></div>
+          <div class="block">
+            <el-carousel height="550px">
+              <el-carousel-item v-for="item in 4" :key="item">
+                <a href="javascript:;"></a>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
         </div>
         <!--轮播图介绍-->
         <div class="PictureInfromtionWrap">
@@ -265,6 +262,7 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
+  import $ from 'jquery'
 
   export default {
     computed: mapGetters([]),
@@ -280,9 +278,35 @@
         this.initData()
       }
     },
+    mounted(){
+    },
+    created(){
+      //首页数据
+      let HotelIndexInfo = {
+        "loginUserID": "huileyou",
+        "loginUserPass": "123",
+      }
+//      this.$store.dispatch('initHotelHomePageData',HotelIndexInfo)
+    }
   }
 </script>
 <style scoped>
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 150px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+
   .HotelHomePageWrap {
     width: 100%;
     overflow: hidden;
@@ -299,14 +323,9 @@
     width: 100%;
   }
 
-  .HotelHomePageWrapHeader:hover .transformCarouselFigureProp {
-    cursor: pointer;
-    left: 0;
-  }
-
-  .HotelHomePageWrapHeader:hover .transformCarouselFigureNext {
-    cursor: pointer;
-    right: 0;
+  .HotelHomePageWrapHeaderCarouselFigure > .block {
+    position: relative;
+    z-index: 0;
   }
 
   .HotelHomePageWrapHeaderCarouselFigureList li {
@@ -314,7 +333,7 @@
     float: left;
   }
 
-  .HotelHomePageWrapHeaderCarouselFigureList li a {
+  .HotelHomePageWrapHeaderCarouselFigure > .block a {
     display: block;
     width: 100%;
     height: 550px;

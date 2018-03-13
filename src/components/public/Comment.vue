@@ -85,7 +85,8 @@
       <div class="mainNavWrap">
         <nav class="mainNavWrapContent">
           <ul class="mainNavWrapContentList  clearfix" ref="mainNavWrapContentList">
-            <li v-for="item,index in mainNavWrapContentList" @click="clickMainNavWrapContent(index)" :class="{active:index==n}">
+            <li v-for="item,index in mainNavWrapContentList" @click="clickMainNavWrapContent(index)"
+                :class="{active:index==n}">
               <router-link :to="item.to">{{item.name}}</router-link>
             </li>
           </ul>
@@ -207,7 +208,7 @@
     },
     data() {
       return {
-        n:0,
+        n: 0,
         isLoginShow: false,
         isLogin: true,
         getName: '获取动态验证码',
@@ -217,32 +218,34 @@
         UserRegisterBoxShow: false,
         isDisabled: false,
         loginName: '',
-        mainNavWrapContentList:[
+        mainNavWrapContentList: [
           {
-            name:'跟团游',
-            to:'/Comment/HeelTour'
+            name: '跟团游',
+            to: '/Comment/HeelTour'
           },
           {
-            name:'门票',
-            to:'/Comment/AdmissionTicketHomePage'
+            name: '门票',
+            to: '/Comment/AdmissionTicketHomePage'
           },
           {
-            name:'酒店',
-            to:'/Comment/HotelHomePage'
+            name: '酒店',
+            to: '/Comment/HotelHomePage'
           },
           {
-            name:'酒店详情',
-            to:'/Comment/HotelSearchMore'
+            name: '酒店详情',
+            to: '/Comment/HotelSearchMore'
           },
         ]
       }
     },
     methods: {
-      clickMainNavWrapContent(index){
-        this.n = index;
-        if(index==2){
+      clickMainNavWrapContent(index) {
+        let commentNavNum = JSON.parse(sessionStorage.getItem('indexNumber'));
+        sessionStorage.setItem('commentNavNum', index);
+        this.n = JSON.parse(sessionStorage.getItem('commentNavNum'));
+        if (this.n == 2) {
           this.$store.commit('hideShowFixedComment')
-        }else{
+        } else {
           this.$store.commit('showShowFixedComment')
         }
       },
@@ -282,10 +285,22 @@
     },
     created() {
       this.initData();
+      //当前选中导航
+      let id = JSON.parse(sessionStorage.getItem('commentNavNum'));
+      if (id) {
+        this.n = id;
+      } else {
+        this.n = 0
+      }
+      //判断右边导航是否隐藏
+      if (id == 2) {
+        this.$store.commit('hideShowFixedComment')
+      } else {
+        this.$store.commit('showShowFixedComment')
+      }
+      sessionStorage.setItem('indexNumber', 0)
     },
     mounted() {
-
-
       if (sessionStorage.getItem('user')) {
         var InformetionObj = JSON.parse(sessionStorage.getItem('user'))
         this.isLogin = false;

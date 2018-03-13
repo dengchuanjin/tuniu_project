@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 
 import agencies from './Agencies'
 import tickets from './Tickets'
+import hotel from './Hotel'
 
 Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== 'production'
@@ -13,7 +14,8 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   modules:{
     agencies,
-    tickets
+    tickets,
+    hotel
   },
   strict: debug,
 })

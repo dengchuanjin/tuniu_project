@@ -572,35 +572,34 @@
       <div class="carousel">
         <el-carousel height="365px">
           <el-carousel-item v-for="item,index in images" :key="index">
-            <img :src="item" alt=""/>
+            <img :src="item"/>
           </el-carousel-item>
         </el-carousel>
-        <div class="block">
-          <el-carousel height="100%">
-            <el-carousel-item v-for="item in imgs" :key="item">
-              <img :src="item" width="990"  />
-            </el-carousel-item>
-          </el-carousel>
-        </div>
       </div>
     </div>
 
 
     <!--国内游-->
     <div class="homePageDomesticTour">
-      <div class="homePageDomesticTourTitle">
+      <div class="homePageDomesticTourTitle clearfix">
         <h4 style="float: left;padding-right: 980px">国内旅游</h4>
+        <div>
+          <a href="javascript:;" v-for="item,index in 4">精选</a>
+        </div>
         <router-link to="HeelTourSearchMore">查询更多>></router-link>
       </div>
       <div class="clearfix">
         <div class="homePageDomesticTourLeft">
+          <a href="javascript:;" class="clearfix" v-for="item,index in 4">
+            <strong>张家界</strong>
+            <span><i></i>13121</span>
+          </a>
         </div>
         <div class="homePageDomesticTourContent">
           <div class="homePageHotPlaceTour">
           </div>
           <ul class="homePageDomesticTourContentList clearfix">
             <li v-for="item,index in domesticDataList" @click="toDetail(item)">
-
               <a href="javascript:;">
                 <img v-lazy="item.oneImg" width="220" height="125">
               </a>
@@ -620,7 +619,7 @@
     </div>
     <!--周边游-->
     <div class="homePageDomesticTour">
-      <div class="homePageDomesticTourTitle AroundTitle">
+      <div class="homePageDomesticTourTitle AroundTitle clearfix">
         <h4>周边旅游</h4>
       </div>
       <div class="clearfix">
@@ -651,7 +650,7 @@
     </div>
     <!--境外短线-->
     <div class="homePageDomesticTour">
-      <div class="homePageDomesticTourTitle shortLongTitle">
+      <div class="homePageDomesticTourTitle shortLongTitle clearfix">
         <h4>境外短线旅游</h4>
       </div>
       <div class="clearfix">
@@ -682,7 +681,7 @@
     </div>
     <!--境外长线-->
     <div class="homePageDomesticTour">
-      <div class="homePageDomesticTourTitle longtLongTitle">
+      <div class="homePageDomesticTourTitle longtLongTitle clearfix">
         <h4>境外长线旅游</h4>
       </div>
       <div class="clearfix">
@@ -730,17 +729,11 @@
     data() {
       return {
         cityName: '',
-        images:[
+        images: [
           'https://m4.tuniucdn.com/fb2/t1/G5/M00/73/0F/Cii-slqRLoKIPikTAAMQgvrp_I8AADocAJjRFMAAxCa93.jpeg',
           'https://m3.tuniucdn.com/fb2/t1/G5/M00/82/35/Cii-slqfkUOITMiUAAMTI0E7wUIAAD94AGHIycAAxM718.jpeg',
           'https://m4.tuniucdn.com/fb2/t1/G5/M00/78/99/Cii-tFqWXo-Ib6cEAAMKGxjhV-AAADvkwBj05UAAwoz83.jpeg',
           'https://m.tuniucdn.com/fb2/t1/G5/M00/5F/05/Cii-s1p9EzuID3bDAAPTV0ruXhQAADTPQEqPtYAA9Nv34.jpeg'
-        ],
-        imgs:[
-          'https://m1.tuniucdn.com/fb2/t1/G5/M00/79/FF/Cii-s1qXlO2IeUIeAAQGPu8doA8AADxdACH95gABAZW78.jpeg',
-          'https://m1.tuniucdn.com/fb2/t1/G5/M00/79/FF/Cii-s1qXlO2IeUIeAAQGPu8doA8AADxdACH95gABAZW78.jpeg',
-          'https://m1.tuniucdn.com/fb2/t1/G5/M00/79/FF/Cii-s1qXlO2IeUIeAAQGPu8doA8AADxdACH95gABAZW78.jpeg',
-          'https://m1.tuniucdn.com/fb2/t1/G5/M00/79/FF/Cii-s1qXlO2IeUIeAAQGPu8doA8AADxdACH95gABAZW78.jpeg'
         ],
       }
     },
@@ -925,6 +918,18 @@
 
   .homePageDomesticTourTitle > h4 {
     margin-left: 10px;
+    float: left;
+  }
+
+  .homePageDomesticTourTitle > a {
+    font: 14px/2 "微软雅黑";
+    color: #ccc;
+    float: right;
+    margin-right: 10px;
+  }
+
+  .homePageDomesticTourTitle > a:hover {
+    color: #f60;
   }
 
   .homePageDomesticTourLeft {
@@ -935,6 +940,7 @@
     background-size: 100%;
     float: left;
     margin: 0 20px 0 -20px;
+    padding-top:10px;
   }
 
   .homePageDomesticTourContent {
@@ -1187,9 +1193,11 @@
   .continer ul li:hover .detail {
     display: block;
   }
-.box{
-  border:none
-}
+
+  .box {
+    border: none
+  }
+
   .continer ul li:hover .detail .box {
     width: 250px;
     height: 122px;
@@ -1243,13 +1251,77 @@
   }
 
   .el-carousel__item:nth-child(2n) {
-     background-color: #99a9bf;
+    background-color: #99a9bf;
   }
 
   .el-carousel__item:nth-child(2n+1) {
-     background-color: #d3dce6;
+    background-color: #d3dce6;
   }
 
+  .homePageDomesticTourTitle {
+    position: relative;
+  }
+
+  .homePageDomesticTourTitle > div {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .homePageDomesticTourTitle > div > a {
+    float: left;
+    padding: 0 15px;
+    margin: 0 5px;
+    color: #666;
+    font: 14px/22px "微软雅黑";
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  .homePageDomesticTourTitle > div > a:hover {
+    background-color: #e694a6;
+    color: #fff;
+  }
+
+  .homePageDomesticTourLeft > a {
+    margin-bottom: 10px;
+    width: 140px;
+    box-sizing: content-box;
+    padding: 10px;
+    background-color: #fff;
+    margin-left: 40px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    transition: .5s;
+    color: #666;
+  }
+
+  .homePageDomesticTourLeft > a:hover {
+    margin-left:30px;
+  }
+
+  .homePageDomesticTourLeft > a > strong {
+    float: left;
+  }
+
+  .homePageDomesticTourLeft > a > span {
+    float: right;
+    position: relative;
+  }
+
+  .homePageDomesticTourLeft > a i {
+    position: absolute;
+    left: -14px;
+    top:0;
+    width:14px;
+    height:13px;
+    background: url("../../assets/img/heart.png") no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+  }
 
 
 </style>
