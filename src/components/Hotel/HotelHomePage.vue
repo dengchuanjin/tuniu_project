@@ -83,43 +83,17 @@
             </div>
             <!--当季玩导航-->
             <ul class="findPlayTheSeasonDescribeList">
-              <li>
-                <a href="javascript:;" class="active">购物小资</a>
-              </li>
-              <li>
-                <a href="javascript:;">漫步古镇</a>
-              </li>
-              <li>
-                <a href="javascript:;">瞭望星空</a>
-              </li>
-              <li>
-                <a href="javascript:;">行摄大漠</a>
-              </li>
-              <li>
-                <a href="javascript:;">深海浮地</a>
-              </li>
-              <li>
-                <a href="javascript:;">吃货天堂</a>
+              <li v-for="item,index in HotPlayData  ">
+                <a href="javascript:;" :class="{active:index == hotPlayNum}"
+                   @click="changeHotPlay(item,index)">{{item.ht_it_Name}}</a>
               </li>
             </ul>
             <!--当季玩图片-->
             <ul class="findPlayTheSeasonPictureList clearfix">
-              <li>
+              <li v-for="item,index in HotPlayList">
                 <a href="javascript:;">
                   <img src="../../assets/img/homePageImage.jpg" width="390" height="230">
-                  <span>上海</span>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <img src="../../assets/img/homePageImage.jpg" width="390" height="230">
-                  <span>上海</span>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <img src="../../assets/img/homePageImage.jpg" width="390" height="230">
-                  <span>上海</span>
+                  <span>{{item.sm_af_AreaName}}</span>
                 </a>
               </li>
             </ul>
@@ -132,46 +106,11 @@
             </div>
             <!--特色推荐图片展示-->
             <ul class="selectedCharacteristicRecommendPictureList clearfix">
-              <li>
+              <li v-for="item,index in characteristicRecommendList" :key="index">
                 <div class="selectedCharacteristicRecommendImageMask">
-                  <h6>古镇酒店</h6>
+                  <h6>{{item.ht_it_Name}}</h6>
                 </div>
-                <div class="selectedCharacteristicRecommendBg"></div>
-                <strong class="selectedCharacteristicRecommendDetails">去古镇/发现前世自己</strong>
-              </li>
-              <li>
-                <div class="selectedCharacteristicRecommendImageMask">
-                  <h6>古镇酒店</h6>
-                </div>
-                <div class="selectedCharacteristicRecommendBg"></div>
-                <strong class="selectedCharacteristicRecommendDetails">去古镇/发现前世自己</strong>
-              </li>
-              <li>
-                <div class="selectedCharacteristicRecommendImageMask">
-                  <h6>古镇酒店</h6>
-                </div>
-                <div class="selectedCharacteristicRecommendBg"></div>
-                <strong class="selectedCharacteristicRecommendDetails">去古镇/发现前世自己</strong>
-              </li>
-              <li>
-                <div class="selectedCharacteristicRecommendImageMask">
-                  <h6>古镇酒店</h6>
-                </div>
-                <div class="selectedCharacteristicRecommendBg"></div>
-                <strong class="selectedCharacteristicRecommendDetails">去古镇/发现前世自己</strong>
-              </li>
-              <li>
-                <div class="selectedCharacteristicRecommendImageMask">
-                  <h6>古镇酒店</h6>
-                </div>
-                <div class="selectedCharacteristicRecommendBg"></div>
-                <strong class="selectedCharacteristicRecommendDetails">去古镇/发现前世自己</strong>
-              </li>
-              <li>
-                <div class="selectedCharacteristicRecommendImageMask">
-                  <h6>古镇酒店</h6>
-                </div>
-                <div class="selectedCharacteristicRecommendBg"></div>
+                <div class="selectedCharacteristicRecommendBg" style=""></div>
                 <strong class="selectedCharacteristicRecommendDetails">去古镇/发现前世自己</strong>
               </li>
             </ul>
@@ -262,31 +201,44 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
-  import $ from 'jquery'
 
   export default {
-    computed: mapGetters([]),
+    computed: mapGetters([
+      'HotPlayData',
+      'HotPlayList',
+      'characteristicRecommendList'
+    ]),
     data() {
       return {
-        radio: '1'
+        radio: '1',
+        hotPlayNum: 0,
       }
     },
     methods: {
       initData() {
+        //首页数据
+        let HotelIndexInfo = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+        }
+        this.$store.dispatch('initHotelHomePageData', HotelIndexInfo)
+          .then(() => {
+          }, err => {
+            this.$notify({
+              message: err,
+              type: 'error'
+            });
+          })
       },
-      search() {
-        this.initData()
+      changeHotPlay(item,index) {
+        this.hotPlayNum = index;
+        this.$store.commit('initHotPlayList',item.CityList)
       }
     },
-    mounted(){
+    mounted() {
     },
-    created(){
-      //首页数据
-      let HotelIndexInfo = {
-        "loginUserID": "huileyou",
-        "loginUserPass": "123",
-      }
-//      this.$store.dispatch('initHotelHomePageData',HotelIndexInfo)
+    created() {
+      this.initData();
     }
   }
 </script>
@@ -668,7 +620,7 @@
   }
 
   .selectedCharacteristicRecommendBg {
-    transition: .3s;
+    transition: .5s linear;
     width: 198px;
     height: 100%;
     background: url("../../assets/img/homePageImage.jpg") no-repeat center center;
@@ -741,7 +693,7 @@
     transform: scale(1.25);
   }
 
-  .exploreSeasonHotPictureList li>img {
+  .exploreSeasonHotPictureList li > img {
     transition: .5s;
   }
 
