@@ -35,6 +35,7 @@ export default {
   educationList: state => state.educationList,
   getAreaInfoList: state => state.getAreaInfoList,
   showFixedComment: state => state.showFixedComment,
+  useScoreDetailInfo: state => state.useScoreDetailInfo,
 
 
   //商户注册

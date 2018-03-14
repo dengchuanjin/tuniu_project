@@ -238,6 +238,21 @@
         ]
       }
     },
+    watch: {
+      '$route' (to, from) {
+        let str = to.path;
+        if(str.includes('Hotel')){
+          sessionStorage.setItem('commentNavNum', 2);
+          window.location.reload()
+        }else if(str.includes('Ticket')){
+          sessionStorage.setItem('commentNavNum', 1);
+          window.location.reload()
+        }else if(str.includes('agencies')){
+          sessionStorage.setItem('commentNavNum', 0);
+          window.location.reload()
+        }
+      }
+    },
     methods: {
       clickMainNavWrapContent(index) {
         let commentNavNum = JSON.parse(sessionStorage.getItem('indexNumber'));

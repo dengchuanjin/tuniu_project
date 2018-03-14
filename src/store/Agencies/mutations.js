@@ -205,6 +205,9 @@ export default {
   },
   hideShowFixedComment(state){
     state.showFixedComment = false
+  },
+  SelectUseScoreDetailInfo(state,data){
+    state.useScoreDetailInfo = data;
   }
 }
 

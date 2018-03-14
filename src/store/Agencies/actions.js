@@ -843,5 +843,24 @@ export default {
         }
       })
     })
+  },
+  //用户积分
+  SelectUseScoreDetailInfo({commit},data){
+    return new Promise((relove, reject) => {
+      axios.post('http://webservice.1000da.com.cn/UseScoreDetail/Select', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data=>{
+        var data = data.data;
+        if(Number(data.resultcode) == 200){
+          commit('SelectUseScoreDetailInfo',data.data)
+          relove(Number(data.totalrows))
+        }else{
+          reject(data.resultcontent)
+        }
+      })
+    })
   }
 }

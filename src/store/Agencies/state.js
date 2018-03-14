@@ -50,4 +50,5 @@ export default  {
   newCommentData:[],
   jobList:[],//个人中心职业
   educationList:[],//个人中心学历
+  useScoreDetailInfo:[],//用户积分
 };

@@ -2,25 +2,64 @@
   <div>
     <el-tabs type="border-card">
       <el-tab-pane label="我的积分">
+        <h1 class="userClass">积分明细查询</h1>
+        <el-col :span="24" class="formSearch" >
+          <el-form :inline="true">
+            <el-form-item>
+              <span>积分类型筛选:</span>
+            </el-form-item>
+            <el-form-item>
+              <el-select v-model="typeID" placeholder="请选择" size="small">
+                <el-option
+                  v-for="item in typeList"
+                  :key="item.value"
+                  :label="item.name"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="search" size="small">查询</el-button>
+            </el-form-item>
+          </el-form>
+        </el-col>
         <el-table
-          :data="tableData"
-          stripe
+          :data="useScoreDetailInfo"
+          highlight-current-row
+          v-loading="isLoading"
           style="width: 100%">
           <el-table-column
-            prop="date"
-            label="日期"
-            width="180">
+            prop="sm_ust_Name"
+            label="积分类型"
+            align="center"
+          >
           </el-table-column>
           <el-table-column
-            prop="name"
-            label="姓名"
-            width="180">
+            prop="sm_usd_CostPrice"
+            align="center"
+            label="消费金额(元)"
+          >
           </el-table-column>
           <el-table-column
-            prop="address"
-            label="地址">
+            align="center"
+            prop="sm_usd_Score"
+            label="获得积分">
           </el-table-column>
         </el-table>
+
+        <!--分页-->
+        <div class="block" style="float: right;padding-top: 20px">
+          <el-pagination
+            @current-change="handleCurrentChange"
+            :page-size="4"
+            layout="total, prev, pager, next"
+            :total="total"
+            v-show="total"
+          >
+          </el-pagination>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="总积分">
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -31,31 +70,82 @@
     name: '',
     data(){
       return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        total:0,
+        typeID:'',
+        typeList:[
+          {
+            name:'消费积分',
+            value:1
+          },
+          {
+            name:'消费次数积分',
+            value:3
+          },
+          {
+            name:'分享积分',
+            value:2
+          },
+          {
+            name:'评论收录积分',
+            value:4
+          },
+        ],
+        user:{},
+        isLoading:false,
       }
     },
-    computed: mapGetters([]),
+    computed: mapGetters([
+      'useScoreDetailInfo'
+    ]),
     created(){
+      this.user = JSON.parse(sessionStorage.getItem('user'));
+      if(this.user){
+        this.initData(1,this.user.ui_UserCode,'')
+      }
     },
-    methods: {},
+    methods: {
+      //分页
+      handleCurrentChange(num){
+        this.initData(num,this.user.ui_UserCode,this.typeID)
+      },
+      //初始化
+      initData(page,userCode,typeID){
+        let options = {
+          "loginUserID": "huileyou",//授权码
+          "loginUserPass": "123",//授权密码
+          "operateUserID": "",//操作员编码
+          "operateUserName": "",//操作员名称
+          "pcName": "",//机器码
+          "userCode": userCode?userCode:'',//用户编码
+          "scoreTypeID": typeID,//积分类型 0消费积分  1消费次数积分 2分享次数 3评论收录积分
+          "page":page?page:1,
+          "rows":4
+        };
+        this.isLoading = true;
+        this.$store.dispatch('SelectUseScoreDetailInfo',options)
+        .then((total)=>{
+          this.total = total;
+          this.isLoading = false;
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+        })
+      },
+      //查询
+      search(){
+        this.initData(1,this.user.ui_UserCode,this.typeID)
+      }
+    },
   }
 </script>
 <style scoped>
-
+  .userClass {
+    padding: 20px 0 0 20px;
+    font-size: 18px;
+  }
+  .formSearch {
+    padding: 20px 0 0 20px;
+  }
 </style>
