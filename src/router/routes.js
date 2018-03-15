@@ -31,9 +31,16 @@ import AdmissionTicketMore from '@/components/Tickets/AdmissionTicketMore' //更
 import HotelHomePage from '@/components/Hotel/HotelHomePage'//酒店首页
 import HotelSearchMore from '@/components/Hotel/HotelSearchMore'//酒店查询更多
 import HotelDetalis from '@/components/Hotel/HotelDetalis'//酒店详情页
+import HotelParentChildTour from '@/components/Hotel/HotelParentChildTour'//酒店亲子游
 
 
 export default [
+  //酒店亲子游
+  {
+    path: '/hotelParentChildTour',
+    name: 'HotelParentChildTour',
+    component: HotelParentChildTour
+  },
   //发表评论
   {
     path: '/commentOnAComment/:id',

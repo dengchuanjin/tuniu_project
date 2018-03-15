@@ -106,7 +106,7 @@
             </div>
             <!--特色推荐图片展示-->
             <ul class="selectedCharacteristicRecommendPictureList clearfix">
-              <li v-for="item,index in characteristicRecommendList" :key="index">
+              <li v-for="item,index in characteristicRecommendList" :key="index" @click="changeRecommendType(index)">
                 <div class="selectedCharacteristicRecommendImageMask">
                   <h6>{{item.ht_it_Name}}</h6>
                 </div>
@@ -227,6 +227,11 @@
       changeHotPlay(item, index) {
         this.hotPlayNum = index;
         this.$store.commit('initHotPlayList', item.CityList)
+      },
+      changeRecommendType(index){
+        if( index == 2 ){
+          this.$router.push({name:'HotelParentChildTour'})
+        }
       }
     },
     mounted() {
