@@ -6,7 +6,7 @@
         <!--轮播图-->
         <div class="HotelHomePageWrapHeaderCarouselFigure">
           <div class="block">
-            <el-carousel height=" ">
+            <el-carousel height="550px">
               <el-carousel-item v-for="item in 4" :key="item">
                 <a href="javascript:;"></a>
               </el-carousel-item>
@@ -92,7 +92,7 @@
             <ul class="findPlayTheSeasonPictureList clearfix">
               <li v-for="item,index in HotPlayList">
                 <a href="javascript:;">
-                  <img src="../../assets/img/homePageImage.jpg" width="390" height="230">
+                  <img :src="item.ht_ai_Image" width="390" height="230">
                   <span>{{item.sm_af_AreaName}}</span>
                 </a>
               </li>
@@ -110,8 +110,8 @@
                 <div class="selectedCharacteristicRecommendImageMask">
                   <h6>{{item.ht_it_Name}}</h6>
                 </div>
-                <div class="selectedCharacteristicRecommendBg" style=""></div>
-                <strong class="selectedCharacteristicRecommendDetails">去古镇/发现前世自己</strong>
+                <div class="selectedCharacteristicRecommendBg" :style="{backgroundImage: `url(${item.ht_it_ImagePath})`}"></div>
+                <strong class="selectedCharacteristicRecommendDetails">{{item.ht_it_Describe}}</strong>
               </li>
             </ul>
           </div>
@@ -215,30 +215,33 @@
       }
     },
     methods: {
-      initData() {
+      async initData() {
         //首页数据
         let HotelIndexInfo = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
         }
-        this.$store.dispatch('initHotelHomePageData', HotelIndexInfo)
-          .then(() => {
-          }, err => {
-            this.$notify({
-              message: err,
-              type: 'error'
-            });
-          })
+        await this.$store.dispatch('initHotelHomePageData', HotelIndexInfo)
+
       },
-      changeHotPlay(item,index) {
+      changeHotPlay(item, index) {
         this.hotPlayNum = index;
-        this.$store.commit('initHotPlayList',item.CityList)
+        this.$store.commit('initHotPlayList', item.CityList)
       }
     },
     mounted() {
     },
     created() {
-      this.initData();
+      this.$store.commit('showLoading')
+      this.initData()
+        .then(() => {
+          this.$store.commit('hideLoading')
+        }, err => {
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+        });
     }
   }
 </script>

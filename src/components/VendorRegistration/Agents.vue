@@ -169,7 +169,7 @@
             <el-form :inline="true">
               <el-form-item label="注册资金:" :required="isOff">
                 <el-input style="width: 100px" type="text" size="mini"
-                          v-model="insertAgentInfo.data.sm_pi_RegMoney"></el-input>
+                          v-model="insertAgentInfo.data.sm_pi_RegMoney" placeholder="请输入数字"></el-input>
                 万元
               </el-form-item>
             </el-form>

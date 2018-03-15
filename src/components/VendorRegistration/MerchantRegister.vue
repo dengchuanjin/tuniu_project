@@ -204,7 +204,7 @@
             <el-form :inline="true">
               <el-form-item label="注册资金:" :required="isOff">
                 <el-input style="width: 100px" type="text" size="mini"
-                          v-model="insertAgentInfo.data.sm_ai_RegMoney"></el-input>
+                          v-model="insertAgentInfo.data.sm_ai_RegMoney" placeholder="请输入数字"></el-input>
                 万元
               </el-form-item>
             </el-form>
@@ -239,16 +239,7 @@
               </el-form-item>
             </el-form>
           </el-col>
-          <el-col :span="24" id="ScopeOfOperationType" class="formSearch">
-            <el-form :inline="true">
-              <el-form-item label="经营范围名称:" :required="isOff">
-                <el-checkbox-group v-model="ScopeOfOperationType" @change="changeBox">
-                  <el-checkbox v-for="item,index in changeScopeOfOperationList" :label="item.sm_ts_Name"
-                               :key="index"></el-checkbox>
-                </el-checkbox-group>
-              </el-form-item>
-            </el-form>
-          </el-col>
+
         </div>
         <!--合作信息-->
         <div class="cooperationContent clearfix">
@@ -283,7 +274,16 @@
               </el-form-item>
             </el-form>
           </el-col>
-
+          <el-col :span="24" id="ScopeOfOperationType" class="formSearch" v-show="ScopeOfOperationTypeShow">
+            <el-form :inline="true">
+              <el-form-item label="经营范围名称:" :required="isOff">
+                <el-checkbox-group v-model="ScopeOfOperationType" @change="changeBox">
+                  <el-checkbox v-for="item,index in changeScopeOfOperationList" :label="item.sm_ts_Name"
+                               :key="index"></el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
+            </el-form>
+          </el-col>
         </div>
         <!--资质信息-->
         <div class="qualificationsContent clearfix">
@@ -546,6 +546,7 @@
         content: '',
         changeCooperationTypeDataList: '',
         ScopeOfOperationTypeList: [],
+        ScopeOfOperationTypeShow: false,
       }
     },
     created() {
@@ -561,6 +562,7 @@
     methods: {
       //服务条款协议提交
       submitContent() {
+        this.ScopeOfOperationTypeShow = true;
         this.contentDialog = false;
         this.isSubmitContent = true;
       },
@@ -822,6 +824,7 @@
             message: '请选择省!',
             type: 'error'
           });
+          this.changeCooperationTypeDataList = ''
           return
         }
         let options = {
@@ -834,7 +837,6 @@
           "sm_cp_Name": "",
           "sm_cp_IsDelete": 0,
           "provice": this.insertAgentInfo.data.sm_ai_Provice,
-//          "city": this.insertAgentInfo.data.sm_ai_City,insertAgentInfo.data.sm_ai_CompanyName
           "partnerTypeID": v,
         };
         this.$store.dispatch('initAgreementContent',options)
@@ -854,53 +856,10 @@
             type: 'error'
           });
         })
-
-//        this.content = this.changeCooperationTypeList.filter(item => {
-//          if (item.sm_cp_ID == v) {
-//            return true
-//          }
-//          return false
-//        })[0].sm_cp_Agreement
-//        if(this.content){
-//          this.contentDialog = true;
-//        }else{
-//          this.$notify({
-//            message: '服务条款协议不存在!',
-//            type: 'error'
-//          });
-//        }
       },
       //信息提交
       InformtionSubmit() {
         this.insertAgentInfo.data.sm_ai_AgentID = this.insertAgentInfo.data.sm_ai_Telephone;
-        //省
-//        if(this.provinceDataList.length){
-//          this.insertAgentInfo.data.sm_ai_Provice = this.provinceDataList.filter(item => {
-//            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_Provice) {
-//              return true
-//            }
-//            return false;
-//          })[0].sm_af_AreaName
-//        }
-//        //市
-//        if(this.cityDataList.length){
-//          this.insertAgentInfo.data.sm_ai_City = this.cityDataList.filter(item => {
-//            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_City) {
-//              return true
-//            }
-//            return false;
-//          })[0].sm_af_AreaName
-//        }
-//
-//        //县
-//        if(this.countyDataList.length){
-//          this.insertAgentInfo.data.sm_ai_County = this.countyDataList.filter(item => {
-//            if (item.sm_af_AreaID == this.insertAgentInfo.data.sm_ai_County) {
-//              return true
-//            }
-//            return false;
-//          })[0].sm_af_AreaName
-//        }
         if (!this.isSubmitContent) {
           this.$notify({
             message: '请选择合作类型并同意条款！',
@@ -910,7 +869,6 @@
         }
         this.newArr = [];
         let arr = this.changeCooperationTypeList;
-//        let typeArr = this.changeCooperationTypeDataList
         for (var i = 0; i < arr.length; i++) {
           if (arr[i].sm_cp_ID == this.changeCooperationTypeDataList) {
             this.newArr.push({
