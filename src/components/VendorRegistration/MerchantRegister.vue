@@ -67,20 +67,20 @@
                 </el-form-item>
               </el-form>
             </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="固定电话国际区号:" :required="isOff">
-                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FixPhoneAreaCode"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="固定电话区号:" :required="isOff">
-                  <el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FixPhoneContryCode"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
+            <!--<el-col :span="24" class="formSearch">-->
+              <!--<el-form :inline="true">-->
+                <!--<el-form-item label="固定电话国际区号:" :required="isOff">-->
+                  <!--<el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FixPhoneAreaCode"></el-input>-->
+                <!--</el-form-item>-->
+              <!--</el-form>-->
+            <!--</el-col>-->
+            <!--<el-col :span="24" class="formSearch">-->
+              <!--<el-form :inline="true">-->
+                <!--<el-form-item label="固定电话区号:" :required="isOff">-->
+                  <!--<el-input type="text" size="mini" v-model="insertAgentInfo.data.sm_ai_FixPhoneContryCode"></el-input>-->
+                <!--</el-form-item>-->
+              <!--</el-form>-->
+            <!--</el-col>-->
             <!--<el-col :span="24" class="formSearch">-->
               <!--<el-form :inline="true">-->
                 <!--<el-form-item label="传真国际区号:" :required="isOff">-->

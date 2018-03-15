@@ -6,7 +6,7 @@
         <!--轮播图-->
         <div class="HotelHomePageWrapHeaderCarouselFigure">
           <div class="block">
-            <el-carousel height="550px">
+            <el-carousel height="550">
               <el-carousel-item v-for="item in 4" :key="item">
                 <a href="javascript:;"></a>
               </el-carousel-item>
@@ -222,7 +222,6 @@
           "loginUserPass": "123",
         }
         await this.$store.dispatch('initHotelHomePageData', HotelIndexInfo)
-
       },
       changeHotPlay(item, index) {
         this.hotPlayNum = index;

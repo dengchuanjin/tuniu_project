@@ -20,13 +20,6 @@
                 <el-option key="2" label="门票订单" value="2"></el-option>
                 <el-option key="3" label="美食订单" value="3"></el-option>
               </el-select>
-              <!--<select>-->
-                <!--<option value="">全部订单</option>-->
-                <!--<option value="0">旅行社订单</option>-->
-                <!--<option value="1">车票订单</option>-->
-                <!--<option value="2">门票订单</option>-->
-                <!--<option value="3">美食订单</option>-->
-              <!--</select>-->
             </dd>
             <dd>数量</dd>
             <dd>时间</dd>

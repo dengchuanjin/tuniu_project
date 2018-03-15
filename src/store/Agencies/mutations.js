@@ -208,6 +208,9 @@ export default {
   },
   SelectUseScoreDetailInfo(state,data){
     state.useScoreDetailInfo = data;
+  },
+  selectUserAllScore(state,data){
+    state.userAllScoreList = data;
   }
 }
 

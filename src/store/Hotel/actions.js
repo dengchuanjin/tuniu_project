@@ -12,10 +12,10 @@ export default {
         .then(data=>{
           var data = data.data;
           if( Number(data.resultcode) == 200 ){
-            relove();
             commit('HotPlayData',data.data.gameplay.SubArray);
             commit('initHotPlayList',data.data.gameplay.SubArray[0].CityList);
             commit('characteristicRecommendList',data.data.special.SubArray);
+            relove();
           }else{
             reject(data.resultcontent)
           }

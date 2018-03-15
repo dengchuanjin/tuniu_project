@@ -241,13 +241,13 @@
     watch: {
       '$route' (to, from) {
         let str = to.path;
-        if(str.includes('Hotel')){
+        if(str.toLocaleLowerCase().includes('hotel')){
           sessionStorage.setItem('commentNavNum', 2);
           window.location.reload()
-        }else if(str.includes('Ticket')){
+        }else if(str.toLocaleLowerCase().includes('ticket')){
           sessionStorage.setItem('commentNavNum', 1);
           window.location.reload()
-        }else if(str.includes('agencies')){
+        }else if(str.toLocaleLowerCase().includes('agencies')){
           sessionStorage.setItem('commentNavNum', 0);
           window.location.reload()
         }

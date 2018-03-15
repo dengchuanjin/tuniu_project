@@ -504,7 +504,7 @@
 
       if(window.location.href.includes('?')){
         let id = window.location.href.split('?')[1].split('=')[1];
-        this.insertAgentInfo.data.sm_ai_ParentID = id;
+        this.insertAgentInfo.data.sm_ai_ProxyParentID = id;
       }
       this.$store.commit('showLoading');
       this.initData().then(() => {

@@ -36,7 +36,7 @@ export default {
   getAreaInfoList: state => state.getAreaInfoList,
   showFixedComment: state => state.showFixedComment,
   useScoreDetailInfo: state => state.useScoreDetailInfo,
-
+  userAllScoreList: state => state.userAllScoreList,
 
   //商户注册
   provinceDataList: state => state.provinceDataList,
