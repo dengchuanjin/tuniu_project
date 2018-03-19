@@ -210,7 +210,7 @@ export default [
       },
       //酒店详情页
       {
-        path: 'hotelSearchMore',
+        path: 'hotelSearchMore/:id',
         components: {
           default: Comment,
           User: HotelSearchMore

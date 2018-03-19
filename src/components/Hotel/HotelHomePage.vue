@@ -91,7 +91,7 @@
             <!--当季玩图片-->
             <ul class="findPlayTheSeasonPictureList clearfix">
               <li v-for="item,index in HotPlayList">
-                <a href="javascript:;">
+                <a href="javascript:;" @click="changeHotlImg(item)">
                   <img width="390" height="230" v-lazy="item.ht_ai_Image">
                   <span>{{item.sm_af_AreaName}}</span>
                 </a>
@@ -226,6 +226,10 @@
       changeHotPlay(item, index) {
         this.hotPlayNum = index;
         this.$store.commit('initHotPlayList', item.CityList)
+      },
+      //选中跳转到酒店详情搜索
+      changeHotlImg(item){
+        this.$router.push({name: 'HotelSearchMore', params: {id: item.sm_af_AreaID}})
       },
       changeRecommendType(index){
         if( index == 2 ){

@@ -7,5 +7,14 @@ export default {
   },
   characteristicRecommendList(state,data){
     state.characteristicRecommendList = data;
+  },
+  initThemeTypeList(state,data){
+    state.themeTypeList = data;
+  },
+  initRoomHardList(state,data){
+    state.roomHardList = data;
+  },
+  initSearchData(state,data){
+    state.searchData = data;
   }
 }

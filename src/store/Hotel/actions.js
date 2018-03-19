@@ -21,5 +21,46 @@ export default {
           }
         })
     })
+  },
+  //酒店搜索详情
+  initHotelSearchFilterInfo({commit},data){
+    return new Promise((relove, reject) => {
+      axios.post('http://webservice.1000da.com.cn/HotelWebPage/SearchFilter',JSON.stringify(data),{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data=>{
+        var data = data.data;
+        if( Number(data.resultcode) == 200 ){
+          //主题
+          commit('initThemeTypeList',data.data.ThemeType)
+          commit('initRoomHardList',data.data.RoomHard)
+          relove();
+        }else{
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //搜索酒店详情数据
+  initSearchData({commit},data){
+    return new Promise((relove, reject) => {
+      axios.post('http://webservice.1000da.com.cn/HotelWebPage/Search',JSON.stringify(data),{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data=>{
+        var data = data.data;
+        if( Number(data.resultcode) == 200 ){
+          //主题
+          commit('initSearchData',data.data.dataArray)
+          relove();
+        }else{
+          reject(data.resultcontent)
+        }
+      })
+    })
   }
 }

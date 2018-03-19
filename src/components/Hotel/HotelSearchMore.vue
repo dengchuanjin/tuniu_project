@@ -99,105 +99,59 @@
         <!--搜索选项-->
         <div class="searchOptionWrap">
           <ul class="searchOption">
-            <!--热门推荐-->
+            <!--主题推荐-->
             <li>
-              <strong>热门推荐 :</strong>
-              <el-checkbox>不限</el-checkbox>
-              <a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>
-              <el-checkbox>五星级/豪华型</el-checkbox>
-              <el-checkbox>150-300元</el-checkbox>
-              <el-checkbox>客栈民宿</el-checkbox>
-              <el-checkbox>三人/家庭房</el-checkbox>
-              <div v-show="isAdministrativeArea" class="moreCheckbox">
-                <el-checkbox>油尖旺区</el-checkbox>
-                <el-checkbox>湾仔区</el-checkbox>
-                <el-checkbox>东区</el-checkbox>
-                <el-checkbox>荃湾区</el-checkbox>
-                <el-checkbox>离岛区</el-checkbox>
-                <el-checkbox>中西区</el-checkbox>
-                <el-checkbox>九龙城区</el-checkbox>
-                <el-checkbox>葵青区</el-checkbox>
-                <el-checkbox>南区</el-checkbox>
-                <el-checkbox>元朗区</el-checkbox>
-                <el-checkbox>观塘区</el-checkbox>
-                <el-checkbox>屯门区</el-checkbox>
-                <el-checkbox>沙田区</el-checkbox>
-              </div>
+              <strong>主题 :</strong>
+              <el-checkbox  @change="changeThemeHardAll">不限</el-checkbox>
+              <p style="height: 20px"></p>
+              <el-radio-group v-model="themeTypeRadio"  style="margin-left: 70px">
+                <el-radio :label="index" v-for="item,index in themeTypeList" :key="index" @change="changeThemeType(item.ht_tt_ThemeID)">{{item.ht_tt_Name}}</el-radio>
+              </el-radio-group>
+              <!--<a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>-->
+              <!--<a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>-->
+              <!--<a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>-->
+              <!--<div v-show="isAdministrativeArea" class="moreCheckbox">-->
+                <!--<el-checkbox>油尖旺区</el-checkbox>-->
+                <!--<el-checkbox>湾仔区</el-checkbox>-->
+                <!--<el-checkbox>东区</el-checkbox>-->
+                <!--<el-checkbox>荃湾区</el-checkbox>-->
+                <!--<el-checkbox>离岛区</el-checkbox>-->
+                <!--<el-checkbox>中西区</el-checkbox>-->
+                <!--<el-checkbox>九龙城区</el-checkbox>-->
+                <!--<el-checkbox>葵青区</el-checkbox>-->
+                <!--<el-checkbox>南区</el-checkbox>-->
+                <!--<el-checkbox>元朗区</el-checkbox>-->
+                <!--<el-checkbox>观塘区</el-checkbox>-->
+                <!--<el-checkbox>屯门区</el-checkbox>-->
+                <!--<el-checkbox>沙田区</el-checkbox>-->
+              <!--</div>-->
             </li>
-            <!--热门推荐-->
+            <!--房间设施-->
             <li>
-              <strong>热门推荐 :</strong>
-              <el-checkbox>不限</el-checkbox>
-              <a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>
-              <el-checkbox>五星级/豪华型</el-checkbox>
-              <el-checkbox>150-300元</el-checkbox>
-              <el-checkbox>客栈民宿</el-checkbox>
-              <el-checkbox>三人/家庭房</el-checkbox>
-              <div v-show="isAdministrativeArea" class="moreCheckbox">
-                <el-checkbox>油尖旺区</el-checkbox>
-                <el-checkbox>湾仔区</el-checkbox>
-                <el-checkbox>东区</el-checkbox>
-                <el-checkbox>荃湾区</el-checkbox>
-                <el-checkbox>离岛区</el-checkbox>
-                <el-checkbox>中西区</el-checkbox>
-                <el-checkbox>九龙城区</el-checkbox>
-                <el-checkbox>葵青区</el-checkbox>
-                <el-checkbox>南区</el-checkbox>
-                <el-checkbox>元朗区</el-checkbox>
-                <el-checkbox>观塘区</el-checkbox>
-                <el-checkbox>屯门区</el-checkbox>
-                <el-checkbox>沙田区</el-checkbox>
-              </div>
-            </li>
-            <!--热门推荐-->
-            <li>
-              <strong>热门推荐 :</strong>
-              <el-checkbox>不限</el-checkbox>
-              <a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>
-              <el-checkbox>五星级/豪华型</el-checkbox>
-              <el-checkbox>150-300元</el-checkbox>
-              <el-checkbox>客栈民宿</el-checkbox>
-              <el-checkbox>三人/家庭房</el-checkbox>
-              <div v-show="isAdministrativeArea" class="moreCheckbox">
-                <el-checkbox>油尖旺区</el-checkbox>
-                <el-checkbox>湾仔区</el-checkbox>
-                <el-checkbox>东区</el-checkbox>
-                <el-checkbox>荃湾区</el-checkbox>
-                <el-checkbox>离岛区</el-checkbox>
-                <el-checkbox>中西区</el-checkbox>
-                <el-checkbox>九龙城区</el-checkbox>
-                <el-checkbox>葵青区</el-checkbox>
-                <el-checkbox>南区</el-checkbox>
-                <el-checkbox>元朗区</el-checkbox>
-                <el-checkbox>观塘区</el-checkbox>
-                <el-checkbox>屯门区</el-checkbox>
-                <el-checkbox>沙田区</el-checkbox>
-              </div>
-            </li>
-            <!--热门推荐-->
-            <li>
-              <strong>热门推荐 :</strong>
-              <el-checkbox>不限</el-checkbox>
-              <a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>
-              <el-checkbox>五星级/豪华型</el-checkbox>
-              <el-checkbox>150-300元</el-checkbox>
-              <el-checkbox>客栈民宿</el-checkbox>
-              <el-checkbox>三人/家庭房</el-checkbox>
-              <div v-show="isAdministrativeArea" class="moreCheckbox">
-                <el-checkbox>油尖旺区</el-checkbox>
-                <el-checkbox>湾仔区</el-checkbox>
-                <el-checkbox>东区</el-checkbox>
-                <el-checkbox>荃湾区</el-checkbox>
-                <el-checkbox>离岛区</el-checkbox>
-                <el-checkbox>中西区</el-checkbox>
-                <el-checkbox>九龙城区</el-checkbox>
-                <el-checkbox>葵青区</el-checkbox>
-                <el-checkbox>南区</el-checkbox>
-                <el-checkbox>元朗区</el-checkbox>
-                <el-checkbox>观塘区</el-checkbox>
-                <el-checkbox>屯门区</el-checkbox>
-                <el-checkbox>沙田区</el-checkbox>
-              </div>
+              <strong>房间设施 :</strong>
+              <el-checkbox   v-model="checked" @change="changeRoomHardAll">不限</el-checkbox>
+              <p style="height: 20px"></p>
+              <el-radio-group v-model="roomHardRadio" style="margin-left: 70px">
+                <el-radio :label="index" v-for="item,index in roomHardList" :key="index" @change="changeRoomHard(item.ht_rh_ID)">{{item.ht_rh_Name}}</el-radio>
+              </el-radio-group>
+              <!--<a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>-->
+              <!--<a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>-->
+              <!--<a href="javascript:;" :class="AdministrativeArea" @click="isDisplay">行政区<i></i></a>-->
+              <!--<div v-show="isAdministrativeArea" class="moreCheckbox">-->
+              <!--<el-checkbox>油尖旺区</el-checkbox>-->
+              <!--<el-checkbox>湾仔区</el-checkbox>-->
+              <!--<el-checkbox>东区</el-checkbox>-->
+              <!--<el-checkbox>荃湾区</el-checkbox>-->
+              <!--<el-checkbox>离岛区</el-checkbox>-->
+              <!--<el-checkbox>中西区</el-checkbox>-->
+              <!--<el-checkbox>九龙城区</el-checkbox>-->
+              <!--<el-checkbox>葵青区</el-checkbox>-->
+              <!--<el-checkbox>南区</el-checkbox>-->
+              <!--<el-checkbox>元朗区</el-checkbox>-->
+              <!--<el-checkbox>观塘区</el-checkbox>-->
+              <!--<el-checkbox>屯门区</el-checkbox>-->
+              <!--<el-checkbox>沙田区</el-checkbox>-->
+              <!--</div>-->
             </li>
           </ul>
 
@@ -220,159 +174,21 @@
                 <el-checkbox>促销</el-checkbox>
               </li>
             </ul>
-            <ul class="HotelRecommendDetalisList clearfix">
-              <li>
+            <ul class="HotelRecommendDetalisList clearfix" v-loading="isLoading">
+              <li v-for="item,index in searchData">
                 <a href="javascript:;" class="HotelRecommendDetalisListImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="262" height="175">
+                  <img  width="262" height="175" v-lazy="item.ht_ht_ImageUrl">
                   <em class="HotelRecommendDetalisListImgBoxsMask">查看更多图片</em>
                 </a>
                 <div class="HotelRecommendDetalisListIntroduceBox">
                   <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">1</span>
-                    <h4><a href="javascript:;" @click="goHotelDetails">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
+                    <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">{{index+1}}</span>
+                    <h4><a href="javascript:;" @click="goHotelDetails">{{item.ht_ht_HotelName}}</a></h4>
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
                   </div>
                   <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
-                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】
-                  </p>
-                  <a href="javascript:;">查看地图</a>
-                  <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
-                    <i class="Restaurant" title="餐厅"></i>
-                    <i class="ParkingLot" title="停车场"></i>
-                    <i class="meetPlaneService" title="接机服务"></i>
-                    <i class="swimmingPool" title="游泳池"></i>
-                    <i class="Gym" title="健身房"></i>
-                    <i class="ConferenceRoom" title="会议室"></i>
-                    <i class="hotWater" title="24小时热水"></i>
-                    <i class="WiFi" title="公共区域免费wifi"></i>
-                    <i class="transit" title="公交"></i>
-                  </div>
-                </div>
-                <div class="HotelRecommendPrice">
-                  <strong class="HotelRecommendPriceMoney">¥<span>1642</span>起</strong>
-                  <div class="scoreDetails clearfix">
-                    <span class="score">4.7/5分</span>
-                    <div class="scoreDetailsContent">
-                      <i></i>
-                      <div class="clearfix">
-                        <span>环境卫生 : <em>4.3</em></span>
-                        <span>服务质量 : <em>4.3</em></span>
-                        <span>设备设施 : <em>4.3</em></span>
-                        <span>位置交通 : <em>4.3</em></span>
-                      </div>
-                    </div>
-                  </div>
-                  <span class="commentNumber">来自<em>1111</em>条评论</span>
-                  <a href="javascript:;">查看详情</a>
-                </div>
-              </li>
-              <li>
-                <a href="javascript:;" class="HotelRecommendDetalisListImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="262" height="175">
-                  <em class="HotelRecommendDetalisListImgBoxsMask">查看更多图片</em>
-                </a>
-                <div class="HotelRecommendDetalisListIntroduceBox">
-                  <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">1</span>
-                    <h4><a href="javascript:;">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
-                  </div>
-                  <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
-                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】
-                  </p>
-                  <a href="javascript:;">查看地图</a>
-                  <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
-                    <i class="Restaurant" title="餐厅"></i>
-                    <i class="ParkingLot" title="停车场"></i>
-                    <i class="meetPlaneService" title="接机服务"></i>
-                    <i class="swimmingPool" title="游泳池"></i>
-                    <i class="Gym" title="健身房"></i>
-                    <i class="ConferenceRoom" title="会议室"></i>
-                    <i class="hotWater" title="24小时热水"></i>
-                    <i class="WiFi" title="公共区域免费wifi"></i>
-                    <i class="transit" title="公交"></i>
-                  </div>
-                </div>
-                <div class="HotelRecommendPrice">
-                  <strong class="HotelRecommendPriceMoney">¥<span>1642</span>起</strong>
-                  <div class="scoreDetails clearfix">
-                    <span class="score">4.7/5分</span>
-                    <div class="scoreDetailsContent">
-                      <i></i>
-                      <div class="clearfix">
-                        <span>环境卫生 : <em>4.3</em></span>
-                        <span>服务质量 : <em>4.3</em></span>
-                        <span>设备设施 : <em>4.3</em></span>
-                        <span>位置交通 : <em>4.3</em></span>
-                      </div>
-                    </div>
-                  </div>
-                  <span class="commentNumber">来自<em>1111</em>条评论</span>
-                  <a href="javascript:;">查看详情</a>
-                </div>
-              </li>
-              <li>
-                <a href="javascript:;" class="HotelRecommendDetalisListImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="262" height="175">
-                  <em class="HotelRecommendDetalisListImgBoxsMask">查看更多图片</em>
-                </a>
-                <div class="HotelRecommendDetalisListIntroduceBox">
-                  <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">1</span>
-                    <h4><a href="javascript:;">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
-                  </div>
-                  <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
-                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】
-                  </p>
-                  <a href="javascript:;">查看地图</a>
-                  <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
-                    <i class="Restaurant" title="餐厅"></i>
-                    <i class="ParkingLot" title="停车场"></i>
-                    <i class="meetPlaneService" title="接机服务"></i>
-                    <i class="swimmingPool" title="游泳池"></i>
-                    <i class="Gym" title="健身房"></i>
-                    <i class="ConferenceRoom" title="会议室"></i>
-                    <i class="hotWater" title="24小时热水"></i>
-                    <i class="WiFi" title="公共区域免费wifi"></i>
-                    <i class="transit" title="公交"></i>
-                  </div>
-                </div>
-                <div class="HotelRecommendPrice">
-                  <strong class="HotelRecommendPriceMoney">¥<span>1642</span>起</strong>
-                  <div class="scoreDetails clearfix">
-                    <span class="score">4.7/5分</span>
-                    <div class="scoreDetailsContent">
-                      <i></i>
-                      <div class="clearfix">
-                        <span>环境卫生 : <em>4.3</em></span>
-                        <span>服务质量 : <em>4.3</em></span>
-                        <span>设备设施 : <em>4.3</em></span>
-                        <span>位置交通 : <em>4.3</em></span>
-                      </div>
-                    </div>
-                  </div>
-                  <span class="commentNumber">来自<em>1111</em>条评论</span>
-                  <a href="javascript:;">查看详情</a>
-                </div>
-              </li>
-              <li>
-                <a href="javascript:;" class="HotelRecommendDetalisListImgBox">
-                  <img src="../../assets/img/homePageImage.jpg" width="262" height="175">
-                  <em class="HotelRecommendDetalisListImgBoxsMask">查看更多图片</em>
-                </a>
-                <div class="HotelRecommendDetalisListIntroduceBox">
-                  <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">1</span>
-                    <h4><a href="javascript:;">香港迪士尼乐园酒店(Disneyland Hotel)</a></h4>
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
-                  </div>
-                  <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
-                    离岛大屿山香港迪士尼乐园度假区，近港铁迪士尼站转乘酒店班车直达。【香港迪士尼乐园度假区】
+                    {{item.ht_ht_HotelAddress}}
                   </p>
                   <a href="javascript:;">查看地图</a>
                   <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
@@ -418,9 +234,17 @@
   import {mapGetters} from 'vuex'
 
   export default {
-    computed: mapGetters([]),
+    computed: mapGetters([
+      'themeTypeList',
+      'roomHardList',
+      'searchData'
+    ]),
     data() {
       return {
+        checked:false,
+        isLoading:false,
+        roomHardRadio:'',
+        themeTypeRadio:'',
         value1: '',
         value2: '',
         n: 0,
@@ -477,9 +301,65 @@
           '最近装修'
         ],
         m: 0,
+        searchOptions:{
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          //"ht_it_ID":"1",//推荐类型
+          "ht_tt_ID":"",//主题
+          //"ht_hd_ID":"1",//设施
+          "ht_rh_ID":"",//房间设施
+        }
       }
     },
+    created(){
+      //初始化数据
+      this.$store.commit('showLoading')
+      this.initData().then(()=>{
+        this.$store.commit('hideLoading')
+      })
+    },
     methods: {
+      //选中主题
+      changeThemeType(id){
+        this.searchOptions.ht_tt_ID = id;
+        this.searchDataList(this.searchOptions)
+      },
+      //选中房间设施
+      changeRoomHard(id){
+        this.searchOptions.ht_rh_ID = id;
+        this.searchDataList(this.searchOptions)
+      },
+      //房间设施不限
+      changeRoomHardAll(){
+        this.roomHardRadio = '';
+        this.searchOptions.ht_rh_ID = ''
+        this.searchDataList(this.searchOptions)
+      },
+      changeThemeHardAll(){
+        this.themeTypeRadio = '';
+        this.searchOptions.ht_tt_ID = ''
+        this.searchDataList(this.searchOptions)
+      },
+      searchDataList(options){
+        this.isLoading = true;
+        this.$store.dispatch('initSearchData',options)
+        .then(()=>{
+          this.isLoading = false;
+        })
+      },
+      async initData(){
+        let initHotelSearchFilterInfo = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+        };
+        await this.$store.dispatch('initHotelSearchFilterInfo',initHotelSearchFilterInfo)
+      },
       goHotelDetails(){
         this.$router.push({name:'HotelDetalis'})
       },

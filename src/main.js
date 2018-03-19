@@ -4,15 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import '@/assets/css/reset.css'
-import '@/assets/css/animate.css'
+// import '@/assets/css/animate.css'
 import '@/assets/css/icons/icomoon/styles.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+// import 'element-ui/lib/theme-chalk/index.css'
+import './assets/css/element-variables.scss'
 import store from './store/index'
 import axios from 'axios'
 import * as filters from './filters'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
@@ -25,7 +26,7 @@ Vue.use(VueAwesomeSwiper)
 
 import VueLazyLoad from 'vue-lazyload'
 Vue.use(VueLazyLoad,{
-  error:'../static/img/error.jpeg',
+  error:'../static/img/error.jpg',
   loading:'../static/img/loading.gif'
 });
 Vue.use(ElementUI)
@@ -38,7 +39,7 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
 
-
+//滑动验证指令
 Vue.directive('move', {
   inserted: function (el) {
     el.onmousedown = function(e) {
