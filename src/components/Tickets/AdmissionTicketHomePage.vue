@@ -37,8 +37,8 @@
         <div class="AdmissionTickeHomePageWrapPicture">
           <div class="block">
             <el-carousel height="370px">
-              <el-carousel-item v-for="item,index in images" :key="index">
-                <img :src="item" alt=""/>
+              <el-carousel-item v-for="item,index in topBigImageList" :key="index">
+                <img alt="" v-lazy="item.tm_tbi_Image[0]" style="height: 100%"/>
               </el-carousel-item>
             </el-carousel>
           </div>
@@ -57,7 +57,7 @@
               </li>
             </ul>
             <div class="AdmissionTickeAsightsAroundTitelMore">
-              <a href="javascript:;">更多景点></a>
+              <router-link to="TicketsDetail">更多景点</router-link>
             </div>
           </div>
           <!--类型与展示-->
@@ -197,7 +197,8 @@
       'outListObj',
       'featuredList',
       'hotCityList',
-      'cooperationList'
+      'cooperationList',
+      'topBigImageList'
     ]),
     data() {
       return {

@@ -13,4 +13,8 @@ export default {
   featuredList: state => state.featuredList,
   hotCityList: state => state.hotCityList,
   cooperationList: state => state.cooperationList,
+  topBigImageList: state => state.topBigImageList,
+  bookKnowObj: state => state.bookKnowObj,
+  getTourSiteList: state => state.getTourSiteList,
+  pictureList: state => state.pictureList,
 }

@@ -40,5 +40,17 @@ export default {
   },
   initCooperationList(state,data){
     state.cooperationList = data;
-  }
+  },
+  initTopBigImageList(state,data){
+    state.topBigImageList = data
+  },
+  //景点开放时间
+  initBookKnowObj(state,obj){
+    state.bookKnowObj = obj;
+  },
+  //景区介绍
+  initGetTourSite(state,data){
+    state.getTourSiteList = data;
+  },
+
 }

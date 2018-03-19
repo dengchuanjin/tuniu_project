@@ -17,6 +17,11 @@ import $ from 'jquery'
 Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
 })
+//vue 轮播插件
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+
+import 'swiper/dist/css/swiper.css'
+Vue.use(VueAwesomeSwiper)
 
 import VueLazyLoad from 'vue-lazyload'
 Vue.use(VueLazyLoad,{

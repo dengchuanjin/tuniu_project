@@ -6,7 +6,7 @@
         <div class="personakCenterWrapHeaderContent clearfix">
           <div class="personakCenterWrapHeaderContentLogo">
             <img src="../../assets/img/center.png" width="60" height="60">
-            <strong>惠乐游个人中心</strong>
+            <router-link to="AgenciesHome" tag="strong" style="cursor: pointer">惠乐游个人中心</router-link>
           </div>
           <ul class="personakCenterWrapHeaderContentNav">
             <li>

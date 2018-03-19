@@ -3,13 +3,44 @@
     <section id="wrapBoxa">
       <div class="scenicSpotInformation clearfix">
         <div class="pictureBox">
-          <div class="block">
-            <el-carousel height="300px">
-              <el-carousel-item v-for="item,index in pictureList" :key="index">
-                <img :src="item" height="300" width="500">
-              </el-carousel-item>
-            </el-carousel>
-          </div>
+          <!--详情轮播1-->
+          <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
+            <swiper-slide class="slide-1">
+              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide class="slide-2">
+              <img width="100%"  height="100%" src="http://m.tuniucdn.com/fb2/t1/G1/M00/72/33/Cii9EVcQSG-ICQ63AAv1F3xl40gAADOPABVa7EAC_Uv300_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide class="slide-3">
+              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide class="slide-4">
+              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide class="slide-5">
+              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+            <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+            <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+          </swiper>
+          <!--详情轮播2-->
+          <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
+            <swiper-slide class="slide-1">
+              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide class="slide-2">
+              <img width="100%" height="100%" src="http://m.tuniucdn.com/fb2/t1/G1/M00/72/33/Cii9EVcQSG-ICQ63AAv1F3xl40gAADOPABVa7EAC_Uv300_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide class="slide-3">
+              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide class="slide-4">
+              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide class="slide-5">
+              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
+            </swiper-slide>
+          </swiper>
         </div>
         <div class="scenicSpotInformationContent">
           <h1>西岭雪山</h1>
@@ -221,16 +252,42 @@
   import '@/assets/css/comment.css'
   import '@/assets/css/AdmissionTicket.css'
   import $ from 'jquery'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
   export default {
     name: '',
-    computed: mapGetters([
+    components: {
+      swiper,
+      swiperSlide
+    },
+    computed: Object.assign({
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
+    },mapGetters([
       'pictureList',
       'bookKnowObj',
       'getTourSiteList'
-    ]),
+    ])),
     data() {
       return {
+        swiperOptionTop: {
+          spaceBetween: 10,
+          loop: true,
+          loopedSlides: 5, //looped slides should be the same
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }
+        },
+        swiperOptionThumbs: {
+          spaceBetween: 10,
+          slidesPerView: 4,
+          touchRatio: 0.2,
+          loop: true,
+          loopedSlides: 5, //looped slides should be the same
+          slideToClickedSlide: true,
+        },
         form: {
           x: '105.44397029',
           y: '24.8959298'
@@ -292,6 +349,12 @@
       }
     },
     mounted() {
+      this.$nextTick(() => {
+        const swiperTop = this.$refs.swiperTop.swiper
+        const swiperThumbs = this.$refs.swiperThumbs.swiper
+        swiperTop.controller.control = swiperThumbs
+        swiperThumbs.controller.control = swiperTop
+      })
       this.searchMap();
       //滚动到一定距离变固定定位
       (function () {
@@ -325,5 +388,29 @@
     }
   }
 </script>
-<style scoped>
+<style lang="scss" scoped>
+  .swiper-container {
+    /*background-color: #000;*/
+  }
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+  .gallery-top {
+    height: 80%!important;
+    width: 100%;
+  }
+  .gallery-thumbs {
+    height: 20%!important;
+    box-sizing: border-box;
+    padding: 10px 0;
+  }
+  .gallery-thumbs .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.6;
+  }
+  .gallery-thumbs .swiper-slide-active {
+    opacity: 1;
+  }
 </style>

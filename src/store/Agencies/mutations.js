@@ -93,18 +93,7 @@ export default {
   //   })[0];
   //   state.pictureList = pictureListObj.ta_tg_ShowImage.split(',')
   // },
-  //景点开放时间
-  initBookKnowObj(state,obj){
-    state.bookKnowObj = obj;
-  },
-  //景区介绍
-  initGetTourSite(state,data){
-    state.getTourSiteList = data;
-    state.getTourSiteListImage = data.filter(item=>{
-      var arr = item.ta_tg_ShowImage.slice(',')
-      console.log(arr)
-    })
-  },
+
   //--------------商户注册----------
   //获取省
   initProvinceData(state,data){
@@ -211,6 +200,24 @@ export default {
   },
   selectUserAllScore(state,data){
     state.userAllScoreList = data;
+  },
+  initTopPageList(state,data){
+    state.topPageList = data;
+  },
+  initHotAgenciesCityList(state,data){
+    state.hotAgenciesCityList = data;
+  },
+  initOutLongAreaList(state,data){
+    state.outLongAreaList = data;
+  },
+  initOutShortAreaList(state,data){
+    state.outShortAreaList = data;
+  },
+  initContryAreaList(state,data){
+    state.contryAreaList = data;
+  },
+  initNearAreaList(state,data){
+    state.nearAreaList = data;
   }
 }
 

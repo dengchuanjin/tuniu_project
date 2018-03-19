@@ -175,17 +175,19 @@
                     };
                     this.$store.dispatch('InsertUseScoreDetailInfo',options)
                     .then(()=>{
-                      let newOptions = {}
-                      for(let item in options){
-                        newOptions[item] = options[item]
-                      }
-                      delete  newOptions.costMoney;
-                      newOptions.scoreTypeID = 1;
-                      this.$store.dispatch('InsertUseScoreDetailInfo',newOptions)
-                      .then(()=>{
-                        //支付成功
-                        this.$router.push({name:'MyTourOrder'});
-                      })
+//                      let newOptions = {}
+//                      for(let item in options){
+//                        newOptions[item] = options[item]
+//                      }
+//                      delete  newOptions.costMoney;
+//                      newOptions.scoreTypeID = 1;
+//                      this.$store.dispatch('InsertUseScoreDetailInfo',newOptions)
+//                      .then(()=>{
+//                        //支付成功
+//                        this.$router.push({name:'MyTourOrder'});
+//                      })
+                      //支付成功
+                      this.$router.push({name:'MyTourOrder'});
                     })
                   },err=>{
                     this.$notify({
@@ -193,8 +195,6 @@
                       type: 'error'
                     });
                   })
-
-
                 }
               })
             }, 300)

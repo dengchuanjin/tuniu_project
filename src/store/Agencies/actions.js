@@ -28,18 +28,65 @@ export default {
         var data = data.data;
         if (Number(data.resultcode) == 200) {
           let resulte = data.data;
-          for(let item in resulte){
-            let arr = resulte[item]
-            if(arr.length){
-              for(var i=0;i<arr.length;i++){
-                arr[i].oneImg = arr[i].ta_tg_ShowImage.split(',')[0]
+          let DomesticDataList = resulte.contryList;
+          for(var i=0;i<DomesticDataList.length;i++){
+            if(DomesticDataList[i].ta_tg_ShowImage){
+              DomesticDataList[i].oneImg = DomesticDataList[i].ta_tg_ShowImage.split(',')[0]
+            }else{
+              DomesticDataList[i].oneImg = []
+            }
+          }
+          let AroundList = resulte.nearList;
+          for(var i=0;i<AroundList.length;i++){
+            if(AroundList[i].ta_tg_ShowImage){
+              AroundList[i].oneImg = AroundList[i].ta_tg_ShowImage.split(',')[0]
+            }else{
+              AroundList[i].oneImg = []
+            }
+          }
+          let ShortLineList = resulte.outShortList;
+          for(var i=0;i<ShortLineList.length;i++){
+            if(ShortLineList[i].ta_tg_ShowImage){
+              ShortLineList[i].oneImg = ShortLineList[i].ta_tg_ShowImage.split(',')[0]
+            }else{
+              ShortLineList[i].oneImg = []
+            }
+          }
+          let LongLineList = resulte.outLongList;
+          for(var i=0;i<LongLineList.length;i++){
+            if(LongLineList[i].ta_tg_ShowImage){
+              LongLineList[i].oneImg = LongLineList[i].ta_tg_ShowImage.split(',')[0]
+            }else{
+              LongLineList[i].oneImg = []
+            }
+          }
+          //轮播图
+          let topPageList = resulte.topPageList;
+          for(var i=0;i<topPageList.length;i++){
+            for(var j=0;j<topPageList[i].length;j++){
+              if(topPageList[i][j].ts_tsi_Image){
+                topPageList[i][j].ts_tsi_Image = topPageList[i][j].ts_tsi_Image.split(',')
+              }else{
+                topPageList[i][j].ts_tsi_Image = []
               }
             }
           }
-          commit('initDomesticData', resulte.contryList)
-          commit('initAroundList', resulte.nearList)
-          commit('initShortLineList', resulte.outShortList)
-          commit('initLongLineList', resulte.outLongList)
+          //热门城市
+          commit('initHotAgenciesCityList',resulte.hotCityList)
+          //出境长线
+          commit('initOutLongAreaList',resulte.outLongAreaList)
+          //出境短线
+          commit('initOutShortAreaList',resulte.outShortAreaList)
+          //国内跟团
+          commit('initContryAreaList',resulte.contryAreaList)
+          //周边跟团
+          commit('initNearAreaList',resulte.nearAreaList)
+
+          commit('initTopPageList',topPageList)
+          commit('initDomesticData', DomesticDataList)
+          commit('initAroundList', AroundList)
+          commit('initShortLineList', ShortLineList)
+          commit('initLongLineList',LongLineList)
           relove()
         }
       })
@@ -210,42 +257,7 @@ export default {
   //   })
   // },
 
-  //---------------------   门票 ----------------
 
-  //预定需知景区开放时间
-  initBookKnowObj({commit}, data) {
-    return new Promise(function (relove, reject) {
-      axios.post('http://hly.mp.1000da.com.cn/BookKnow/GetBookKnowList', JSON.stringify(data), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-        .then(data => {
-          var data = data.data;
-          if (Number(data.resultcode) == 200) {
-            commit('initBookKnowObj', data.data)
-            relove()
-          }
-        })
-    })
-  },
-  //景区介绍
-  initGetTourSite({commit}, data) {
-    return new Promise(function (relove, reject) {
-      axios.post('http://hly.mp.1000da.com.cn/TourSite/GetTourSite', JSON.stringify(data), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-        .then(data => {
-          var data = data.data;
-          if (Number(data.resultcode) == 200) {
-            commit('initGetTourSite', data.data)
-            relove()
-          }
-        })
-    })
-  },
 //---------------------商户注册---------------
   //获取省
   initProvinceData({commit}, data) {
@@ -876,6 +888,24 @@ export default {
         if(Number(data.resultcode) == 200){
           commit('selectUserAllScore',data.data)
           relove(data.resultcontent)
+        }else{
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //代理商注册获取协议
+  initSelectProxy(store,data){
+    return new Promise((relove, reject) => {
+      axios.post('http://webservice.1000da.com.cn/CooperationType/SelectProxy', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data=>{
+        var data = data.data;
+        if(Number(data.resultcode) == 200){
+          relove(data.data)
         }else{
           reject(data.resultcontent)
         }

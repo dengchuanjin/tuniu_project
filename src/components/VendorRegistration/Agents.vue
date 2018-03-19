@@ -352,7 +352,7 @@
       </div>
       <!--信息提交-->
       <div class="ContactsSubmitWrap" v-show="off">
-       <p><el-checkbox v-model="isSubmitContent"></el-checkbox><span style="font-size: 12px;cursor:pointer;padding-left: 5px" @click="consentAgreement">同意服务条款协议</span></p>
+       <!--<p><el-checkbox v-model="isSubmitContent"></el-checkbox><span style="font-size: 12px;cursor:pointer;padding-left: 5px" @click="consentAgreement">同意服务条款协议</span></p>-->
         <a href="javascript:;" @click="InformtionSubmit">提交信息</a>
       </div>
       <div class="MerchantRegisterTabel" v-show="!off">
@@ -379,7 +379,10 @@
       width="50%"
       :close-on-click-modal="false"
     >
-      <span v-html="content"></span>
+      <div style="position: relative">
+        <div v-html="content"></div>
+        <img src="../../assets/img/Chapter.png" alt="" style="position: absolute;bottom: -30px;left: 20px;width: 150px;height: 150px">
+      </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitContent">同意条款并继续</el-button>
       </span>
@@ -518,6 +521,32 @@
       },
       //选择等级
       changeLevel(v){
+        if(!this.insertAgentInfo.data.sm_pi_CompanyName){
+          this.$notify({
+            message: '请输入公司名称!',
+            type: 'error'
+          });
+          return
+        }
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "partnerName":this.insertAgentInfo.data.sm_pi_CompanyName,    //合作伙伴类型名称
+          "proxyLevel": v//代理商级别 (1.区域代理,2.省代理,3市代理)
+        };
+        this.$store.dispatch('initSelectProxy',options)
+        .then(content=>{
+          this.content = content;
+          this.contentDialog = true;
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+        })
         this.insertAgentInfo.areaData = []
       },
       changeAreaInfo(v){
@@ -732,7 +761,7 @@
         }
         if (!this.isSubmitContent) {
           this.$notify({
-            message: '请选择合作类型并同意条款！',
+            message: '请选择代理级别并同意条款协议！',
             type: 'error'
           });
           return

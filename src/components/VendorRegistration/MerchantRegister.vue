@@ -436,10 +436,13 @@
       width="50%"
       :close-on-click-modal="false"
     >
-      <span v-html="content"></span>
+      <div style="position: relative">
+        <div v-html="content"></div>
+        <img src="../../assets/img/Chapter.png" alt="" style="position: absolute;bottom: -30px;left: 20px;width: 150px;height: 150px"/>
+      </div>
       <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="submitContent">同意条款并继续</el-button>
-  </span>
+        <el-button type="primary" @click="submitContent">同意条款并继续</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -838,6 +841,7 @@
           "sm_cp_IsDelete": 0,
           "provice": this.insertAgentInfo.data.sm_ai_Provice,
           "partnerTypeID": v,
+          "partnerName":this.insertAgentInfo.data.sm_ai_CompanyName
         };
         this.$store.dispatch('initAgreementContent',options)
         .then(content=>{

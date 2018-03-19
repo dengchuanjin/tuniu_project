@@ -24,8 +24,7 @@ export default  {
   navList:[],//导航套子导航
   getLineCityList:[],//获取城市列表
   // pictureList:[],//获取图片
-  bookKnowObj:{},//景点开放时间
-  getTourSiteList:{},//景点介绍
+
   showQuit:false,//退出
   orderDetail:{},//订单详情
   getAreaInfoList:[],//区域
@@ -52,4 +51,10 @@ export default  {
   educationList:[],//个人中心学历
   useScoreDetailInfo:[],//用户积分
   userAllScoreList:[],//用户总积分
+  topPageList:[],//轮播图
+  hotAgenciesCityList:[],//热门城市
+  outLongAreaList:[],//出境长线
+  outShortAreaList:[],//出境短线
+  contryAreaList:[],//国内跟团
+  nearAreaList:[],//周边跟团
 };

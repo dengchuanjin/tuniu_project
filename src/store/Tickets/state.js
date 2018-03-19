@@ -5,6 +5,8 @@ export default {
   admissionTicketHomePageObj:{},//门票首页
   nearList:[],
   themeTypeNameList:[],//主题
+  bookKnowObj:{},//景点开放时间
+  getTourSiteList:{},//景点介绍
   adminNearTickeFilterObj:{},//身边景点景点
   hotList:[],//热门目的地
   outList:[],//境外景点
@@ -13,4 +15,5 @@ export default {
   featuredList:[],//精选名称
   hotCityList:[],//热门城市
   cooperationList:[],//合作景区
+  topBigImageList:[],//门票首页轮播
 }

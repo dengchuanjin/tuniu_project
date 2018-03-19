@@ -19,8 +19,7 @@ export default {
   navList: state => state.navList,
   getLineCityList: state => state.getLineCityList,
   // pictureList: state => state.pictureList,
-  bookKnowObj: state => state.bookKnowObj,
-  getTourSiteList: state => state.getTourSiteList,
+
   aroundList: state => state.aroundList,
   shortLineList: state => state.shortLineList,
   longLineList: state => state.longLineList,
@@ -37,6 +36,12 @@ export default {
   showFixedComment: state => state.showFixedComment,
   useScoreDetailInfo: state => state.useScoreDetailInfo,
   userAllScoreList: state => state.userAllScoreList,
+  topPageList: state => state.topPageList,
+  hotAgenciesCityList: state => state.hotAgenciesCityList,
+  outLongAreaList: state => state.outLongAreaList,
+  outShortAreaList: state => state.outShortAreaList,
+  contryAreaList: state => state.contryAreaList,
+  nearAreaList: state => state.nearAreaList,
 
   //商户注册
   provinceDataList: state => state.provinceDataList,

@@ -6,7 +6,7 @@
         <!--轮播图-->
         <div class="HotelHomePageWrapHeaderCarouselFigure">
           <div class="block">
-            <el-carousel height="550">
+            <el-carousel height="550px">
               <el-carousel-item v-for="item in 4" :key="item">
                 <a href="javascript:;"></a>
               </el-carousel-item>
@@ -92,7 +92,7 @@
             <ul class="findPlayTheSeasonPictureList clearfix">
               <li v-for="item,index in HotPlayList">
                 <a href="javascript:;">
-                  <img :src="item.ht_ai_Image" width="390" height="230">
+                  <img width="390" height="230" v-lazy="item.ht_ai_Image">
                   <span>{{item.sm_af_AreaName}}</span>
                 </a>
               </li>
@@ -106,7 +106,7 @@
             </div>
             <!--特色推荐图片展示-->
             <ul class="selectedCharacteristicRecommendPictureList clearfix">
-              <li v-for="item,index in characteristicRecommendList" :key="index">
+              <li v-for="item,index in characteristicRecommendList" :key="index" @click="changeRecommendType(index)">
                 <div class="selectedCharacteristicRecommendImageMask">
                   <h6>{{item.ht_it_Name}}</h6>
                 </div>
@@ -226,6 +226,11 @@
       changeHotPlay(item, index) {
         this.hotPlayNum = index;
         this.$store.commit('initHotPlayList', item.CityList)
+      },
+      changeRecommendType(index){
+        if( index == 2 ){
+          this.$router.push({name:'HotelParentChildTour'})
+        }
       }
     },
     mounted() {

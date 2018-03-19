@@ -38,6 +38,19 @@ export default {
           }
           commit('initHotList',hotList)
 
+          //门票首页轮播
+          let topBigImageList = data.data.topBigImageList;
+          console.log(topBigImageList)
+          for(var i=0;i<topBigImageList.length;i++){
+            if(topBigImageList[i].tm_tbi_Image){
+              topBigImageList[i].tm_tbi_Image = topBigImageList[i].tm_tbi_Image.split(',')
+            }else{
+              topBigImageList[i].tm_tbi_Image = []
+            }
+          }
+
+          commit('initTopBigImageList',topBigImageList)
+
           //境外景点
           let outList =  data.data.outList;
 
@@ -94,6 +107,42 @@ export default {
           relove(data.data)
         }else{
           reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //---------------------   门票 ----------------
+
+  //预定需知景区开放时间
+  initBookKnowObj({commit}, data) {
+    return new Promise(function (relove, reject) {
+      axios.post('http://webservice.1000da.com.cn/BookKnow/GetBookKnowList', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          commit('initBookKnowObj', data.data)
+          relove()
+        }
+      })
+    })
+  },
+  //景区介绍
+  initGetTourSite({commit}, data) {
+    return new Promise(function (relove, reject) {
+      axios.post('http://webservice.1000da.com.cn/TourSite/GetTourSite', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          commit('initGetTourSite', data.data)
+          relove()
         }
       })
     })
