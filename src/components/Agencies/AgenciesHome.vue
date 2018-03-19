@@ -542,12 +542,12 @@
         </li>
       </ul>
       <div class="carousel">
-        <el-carousel height="365px">
+        <el-carousel>
           <el-carousel-item v-for="item,index in topPageList" :key="index">
             <a href="javascript:;" v-for="item1,index1 in item">
               <img alt="" v-lazy="item1.ts_tsi_Image[0]" :class="{five:index1==item.length-1,one:index1==0,two:index1==1,three:index1==2,four:index1==3,five:index1==4}">
             </a>
-          </el-carousel-item>
+            </el-carousel-item>
         </el-carousel>
       </div>
     </div>
