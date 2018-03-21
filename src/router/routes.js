@@ -258,7 +258,7 @@ export default [
     name: 'AdminLogin'
   },
   {
-    path: '*',
+    path: '/',
     hidden: true,
     redirect: {name: 'AgenciesHome'}
   },

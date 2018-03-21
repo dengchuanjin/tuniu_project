@@ -1,6 +1,5 @@
 <template>
   <div>
-<<<<<<< Updated upstream
     <div class="wrapContent">
       <div class="titleTop clearfix">
         <div class="title">
@@ -27,10 +26,10 @@
           <div class="hotelInfromation">
             <!--导航-->
             <div class="hotelInfromationNav clearfix">
-              <a v-for="item,index in hotelInfromationNav" href="javascript:;">{{item}}</a>
+              <a v-for="item,index in hotelInfromationNav" href="javascript:;" @click="menuClick(index)" :class="{active:index==n}">{{item}}</a>
             </div>
             <!--筛选-->
-            <div class="screenTime clearfix">
+            <div class="screenTime clearfix" v-show="showList[0].isShow">
               <div class="block">
                 <span class="demonstration">入住</span>
                 <el-date-picker
@@ -58,7 +57,7 @@
               </div>
             </div>
             <!--酒店类型列表-->
-            <div class="hotelTypeList">
+            <div class="hotelTypeList"  v-show="showList[0].isShow">
               <!--酒店筛选导航-->
               <dl class="hotelTypeListNav clearfix">
                 <dt>房型</dt>
@@ -117,12 +116,12 @@
               </ul>
             </div>
             <!--温馨提示-->
-            <div class="reminder">
+            <div class="reminder"  v-show="showList[1].isShow">
               <strong>温馨提示</strong>
               <p>未满18周岁的小孩需有成人陪同才可入住。</p>
             </div>
             <!--酒店简介-->
-            <div class="hotelBriefIntroduction">
+            <div class="hotelBriefIntroduction"  v-show="showList[1].isShow">
               <strong class="strongFont">酒店简介</strong>
               <div class="label clearfix">
                 <span>亲子时刻</span>
@@ -139,7 +138,7 @@
               </p>
             </div>
             <!--酒店政策-->
-            <div class="hotelPolicy">
+            <div class="hotelPolicy"  v-show="showList[1].isShow">
               <strong class="strongFont">酒店政策</strong>
               <ul>
                 <li v-for="item,index in hotelPolicyList">
@@ -152,7 +151,7 @@
               </ul>
             </div>
             <!--设施服务-->
-            <div class="facilitiesServices">
+            <div class="facilitiesServices"  v-show="showList[1].isShow">
               <strong class="strongFont">设施服务</strong>
               <ul>
                 <li v-for="item,index in facilitiesServicesList">
@@ -173,7 +172,7 @@
               </ul>
             </div>
             <!--住客点评-->
-            <div class="commentsOnGuests">
+            <div class="commentsOnGuests"  v-show="showList[3].isShow">
               <strong class="strongFont">住客点评</strong>
               <!--评分-->
               <div class="hotelScoreBox clearfix">
@@ -258,6 +257,29 @@
     computed: mapGetters([]),
     data() {
       return {
+        showList:[
+          {
+            id:0,
+            isShow:true
+          },
+          {
+            id:1,
+            isShow:false
+          },
+          {
+            id:2,
+            isShow:false
+          },
+          {
+            id:3,
+            isShow:false
+          },
+          {
+            id:4,
+            isShow:false
+          }
+        ],
+        n:0,
         hotelInfromationNav: [
           '房型价格',
           '酒店介绍',
@@ -296,6 +318,19 @@
         ],
       }
     },
+    methods:{
+      //点击菜单
+      menuClick(index){
+        this.n = index;
+        for(var i=0;i<this.showList.length;i++){
+          if(this.showList[i].id==index){
+            this.showList[i].isShow=true
+          }else{
+            this.showList[i].isShow=false
+          }
+        }
+      }
+    }
   }
 </script>
 <style scoped>

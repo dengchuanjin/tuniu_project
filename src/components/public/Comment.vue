@@ -221,7 +221,7 @@
         mainNavWrapContentList: [
           {
             name: '跟团游',
-            to: '/Comment/HeelTour'
+            to: '/Comment/AgenciesHome'
           },
           {
             name: '门票',

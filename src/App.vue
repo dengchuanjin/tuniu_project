@@ -8,14 +8,19 @@
         <p>拼命加载中</p>
       </div>
     </div>
+    <!--<comment></comment>-->
     <router-view/>
   </div>
 </template>
 
 <script>
+  import Comment from '@/components/public/Comment'
   import {mapGetters} from 'vuex'
 export default {
   name: 'app',
+  components:{
+    Comment
+  },
   computed:mapGetters([
     'isLoading'
   ])
