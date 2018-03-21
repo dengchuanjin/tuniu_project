@@ -32,9 +32,23 @@ import HotelHomePage from '@/components/Hotel/HotelHomePage'//酒店首页
 import HotelSearchMore from '@/components/Hotel/HotelSearchMore'//酒店查询更多
 import HotelDetalis from '@/components/Hotel/HotelDetalis'//酒店详情页
 import HotelParentChildTour from '@/components/Hotel/HotelParentChildTour'//酒店亲子游
+import HotelLovers from '@/components/Hotel/HotelLovers' //情侣酒店
+import HotelMountaineering from '@/components/Hotel/HotelMountaineering'//依山酒店
 
 
 export default [
+  //依山酒店
+  {
+    path: '/hotelMountaineering',
+    name: 'HotelMountaineering',
+    component: HotelMountaineering
+  },
+  //情侣酒店
+  {
+    path: '/hotelLovers',
+    name: 'HotelLovers',
+    component: HotelLovers
+  },
   //酒店亲子游
   {
     path: '/hotelParentChildTour',
@@ -208,7 +222,7 @@ export default [
         },
         name: 'HotelHomePage'
       },
-      //酒店详情页
+      //酒店搜索更多
       {
         path: 'hotelSearchMore/:id',
         components: {
