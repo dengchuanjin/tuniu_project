@@ -67,24 +67,6 @@
               </p>
             </div>
           </div>
-          <!--<div class="specialContent">-->
-            <!--<h5>专项</h5>-->
-            <!--<ul>-->
-              <!--<li v-for="item in 4">-->
-                <!--<div class="admissionTicketContent clearfix">-->
-                  <!--<a href="javascript:;" class="widthCommentA"><【千里达旅游网】西岭雪山后山门票+鸳鸯池索道往返 - 成人门票>▼</a>-->
-                  <!--<span>当天17点前</span>-->
-                  <!--<span class="marketMoney">¥240</span>-->
-                  <!--<span class="myMoney">¥228起</span>-->
-                  <!--<span class="quan">优惠券</span>-->
-                  <!--<p class="payment">-->
-                    <!--<span>网上支付</span>-->
-                    <!--<a href="javascript:;">预订</a>-->
-                  <!--</p>-->
-                <!--</div>-->
-              <!--</li>-->
-            <!--</ul>-->
-          <!--</div>-->
         </div>
       </div>
       <!--主体部分-->

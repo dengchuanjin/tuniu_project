@@ -326,6 +326,8 @@
 
   .AdmissionTickeHomePageWrapNavList li {
     margin-top: 10px;
+    max-height: 75px;
+    overflow: hidden;
   }
 
   .AdmissionTickeHomePageWrapNavList img {

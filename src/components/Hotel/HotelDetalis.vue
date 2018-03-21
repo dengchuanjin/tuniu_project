@@ -171,6 +171,16 @@
                 </li>
               </ul>
             </div>
+            <!--位置及周边-->
+            <div class="positionPeriphery">
+              <strong class="strongFont">位置及周边</strong>
+              <!--地图-->
+              <div class="mapBoxWrap">
+                <div class="mapJW">
+                  <div id="allmap"></div>
+                </div>
+              </div>
+            </div>
             <!--住客点评-->
             <div class="commentsOnGuests"  v-show="showList[3].isShow">
               <strong class="strongFont">住客点评</strong>
@@ -241,6 +251,30 @@
                 layout="prev, pager, next"
                 :total="20">
               </el-pagination>
+            </div>
+            <!--周边热卖酒店-->
+            <div class="hotelHotSell">
+              <strong class="strongFont">周边热卖酒店</strong>
+              <div class="hotelHotSellWrap clearfix">
+                <ul class="partitionList">
+                  <li v-for="item,index in partitionList">{{item}}</li>
+                </ul>
+                <ul class="recommendList clearfix">
+                  <li v-for="item,index in 4">
+                    <img src="../../assets/img/homePageImage.jpg" width="170" height="115">
+                    <strong class="name">迪士尼探索家度假酒店迪士尼探索家度假酒店迪士尼探索家度假酒店</strong>
+                    <span class="hotelType">豪华型</span>
+                    <span class="price">¥1913</span>
+                    <strong class="guestScore">
+                      <span>特别棒4.7分</span>
+                      来自708条评价
+                    </strong>
+                    <span class="address">离岛大屿山香港迪士尼乐园度假离岛大屿山香港迪士尼乐园度假</span>
+                    <span class="modify">2005年装修</span>
+                    <a href="javascript:;">马上预定</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -316,6 +350,16 @@
           '不限',
           '双床'
         ],
+        form: {
+          x: '105.44397029',
+          y: '24.8959298'
+        },
+        partitionList:[
+          '每晚起价',
+          '住客评分',
+          '区域位置',
+          '装修时间'
+        ],
       }
     },
     methods:{
@@ -329,7 +373,21 @@
             this.showList[i].isShow=false
           }
         }
-      }
+      },
+      //查询地图
+      searchMap() {
+        var map = new BMap.Map("allmap");
+        map.centerAndZoom(new BMap.Point(116.331398, 39.897445), 11);
+        map.enableScrollWheelZoom(true);
+        map.clearOverlays();
+        var new_point = new BMap.Point(this.form.x, this.form.y);
+        var marker = new BMap.Marker(new_point);  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+        map.panTo(new_point);
+      },
+    },
+    mounted(){
+      this.searchMap();
     }
   }
 </script>
@@ -946,4 +1004,92 @@
   .timeAndApp > span:nth-of-type(2) {
     color: #999;
   }
+
+  /*周边热卖酒店*/
+
+  .partitionList {
+    float: left;
+    width: 120px;
+    border-top: 1px solid #e5e5e5;
+    font: 14px/40px "微软雅黑";
+    margin-top: 180px;
+  }
+
+  .partitionList > li {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .recommendList {
+    float: left;
+    width: 775px;
+
+  }
+
+  .recommendList > li {
+    width: 190px;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    float: left;
+  }
+
+  .recommendList .name {
+    display: block;
+    font: bold 14px/25px "微软雅黑";
+    height:25px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+
+  .recommendList .hotelType {
+    display: block;
+    font:13px/30px "微软雅黑";
+  }
+
+  .recommendList .price {
+    font: 18px/40px "微软雅黑";
+    color: #f60;
+    display: block;
+    margin-left:0;
+  }
+
+  .recommendList .guestScore {
+    font: 12px/40px "微软雅黑";
+    color: #666;
+  }
+
+  .recommendList .guestScore > span {
+    font-size: 15px;
+    color: #2DBB55;
+  }
+
+  .recommendList .address {
+    height: 40px;
+    font: 12px/40px "微软雅黑";
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    display: block;
+    color: #333;
+  }
+
+  .recommendList .modify {
+    height: 40px;
+    font: 12px/40px "微软雅黑";
+    color: #666;
+  }
+
+  .recommendList a {
+    width: 100%;
+    border-radius: 2px;
+    background-color: #f80;
+    color: #fff;
+    text-align: center;
+    line-height: 38px;
+    font-size: 16px;
+  }
+
+
+
+
 </style>
