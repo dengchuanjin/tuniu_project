@@ -183,7 +183,7 @@
                 <div class="HotelRecommendDetalisListIntroduceBox">
                   <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">{{index+1}}</span>
-                    <h4><a href="javascript:;" @click="goHotelDetails">{{item.ht_ht_HotelName}}</a></h4>
+                    <h4><a href="javascript:;" @click="goHotelDetails(item)">{{item.ht_ht_HotelName}}</a></h4>
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
                   </div>
@@ -222,6 +222,17 @@
                 </div>
               </li>
             </ul>
+            <!--分页-->
+            <div class="block" style="float: right;padding-top: 20px">
+              <el-pagination
+                @current-change="handleCurrentChange"
+                :page-size="5"
+                layout="total, prev, pager, next"
+                :total="total"
+                v-show="total"
+              >
+              </el-pagination>
+            </div>
           </div>
           <!--酒店所在地图-->
           <div class="HotelRecommendMap"></div>
@@ -241,6 +252,7 @@
     ]),
     data() {
       return {
+        total:10,
         checked:false,
         isLoading:false,
         roomHardRadio:'',
@@ -311,6 +323,8 @@
           "ht_tt_ID":"",//主题
           //"ht_hd_ID":"1",//设施
           "ht_rh_ID":"",//房间设施
+          "page":"1", //页面编号  默认为 1
+          "rows":"5",//单页显示数据数量
         }
       }
     },
@@ -322,6 +336,11 @@
       })
     },
     methods: {
+      //分页
+      handleCurrentChange(num){
+        this.searchOptions.page = num;
+        this.searchDataList(this.searchOptions)
+      },
       //选中主题
       changeThemeType(id){
         this.searchOptions.ht_tt_ID = id;
@@ -346,11 +365,13 @@
       searchDataList(options){
         this.isLoading = true;
         this.$store.dispatch('initSearchData',options)
-        .then(()=>{
+        .then((total)=>{
+          this.total = total;
           this.isLoading = false;
         })
       },
       async initData(){
+        //筛选条件
         let initHotelSearchFilterInfo = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
@@ -359,9 +380,12 @@
           "pcName": "",
         };
         await this.$store.dispatch('initHotelSearchFilterInfo',initHotelSearchFilterInfo)
+
+        //详情数据
+        await this.$store.dispatch('initSearchData',this.searchOptions)
       },
-      goHotelDetails(){
-        this.$router.push({name:'HotelDetalis'})
+      goHotelDetails(item){
+        this.$router.push({name:'HotelDetalis', params: {id: item.ht_ht_hotelID}})
       },
       changeCity() {
 

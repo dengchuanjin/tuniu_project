@@ -52,5 +52,13 @@ export default {
   initGetTourSite(state,data){
     state.getTourSiteList = data;
   },
-
+  initTicketsDetailData(state,obj){
+    state.ticketsDetailData = obj
+  },
+  initTransportMessage(state,obj){
+    state.transportMessage = obj
+  },
+  initTicketType_PriceMX(state,data){
+    state.ticketType_PriceMXList = data;
+  }
 }

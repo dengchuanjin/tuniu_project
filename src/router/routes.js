@@ -197,7 +197,7 @@ export default [
       },
       //门票详情页
       {
-        path: 'ticketsDetail',
+        path: 'ticketsDetail/:id',
         components: {
           default: Comment,
           User: TicketsDetail
@@ -233,7 +233,7 @@ export default [
       },
       //酒店详情页
       {
-        path: 'hotelDetalis',
+        path: 'hotelDetalis/:id',
         components: {
           default: Comment,
           User: HotelDetalis

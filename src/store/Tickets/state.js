@@ -16,4 +16,7 @@ export default {
   hotCityList:[],//热门城市
   cooperationList:[],//合作景区
   topBigImageList:[],//门票首页轮播
+  ticketsDetailData:{},//景点详情数据
+  transportMessage:{},//交通指南
+  ticketType_PriceMXList:[],//门票详情门票
 }

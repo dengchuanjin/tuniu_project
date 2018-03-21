@@ -15,6 +15,8 @@ export default {
   cooperationList: state => state.cooperationList,
   topBigImageList: state => state.topBigImageList,
   bookKnowObj: state => state.bookKnowObj,
-  getTourSiteList: state => state.getTourSiteList,
   pictureList: state => state.pictureList,
+  ticketsDetailData: state => state.ticketsDetailData,
+  transportMessage: state => state.transportMessage,
+  ticketType_PriceMXList: state => state.ticketType_PriceMXList,
 }

@@ -57,7 +57,7 @@ export default {
         if( Number(data.resultcode) == 200 ){
           //主题
           commit('initSearchData',data.data.dataArray)
-          relove();
+          relove(Number(data.totalrows));
         }else{
           reject(data.resultcontent)
         }

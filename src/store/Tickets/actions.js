@@ -40,7 +40,6 @@ export default {
 
           //门票首页轮播
           let topBigImageList = data.data.topBigImageList;
-          console.log(topBigImageList)
           for(var i=0;i<topBigImageList.length;i++){
             if(topBigImageList[i].tm_tbi_Image){
               topBigImageList[i].tm_tbi_Image = topBigImageList[i].tm_tbi_Image.split(',')
@@ -113,10 +112,48 @@ export default {
   },
   //---------------------   门票 ----------------
 
-  //预定需知景区开放时间
-  initBookKnowObj({commit}, data) {
+  // //预定需知景区开放时间
+  // initBookKnowObj({commit}, data) {
+  //   return new Promise(function (relove, reject) {
+  //     axios.post('http://webservice.1000da.com.cn/BookKnow/GetBookKnowList', JSON.stringify(data), {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       }
+  //     })
+  //     .then(data => {
+  //       var data = data.data;
+  //       if (Number(data.resultcode) == 200) {
+  //         commit('initBookKnowObj', data.data)
+  //         relove(data.resultcontent)
+  //       }else{
+  //         reject(data.resultcontent)
+  //       }
+  //     })
+  //   })
+  // },
+  // //景区介绍
+  // initGetTourSite({commit}, data) {
+  //   return new Promise(function (relove, reject) {
+  //     axios.post('http://webservice.1000da.com.cn/TourSite/GetTourSite', JSON.stringify(data), {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       }
+  //     })
+  //     .then(data => {
+  //       var data = data.data;
+  //       if (Number(data.resultcode) == 200) {
+  //         commit('initGetTourSite', data.data)
+  //         relove()
+  //       }else{
+  //         reject(data.resultcontent)
+  //       }
+  //     })
+  //   })
+  // },
+  //景点详情数据
+  initTicketsDetailData({commit},data){
     return new Promise(function (relove, reject) {
-      axios.post('http://webservice.1000da.com.cn/BookKnow/GetBookKnowList', JSON.stringify(data), {
+      axios.post('http://192.168.3.245/TtWebPage/Detail', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -124,27 +161,19 @@ export default {
       .then(data => {
         var data = data.data;
         if (Number(data.resultcode) == 200) {
-          commit('initBookKnowObj', data.data)
-          relove()
+          //预定需知景区开放时间
+          commit('initBookKnowObj', data.data.bookKnow)
+          if(data.data.tm_ts_ShowImage){
+            data.data.tm_ts_ShowImage = data.data.tm_ts_ShowImage.split(',')
+          }
+          commit('initTicketsDetailData',data.data)
+          commit('initTransportMessage',data.data.transportMessage)
+          commit('initTicketType_PriceMX',data.data.tm_TicketType_PriceMX)
+          relove(data.resultcontent)
+        }else{
+          reject(data.resultcontent)
         }
       })
     })
-  },
-  //景区介绍
-  initGetTourSite({commit}, data) {
-    return new Promise(function (relove, reject) {
-      axios.post('http://webservice.1000da.com.cn/TourSite/GetTourSite', JSON.stringify(data), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-      .then(data => {
-        var data = data.data;
-        if (Number(data.resultcode) == 200) {
-          commit('initGetTourSite', data.data)
-          relove()
-        }
-      })
-    })
-  },
+  }
 }

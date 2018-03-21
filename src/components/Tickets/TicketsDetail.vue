@@ -4,54 +4,25 @@
       <div class="scenicSpotInformation clearfix">
         <div class="pictureBox">
           <!--详情轮播1-->
-          <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-            <swiper-slide class="slide-1">
-              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
+          <swiper :options="swiperOptionTop" class="gallery-top">
+            <swiper-slide :class="'slide-'+(index+1)"  v-for="item,index in ticketsDetailData.tm_ts_ShowImage" :key="index">
+              <img width="100%" height="100%"  alt="" v-lazy="item">
             </swiper-slide>
-            <swiper-slide class="slide-2">
-              <img width="100%"  height="100%" src="http://m.tuniucdn.com/fb2/t1/G1/M00/72/33/Cii9EVcQSG-ICQ63AAv1F3xl40gAADOPABVa7EAC_Uv300_w500_h280_c1_t0.jpg" alt="">
-            </swiper-slide>
-            <swiper-slide class="slide-3">
-              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
-            </swiper-slide>
-            <swiper-slide class="slide-4">
-              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
-            </swiper-slide>
-            <swiper-slide class="slide-5">
-              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
-            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination" style="color: #fff"></div>
             <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
             <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
           </swiper>
-          <!--详情轮播2-->
-          <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-            <swiper-slide class="slide-1">
-              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
-            </swiper-slide>
-            <swiper-slide class="slide-2">
-              <img width="100%" height="100%" src="http://m.tuniucdn.com/fb2/t1/G1/M00/72/33/Cii9EVcQSG-ICQ63AAv1F3xl40gAADOPABVa7EAC_Uv300_w500_h280_c1_t0.jpg" alt="">
-            </swiper-slide>
-            <swiper-slide class="slide-3">
-              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
-            </swiper-slide>
-            <swiper-slide class="slide-4">
-              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
-            </swiper-slide>
-            <swiper-slide class="slide-5">
-              <img width="100%" height="100%" src="http://m.tuniucdn.com/filebroker/cdn/olb/f5/bd/f5bd00e897956e713deb4e6bf611128b_w500_h280_c1_t0.jpg" alt="">
-            </swiper-slide>
-          </swiper>
         </div>
         <div class="scenicSpotInformationContent">
-          <h1>西岭雪山</h1>
+          <h1>{{ticketsDetailData.tm_ts_Name}}</h1>
           <p class="money">
             <span>价格: ￥</span>
-            <strong>198</strong>
+            <strong>{{ticketsDetailData.tm_ts_SuggestPrice}}</strong>
             起
           </p>
           <ul class="describe">
-            <li><span>具体地址：</span>四川省成都市大邑县西岭镇邛崃山脉中段<a href="#trafficInformation">查看地图</a></li>
-            <li><span>开放时间：</span>周一至周五：08:30-18:00 周六至周日：07:30-18:00</li>
+            <li><span>具体地址：</span>{{ticketsDetailData.tm_ts_Address}}<a href="javascript:;" style="width: 70px">查看地图</a></li>
+            <li><span>开放时间：</span>{{ticketsDetailData.tm_ts_Opentime}}</li>
             <li>
               <span>服务承诺：</span>
               <button>入园保障</button>
@@ -84,11 +55,11 @@
           </ul>
           <div class="productType">
             <h5>门票</h5>
-            <div class="admissionTicketContent clearfix">
-              <a href="javascript:;" class="widthCommentA"><【千里达旅游网】西岭雪山后山门票+鸳鸯池索道往返 - 成人门票>▼</a>
-              <span>当天17点前	</span>
-              <span class="marketMoney">¥240</span>
-              <span class="myMoney">¥228起</span>
+            <div class="admissionTicketContent clearfix" v-for="item in ticketType_PriceMXList">
+              <a href="javascript:;" class="widthCommentA">{{item.tm_tt_Name}}</a>
+              <span>当天{{item.tm_tt_BeforeTime}}点前	</span>
+              <span class="marketMoney">¥{{item.tm_tp_RealPrice}}</span>
+              <span class="myMoney">¥{{item.tm_tp_TicketPrice}}起</span>
               <span class="quan">优惠券</span>
               <p class="payment">
                 <span>网上支付</span>
@@ -96,24 +67,24 @@
               </p>
             </div>
           </div>
-          <div class="specialContent">
-            <h5>专项</h5>
-            <ul>
-              <li v-for="item in 4">
-                <div class="admissionTicketContent clearfix">
-                  <a href="javascript:;" class="widthCommentA"><【千里达旅游网】西岭雪山后山门票+鸳鸯池索道往返 - 成人门票>▼</a>
-                  <span>当天17点前</span>
-                  <span class="marketMoney">¥240</span>
-                  <span class="myMoney">¥228起</span>
-                  <span class="quan">优惠券</span>
-                  <p class="payment">
-                    <span>网上支付</span>
-                    <a href="javascript:;">预订</a>
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <!--<div class="specialContent">-->
+            <!--<h5>专项</h5>-->
+            <!--<ul>-->
+              <!--<li v-for="item in 4">-->
+                <!--<div class="admissionTicketContent clearfix">-->
+                  <!--<a href="javascript:;" class="widthCommentA"><【千里达旅游网】西岭雪山后山门票+鸳鸯池索道往返 - 成人门票>▼</a>-->
+                  <!--<span>当天17点前</span>-->
+                  <!--<span class="marketMoney">¥240</span>-->
+                  <!--<span class="myMoney">¥228起</span>-->
+                  <!--<span class="quan">优惠券</span>-->
+                  <!--<p class="payment">-->
+                    <!--<span>网上支付</span>-->
+                    <!--<a href="javascript:;">预订</a>-->
+                  <!--</p>-->
+                <!--</div>-->
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</div>-->
         </div>
       </div>
       <!--主体部分-->
@@ -121,11 +92,11 @@
         <!--主体导航-->
         <ul id="infrometionWrapNav" ref="infrometionWrapNav" class="infrometionWrapNav clearfix">
           <li v-for="item,index in idName">
-            <a :href="'#'+item.id" @click="changeType(index)">{{item.name}}</a>
+            <a href="javascript:;" @click="changeType(index)" :class="{active:index==n}">{{item.name}}</a>
           </li>
         </ul>
         <!--预定需知-->
-        <div id="reserveContent" class="reserveContent clearfix">
+        <div id="reserveContent" class="reserveContent clearfix" v-show="showList[0].isShow">
           <div class="discountIcon">
             <h3>预定需知</h3>
           </div>
@@ -196,7 +167,7 @@
           </div>
         </div>
         <!--景点介绍-->
-        <div id="introductionOfScenicSpots" class="introductionOfScenicSpots clearfix">
+        <div id="introductionOfScenicSpots" class="introductionOfScenicSpots clearfix"  v-show="showList[1].isShow">
           <div class="discountIcon">
             <h3>景点介绍</h3>
           </div>
@@ -206,12 +177,12 @@
               <h5>景点详情</h5>
             </div>
             <div class="detailsOfTheScenicSpots">
-              <div v-for="item in getTourSiteList" v-html="item.tm_ts_Detailedintroduction"></div>
+              <div v-html="ticketsDetailData.tm_ts_Detailedintroduction"></div>
             </div>
           </div>
         </div>
         <!--交通信息-->
-        <div id="trafficInformation" class="trafficInformation clearfix">
+        <div id="trafficInformation" class="trafficInformation clearfix"  v-show="showList[2].isShow">
           <div class="discountIcon">
             <h3>交通指南</h3>
           </div>
@@ -224,13 +195,13 @@
               <div class="recommendRoute">
                 <ul>
                   <li class="clearfix">
-                    <strong>自驾线路 : </strong><span></span>
+                    <strong>自驾线路 : </strong><span>{{transportMessage.tm_tm_Drive}}</span>
                   </li>
                   <li class="clearfix">
-                    <strong>公交线路 : </strong><span>从西岭镇—行驶80米—左转行驶160米—向右转行驶20米—右前方转弯行驶4.0公里—右转行驶3.4公里—到达终点（西岭雪山）。</span>
+                    <strong>公交线路 : </strong><span>{{transportMessage.tm_tm_Bus}}</span>
                   </li>
                   <li class="clearfix">
-                    <strong>景点地址 : </strong><span> 四川省成都市大邑县西岭镇邛崃山脉中段</span>
+                    <strong>景点地址 : </strong><span>{{transportMessage.tm_tm_Address}}</span>
                   </li>
                 </ul>
               </div>
@@ -267,26 +238,45 @@
     },mapGetters([
       'pictureList',
       'bookKnowObj',
-      'getTourSiteList'
+      'ticketsDetailData',
+      'getTourSiteList',
+      'transportMessage',
+      'ticketType_PriceMXList'
     ])),
     data() {
       return {
+        showList:[
+          {
+            id:0,
+            isShow:true
+          },
+          {
+            id:1,
+            isShow:false
+          },
+          {
+            id:2,
+            isShow:false
+          },
+          {
+            id:3,
+            isShow:false
+          },
+          {
+            id:4,
+            isShow:false
+          }
+        ],
+        n: 0,
         swiperOptionTop: {
-          spaceBetween: 10,
-          loop: true,
-          loopedSlides: 5, //looped slides should be the same
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction'
+          },
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev'
           }
-        },
-        swiperOptionThumbs: {
-          spaceBetween: 10,
-          slidesPerView: 4,
-          touchRatio: 0.2,
-          loop: true,
-          loopedSlides: 5, //looped slides should be the same
-          slideToClickedSlide: true,
         },
         form: {
           x: '105.44397029',
@@ -308,26 +298,30 @@
         ]
       }
     },
+    created() {
+      let id = this.$route.params.id
+//      this.$store.commit('showLoading')
+      this.initData(id).then(()=>{
+//        this.$store.commit('hideLoading')
+      },err=>{
+        this.$notify({
+          message: err,
+          type: 'error'
+        });
+      });
+    },
     methods: {
-      initData() {
-        //预定需知
-        var getBookKnow = {
+      async initData(id) {
+        //景点详情
+        let options = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
-          "siteName": "001"
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "tm_ts_Code": '023',
         }
-        this.$store.dispatch('initBookKnowObj', getBookKnow);
-        //景点介绍
-        var GetTourSite = {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "tsCode": "001",
-          "tsName": "",
-          "isDelete": 0,
-          "page": 1,
-          "rows": 5
-        };
-        this.$store.dispatch('initGetTourSite', GetTourSite)
+        await this.$store.dispatch('initTicketsDetailData',options)
       },
       //查询地图
       searchMap() {
@@ -341,76 +335,54 @@
         map.panTo(new_point);
       },
       changeType(index){
-        let lis = this.$refs.infrometionWrapNav.children;
-        for (var i = 0; i < lis.length; i++) {
-          lis[i].children[0].className = ''
+       this.n = index
+        for(var i=0;i<this.showList.length;i++){
+          if(this.showList[i].id==index){
+            this.showList[i].isShow=true
+          }else{
+            this.showList[i].isShow=false
+          }
         }
-        lis[index].children[0].className = 'active'
       }
     },
     mounted() {
-      this.$nextTick(() => {
-        const swiperTop = this.$refs.swiperTop.swiper
-        const swiperThumbs = this.$refs.swiperThumbs.swiper
-        swiperTop.controller.control = swiperThumbs
-        swiperThumbs.controller.control = swiperTop
-      })
-      this.searchMap();
-      //滚动到一定距离变固定定位
-      (function () {
-        var w = ($(window).width() - 1188) / 2
-        var sTop = $('#infrometionWrapNav').get(0).offsetTop;
-        $(window).bind("scroll", function () {
-          var top = $(this).scrollTop(); // 当前窗口的滚动距离
-          if (top > sTop) {
-            $('#infrometionWrapNav').css({position: 'fixed', left: w - 6 + 'px', top: 0,})
-          } else {
-            $('#infrometionWrapNav').css({position: 'static', left: 'auto', top: 'auto',})
-          }
-        });
-      })()
 
-      //      点击切换导航的class
-      let lis = this.$refs.infrometionWrapNav.children;
-      lis[0].children[0].className = 'active'
+      this.searchMap();
+//      //滚动到一定距离变固定定位
+//      (function () {
+//        var w = ($(window).width() - 1188) / 2
+//        var sTop = $('#infrometionWrapNav').get(0).offsetTop;
+//        $(window).bind("scroll", function () {
+//          var top = $(this).scrollTop(); // 当前窗口的滚动距离
+//          if (top > sTop) {
+//            $('#infrometionWrapNav').css({position: 'fixed', left: w - 6 + 'px', top: 0,})
+//          } else {
+//            $('#infrometionWrapNav').css({position: 'static', left: 'auto', top: 'auto',})
+//          }
+//        });
+//      })()
     },
-    created() {
-      this.initData();
-    },
+
     update() {
-      let lisSearch = this.$refs.infrometionWrapNav.querySelectorAll('li')
-      if (lisSearch.length) {
-        for (var i = 0; i < lisSearch.length; i++) {
-          lisSearch[i].querySelector('a').className = ''
-        }
-        lisSearch[0].querySelector('a').className = 'active'
-      }
+//      let lisSearch = this.$refs.infrometionWrapNav.querySelectorAll('li')
+//      if (lisSearch.length) {
+//        for (var i = 0; i < lisSearch.length; i++) {
+//          lisSearch[i].querySelector('a').className = ''
+//        }
+//        lisSearch[0].querySelector('a').className = 'active'
+//      }
     }
   }
 </script>
 <style lang="scss" scoped>
-  .swiper-container {
-    /*background-color: #000;*/
-  }
+
   .swiper-slide {
     background-size: cover;
     background-position: center;
   }
   .gallery-top {
-    height: 80%!important;
+    height: 100%!important;
     width: 100%;
   }
-  .gallery-thumbs {
-    height: 20%!important;
-    box-sizing: border-box;
-    padding: 10px 0;
-  }
-  .gallery-thumbs .swiper-slide {
-    width: 25%;
-    height: 100%;
-    opacity: 0.6;
-  }
-  .gallery-thumbs .swiper-slide-active {
-    opacity: 1;
-  }
+
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div>
+<<<<<<< Updated upstream
     <div class="wrapContent">
       <div class="titleTop clearfix">
         <div class="title">
@@ -247,6 +248,7 @@
         <div class="pricePlace"></div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -294,7 +296,6 @@
         ],
       }
     },
-    methods: {},
   }
 </script>
 <style scoped>

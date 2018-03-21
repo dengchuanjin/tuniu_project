@@ -184,10 +184,10 @@
     mounted() {
     },
     created() {
-      this.$store.commit('showLoading')
+//      this.$store.commit('showLoading')
       this.initData()
         .then(() => {
-          this.$store.commit('hideLoading')
+//          this.$store.commit('hideLoading')
         }, err => {
           this.$notify({
             message: err,

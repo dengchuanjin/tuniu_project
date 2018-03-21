@@ -713,11 +713,11 @@
     },
     created() {
 
-      this.$store.commit('showLoading');
+//      this.$store.commit('showLoading');
       this.initCity()
         .then(name => {
           this.initData(name).then(() => {
-            this.$store.commit('hideLoading');
+//            this.$store.commit('hideLoading');
           })
         })
     },

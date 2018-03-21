@@ -54,6 +54,7 @@
             <ul class="AdmissionTickeAsightsAroundTitelList">
               <li v-show="nearList.length" v-for="item,index in nearList" @mouseover="clickTourSiteMXList(item,index)">
                 <a href="javascript:;" :class="{active:index==n}">{{item.hotcity}}</a>
+
               </li>
             </ul>
             <div class="AdmissionTickeAsightsAroundTitelMore">
@@ -90,7 +91,7 @@
             <!--门票展示-->
             <div class="AdmissionTickeAsightsAroundContentShow">
               <ul class="AdmissionTickeAsightsAroundContentShowList clearfix">
-                <router-link tag="li" to="TicketsDetail" v-for="item,index in adminNearTickeFilterObj.hcTourSiteList" :key="index">
+                <router-link tag="li" :to="{name:'TicketsDetail', params: { id: item.tm_ts_Code }}" v-for="item,index in adminNearTickeFilterObj.hcTourSiteList" :key="index">
                   <!--img部分-->
                   <div class="AdmissionTickeAsightsAroundContentShowImgBox">
                     <img  width="188" height="110" v-lazy="item.tm_ts_ShowImage[0]">
@@ -218,7 +219,7 @@
         "areaPid": 0
       };
 
-      this.$store.commit('showLoading')
+//      this.$store.commit('showLoading')
       this.initCity()
       .then(name => {
         this.$store.dispatch('initProvice',options)
@@ -240,7 +241,7 @@
 
 
         this.initData(name).then(() => {
-          this.$store.commit('hideLoading');
+//          this.$store.commit('hideLoading');
         })
       })
     },
