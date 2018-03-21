@@ -110,7 +110,8 @@
                 <div class="selectedCharacteristicRecommendImageMask">
                   <h6>{{item.ht_it_Name}}</h6>
                 </div>
-                <div class="selectedCharacteristicRecommendBg" :style="{backgroundImage: `url(${item.ht_it_ImagePath})`}"></div>
+                <div class="selectedCharacteristicRecommendBg"
+                     :style="{backgroundImage: `url(${item.ht_it_ImagePath})`}"></div>
                 <strong class="selectedCharacteristicRecommendDetails">{{item.ht_it_Describe}}</strong>
               </li>
             </ul>
@@ -122,74 +123,16 @@
               <strong>HOT DESTINATION</strong>
             </div>
             <ul class="exploreSeasonHotPictureList clearfix">
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="250">
+              <li v-for="item,index in hotDestinationList">
+                <img v-lazy="item.ht_hl_HotelImage"
+                     :class="{one:index==0,two:index==1,three:index==2,four:index==3,five:index==4,six:index==5,seven:index==6 }"
+                     height="250">
                 <div class="exploreSeasonHotPictureListMask"></div>
                 <div class="exploreSeasonHotPictureListMaskContent">
-                  <span>上海和平饭店</span>
+                  <span>{{item.ht_hl_HotelName}}</span>
                   <span>外滩地区/5星级</span>
                   <span>￥1621元</span>
                   <a href="javascript:;" class="order">马上预定</a>
-                </div>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="790" height="250">
-                <div class="exploreSeasonHotPictureListMask"></div>
-                <div class="exploreSeasonHotPictureListMaskContent">
-                  <span>上海和平饭店</span>
-                  <span>外滩地区/5星级</span>
-                  <span>￥1621元</span>
-                  <a href="javascript:;">马上预定</a>
-                </div>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="250">
-                <div class="exploreSeasonHotPictureListMask"></div>
-                <div class="exploreSeasonHotPictureListMaskContent">
-                  <span>上海和平饭店</span>
-                  <span>外滩地区/5星级</span>
-                  <span>￥1621元</span>
-                  <a href="javascript:;">马上预定</a>
-                </div>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="250">
-                <div class="exploreSeasonHotPictureListMask"></div>
-                <div class="exploreSeasonHotPictureListMaskContent">
-                  <span>上海和平饭店</span>
-                  <span>外滩地区/5星级</span>
-                  <span>￥1621元</span>
-                  <a href="javascript:;">马上预定</a>
-                </div>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="250">
-                <div class="exploreSeasonHotPictureListMask"></div>
-                <div class="exploreSeasonHotPictureListMaskContent">
-                  <span>上海和平饭店</span>
-                  <span>外滩地区/5星级</span>
-                  <span>￥1621元</span>
-                  <a href="javascript:;">马上预定</a>
-                </div>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="790" height="250">
-                <div class="exploreSeasonHotPictureListMask"></div>
-                <div class="exploreSeasonHotPictureListMaskContent">
-                  <span>上海和平饭店</span>
-                  <span>外滩地区/5星级</span>
-                  <span>￥1621元</span>
-                  <a href="javascript:;">马上预定</a>
-                </div>
-              </li>
-              <li>
-                <img src="../../assets/img/homePageImage.jpg" width="390" height="250">
-                <div class="exploreSeasonHotPictureListMask"></div>
-                <div class="exploreSeasonHotPictureListMaskContent">
-                  <span>上海和平饭店</span>
-                  <span>外滩地区/5星级</span>
-                  <span>￥1621元</span>
-                  <a href="javascript:;">马上预定</a>
                 </div>
               </li>
             </ul>
@@ -206,7 +149,8 @@
     computed: mapGetters([
       'HotPlayData',
       'HotPlayList',
-      'characteristicRecommendList'
+      'characteristicRecommendList',
+      'hotDestinationList'
     ]),
     data() {
       return {
@@ -228,12 +172,12 @@
         this.$store.commit('initHotPlayList', item.CityList)
       },
       //选中跳转到酒店详情搜索
-      changeHotlImg(item){
+      changeHotlImg(item) {
         this.$router.push({name: 'HotelSearchMore', params: {id: item.sm_af_AreaID}})
       },
-      changeRecommendType(index){
-        if( index == 2 ){
-          this.$router.push({name:'HotelParentChildTour'})
+      changeRecommendType(index) {
+        if (index == 2) {
+          this.$router.push({name: 'HotelParentChildTour'})
         }
       }
     },
@@ -254,6 +198,34 @@
   }
 </script>
 <style scoped>
+  .one {
+    width: 390px;
+  }
+
+  .two {
+    width: 790px;
+  }
+
+  .three {
+    width: 390px;
+  }
+
+  .four {
+    width: 390px;
+  }
+
+  .five {
+    width: 390px;
+  }
+
+  .six {
+    width: 790px;
+  }
+
+  .seven {
+    width: 390px;
+  }
+
   .el-carousel__item h3 {
     color: #475669;
     font-size: 14px;

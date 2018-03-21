@@ -15,6 +15,7 @@ export default {
             commit('HotPlayData',data.data.gameplay.SubArray);
             commit('initHotPlayList',data.data.gameplay.SubArray[0].CityList);
             commit('characteristicRecommendList',data.data.special.SubArray);
+            commit('hotDestination',data.data.thehot.HotelList);//当季热门
             relove();
           }else{
             reject(data.resultcontent)

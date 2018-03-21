@@ -5,4 +5,5 @@ export default {
   themeTypeList: state => state.themeTypeList,
   roomHardList: state => state.roomHardList,
   searchData: state => state.searchData,
+  hotDestinationList: state => state.hotDestinationList,
 }

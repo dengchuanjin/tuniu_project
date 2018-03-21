@@ -5,4 +5,5 @@ export default {
   themeTypeList:[],//酒店搜索详情酒店主题搜索
   roomHardList:[],//酒店搜索详情房间设施搜索
   searchData:[],//酒店搜索详情数据
+  hotDestinationList:[],//当季热门数据
 }
