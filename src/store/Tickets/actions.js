@@ -153,7 +153,7 @@ export default {
   //景点详情数据
   initTicketsDetailData({commit},data){
     return new Promise(function (relove, reject) {
-      axios.post('http://192.168.3.245/TtWebPage/Detail', JSON.stringify(data), {
+      axios.post('http://webservice.1000da.com.cn/TtWebPage/Detail', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }

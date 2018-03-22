@@ -879,6 +879,7 @@
               var booToomMonth = this.getDates(year, month + 1);
               _this.arr2.push(v - this.getDates(year, month))
             } else if (v == new Date().getDate() && year == new Date().getFullYear() && month == new Date().getMonth()) {
+              newArr.push(v)
                 _this.arr3 = []
 //              for (var n = 0; n < data.length; n++) {
 //                if (data[n].day == new Date().getDate()) {
@@ -1078,7 +1079,7 @@
       this.initComment();
       this.price = sessionStorage.getItem('money');
       //获取轮播图
-      this.$store.commit('showLoading');
+//      this.$store.commit('showLoading');
       let images = JSON.parse(sessionStorage.getItem('images')).split(',')
       if (!images[images.length - 1]) {
         images.pop()
@@ -1089,7 +1090,7 @@
         let date = new Date()
         let str = date.getFullYear()+'-'+this.getNum(date.getMonth()+1)+'-01'
         this.getCitySearch(id, '', true,str,date.getMonth());
-        this.$store.commit('hideLoading')
+//        this.$store.commit('hideLoading')
       });
       this.data = cityOptions;
     },

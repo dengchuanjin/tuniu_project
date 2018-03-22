@@ -204,7 +204,6 @@
   import {mapGetters} from 'vuex'
   import '@/assets/css/comment.css'
   import '@/assets/css/AdmissionTicket.css'
-  import $ from 'jquery'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
   export default {
@@ -285,6 +284,7 @@
 //      this.$store.commit('showLoading')
       this.initData(id).then(()=>{
 //        this.$store.commit('hideLoading')
+        this.searchMap(this.ticketsDetailData)
       },err=>{
         this.$notify({
           message: err,
@@ -301,20 +301,28 @@
           "operateUserID": "",
           "operateUserName": "",
           "pcName": "",
-          "tm_ts_Code": '023',
+          "tm_ts_Code": id,
         }
         await this.$store.dispatch('initTicketsDetailData',options)
       },
       //查询地图
-      searchMap() {
+      searchMap(ticketsDetailData) {
         var map = new BMap.Map("allmap");
-        map.centerAndZoom(new BMap.Point(116.331398, 39.897445), 11);
-        map.enableScrollWheelZoom(true);
-        map.clearOverlays();
-        var new_point = new BMap.Point(this.form.x, this.form.y);
-        var marker = new BMap.Marker(new_point);  // 创建标注
+        var point = new BMap.Point(ticketsDetailData.tm_ts_Longitude, ticketsDetailData.tm_ts_Latitude);
+        var marker = new BMap.Marker(point);  // 创建标注
         map.addOverlay(marker);              // 将标注添加到地图中
-        map.panTo(new_point);
+        map.centerAndZoom(point, 15);
+        var opts = {
+          width : 200,     // 信息窗口宽度
+          height: 100,     // 信息窗口高度
+          title : ticketsDetailData.tm_ts_Name , // 信息窗口标题
+          enableMessage:true,//设置允许信息窗发送短息
+          message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
+        }
+        var infoWindow = new BMap.InfoWindow(`地址：${ticketsDetailData.tm_ts_Address}`, opts);  // 创建信息窗口对象
+        marker.addEventListener("click", function(){
+          map.openInfoWindow(infoWindow,point); //开启信息窗口
+        });
       },
       changeType(index){
        this.n = index
@@ -329,7 +337,6 @@
     },
     mounted() {
 
-      this.searchMap();
 //      //滚动到一定距离变固定定位
 //      (function () {
 //        var w = ($(window).width() - 1188) / 2
@@ -356,7 +363,8 @@
     }
   }
 </script>
-<style lang="scss" scoped>
+<style scoped>
+
 
   .swiper-slide {
     background-size: cover;

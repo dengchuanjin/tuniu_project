@@ -252,7 +252,7 @@
     ]),
     data() {
       return {
-        total:10,
+        total:0,
         checked:false,
         isLoading:false,
         roomHardRadio:'',
@@ -333,6 +333,7 @@
       this.$store.commit('showLoading')
       this.initData().then(()=>{
         this.$store.commit('hideLoading')
+        this.searchDataList(this.searchOptions)
       })
     },
     methods: {
@@ -382,7 +383,7 @@
         await this.$store.dispatch('initHotelSearchFilterInfo',initHotelSearchFilterInfo)
 
         //详情数据
-        await this.$store.dispatch('initSearchData',this.searchOptions)
+//        await this.$store.dispatch('initSearchData',this.searchOptions)
       },
       goHotelDetails(item){
         this.$router.push({name:'HotelDetalis', params: {id: item.ht_ht_hotelID}})

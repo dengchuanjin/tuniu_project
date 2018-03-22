@@ -9,26 +9,26 @@
             <li class="seasonSelection">
               <h5><img src="../../assets/img/icon-star.png" width="14" height="14">当季精选</h5>
               <div class="clearfix">
-                <a href="javascript:;" v-show="featuredList.length" v-for="item in featuredList">{{item.tm_ts_Name}}</a>
+                <a href="javascript:;" v-show="featuredList.length" v-for="item in featuredList" @click="clickFeaturedList(item)">{{item.tm_ts_Name}}</a>
               </div>
             </li>
             <li class="surroundingCities">
               <h5><img src="../../assets/img/icon-location.png" width="12" height="15">周边城市</h5>
               <div class="clearfix">
-                <a href="javascript:;" v-for="item in cityList">{{item.sm_af_AreaName}}</a>
+                <a href="javascript:;" v-for="item in cityList" @click="clickCityList(item)">{{item.sm_af_AreaName}}</a>
               </div>
             </li>
             <li class="hotCities">
               <h5><img src="../../assets/img/icon-fire.png" width="12" height="15">热门城市</h5>
               <div class="clearfix">
-                <a href="javascript:;" v-for="item in hotCityList">{{item.sm_af_AreaName}}</a>
+                <a href="javascript:;" v-for="item in hotCityList" @click="clickHotCityList(item)">{{item.sm_af_AreaName}}</a>
                 <a href="javascript:;">更多城市>></a>
               </div>
             </li>
             <li class="themeOfPlay">
               <h5><img src="../../assets/img/icon-baloon.png" width="11" height="13">游玩主题</h5>
               <div class="clearfix">
-                <a href="javascript:;" v-for="item in themeTypeNameList">{{item}}</a>
+                <a href="javascript:;" v-for="item in themeTypeNameList" @click="clickThemeTypeNameList(item)">{{item}}</a>
               </div>
             </li>
           </ul>
@@ -38,7 +38,7 @@
           <div class="block">
             <el-carousel height="370px">
               <el-carousel-item v-for="item,index in topBigImageList" :key="index">
-                <img alt="" v-lazy="item.tm_tbi_Image[0]" style="height: 100%"/>
+                <img alt="" v-lazy="item.tm_tbi_Image[0]" style="height: 100%" @click="clickTopBigImageList(item)"/>
               </el-carousel-item>
             </el-carousel>
           </div>
@@ -128,7 +128,7 @@
           </div>
           <div class="AdmissionTickeHotDestinationContent">
             <ul class="AdmissionTickeHotDestinationList clearfix">
-              <li v-for="item in hotList">
+              <li v-for="item in hotList" @click="clickHotList(item)">
                 <img width="390" height="160" v-lazy="item.tm_ts_ShowImage[0]">
                 <div></div>
                 <span>{{item.tm_ts_Name}}</span>
@@ -150,7 +150,7 @@
           <!--境外景点展示-->
           <div class="overseasScenicSpotsContent">
             <ul class="overseasScenicSpotsContentList clearfix">
-              <li v-for="item in outListObj.gtTourSiteList">
+              <li v-for="item in outListObj.gtTourSiteList" @click="clickGtTourSiteList(item)">
                 <div class="overseasScenicSpotsContentImgBox">
                   <img  width="188" height="110" v-lazy="item.tm_ts_ShowImage[0]">
                   <strong></strong>
@@ -246,6 +246,34 @@
       })
     },
     methods: {
+      //点击上面的周边城市
+      clickCityList(item){
+        this.$router.push({name: 'AdmissionTicketMore'})
+      },
+      //点击上面的热门城市
+      clickHotCityList(item){
+        this.$router.push({name: 'AdmissionTicketMore'})
+      },
+      //点击上面的游玩主题
+      clickThemeTypeNameList(item){
+        this.$router.push({name: 'AdmissionTicketMore'})
+      },
+      //点击轮播图
+      clickTopBigImageList(item){
+        console.log(item)
+      },
+      //点击热门目的地
+      clickHotList(item){
+        this.$router.push({name: 'TicketsDetail', params: {id: item.tm_ts_Code}})
+      },
+      //点击境外景点
+      clickGtTourSiteList(item){
+        this.$router.push({name: 'TicketsDetail', params: {id: item.tm_ts_Code}})
+      },
+      //点击当季精选
+      clickFeaturedList(item){
+        this.$router.push({name: 'TicketsDetail', params: {id: item.tm_ts_Code}})
+      },
       //选中境外景点
       clickOutList(item,index){
         this.m = index;
@@ -268,9 +296,6 @@
         })
       },
       async initData(name) {
-        let cityOptions = {
-
-        }
         let initOptions = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",

@@ -3,8 +3,8 @@
     <div class="wrapContent">
       <div class="titleTop clearfix">
         <div class="title">
-          <h4>香港迪士尼乐园酒店(Disneyland Hotel)<span>豪华型</span></h4>
-          <strong>离岛大屿山香港迪士尼乐园度假区，港铁迪士尼站转乘酒店班车直达 【 香港迪士尼乐园度假区 】</strong>
+          <h4>{{hotelModel.ht_ht_HotelName}}<span>豪华型</span></h4>
+          <strong>{{hotelModel.ht_ht_HotelAddress}}</strong>
         </div>
         <div class="priceAndSubmit">
           <strong>￥<span>2156</span> 起</strong>
@@ -16,11 +16,21 @@
           <!--图片框-->
           <div class="imgBoxList clearfix">
             <div class="bigImg">
-              <img src="../../assets/img/homePageImage.jpg" width="440" height="329">
+              <img  width="440" height="329" v-lazy="item.ht_hi_ImageURL" v-for="item,index in exteriorList" v-if="index==0">
             </div>
+            <!--大堂-->
             <div class="smallImgList">
-              <img v-for="item,index in 6" src="../../assets/img/homePageImage.jpg" width="150" height="164"/>
+              <img  width="150" height="164" v-lazy="item.ht_hi_ImageURL" v-for="item,index in exteriorList" v-if="index!=0">
+              <!--餐厅-->
+              <img  width="150" height="164" v-lazy="item.ht_hi_ImageURL" v-for="item,index in publicAreasList">
+              <img  width="150" height="164" v-lazy="item.ht_hi_ImageURL" v-for="item,index in theLobbyList">
+              <!--餐厅-->
+              <img  width="150" height="164" v-lazy="item.ht_hi_ImageURL" v-for="item,index in restaurantList">
             </div>
+
+            <!--<div class="smallImgList">-->
+              <!--<img v-for="item,index in 6" src="../../assets/img/homePageImage.jpg" width="150" height="164"/>-->
+            <!--</div>-->
           </div>
           <!--酒店介绍-->
           <div class="hotelInfromation">
@@ -34,28 +44,30 @@
               <div class="block">
                 <span class="demonstration">入住</span>
                 <el-date-picker
-                  v-model="value1"
+                  v-model="begin"
                   type="date"
                   placeholder="选择日期"
                   size="mini"
+                  value-format="yyyy-MM-dd"
                 >
                 </el-date-picker>
               </div>
               <div class="block">
                 <span class="demonstration">离店</span>
                 <el-date-picker
-                  v-model="value2"
+                  v-model="end"
                   type="date"
                   placeholder="选择日期"
                   size="mini"
+                  value-format="yyyy-MM-dd"
                 >
                 </el-date-picker>
               </div>
-              <el-button type="warning" size="mini">确定</el-button>
-              <div class="condition">
-                <el-checkbox v-model="checked">可预付</el-checkbox>
-                <el-checkbox v-model="checked">立即确认</el-checkbox>
-              </div>
+              <el-button type="warning" size="mini" @click="submit">确定</el-button>
+              <!--<div class="condition">-->
+                <!--<el-checkbox v-model="checked">可预付</el-checkbox>-->
+                <!--<el-checkbox v-model="checked">立即确认</el-checkbox>-->
+              <!--</div>-->
             </div>
             <!--酒店类型列表-->
             <div class="hotelTypeList" v-show="showList[0].isShow">
@@ -65,66 +77,59 @@
                 <dd class="bedType">
                   <em>床型<i></i></em>
                   <ul>
-                    <li v-for="item,index in bedTypeList">{{item}}</li>
+                    <li v-for="item,index in searchHotelRoomFilterObj.BedType" @click="clickBedType(item)">{{item.Name}}</li>
                   </ul>
                 </dd>
                 <dd class="breakfast">
                   <em>早餐<i></i></em>
                   <ul>
-                    <li v-for="item,index in bedTypeList">{{item}}</li>
+                    <li v-for="item,index in searchHotelRoomFilterObj.BreakfastType" @click="clickBreakfastType(item)">{{item.Name}}</li>
                   </ul>
                 </dd>
                 <dd class="WIFI">
                   <em>宽带<i></i></em>
                   <ul>
-                    <li v-for="item,index in bedTypeList">{{item}}</li>
+                    <li v-for="item,index in searchHotelRoomFilterObj.WafiType" @click="clickWafiType(item)">{{item.Name}}</li>
                   </ul>
                 </dd>
                 <dd calss="cancelPolicy">
                   <em>取消政策<i></i></em>
                   <ul style="width: 100px;">
-                    <li v-for="item,index in bedTypeList">{{item}}</li>
+                    <li v-for="item,index in searchHotelRoomFilterObj.CancelType" @click="clickCancelType(item)">{{item.Name}}</li>
                   </ul>
                 </dd>
                 <dd class="price">日均价（含服务费）</dd>
               </dl>
               <!--客房列表-->
-              <ul class="roomList">
-                <li class="clearfix" v-for="item,index in 3">
+              <ul class="roomList" v-loading="isLoading">
+                <li class="clearfix" v-for="item,index in hotelRoom">
                   <div class="guestRoomType">
                     <img src="../../assets/img/homePageImage.jpg" width="100" height="56">
-                    <strong>标准客房</strong>
-                    <a href="JavaScript:;">查看详情&gt;</a>
+                    <strong>{{item.RoomInfo.ht_bt_RoomName}}</strong>
+                    <a href="JavaScript:;" @click="lookSearchDetils(index)">查看详情&gt;</a>
                   </div>
                   <!--查看详情-->
                   <div class="searchDetils">
-                    <div class="searchDetilsContent">
+                    <div class="searchDetilsContent" v-show="index==s">
                       <div class="searchDetilsContentTop clearfix">
                         <img src="../../assets/img/homePageImage.jpg" width="225" height="127">
                         <ul class="roomToConfigure">
-                          <li><strong>床型:</strong><span> 大床1.5米x1张(或单人撒旦飞洒发生</span></li>
-                          <li><strong>最多入住人数:</strong><span> 2</span></li>
-                          <li><strong>楼层:</strong><span> 5-22层</span></li>
-                          <li><strong>无烟房:</strong><span> 全部房间可无烟处理</span></li>
-                          <li><strong>面积:</strong><span> 20平方米</span></li>
-                          <li><strong>加床:</strong><span> 不可加床</span></li>
+                          <li><strong>床型:</strong><span> {{item.RoomInfo.ht_bt_BedType}}</span></li>
+                          <li><strong>最多入住人数:</strong><span> {{item.RoomInfo.ht_bt_MostIn}}</span></li>
+                          <li><strong>楼层:</strong><span> {{item.RoomInfo.ht_bt_Level}}</span></li>
+                          <li><strong>无烟房:</strong><span> {{item.RoomInfo.ht_bt_Smoke}}</span></li>
+                          <li><strong>面积:</strong><span> {{item.RoomInfo.ht_bt_Area}}平方米</span></li>
+                          <li><strong>加床:</strong><span> {{item.RoomInfo.ht_bt_AddBed}}</span></li>
                         </ul>
-                        <a href="javascript:;" class="closeDetils">×</a>
+                        <a href="javascript:;" class="closeDetils" @click="closeSearchDetils(index)">×</a>
                         <a href="javascript:;" class="searchMore">查看所有房型设施<i></i></a>
                       </div>
                       <div class="searchDetilsContentBottom">
                         <ul>
-                          <li v-for="item,index in 5">
-                            <strong>便利设施:</strong>
+                          <li v-for="v,index in item.RoomTypeHardList">
+                            <strong>{{v.ht_rh_RoomHardTypeName}}:</strong>
                             <div class="searchDetilsContentBottomList clearfix">
-                              <span><i></i>220V电压插座</span>
-                              <span><i></i>遮光窗帘</span>
-                              <span><i></i>房内保险箱</span>
-                              <span><i></i>床具:鸭绒被</span>
-                              <span><i></i>床具:毯子或被子</span>
-                              <span><i></i>熨衣设备</span>
-                              <span><i></i>房间内高速上网</span>
-                              <span><i></i>空调</span>
+                              <span v-for="m in v.SubArray" v-show="v.SubArray.length"><i></i>{{m.ht_rth_RoomHardName}}</span>
                             </div>
                           </li>
                         </ul>
@@ -132,26 +137,58 @@
                       </div>
                     </div>
                     <ul class="roomContentList">
-                      <li v-for="item,index in 4">
+                      <li v-for="v,index in item.RoomProductPriceList">
                         <div class="clearfix">
-                        <span class="hotelDescribe"><span>(特价大促销)(内宾) (成人最多入住2位)[无早]</span><a
+                        <span class="hotelDescribe"><span>{{v.ht_rpp_Name}}</span><a
                           href="javascript:;">超值价</a></span>
                           <span class="bedType">大/双</span>
                           <span class="breakfast">无早</span>
-                          <span class="WIFI"><span>免费无线</span></span>
-                          <span class="cancelPolicy"><span>不可取消</span><a href="javascript:;">立即确认</a></span>
-                          <span class="price">￥<em>2156</em></span>
+                          <!--<span class="WIFI"  v-popover:popover1><span>免费无线</span></span>-->
+                          <el-popover
+                            ref="popover1"
+                            placement="top-start"
+                            width="200"
+                            trigger="hover" class="WIFI" >
+                            <div slot>
+                              免费有线宽带<br>免费无线宽带
+                            </div>
+                            <span slot="reference"><span>免费无线</span></span>
+                          </el-popover>
+                          <el-popover
+                            ref="popover2"
+                            placement="top-start"
+                            width="200"
+                            trigger="hover"
+                            class="cancelPolicy">
+                            <div slot>
+                              订单提交后可随时取消，途牛不收取任何费用。
+                            </div>
+                            <span  slot="reference"><span>不可取消</span><a href="javascript:;">立即确认</a></span>
+                          </el-popover>
+                          <!--<span class="cancelPolicy"><span>不可取消</span><a href="javascript:;">立即确认</a></span>-->
+                          <span class="price">￥<em>{{v.ht_rpp_ProductPrice}}</em></span>
                           <span class="submit"><a href="javascript:;"
                                                   @click="goHotelOrder">预定</a><em>在线付(少量)</em></span>
                         </div>
                       </li>
-                      <li class="more">
-                        <a href="javascript:;"><em>查看更多产品报价<i></i></em></a>
-                      </li>
+                      <!--<li class="more">-->
+                        <!--<a href="javascript:;"><em>查看更多产品报价<i></i></em></a>-->
+                      <!--</li>-->
                     </ul>
                   </div>
                 </li>
               </ul>
+              <!--分页-->
+              <div class="block" style="float: right;padding-top: 20px">
+                <el-pagination
+                  @current-change="handleCurrentChange"
+                  :page-size="5"
+                  layout="total, prev, pager, next"
+                  :total="total"
+                  v-show="total"
+                >
+                </el-pagination>
+              </div>
             </div>
             <!--温馨提示-->
             <div class="reminder" v-show="showList[1].isShow">
@@ -162,29 +199,42 @@
             <div class="hotelBriefIntroduction" v-show="showList[1].isShow">
               <strong class="strongFont">酒店简介</strong>
               <div class="label clearfix">
-                <span>亲子时刻</span>
-                <span>亲子时刻</span>
-                <span>亲子时刻</span>
-                <span>亲子时刻</span>
+                <span v-for="item in hotelDetalis.HotelTheme">{{item.ht_tt_Name}}</span>
               </div>
-              <p>
-                香港迪士尼乐园酒店位于香港大屿山香港迪士尼乐园度假区，交通便利，由中环出发乘地铁只需半小时。
-                香港迪士尼乐园酒店是一家以华丽的维多利亚风格为设计的酒店，
-                拥有别致小亭，供婚礼使用的花园及宽敞的展览和会议场地。酒店除了华丽宽敞的房间，还有各种别具特色的餐厅、
-                各种休闲设施及服务，如水疗泳池健身室、特别为小朋友设置的各种活动等。这里乐趣无穷，更少不了与迪士尼朋友见面的机会，
-                让您的奇妙之旅得以延续。
+              <p v-html="hotelModel.ht_ht_Details">
               </p>
             </div>
             <!--酒店政策-->
             <div class="hotelPolicy" v-show="showList[1].isShow">
               <strong class="strongFont">酒店政策</strong>
               <ul>
-                <li v-for="item,index in hotelPolicyList">
+                <li>
                   <div class="couponsActive clearfix">
                     <span></span>
-                    <h5>{{item}}</h5>
+                    <h5>入住和离店</h5>
                   </div>
-                  <p>入住时间：15:00以后 离店时间：11:00以前</p>
+                  <p>{{hotelPolicy.ht_hp_InOut}}</p>
+                </li>
+                <li>
+                  <div class="couponsActive clearfix">
+                    <span></span>
+                    <h5>取消政策</h5>
+                  </div>
+                  <p>{{hotelPolicy.ht_hp_CancelRule}}</p>
+                </li>
+                <li>
+                  <div class="couponsActive clearfix">
+                    <span></span>
+                    <h5>入住手续</h5>
+                  </div>
+                  <p>{{hotelPolicy.ht_hp_BookRule}}</p>
+                </li>
+                <li>
+                  <div class="couponsActive clearfix">
+                    <span></span>
+                    <h5>携带宠物</h5>
+                  </div>
+                  <p>{{hotelPolicy.ht_hp_TakePeg}}</p>
                 </li>
               </ul>
             </div>
@@ -192,25 +242,25 @@
             <div class="facilitiesServices" v-show="showList[1].isShow">
               <strong class="strongFont">设施服务</strong>
               <ul>
-                <li v-for="item,index in facilitiesServicesList">
+                <li  v-for="item in hotelDetalis.HardServiceHard">
                   <div class="couponsActive clearfix">
                     <span></span>
-                    <h5>{{item}}</h5>
+                    <h5>{{item.ht_ht_HardTypeName}}</h5>
                   </div>
-                  <p v-if="index<=2">
-                    香港迪士尼乐园酒店位于香港大屿山香港迪士尼乐园度假区，交通便利，由中环出发乘地铁只需半小时。
-                    香港迪士尼乐园酒店是一家以华丽的维多利亚风格为设计的酒店，拥有别致小亭，供婚礼使用的花园及宽敞的展览和会议场地。
-                    酒店除了华丽宽敞的房间，还有各种别具特色的餐厅、各种休闲设施及服务，
-                    如水疗泳池健身室、特别为小朋友设置的各种活动等。这里乐趣无穷，更少不了与迪士尼朋友见面的机会，让您的奇妙之旅得以延续。
-                  </p>
-                  <div v-if="index>2" class="functionType clearfix">
-                    <span v-for="item,index in 10"><i></i>中餐厅</span>
+                  <!--<p>-->
+                    <!--香港迪士尼乐园酒店位于香港大屿山香港迪士尼乐园度假区，交通便利，由中环出发乘地铁只需半小时。-->
+                    <!--香港迪士尼乐园酒店是一家以华丽的维多利亚风格为设计的酒店，拥有别致小亭，供婚礼使用的花园及宽敞的展览和会议场地。-->
+                    <!--酒店除了华丽宽敞的房间，还有各种别具特色的餐厅、各种休闲设施及服务，-->
+                    <!--如水疗泳池健身室、特别为小朋友设置的各种活动等。这里乐趣无穷，更少不了与迪士尼朋友见面的机会，让您的奇妙之旅得以延续。-->
+                  <!--</p>-->
+                  <div class="functionType clearfix">
+                    <span  v-for="v in item.SubArray" v-show="item.SubArray.length"><i></i>{{v.ht_hd_HardName}}</span>
                   </div>
                 </li>
               </ul>
             </div>
             <!--位置及周边-->
-            <div class="positionPeriphery">
+            <div class="positionPeriphery"  v-show="showList[2].isShow">
               <strong class="strongFont">位置及周边</strong>
               <!--地图-->
               <div class="mapBoxWrap">
@@ -282,16 +332,10 @@
                   </li>
                 </ul>
               </div>
-              <!--分页-->
-              <el-pagination
-                style="text-align: right; padding: 20px 0;"
-                background
-                layout="prev, pager, next"
-                :total="20">
-              </el-pagination>
+
             </div>
             <!--周边热卖酒店-->
-            <div class="hotelHotSell">
+            <div class="hotelHotSell"  v-show="showList[4].isShow">
               <strong class="strongFont">周边热卖酒店</strong>
               <div class="hotelHotSellWrap clearfix">
                 <ul class="partitionList">
@@ -326,9 +370,14 @@
   import {mapGetters} from 'vuex'
 
   export default {
-    computed: mapGetters([]),
+
     data() {
       return {
+        total:0,
+        begin:'',
+        end:'',
+        isLoading:false,
+        value:'',
         showList: [
           {
             id: 0,
@@ -359,39 +408,16 @@
           '点评（707条）',
           '周边热卖酒店'
         ],
+        s:111,
         value1: '',
         value2: '',
         checked: false,
-        hotelPolicyList: [
-          '入住和离店',
-          '取消政策',
-          '入住手续',
-          '携带宠物'
-        ],
-        facilitiesServicesList: [
-          '基本信息',
-          '酒店特色',
-          '停车服务',
-          '餐饮设施',
-          '会议设施',
-          '服务项目',
-          '房间设施',
-          '娱乐与健身设施'
-        ],
         value5: 4.7,
         scoreType: [
           '舒适度',
           '睡眠质量',
           '性价比'
         ],
-        bedTypeList: [
-          '不限',
-          '双床'
-        ],
-        form: {
-          x: '105.44397029',
-          y: '24.8959298'
-        },
         partitionList: [
           '每晚起价',
           '住客评分',
@@ -400,7 +426,138 @@
         ],
       }
     },
-    methods: {
+    computed: mapGetters([
+      'hotelDetalis',
+      'hotelModel',
+      'hotelPolicy',
+      'hotelRoom',
+      'hotelImage',
+      'exteriorList',
+      'publicAreasList',
+      'theLobbyList',
+      'restaurantList',
+      'searchHotelRoomFilterObj'
+    ]),
+    created(){
+      let id= this.$route.params.id;
+      this.initData(id).then(()=>{
+        this.initRoomSearch().then(()=>{
+          this.searchRoomInfo()
+        })
+        this.searchMap(this.hotelModel);
+      })
+    },
+    methods:{
+      //分页
+      handleCurrentChange(num){
+        this.searchRoomInfo({
+          page:num
+        })
+      },
+      //确定
+      submit(){
+        this.searchRoomInfo({
+          inDate:this.begin,
+          outDate:this.end
+        })
+      },
+      //选中床型
+      clickBedType(item){
+        this.searchRoomInfo({
+          inDate:this.begin,
+          outDate:this.end,
+          ht_rpp_BedType:item.ht_rpp_BedType
+        })
+      },
+      //选中早餐
+      clickBreakfastType(item){
+        this.searchRoomInfo({
+          inDate:this.begin,
+          outDate:this.end,
+          ht_rpp_BreakfastType:item.ht_rpp_BreakfastType
+        })
+      },
+      //选中宽带
+      clickWafiType(item){
+        this.searchRoomInfo({
+          inDate:this.begin,
+          outDate:this.end,
+          ht_rpp_WafiType:item.ht_rpp_WafiType
+        })
+      },
+      //选中政策
+      clickCancelType(item){
+        this.searchRoomInfo({
+          inDate:this.begin,
+          outDate:this.end,
+          ht_rpp_CancelType:item.ht_rpp_CancelType
+        })
+      },
+      searchRoomInfo(obj){
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "page": "1",
+          "rows": "5",
+          "ht_bt_HotelID": this.$route.params.id,  //酒店ID （必要条件）
+          "inDate": "", //入住日期
+          "outDate": "",//退房日期
+          "ht_rpp_BedType": "", //床型
+          "ht_rpp_BreakfastType": "", //早餐类型
+          "ht_rpp_WafiType": "",//wafi类型
+          "ht_rpp_CancelType": "",//取消类型
+        }
+        this.isLoading = true;
+        for(let attr in obj){
+          options[attr] = obj[attr]
+        }
+        this.$store.dispatch('initSearchRoomInfo',options)
+        .then((total)=>{
+          this.total = total;
+          this.isLoading = false
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+          this.isLoading = false
+        })
+      },
+      //查看详情
+      lookSearchDetils(index){
+        this.s = index
+      },
+      //关闭详情
+      closeSearchDetils(index){
+        if(this.s==index){
+          this.s = 111
+        }
+      },
+      initRoomSearch(){
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+        }
+        return this.$store.dispatch('SearchHotelRoomFilter',options)
+      },
+      async initData(id){
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "ht_ht_hotelID": id,//房间ID
+          //"sm_ai_AgentInfoID": "10",//供应商ID   二选一  优先使用酒店ID
+        };
+        await this.$store.dispatch('initHotelDetalis',options)
+      },
       //点击菜单
       menuClick(index) {
         this.n = index;
@@ -413,27 +570,35 @@
         }
       },
       //查询地图
-      searchMap() {
+      searchMap(hotelModel) {
         var map = new BMap.Map("allmap");
-        map.centerAndZoom(new BMap.Point(116.331398, 39.897445), 11);
-        map.enableScrollWheelZoom(true);
-        map.clearOverlays();
-        var new_point = new BMap.Point(this.form.x, this.form.y);
-        var marker = new BMap.Marker(new_point);  // 创建标注
+        var point = new BMap.Point(hotelModel.ht_ht_Longitude, hotelModel.ht_ht_Latitude);
+        var marker = new BMap.Marker(point);  // 创建标注
         map.addOverlay(marker);              // 将标注添加到地图中
-        map.panTo(new_point);
+        map.centerAndZoom(point, 15);
+        var opts = {
+          width : 200,     // 信息窗口宽度
+          height: 100,     // 信息窗口高度
+          title : hotelModel.ht_ht_HotelName , // 信息窗口标题
+          enableMessage:true,//设置允许信息窗发送短息
+          message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
+        }
+        var infoWindow = new BMap.InfoWindow(`地址：${hotelModel.ht_ht_HotelAddress}`, opts);  // 创建信息窗口对象
+        marker.addEventListener("click", function(){
+          map.openInfoWindow(infoWindow,point); //开启信息窗口
+        });
       },
       //跳转到酒店订单页面
       goHotelOrder() {
         this.$router.push({name: 'HotelOrder'})
       }
     },
-    mounted() {
-      this.searchMap();
-    }
   }
 </script>
 <style scoped>
+  .mapJW{
+    padding-bottom: 40px;
+  }
 
   .wrapContent {
     width: 1200px;
@@ -601,6 +766,7 @@
     text-align: center;
     box-shadow: 0 0 5px #ccc;
     display: none;
+    z-index: 11;
   }
 
   .hotelTypeListNav ul li:hover {

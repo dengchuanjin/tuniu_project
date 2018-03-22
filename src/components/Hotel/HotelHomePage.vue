@@ -179,6 +179,12 @@
         if (index == 2) {
           this.$router.push({name: 'HotelParentChildTour'})
         }
+        if (index == 5) {
+          this.$router.push({name: 'HotelLovers'})
+        }
+        if (index == 3) {
+          this.$router.push({name: 'HotelMountaineering'})
+        }
       }
     },
     mounted() {

@@ -509,9 +509,9 @@
         let id = window.location.href.split('?')[1].split('=')[1];
         this.insertAgentInfo.data.sm_ai_ProxyParentID = id;
       }
-      this.$store.commit('showLoading');
+//      this.$store.commit('showLoading');
       this.initData().then(() => {
-        this.$store.commit('hideLoading')
+//        this.$store.commit('hideLoading')
       })
     },
     methods: {
