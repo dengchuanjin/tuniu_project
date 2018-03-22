@@ -31,12 +31,19 @@ import AdmissionTicketMore from '@/components/Tickets/AdmissionTicketMore' //更
 import HotelHomePage from '@/components/Hotel/HotelHomePage'//酒店首页
 import HotelSearchMore from '@/components/Hotel/HotelSearchMore'//酒店查询更多
 import HotelDetalis from '@/components/Hotel/HotelDetalis'//酒店详情页
+import HotelOrder from '@/components/Hotel/HotelOrder' //酒店订单页
 import HotelParentChildTour from '@/components/Hotel/HotelParentChildTour'//酒店亲子游
 import HotelLovers from '@/components/Hotel/HotelLovers' //情侣酒店
 import HotelMountaineering from '@/components/Hotel/HotelMountaineering'//依山酒店
 
 
 export default [
+  //酒店订单页
+  {
+    path: '/hotelOrder',
+    name: 'HotelOrder',
+    component: HotelOrder
+  },
   //依山酒店
   {
     path: '/hotelMountaineering',

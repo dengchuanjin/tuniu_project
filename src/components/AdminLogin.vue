@@ -2,7 +2,7 @@
   <div id="wrapBox">
     <div class="huLeYouLogo">
       <a href="javascript:;">
-        <router-link to="/HeelTour" style="position: absolute;width: 100%;height:100%"></router-link>
+        <router-link to="/Comment/AgenciesHome" style="position: absolute;width: 100%;height:100%"></router-link>
         <img src="../assets/img/huileyouLogo.jpg" width="286" height="75">
       </a>
     </div>

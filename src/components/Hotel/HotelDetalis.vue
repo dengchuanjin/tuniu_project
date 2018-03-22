@@ -26,7 +26,8 @@
           <div class="hotelInfromation">
             <!--导航-->
             <div class="hotelInfromationNav clearfix">
-              <a v-for="item,index in hotelInfromationNav" href="javascript:;" @click="menuClick(index)" :class="{active:index==n}">{{item}}</a>
+              <a v-for="item,index in hotelInfromationNav" href="javascript:;" @click="menuClick(index)"
+                 :class="{active:index==n}">{{item}}</a>
             </div>
             <!--筛选-->
             <div class="screenTime clearfix" v-show="showList[0].isShow">
@@ -57,7 +58,7 @@
               </div>
             </div>
             <!--酒店类型列表-->
-            <div class="hotelTypeList"  v-show="showList[0].isShow">
+            <div class="hotelTypeList" v-show="showList[0].isShow">
               <!--酒店筛选导航-->
               <dl class="hotelTypeListNav clearfix">
                 <dt>房型</dt>
@@ -95,33 +96,70 @@
                     <strong>标准客房</strong>
                     <a href="JavaScript:;">查看详情&gt;</a>
                   </div>
-                  <ul class="roomContentList">
-                    <li v-for="item,index in 4">
-                      <div class="clearfix">
+                  <!--查看详情-->
+                  <div class="searchDetils">
+                    <div class="searchDetilsContent">
+                      <div class="searchDetilsContentTop clearfix">
+                        <img src="../../assets/img/homePageImage.jpg" width="225" height="127">
+                        <ul class="roomToConfigure">
+                          <li><strong>床型:</strong><span> 大床1.5米x1张(或单人撒旦飞洒发生</span></li>
+                          <li><strong>最多入住人数:</strong><span> 2</span></li>
+                          <li><strong>楼层:</strong><span> 5-22层</span></li>
+                          <li><strong>无烟房:</strong><span> 全部房间可无烟处理</span></li>
+                          <li><strong>面积:</strong><span> 20平方米</span></li>
+                          <li><strong>加床:</strong><span> 不可加床</span></li>
+                        </ul>
+                        <a href="javascript:;" class="closeDetils">×</a>
+                        <a href="javascript:;" class="searchMore">查看所有房型设施<i></i></a>
+                      </div>
+                      <div class="searchDetilsContentBottom">
+                        <ul>
+                          <li v-for="item,index in 5">
+                            <strong>便利设施:</strong>
+                            <div class="searchDetilsContentBottomList clearfix">
+                              <span><i></i>220V电压插座</span>
+                              <span><i></i>遮光窗帘</span>
+                              <span><i></i>房内保险箱</span>
+                              <span><i></i>床具:鸭绒被</span>
+                              <span><i></i>床具:毯子或被子</span>
+                              <span><i></i>熨衣设备</span>
+                              <span><i></i>房间内高速上网</span>
+                              <span><i></i>空调</span>
+                            </div>
+                          </li>
+                        </ul>
+                        <strong>（部分设备在部分房型中提供）</strong>
+                      </div>
+                    </div>
+                    <ul class="roomContentList">
+                      <li v-for="item,index in 4">
+                        <div class="clearfix">
                         <span class="hotelDescribe"><span>(特价大促销)(内宾) (成人最多入住2位)[无早]</span><a
                           href="javascript:;">超值价</a></span>
-                        <span class="bedType">大/双</span>
-                        <span class="breakfast">无早</span>
-                        <span class="WIFI"><span>免费无线</span></span>
-                        <span class="cancelPolicy"><span>不可取消</span><a href="javascript:;">立即确认</a></span>
-                        <span class="price">￥<em>2156</em></span>
-                        <span class="submit"><a href="javascript:;">预定</a><em>在线付(少量)</em></span>
-                      </div>
-                    </li>
-                    <li class="more">
-                      <a href="javascript:;"><em>查看更多产品报价<i></i></em></a>
-                    </li>
-                  </ul>
+                          <span class="bedType">大/双</span>
+                          <span class="breakfast">无早</span>
+                          <span class="WIFI"><span>免费无线</span></span>
+                          <span class="cancelPolicy"><span>不可取消</span><a href="javascript:;">立即确认</a></span>
+                          <span class="price">￥<em>2156</em></span>
+                          <span class="submit"><a href="javascript:;"
+                                                  @click="goHotelOrder">预定</a><em>在线付(少量)</em></span>
+                        </div>
+                      </li>
+                      <li class="more">
+                        <a href="javascript:;"><em>查看更多产品报价<i></i></em></a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
               </ul>
             </div>
             <!--温馨提示-->
-            <div class="reminder"  v-show="showList[1].isShow">
+            <div class="reminder" v-show="showList[1].isShow">
               <strong>温馨提示</strong>
               <p>未满18周岁的小孩需有成人陪同才可入住。</p>
             </div>
             <!--酒店简介-->
-            <div class="hotelBriefIntroduction"  v-show="showList[1].isShow">
+            <div class="hotelBriefIntroduction" v-show="showList[1].isShow">
               <strong class="strongFont">酒店简介</strong>
               <div class="label clearfix">
                 <span>亲子时刻</span>
@@ -138,7 +176,7 @@
               </p>
             </div>
             <!--酒店政策-->
-            <div class="hotelPolicy"  v-show="showList[1].isShow">
+            <div class="hotelPolicy" v-show="showList[1].isShow">
               <strong class="strongFont">酒店政策</strong>
               <ul>
                 <li v-for="item,index in hotelPolicyList">
@@ -151,7 +189,7 @@
               </ul>
             </div>
             <!--设施服务-->
-            <div class="facilitiesServices"  v-show="showList[1].isShow">
+            <div class="facilitiesServices" v-show="showList[1].isShow">
               <strong class="strongFont">设施服务</strong>
               <ul>
                 <li v-for="item,index in facilitiesServicesList">
@@ -182,7 +220,7 @@
               </div>
             </div>
             <!--住客点评-->
-            <div class="commentsOnGuests"  v-show="showList[3].isShow">
+            <div class="commentsOnGuests" v-show="showList[3].isShow">
               <strong class="strongFont">住客点评</strong>
               <!--评分-->
               <div class="hotelScoreBox clearfix">
@@ -291,29 +329,29 @@
     computed: mapGetters([]),
     data() {
       return {
-        showList:[
+        showList: [
           {
-            id:0,
-            isShow:true
+            id: 0,
+            isShow: true
           },
           {
-            id:1,
-            isShow:false
+            id: 1,
+            isShow: false
           },
           {
-            id:2,
-            isShow:false
+            id: 2,
+            isShow: false
           },
           {
-            id:3,
-            isShow:false
+            id: 3,
+            isShow: false
           },
           {
-            id:4,
-            isShow:false
+            id: 4,
+            isShow: false
           }
         ],
-        n:0,
+        n: 0,
         hotelInfromationNav: [
           '房型价格',
           '酒店介绍',
@@ -354,7 +392,7 @@
           x: '105.44397029',
           y: '24.8959298'
         },
-        partitionList:[
+        partitionList: [
           '每晚起价',
           '住客评分',
           '区域位置',
@@ -362,15 +400,15 @@
         ],
       }
     },
-    methods:{
+    methods: {
       //点击菜单
-      menuClick(index){
+      menuClick(index) {
         this.n = index;
-        for(var i=0;i<this.showList.length;i++){
-          if(this.showList[i].id==index){
-            this.showList[i].isShow=true
-          }else{
-            this.showList[i].isShow=false
+        for (var i = 0; i < this.showList.length; i++) {
+          if (this.showList[i].id == index) {
+            this.showList[i].isShow = true
+          } else {
+            this.showList[i].isShow = false
           }
         }
       },
@@ -385,8 +423,12 @@
         map.addOverlay(marker);              // 将标注添加到地图中
         map.panTo(new_point);
       },
+      //跳转到酒店订单页面
+      goHotelOrder() {
+        this.$router.push({name: 'HotelOrder'})
+      }
     },
-    mounted(){
+    mounted() {
       this.searchMap();
     }
   }
@@ -600,6 +642,109 @@
     margin-left: 50px;
   }
 
+  /*查看详情*/
+
+  .searchDetils {
+    width: 775px;
+    margin-left: 20px;
+  }
+
+  .searchDetilsContent {
+    padding: 25px;
+    background-color: #f0f2f2;
+    margin-bottom: 20px;
+  }
+
+  .searchDetilsContentTop {
+    position: relative;
+    padding-bottom: 36px;
+    border-bottom: 1px dashed #ccc;
+  }
+
+  .searchDetilsContentTop > img {
+    float: left;
+    margin-right: 25px;
+  }
+
+  .searchDetilsContentTop > ul {
+    float: left;
+    width: 475px;
+  }
+
+  .searchDetilsContentTop .closeDetils {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    font-size: 30px;
+  }
+
+  .searchDetilsContentTop .searchMore {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font: 14px/18px "微软雅黑";
+    color: green;
+  }
+
+  .searchDetilsContentTop .searchMore > i {
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    border-top: 4px solid green;
+    border-bottom: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+  }
+
+  .roomToConfigure > li {
+    float: left;
+    width: 237px;
+    font: 14px/32px "微软雅黑";
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 32px;
+    color: #666;
+  }
+
+  .roomToConfigure > li > strong {
+    font-weight: bold;
+  }
+
+  .searchDetilsContentBottom li {
+    margin-top: 20px;
+  }
+
+  .searchDetilsContentBottom > strong {
+    font: bold 14px/24px "微软雅黑";
+    color: #9ea09f;
+    margin-top: 20px;
+    display: block;
+  }
+
+  .searchDetilsContentBottom strong {
+    font: bold 14px/24px "微软雅黑";
+    color: #666;
+  }
+
+  .searchDetilsContentBottomList {
+    font:12px/2 "微软雅黑";
+    color: #666;
+  }
+
+  .searchDetilsContentBottomList > span {
+    float: left;
+    margin-right: 23px;
+  }
+
+  .searchDetilsContentBottomList > span > i {
+    display: inline-block;
+    width: 18px;
+    height: 9px;
+    background: url("../../assets/img/tips.png") -65px -14px no-repeat;
+    vertical-align: middle;
+  }
+
   /*客房列表*/
 
   .roomList > li {
@@ -629,9 +774,8 @@
     color: #2dbb55;
   }
 
-  .roomList > li > ul {
+  .roomList > li .roomContentList {
     width: 775px;
-    margin-left: 20px;
     font: 13px/18px "微软雅黑";
   }
 
@@ -1035,22 +1179,22 @@
   .recommendList .name {
     display: block;
     font: bold 14px/25px "微软雅黑";
-    height:25px;
+    height: 25px;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .recommendList .hotelType {
     display: block;
-    font:13px/30px "微软雅黑";
+    font: 13px/30px "微软雅黑";
   }
 
   .recommendList .price {
     font: 18px/40px "微软雅黑";
     color: #f60;
     display: block;
-    margin-left:0;
+    margin-left: 0;
   }
 
   .recommendList .guestScore {
@@ -1067,7 +1211,7 @@
     height: 40px;
     font: 12px/40px "微软雅黑";
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
     display: block;
     color: #333;
@@ -1088,8 +1232,6 @@
     line-height: 38px;
     font-size: 16px;
   }
-
-
 
 
 </style>
