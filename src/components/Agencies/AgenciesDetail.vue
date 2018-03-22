@@ -193,7 +193,7 @@
                     <span>选择数量:</span><i style="margin-left: 20px">成人:</i>
                     <div class="bottom">
                       <el-tooltip class="item" effect="light" content="此价格根据机票有浮动，详情请咨询客服." placement="bottom-start">
-                        <i class=" icon-info22"></i>
+                        <i class="icon-info22"></i>
                       </el-tooltip>
                       <span style="color: #f60;font-weight: bold;"
                             v-show="addOrderOptions.adultPrice">¥{{addOrderOptions.adultPrice}}</span>
