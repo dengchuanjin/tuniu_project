@@ -110,8 +110,7 @@
                 <div class="selectedCharacteristicRecommendImageMask">
                   <h6>{{item.ht_it_Name}}</h6>
                 </div>
-                <div class="selectedCharacteristicRecommendBg"
-                     :style="{backgroundImage: `url(${item.ht_it_ImagePath})`}"></div>
+                <div class="selectedCharacteristicRecommendBg" :style="{backgroundImage: `url(${item.ht_it_ImagePath})`}"></div>
                 <strong class="selectedCharacteristicRecommendDetails">{{item.ht_it_Describe}}</strong>
               </li>
             </ul>
@@ -184,6 +183,9 @@
         }
         if (index == 3) {
           this.$router.push({name: 'HotelMountaineering'})
+        }
+        if (index == 4) {
+          this.$router.push({name: 'HotelInn'})
         }
       }
     },
