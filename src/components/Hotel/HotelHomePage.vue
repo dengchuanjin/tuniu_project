@@ -187,8 +187,11 @@
         }
         if (index == 5) {
           this.$router.push({name: 'HotelLovers'})
+          if (index == 4) {
+            this.$router.push({name: 'HotelInn'})
+          }
         }
-      }
+      },
     },
     mounted() {
     },
