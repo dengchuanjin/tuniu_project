@@ -44,16 +44,68 @@
           <div class="aboutScenicSpot clearfix" v-for="item,index in aboutScenicSpot">
             <strong>{{item.title}}</strong>
             <ul class="propListScenicSpotList">
-              <li v-for="ite,index in item.aboutScenicSpotData"><a href="javascript:;">{{ite}}</a></li>
+              <li v-for="item,index in item.aboutScenicSpotData"><a href="javascript:;">{{item}}</a></li>
             </ul>
           </div>
         </div>
+        <!--条件筛选-->
         <div class="screenAdmissionTicketType clearfix">
           <div class="salesVolume"><a href="javascript:;" title="按销量排序">销量</a></div>
           <div class="comment"><a href="javascript:;" title="按点评数排序">点评</a></div>
           <div class="satisfied"><a href="javascript:;" title="按满意度排序">满意</a></div>
           <div class="price"><a href="javascript:;" title="按价格排序">价格</a></div>
+          <div class="priceRange clearfix">
+            <input type="text" placeholder="请输入价格"><em>-</em><input type="text" placeholder="请输入价格">
+            <button>确定</button>
+          </div>
         </div>
+        <!--数据-->
+        <ul class="admissionTicketList">
+          <li>
+            <div class="scenicSpotDetils clearfix">
+              <img src="../../assets/img/homePageImage.jpg" width="90" height="50">
+              <div class="scenicSpotAddress">
+                <h6 class="clearfix"><a href="javascript:;">峨眉山</a><span><em>[</em><a href="javascript:;">四川</a><a
+                  href="javascript:;">.乐山</a><em>]</em></span></h6>
+                <div><strong>游客满意度：</strong><i>100%</i><span>,游客点评<em>132321</em>条</span></div>
+                <p>景点地址:四川省乐山市峨眉山市境内</p>
+              </div>
+              <div class="priceAndReserve">
+                <strong>￥<span>129</span>起</strong>
+                <div class="QRCodeBtn">
+                  <a href="javascript:;">扫码预定<i></i></a>
+                  <div class="QRCodeReserve">
+                    <strong>惠乐游APP扫码预定</strong>
+                    <img src="../../assets/img/yii.png" width="187" height="187">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="productNav clearfix">
+              <strong>产品名称</strong>
+              <span>景点报价</span>
+              <span>途牛价</span>
+            </div>
+            <ul class="reserveInformationList">
+              <li class="clearfix">
+                <div><a href="javacript:;">&lt;黄山风景区门票儿童票(旺季)(3.1-11.30)专项&gt;</a></div>
+                <span>¥115</span>
+                <strong>¥115</strong>
+                <a href="javascript:;">预订</a>
+              </li>
+            </ul>
+            <div class="reserveMore">
+              <a href="javascript:;">更多</a>
+            </div>
+          </li>
+        </ul>
+        <!--分页-->
+        <el-pagination
+          style="text-align: right; margin-top: 20px;"
+          background
+          layout="prev, pager, next"
+          :total="1000">
+        </el-pagination>
       </div>
     </div>
   </div>
@@ -396,6 +448,8 @@
   .screenAdmissionTicketType {
     padding: 10px 0 10px 20px;
     margin-bottom: 10px;
+    margin-top: -1px;
+    border: 1px solid #ccc;
   }
 
   .screenAdmissionTicketType a {
@@ -404,7 +458,7 @@
 
   .screenAdmissionTicketType > .salesVolume > a,
   .screenAdmissionTicketType > .comment > a,
-  .screenAdmissionTicketType > .satisfied > a{
+  .screenAdmissionTicketType > .satisfied > a {
     background: url("../../assets/img/ticketMore.png") no-repeat 20px -87px;
   }
 
@@ -431,5 +485,268 @@
   .screenAdmissionTicketType > div.active > a {
     color: #ff6600;
   }
+
+  .screenAdmissionTicketType > .priceRange {
+    width: 300px;
+  }
+
+  .priceRange > * {
+    float: left;
+  }
+
+  .priceRange > input {
+    width: 100px;
+    border: 1px solid #ccc;
+    padding: 3px 5px;
+  }
+
+  .priceRange > em {
+    margin: 0 5px;
+  }
+
+  .priceRange > button {
+    font: 12px/1.3 "微软雅黑";
+    border: 1px solid #ccc;
+    margin-left: 10px;
+    padding: 3px 5px;
+  }
+
+  /*门票数据*/
+
+  .admissionTicketList > li {
+    padding: 10px;
+    border: 1px solid #eaeaea;
+    border-top: 2px solid #ffc550;
+    margin-bottom: 10px;
+  }
+
+  .scenicSpotDetils > * {
+    float: left;
+  }
+
+  .scenicSpotDetils > img {
+    margin-top: 10px;
+  }
+
+  .scenicSpotAddress {
+    margin-left: 20px;
+  }
+
+  .scenicSpotAddress > h6 * {
+    float: left;
+  }
+
+  .scenicSpotAddress > h6 > a {
+    font: bold 16px/24px "宋体";
+    color: #4e9700;
+  }
+
+  .scenicSpotAddress > h6 > a:hover {
+    color: #f00;
+  }
+
+  .scenicSpotAddress > h6 > span {
+    font: 12px/18px "宋体";
+    color: #666;
+    margin: 5px 0 0 10px;
+  }
+
+  .scenicSpotAddress > h6 > span > a {
+    color: #666;
+  }
+
+  .scenicSpotAddress > h6 > span > a:hover {
+    color: #f60;
+  }
+
+  .scenicSpotAddress > div {
+    font: 12px/2 "宋体";
+  }
+
+  .scenicSpotAddress > div > strong {
+    color: #666;
+  }
+
+  .scenicSpotAddress > div > i {
+    color: #c30;
+    font-weight: bold;
+    font-family: "微软雅黑";
+  }
+
+  .scenicSpotAddress > div > span {
+    color: #4e9700;
+  }
+
+  .scenicSpotAddress > div em {
+    color: #f60;
+    font-weight: bold;
+    font-family: "微软雅黑";
+  }
+
+  .scenicSpotAddress > p {
+    font: 12px/2 "宋体";
+    color: #999;
+  }
+
+  .priceAndReserve {
+    float: right;
+  }
+
+  .priceAndReserve > strong {
+    display: block;
+    width: 90px;
+    text-align: center;
+    font: 14px/30px "微软雅黑";
+    color: #f60;
+    background-color: #fdfbee;
+    border: 1px solid #fae1bb;
+  }
+
+  .priceAndReserve > strong > span {
+    font-size: 18px;
+  }
+
+  .QRCodeBtn {
+    width: 90px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    position: relative;
+    font: 12px/28px "微软雅黑";
+    text-align: center;
+    padding-bottom: 10px;
+  }
+
+  .QRCodeBtn::before {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    transform: rotateZ(45deg);
+    transition: .5s;
+  }
+
+  .QRCodeBtn:hover {
+    border-bottom-color: transparent;
+  }
+
+  .QRCodeBtn:hover::before {
+    transform: rotateZ(225deg);
+  }
+
+  .QRCodeBtn:hover .QRCodeReserve {
+    display: block;
+  }
+
+  .QRCodeBtn > a {
+    color: #666;
+  }
+
+  .QRCodeBtn > a > i {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("../../assets/img/u_order_qrcode.png") no-repeat -8px -3px;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+
+  .QRCodeReserve {
+    position: absolute;
+    bottom: 0;
+    right: -1px;
+    transform: translateY(100%);
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: none;
+  }
+
+  .QRCodeReserve > strong {
+    font: 14px/22px "微软雅黑";
+    color: #999;
+  }
+
+  .productNav {
+    font: 12px/2 "微软雅黑";
+    color: #999;
+    margin-top: 20px;
+    border-bottom: 1px solid #f90;
+  }
+
+  .productNav > strong {
+    float: left;
+    width: 600px;
+    text-indent: 10px;
+  }
+
+  .productNav > span {
+    float: left;
+    width: 120px;
+    text-align: center;
+  }
+
+  .reserveInformationList > li {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+  }
+
+  .reserveInformationList > li > * {
+    float: left;
+    font: 14px/2 "微软雅黑";
+  }
+
+  .reserveInformationList div {
+    width: 600px;
+  }
+
+  .reserveInformationList div > a {
+    display: inline-block;
+    color: #0053aa;
+  }
+
+  .reserveInformationList div > a:hover {
+    color: #f80;
+  }
+
+  .reserveInformationList > li > span {
+    width: 120px;
+    text-align: center;
+    text-decoration: line-through;
+  }
+
+  .reserveInformationList > li > strong {
+    width: 120px;
+    text-align: center;
+    font-weight: bold;
+    color: #f60;
+  }
+
+  .reserveInformationList > li > a {
+    background-color: #f60;
+    padding: 0 20px;
+    color: #fff;
+    float: right;
+    margin-right: 20px;
+    border-radius: 5px;
+  }
+
+  .reserveMore {
+    width: 100%;
+    padding: 10px 20px 0 0;
+    text-align: right;
+  }
+
+  .reserveMore > a {
+    font: 14px/2 "微软雅黑";
+    display: inline-block;
+    padding: 0 20px;
+    background-color: #ccc;
+    color: #fff;
+    border-radius: 5px;
+  }
+
 
 </style>

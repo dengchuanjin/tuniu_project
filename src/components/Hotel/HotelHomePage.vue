@@ -176,14 +176,17 @@
         this.$router.push({name: 'HotelSearchMore', params: {id: item.sm_af_AreaID}})
       },
       changeRecommendType(index) {
+        if (index == 1) {
+          this.$router.push({name: 'HotelAncientTown'})
+        }
         if (index == 2) {
           this.$router.push({name: 'HotelParentChildTour'})
         }
-        if (index == 5) {
-          this.$router.push({name: 'HotelLovers'})
-        }
         if (index == 3) {
           this.$router.push({name: 'HotelMountaineering'})
+        }
+        if (index == 5) {
+          this.$router.push({name: 'HotelLovers'})
         }
       }
     },

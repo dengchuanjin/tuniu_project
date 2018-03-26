@@ -35,9 +35,16 @@ import HotelOrder from '@/components/Hotel/HotelOrder' //酒店订单页
 import HotelParentChildTour from '@/components/Hotel/HotelParentChildTour'//酒店亲子游
 import HotelLovers from '@/components/Hotel/HotelLovers' //情侣酒店
 import HotelMountaineering from '@/components/Hotel/HotelMountaineering'//依山酒店
+import HotelAncientTown from '@/components/Hotel/HotelAncientTown' //古镇酒店
 
 
 export default [
+  //古镇酒店
+  {
+    path:'/hotelAncientTown',
+    name:'HotelAncientTown',
+    component:HotelAncientTown
+  },
   //酒店订单页
   {
     path: '/hotelOrder',
