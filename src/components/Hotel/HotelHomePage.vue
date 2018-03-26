@@ -331,31 +331,6 @@
     -webkit-background-size: cover;
     background-size: cover;
   }
-
-  /*轮播切换*/
-
-  .transformCarouselFigureProp {
-    transition: .3s;
-    width: 70px;
-    height: 100px;
-    position: absolute;
-    top: 50%;
-    left: -70px;
-    transform: translateY(-100px);
-    background: url("../../assets/img/HotelImage-icon.png") no-repeat;
-  }
-
-  .transformCarouselFigureNext {
-    transition: .3s;
-    width: 70px;
-    height: 100px;
-    position: absolute;
-    top: 50%;
-    right: -70px;
-    transform: translateY(-100px);
-    background: url("../../assets/img/HotelImage-icon.png") no-repeat -79px 0;
-  }
-
   /*轮播图片介绍*/
 
   .PictureInfromtionWrap {
