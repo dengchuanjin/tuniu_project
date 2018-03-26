@@ -104,7 +104,7 @@
               <ul class="roomList" v-loading="isLoading">
                 <li class="clearfix" v-for="item,index in hotelRoom">
                   <div class="guestRoomType">
-                    <img src="../../assets/img/homePageImage.jpg" width="100" height="56">
+                    <img  width="100" height="56"  v-lazy="item.RoomInfo.ht_bt_ImagePath">
                     <strong>{{item.RoomInfo.ht_bt_RoomName}}</strong>
                     <a href="JavaScript:;" @click="lookSearchDetils(index)">查看详情&gt;</a>
                   </div>
@@ -112,7 +112,7 @@
                   <div class="searchDetils">
                     <div class="searchDetilsContent" v-show="index==s">
                       <div class="searchDetilsContentTop clearfix">
-                        <img src="../../assets/img/homePageImage.jpg" width="225" height="127">
+                        <img  width="225" height="127" v-lazy="item.RoomInfo.ht_bt_ImagePath">
                         <ul class="roomToConfigure">
                           <li><strong>床型:</strong><span> {{item.RoomInfo.ht_bt_BedType}}</span></li>
                           <li><strong>最多入住人数:</strong><span> {{item.RoomInfo.ht_bt_MostIn}}</span></li>
@@ -141,8 +141,8 @@
                         <div class="clearfix">
                         <span class="hotelDescribe"><span>{{v.ht_rpp_Name}}</span><a
                           href="javascript:;">超值价</a></span>
-                          <span class="bedType">大/双</span>
-                          <span class="breakfast">无早</span>
+                          <span class="bedType">{{v.ht_rpp_BedType}}</span>
+                          <span class="breakfast">{{v.ht_rpp_BreakfastType}}</span>
                           <!--<span class="WIFI"  v-popover:popover1><span>免费无线</span></span>-->
                           <el-popover
                             ref="popover1"
@@ -152,7 +152,7 @@
                             <div slot>
                               免费有线宽带<br>免费无线宽带
                             </div>
-                            <span slot="reference"><span>免费无线</span></span>
+                            <span slot="reference"><span>{{v.ht_rpp_WafiType}}</span></span>
                           </el-popover>
                           <el-popover
                             ref="popover2"
@@ -163,7 +163,7 @@
                             <div slot>
                               订单提交后可随时取消，途牛不收取任何费用。
                             </div>
-                            <span  slot="reference"><span>不可取消</span><a href="javascript:;">立即确认</a></span>
+                            <span  slot="reference"><span>{{v.ht_rpp_CancelType}}</span><a href="javascript:;">立即确认</a></span>
                           </el-popover>
                           <!--<span class="cancelPolicy"><span>不可取消</span><a href="javascript:;">立即确认</a></span>-->
                           <span class="price">￥<em>{{v.ht_rpp_ProductPrice}}</em></span>

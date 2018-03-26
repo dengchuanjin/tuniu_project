@@ -168,8 +168,26 @@ export default {
           }
           commit('initTicketsDetailData',data.data)
           commit('initTransportMessage',data.data.transportMessage)
-          commit('initTicketType_PriceMX',data.data.tm_TicketType_PriceMX)
+          commit('initTicketType_PriceMX',data.data.tm_TourSite_TicketTypeMX)
           relove(data.resultcontent)
+        }else{
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //门票立即预订日期
+  initTicketsReserveDate({commit},data){
+    return new Promise((relove, reject) => {
+      axios.post('http://webservice.1000da.com.cn/TicketTypePrice/GetTicketTypePriceList', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data=>{
+        var data = data.data;
+        if(Number(data.resultcode)==200) {
+          relove(data.data)
         }else{
           reject(data.resultcontent)
         }

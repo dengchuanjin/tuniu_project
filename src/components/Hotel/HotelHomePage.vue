@@ -105,8 +105,8 @@
               <strong>CHARACTERISTIC RECOMMEND</strong>
             </div>
             <!--特色推荐图片展示-->
-            <ul class="selectedCharacteristicRecommendPictureList clearfix">
-              <li v-for="item,index in characteristicRecommendList" :key="index" @click="changeRecommendType(index)">
+            <ul class="selectedCharacteristicRecommendPictureList clearfix" ref="recommendType">
+              <li v-for="item,index in characteristicRecommendList" :key="index" @click="changeRecommendType(index)" @mouseover="hoverRecommendType(index)" @mouseout="outRecommendType(index)">
                 <div class="selectedCharacteristicRecommendImageMask">
                   <h6>{{item.ht_it_Name}}</h6>
                 </div>
@@ -159,6 +159,49 @@
       }
     },
     methods: {
+      //鼠标移入
+      hoverRecommendType(index){
+        let thisLi = this.$refs.recommendType.children[index]
+        let selectedCharacteristicRecommendImageMask = this.$refs.recommendType.children[index].querySelector('.selectedCharacteristicRecommendImageMask');
+        selectedCharacteristicRecommendImageMask.style.display = 'none';
+        thisLi.style.width = '390px';
+        let arr = [];
+        for(var i=0;i<this.characteristicRecommendList.length;i++){
+          arr.push(i);
+        }
+        let newArr = arr.filter(item=>{
+          if(item==index){
+            return false
+          }
+          return true
+        });
+        for(var i=0;i<newArr.length;i++){
+          let thisNewLi = this.$refs.recommendType.children[newArr[i]];
+          let newSelectedCharacteristicRecommendImageMask = this.$refs.recommendType.children[newArr[i]].querySelector('.selectedCharacteristicRecommendImageMask');
+          thisNewLi.style.width = '160px';
+        }
+      },
+      //鼠标移出
+      outRecommendType(index){
+        let thisLi = this.$refs.recommendType.children[index]
+        let selectedCharacteristicRecommendImageMask = this.$refs.recommendType.children[index].querySelector('.selectedCharacteristicRecommendImageMask');
+        selectedCharacteristicRecommendImageMask.style.display = 'block'
+        thisLi.style.width = '198px'
+        let arr = [];
+        for(var i=0;i<this.characteristicRecommendList.length;i++){
+          arr.push(i);
+        }
+        let newArr = arr.filter(item=>{
+          if(item==index){
+            return false
+          }
+          return true
+        });
+        for(var i=0;i<newArr.length;i++){
+          let thisNewLi = this.$refs.recommendType.children[newArr[i]];
+          thisNewLi.style.width = (1190-198)/5+'px';
+        }
+      },
       async initData() {
         //首页数据
         let HotelIndexInfo = {
@@ -586,7 +629,9 @@
   /*特色推荐开始*/
 
   .selectedCharacteristicRecommendPictureList {
+    width: 1190px;
     margin-top: 20px;
+    overflow: hidden;
   }
 
   .selectedCharacteristicRecommendPictureList li {
@@ -594,20 +639,9 @@
     width: 198px;
     height: 325px;
     position: relative;
-  }
-
-  .selectedCharacteristicRecommendPictureList li:hover {
+    overflow: hidden;
     cursor: pointer;
-    z-index: 100;
-  }
-
-  .selectedCharacteristicRecommendPictureList li:hover .selectedCharacteristicRecommendImageMask {
-    display: none;
-  }
-
-  .selectedCharacteristicRecommendPictureList li:hover .selectedCharacteristicRecommendBg {
-    width: 487px;
-    z-index: 3;
+    transition: .3s linear;
   }
 
   .selectedCharacteristicRecommendPictureList li:hover .selectedCharacteristicRecommendDetails {
@@ -615,8 +649,7 @@
   }
 
   .selectedCharacteristicRecommendBg {
-    transition: .5s linear;
-    width: 198px;
+    width: 100%;
     height: 100%;
     background: url("../../assets/img/homePageImage.jpg") no-repeat center center;
     -webkit-background-size: 487px 325px;

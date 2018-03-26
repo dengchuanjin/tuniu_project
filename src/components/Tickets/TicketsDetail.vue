@@ -61,7 +61,7 @@
               <span class="marketMoney">¥{{item.tm_tp_RealPrice}}</span>
               <span class="myMoney">¥{{item.tm_tp_TicketPrice}}起</span>
               <span class="quan">优惠券</span>
-              <p class="payment">
+              <p class="payment" style="cursor: pointer" @click="clickPayment(item)">
                 <span>网上支付</span>
                 <a href="javascript:;">预订</a>
               </p>
@@ -293,6 +293,10 @@
       });
     },
     methods: {
+      //点击立即预订
+      clickPayment(item){
+        this.$router.push({name:'TicketsReserve',params: {id: item.tm_tt_ID}})
+      },
       async initData(id) {
         //景点详情
         let options = {

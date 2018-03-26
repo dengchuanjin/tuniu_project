@@ -160,23 +160,25 @@
 
               <div class="setOut">
                 <ul>
-                  <li class="selectCity">
-                    <span>出发城市: </span>
-                    <el-select
-                      v-model="addOrderOptions.provinceValue"
-                      placeholder="请选择出发城市"
-                      size="small"
-                      style="width: 150px"
-                      @change="getSearchCity"
-                    >
-                      <el-option
-                        v-for="item,index in getLineCityList"
-                        :key="index"
-                        :label="item"
-                        :value="item"
+                  <li>
+                    <div class="block">
+                      <span>出发城市: </span>
+                      <el-select
+                        v-model="addOrderOptions.provinceValue"
+                        placeholder="请选择出发城市"
+                        size="small"
+                        style="width: 150px"
+                        @change="getSearchCity"
                       >
-                      </el-option>
-                    </el-select>
+                        <el-option
+                          v-for="item,index in getLineCityList"
+                          :key="index"
+                          :label="item"
+                          :value="item"
+                        >
+                        </el-option>
+                      </el-select>
+                    </div>
                   </li>
                   <li>
                     <div class="block">

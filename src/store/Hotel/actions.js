@@ -127,7 +127,7 @@ export default {
   //房间搜索条件
   SearchHotelRoomFilter({commit},data){
     return new Promise((relove, reject) => {
-      axios.post('http://192.168.3.88:8080/HotelWebPage/SearchHotelRoomFilter',JSON.stringify(data),{
+      axios.post('http://webservice.1000da.com.cn/HotelWebPage/SearchHotelRoomFilter',JSON.stringify(data),{
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -146,7 +146,7 @@ export default {
   //房间列表搜索
   initSearchRoomInfo({commit},data){
     return new Promise((relove, reject) => {
-      axios.post('http://192.168.3.88:8080/HotelWebPage/SearchHotelRoom',JSON.stringify(data),{
+      axios.post('http://webservice.1000da.com.cn/HotelWebPage/SearchHotelRoom',JSON.stringify(data),{
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }

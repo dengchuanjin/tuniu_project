@@ -62,9 +62,9 @@
                 </div>
                 <div class="choiceOutTimeCalendar">
                   <div class="lastTimeNext clearfix">
-                    <a href="javascript:;" class="last"></a>
-                    <span class="time">23343413</span>
-                    <a href="javascript:;" class="next"></a>
+                    <a href="javascript:;" class="last" @click="prev"></a>
+                    <span class="time">{{date}}</span>
+                    <a href="javascript:;" class="next" @click="next"></a>
                   </div>
                   <div class="weekListWrap">
                     <ul class="weekList clearfix">
@@ -79,7 +79,28 @@
                   </div>
                   <!--日历-->
                   <div class="choiceOutTimeCalendarListWrap">
-                    <ul class="choiceOutTimeCalendarList clearfix" v-html="str"></ul>
+                    <ul class="choiceOutTimeCalendarList clearfix" v-loading="isLoading">
+                      <li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item in arr1">
+                        <span style="color: #ccc; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item}}</span>
+                        <!--<strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;">1</strong>-->
+                      </li>
+                      <li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item in arr4">
+                        <span style="color: #333; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item}}</span>
+                        <!--<strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;">1</strong>-->
+                      </li>
+                      <li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item in arr3">
+                        <span style="color: #333; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item.n==day.d?"今天":item.n}}</span>
+                        <strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;"  v-show="item.tm_tp_RealPrice">¥{{item.tm_tp_RealPrice}}</strong>
+                      </li>
+                      <!--<li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item in arr5" v-show="arr5.length">-->
+                        <!--<span style="color: #333; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item.n}}</span>-->
+                        <!--&lt;!&ndash;<strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;">1</strong>&ndash;&gt;-->
+                      <!--</li>-->
+                      <li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item in arr2">
+                        <span style="color: #ccc; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item}}</span>
+                        <!--<strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;">1</strong>-->
+                      </li>
+                    </ul>
                   </div>
                 </div>
                 <!--选择人数-->
@@ -175,27 +196,197 @@
     computed: mapGetters([]),
     data() {
       return {
+        isLoading:false,
+        day:{},
         str: '',
         peopleNumber: '1',
         pickUp: 1,
+        date:'',
+        id:'',
         checked: false,
+        m:'',
+        arr1:[],
+        arr2:[],
+        arr3:[],
+        arr4:[],
+        arr5:[]
       }
     },
+    created(){
+      this.day.d = new Date().getDate()
+      this.id = this.$route.params.id;
+      let month = this.getNum(new Date().getMonth()+1);
+      this.m = new Date().getMonth()+1;
+      this.isLoading = true;
+      this.initData(this.id,month).then((data)=>{
+        var year = new Date().getFullYear();
+        var month = new Date().getMonth();
+        this.isLoading = false;
+        if(data.length){
+          this.getDateList(year,month,data)
+        }else{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+          return
+        }
+
+      })
+    },
     methods: {
-      initData() {
+      getNum(num){
+        return num<10?'0'+num:''+num
+      },
+      getDateList(year, month,data){
+        if(!data.length){
+          this.$notify({
+            message: '下个月数据不存在!',
+            type: 'error'
+          });
+          return
+        }
+        //赋值day
+        for (var n = 0; n < data.length; n++) {
+          data[n].day = Number(data[n].tm_tp_Date.split('-')[2])
+        }
+        return new Promise((relove,reject)=>{
+          let newYear = Number(year);
+          let newMonth = Number(month);
+          let newArr = [];
+          this.arr1 = [];
+          this.arr2 = [];
+          this.arr3 = [];
+          this.arr4 = [];
+          this.arr5 = [];
+          for (var i = 1; i <= 42; i++) {
+            var v = i - this.getWeek(newYear, newMonth);
+
+            if (v < 1) {
+              var topMonth = this.getDates(newYear, newMonth - 1);
+
+              this.arr1.push(topMonth - (this.getWeek(newYear, newMonth) - i))
+            } else if (v > this.getDates(newYear, newMonth)) {
+              this.arr2.push(v - this.getDates(newYear, newMonth))
+            } else if (v == new Date().getDate() && newYear == new Date().getFullYear() && newMonth == new Date().getMonth()) {
+              newArr.push(v)
+            }
+            else {
+              if(data.length){
+                if (v < data[0].day) {
+                  this.arr4.push(v)
+                } else {
+                  newArr.push(v)
+                }
+              }else{
+                newArr.push(v)
+              }
+            }
+          }
+          for (var j = 0; j < newArr.length; j++) {
+            for (var m = 0; m < data.length; m++) {
+              if (data[m].day && data[m].day == newArr[j]) {
+                data[m].n = newArr[j];
+                this.arr3.push(data[m])
+              }
+            }
+            if(newArr[j]>data[data.length-1].day){
+              this.arr5.push({
+                n: newArr[j],
+              })
+            }else{
+              this.arr5 = []
+            }
+            console.log(this.arr5)
+//            this.arr5.push({
+//              n: newArr[j],
+//            })
+          }
+          var hash = {};
+
+          this.arr3 = this.arr3.reduce(function (item, next) {
+            hash[next.n] ? '' : hash[next.n] = true && item.push(next);
+            return item
+          }, [])
+//          console.log(this.arr3)
+          relove()
+        })
+      },
+      async initData(id,month) {
+        let year = new Date().getFullYear();
+        let day = this.getNum(new Date().getDate());
+        this.date = year+'-'+month
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "dateFrom":year+'-'+month,
+          "tm_tt_ID": '152',//商户票种编号
+        }
+        let data = await this.$store.dispatch('initTicketsReserveDate',options)
+        return data
       },
       search() {
         this.initData()
+      },
+      //获取周数
+      getWeek(year, month) {
+        return new Date(year, month, 1, 0, 0, 0).getDay();
+      },
+      //获取一个月中的所有天数
+      getDates(year, month) {
+        return new Date(year, month + 1, 1, -1, 0, 0).getDate();
+      },
+      //上个月
+      prev(){
+        let month = this.getNum(new Date().getMonth()+1);
+        let newM = this.date.split('-')[1];
+        if(month===newM){
+          this.$notify({
+            message: '上个月数据不存在!',
+            type: 'error'
+          });
+          return
+        }else{
+          var year = new Date().getFullYear();
+          this.m--;
+          this.date = year+'-'+this.getNum(this.m);
+          let newM = this.getNum(this.m)
+          let id = this.id
+          this.initData(id,newM).then((data)=>{
+            var year = new Date().getFullYear();
+            this.getDateList(year,newM,data)
+          })
+        }
+      },
+      //下个月
+      next(){
+        var year = new Date().getFullYear();
+        this.m++;
+        this.date = year+'-'+this.getNum(this.m);
+        let newM = this.getNum(this.m)
+        let id = this.id
+        this.initData(id,newM).then((data)=>{
+          var year = new Date().getFullYear();
+          this.getDateList(year,newM,data)
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+          return
+        })
       }
     },
     mounted() {
-      let li = document.createElement(li)
-      for (var i = 0; i < 42; i++) {
-        this.str += `<li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;">
-                  <span style="color: #000; padding-left: 10px; font: 14px/2 '微软雅黑';">${i}</span>
-                  <strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;">${i}</strong>
-                </li>`
-    }
+//      for (var i = 0; i < 42; i++) {
+//        this.str += `<li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;">
+//                  <span style="color: #000; padding-left: 10px; font: 14px/2 '微软雅黑';">${i}</span>
+//                  <strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;">${i}</strong>
+//                </li>`
+//    }
     }
   }
 </script>

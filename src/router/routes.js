@@ -90,7 +90,7 @@ export default [
   },
   //门票预定
   {
-    path: '/ticketsReserve',
+    path: '/ticketsReserve/:id',
     name: 'TicketsReserve',
     component: TicketsReserve
   },
