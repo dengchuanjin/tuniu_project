@@ -59,9 +59,11 @@ body{
 	height:0;
 	clear:both;
 }
+
 .fl,.l{
 	float: left;
 }
+
 .fr,.r{
 	float: right;
 }

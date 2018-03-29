@@ -186,9 +186,6 @@
         this.$http.post('http://webservice.1000da.com.cn/UserInfo/RegByCode', JSON.stringify({
           "loginUserID": "huileyou",
           "loginUserPass": "123",
-          "operateUserID": "",
-          "operateUserName": "",
-          "pcName": "",
           "phone": this.addOptions.phone,
           extensionID:this.addOptions.extensionID,
           "password": this.addOptions.password,

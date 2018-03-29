@@ -184,6 +184,121 @@
     </div>
 
     <router-view name="User"></router-view>
+    <!--底部-->
+    <footer>
+      <!--服务类型-->
+      <div class="serviceType clearfix">
+        <!--去旅游-->
+        <dl class="goTourism">
+          <dt><i></i>去旅游</dt>
+          <dd v-for="item,index in goTourismList"><a href="javascript:;">{{item}}</a></dd>
+        </dl>
+        <!--寻优惠-->
+        <dl class="seekPreferentialTreatment">
+          <dt><i></i>寻优惠</dt>
+          <dd><a href="javascript:;">特卖</a></dd>
+          <dd><a href="javascript:;">订酒店 返现金</a></dd>
+          <dd><a href="javascript:;">积分商城</a></dd>
+          <dd><a href="javascript:;">银行特惠游</a></dd>
+        </dl>
+        <!--看攻略-->
+        <dl class="lookAtTheOffensive">
+          <dt><i></i>看攻略</dt>
+          <dd><a href="javascript:;">攻略</a></dd>
+          <dd><a href="javascript:;">惠乐游风向标</a></dd>
+          <dd><a href="javascript:;">游记</a></dd>
+          <dd><a href="javascript:;">达人玩法</a></dd>
+        </dl>
+        <!--查服务-->
+        <dl class="lookupService">
+          <dt><i></i>查服务</dt>
+          <dd><a href="javascript:;">帮助中心</a></dd>
+          <dd><a href="javascript:;">会员俱乐部</a></dd>
+          <dd><a href="javascript:;">阳光保障</a></dd>
+          <dd><a href="javascript:;">火车时刻表</a></dd>
+          <dd><a href="javascript:;">航班查询</a></dd>
+        </dl>
+        <!--惠乐游APP-->
+        <div class="huiLeYouApp">
+          <strong><i></i>惠乐游APP</strong>
+          <span>扫描下载惠乐游APP</span>
+          <img src="../../assets/img/huiLeYouAppQRCode.png" width="80" height="80">
+        </div>
+      </div>
+      <!--关于服务-->
+      <div class="aboutService">
+        <a href="javascript:;">
+          <span>
+            <em>客户服务电话（免长途费）</em>
+            <em>4007-999-999</em>
+          </span>
+        </a>
+      </div>
+      <!--底部内容-->
+      <div class="footerContent">
+        <!--图片列表-->
+        <div class="footerImageList clearfix">
+          <a href="javascript:;"><img src="../../assets/img/tn_footer_042.jpg" width="238" height="58"></a>
+          <a href="javascript:;"><img src="../../assets/img/tn_footer_06.jpg" width="238" height="58"></a>
+          <a href="javascript:;"><img src="../../assets/img/superFreeLine.jpeg" width="238" height="58"></a>
+          <a href="javascript:;"><img src="../../assets/img/integralMall.jpeg" width="238" height="58"></a>
+        </div>
+        <!--高品质跟团游img-->
+        <div class="footerImageBox">
+          <a href="javascript:;"><img src="../../assets/img/superiorQuality.jpeg" width="988" height="58"></a>
+        </div>
+        <!--信息-->
+        <div class="abouthuiLeYouInformation">
+          <p>
+            惠乐游客服中心位于南京市 来电显示为 025-86859999 、025-86259999 、025-85029999 、025-69609987 、025-69609986 、025-57629999 或 025-52339999</p>
+          <p>北京国际旅行社有限公司，旅行社业务经营许可证编号：L-BJ-CJ00144　　上海国际旅行社有限公司，旅行社业务经营许可证编号：L-SH-CJ00107</p>
+          <div class="aboutWe">
+            <a href="javascript:;">关于我们</a>
+            <a href="javascript:;">Investor Relations</a>
+            <a href="javascript:;">联系我们</a>
+            <a href="javascript:;">投诉建议</a>
+            <a href="javascript:;">广告服务</a>
+            <a href="javascript:;">旅游券</a>
+            <a href="javascript:;">隐私保护</a>
+            <a href="javascript:;">免责声明</a>
+            <a href="javascript:;">旅游度假资质</a>
+            <a href="javascript:;">主题旅游</a>
+            <a href="javascript:;">用户协议</a>
+            <a href="javascript:;">网站地图</a>
+            <a href="javascript:;">UEIP</a>
+            <a href="javascript:;">帮助中心</a>
+          </div>
+          <!--营业执照-->
+          <p class="businessLicense">
+            <strong>Copyright © 2006-2018</strong>
+            <a href="javascript:;">科技有限公司</a>
+            <a href="javascript:;">Tuniu.com</a>|
+            <a href="javascript:;">营业执照</a>
+            <a href="javascript:;">ICP证：苏B2-20130006</a>
+            <a href="javascript:;">苏ICP备12009060号</a>
+            <a href="javascript:;">成都旅游网</a>
+          </p>
+          <!--供应商合作-->
+          <div class="supplierCooperation">
+            <a href="javascript:;"><img src="../../assets/img/footer_1.jpg" width="175" height="38"></a>
+            <a href="javascript:;"><img src="../../assets/img/IndependentTravel.png" width="175" height="38"></a>
+            <a href="javascript:;"><img src="../../assets/img/bottom.jpg" width="175" height="38"></a>
+          </div>
+          <!--旅游保障-->
+          <div class="tourismSecurity">
+            <a href="javascript:;"><img src="../../assets/img/chengxinOne.png" width="113" height="41"></a>
+            <a href="javascript:;"><img src="../../assets/img/buliang.png" width="109" height="47"></a>
+            <a href="javascript:;"><img src="../../assets/img/wangluo.png" width="110" height="47"></a>
+            <a href="javascript:;"><img src="../../assets/img/cata.png" width="110" height="47"></a>
+            <a href="javascript:;"><img src="../../assets/img/CouncilMembers.png" width="110" height="47"></a>
+            <a href="javascript:;"><img src="../../assets/img/3acomp.png" width="110" height="47"></a>
+            <a href="javascript:;"><img src="../../assets/img/chengxin.png" width="110" height="47"></a>
+            <a href="javascript:;"><img src="../../assets/img/ebsIcon.png" width="32" height="47"></a>
+            <a href="javascript:;"><img src="../../assets/img/pata.png" width="140" height="47"></a>
+          </div>
+        </div>
+      </div>
+    </footer>
 
   </div>
 </template>
@@ -207,8 +322,8 @@
     },
     data() {
       return {
-        'showQuit':false,
-        n:0,
+        showQuit: false,
+        n: 0,
         isLoginShow: false,
         isLogin: true,
         getName: '获取动态验证码',
@@ -231,19 +346,39 @@
             name: '酒店',
             to: '/Comment/HotelHomePage'
           },
+        ],
+        goTourismList: [
+          '跟团游',
+          '牛人专线',
+          '酒店',
+          '自由行',
+          '亲子游',
+          '门票',
+          '酒+景',
+          '蜜月游',
+          '邮轮',
+          '公司旅游',
+          '海岛游',
+          '签证',
+          '当地玩乐',
+          '老于推荐',
+          '机票',
+          '首付出发',
+          '机票+酒店',
+          '旅拍'
         ]
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         let str = to.path;
-        if(str.toLocaleLowerCase().includes('hotel')){
+        if (str.toLocaleLowerCase().includes('hotel')) {
           sessionStorage.setItem('commentNavNum', 2);
           window.location.reload()
-        }else if(str.toLocaleLowerCase().includes('ticket')){
+        } else if (str.toLocaleLowerCase().includes('ticket')) {
           sessionStorage.setItem('commentNavNum', 1);
           window.location.reload()
-        }else if(str.toLocaleLowerCase().includes('agencies')){
+        } else if (str.toLocaleLowerCase().includes('agencies')) {
           sessionStorage.setItem('commentNavNum', 0);
           window.location.reload()
         }
@@ -296,7 +431,7 @@
     },
     created() {
       let user = JSON.parse(sessionStorage.getItem('user'))
-      if(user){
+      if (user) {
         this.showQuit = true;
       }
       this.initData();
@@ -479,6 +614,258 @@
 
   .FixedCommentBottom > .goTop:hover > a:first-of-type {
     background-position: -60px -600px;
+  }
+
+  /*底部*/
+
+  footer {
+    margin-top: 30px;
+    background-color: #f5f5f5;
+  }
+
+  .serviceType {
+    width: 990px;
+    padding: 20px 0;
+    margin: 0 auto;
+  }
+
+  .serviceType > * {
+    float: left;
+  }
+
+  .serviceType > dl {
+    margin-right: 25px;
+    padding-bottom: 20px;
+    border-right: 1px dotted #d8d8d8;
+    padding-left: 45px;
+  }
+
+  /*去旅游*/
+
+  .goTourism {
+    width: 250px;
+  }
+
+  .serviceType > dl > dt,
+  .huiLeYouApp > strong {
+    font: bold 14px/35px "宋体";
+    display: block;
+    color: #666666;
+    margin-left: -45px;
+    margin-bottom: 10px;
+  }
+
+  .goTourism > dt i {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: url('../../assets/img/common_foot_2.png') no-repeat 0 0;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+
+  .goTourism > dd {
+    font: 12px/1.5 "宋体";
+    display: inline-block;
+    width: 65px;
+  }
+
+  .goTourism > dd > a {
+    color: #999;
+  }
+
+  /*寻优惠*/
+
+  .seekPreferentialTreatment {
+    width: 150px;
+  }
+
+  .seekPreferentialTreatment > dt > i {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: url('../../assets/img/common_foot_2.png') no-repeat -40px 0;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+
+  .seekPreferentialTreatment > dd {
+    font: 12px/1.5 "宋体";
+  }
+
+  .seekPreferentialTreatment > dd > a {
+    color: #999;
+  }
+
+  /*看攻略*/
+
+  .lookAtTheOffensive {
+    width: 150px;
+  }
+
+  .lookAtTheOffensive > dt > i {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: url('../../assets/img/common_foot_2.png') no-repeat -80px 0;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+
+  .lookAtTheOffensive > dd {
+    font: 12px/1.5 "宋体";
+  }
+
+  .lookAtTheOffensive > dd > a {
+    color: #999;
+  }
+
+  /*查服务*/
+
+  .lookupService {
+    width: 150px;
+
+  }
+
+  .lookupService > dt > i {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: url('../../assets/img/common_foot_2.png') no-repeat -120px 0;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+
+  .lookupService > dd {
+    font: 12px/1.5 "宋体";
+  }
+
+  .lookupService > dd > a {
+    color: #999;
+  }
+
+  /*下载app*/
+
+  .huiLeYouApp {
+    width: 150px;
+    padding-left: 45px;
+  }
+
+  .huiLeYouApp > strong > i {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: url('../../assets/img/common_foot_2.png') no-repeat -160px 0;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+
+  .huiLeYouApp > span {
+    display: block;
+    font: 12px/1.5 "宋体";
+    color: #999;
+    padding-bottom: 10px;
+  }
+
+  .aboutService {
+    width: 100%;
+    height: 62px;
+    background-color: #60ca6e;
+  }
+
+  .aboutService > a {
+    width: 990px;
+    height: 100%;
+    margin: 0 auto;
+    background: url("../../assets/img/thr_sun.jpg") no-repeat 0 0;
+  }
+
+  .aboutService span {
+    float: right;
+    margin-top: 10px;
+  }
+
+  .aboutService span > em {
+    text-align: center;
+    display: block;
+  }
+
+  .aboutService span > em:nth-of-type(1) {
+    color: #fff;
+    font: normal 12px/20px arial, sans-serif;
+  }
+
+  .aboutService span > em:nth-of-type(2) {
+    color: #fff;
+    font: normal bold 20px/32px arial, sans-serif;
+    margin-top: -5px;
+  }
+
+  .footerContent {
+    width: 990px;
+    margin: 0 auto;
+  }
+
+  .footerImageList {
+    margin: 10px 0;
+  }
+
+  .footerImageList > a {
+    float: left;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+
+  .footerImageList > a:last-of-type {
+    margin-right: 0;
+  }
+
+  .abouthuiLeYouInformation {
+    margin-top: 15px;
+  }
+
+  .abouthuiLeYouInformation > p {
+    text-align: center;
+    font: 13px/19px "宋体";
+    color: #777777;
+  }
+
+  .aboutWe {
+    text-align: center;
+  }
+
+  .aboutWe > a {
+    display: inline-block;
+    font: 13px/19px "宋体";
+    color: #777777;
+    margin: 0 3px;
+  }
+
+  .businessLicense {
+    margin-top: 10px;
+  }
+
+  .businessLicense > a {
+    color: #777;
+  }
+
+  .supplierCooperation {
+    text-align: center;
+    margin-top:10px;
+  }
+
+  .supplierCooperation > a {
+    display: inline-block;
+    border: 1px solid #ccc;
+  }
+
+  .tourismSecurity {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .tourismSecurity > a {
+    display: inline-block;
   }
 
 </style>

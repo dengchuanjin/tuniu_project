@@ -1,6 +1,4 @@
 
-
-
 export default {
   showQuitButton(state){
     state.showQuit = true;

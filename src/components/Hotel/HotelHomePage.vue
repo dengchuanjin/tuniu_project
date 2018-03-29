@@ -521,7 +521,6 @@
   .HotelHomePageWrapContentBox {
     width: 1190px;
     margin: 0 auto;
-    height: 10000px;
   }
 
   /*推荐地点*/

@@ -116,9 +116,6 @@
         var GetValidateByPassword = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
-          "operateUserID": "",
-          "operateUserName": "",
-          "pcName": "",
           "userID": this.loginOptions.loginNumber,
           "password": this.loginOptions.loginPassword
         }
