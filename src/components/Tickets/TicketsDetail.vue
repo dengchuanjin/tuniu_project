@@ -47,21 +47,21 @@
         <div class="admissionTicketTypeContent">
           <ul class="titleList clearfix">
             <li class="admissionTicketName">产品名称</li>
-            <li>提前预订时间</li>
-            <li>市场价</li>
-            <li>千里达旅游网价</li>
-            <li>优惠</li>
-            <li>支付方式</li>
+            <li class="reserveTime">提前预订时间</li>
+            <li class="marketValue">市场价</li>
+            <li class="myPrice">千里达旅游网价</li>
+            <li class="discount">优惠</li>
+            <li class="paymentMethod">支付方式</li>
           </ul>
           <div class="productType">
             <h5>门票</h5>
             <div class="admissionTicketContent clearfix" v-for="item in ticketType_PriceMXList">
               <a href="javascript:;" class="widthCommentA">{{item.tm_tt_Name}}</a>
-              <span>当天{{item.tm_tt_BeforeTime}}点前	</span>
-              <span class="marketMoney">¥{{item.tm_tt_TicketPrice}}</span>
-              <span class="myMoney">¥{{item.tm_tt_RealPrice}}起</span>
-              <span class="quan">优惠券</span>
-              <p class="payment" style="cursor: pointer" @click="clickPayment(item)">
+              <span class="reserveTime reserveTime">当天{{item.tm_tt_BeforeTime}}点前	</span>
+              <span class="marketMoney marketValue">¥{{item.tm_tt_TicketPrice}}</span>
+              <span class="myMoney myPrice">¥{{item.tm_tt_RealPrice}}起</span>
+              <span class="quan discount">优惠券</span>
+              <p class="payment paymentMethod" style="cursor: pointer" @click="clickPayment(item)">
                 <span>网上支付</span>
                 <a href="javascript:;">预订</a>
               </p>

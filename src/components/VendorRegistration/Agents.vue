@@ -618,6 +618,7 @@
                     imageData: data
                   })
                   .then(data => {
+                    console.log(data)
                     if (data) {
                       this.ImageURL1.push(data.data);
                     } else {

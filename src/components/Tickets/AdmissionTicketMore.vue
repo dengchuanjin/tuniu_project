@@ -75,7 +75,7 @@
             <div class="scenicSpotDetils clearfix">
               <img  width="90" height="50" v-lazy="item.tm_ts_ShowImage">
               <div class="scenicSpotAddress">
-                <h6 class="clearfix"><a href="javascript:;">{{item.tm_ts_Name}}</a><span><em>[</em><a href="javascript:;">{{item.tm_ts_ProviceName.substring(0,item.tm_ts_ProviceName.length-1)}}</a><a
+                <h6 class="clearfix"><a href="javascript:;" @click="goDetils(item.tm_ts_Code)">{{item.tm_ts_Name}}</a><span><em>[</em><a href="javascript:;">{{item.tm_ts_ProviceName.substring(0,item.tm_ts_ProviceName.length-1)}}</a><a
                   href="javascript:;">.{{item.tm_ts_CityName.substring(0,item.tm_ts_CityName.length-1)}}</a><em>]</em></span></h6>
                 <div><strong>游客满意度：</strong><i>100%</i><span>,游客点评<em>132321</em>条</span></div>
                 <p>景点地址:{{item.tm_ts_Address}}</p>
@@ -354,6 +354,9 @@
 
         })
       },
+      goDetils(id){
+        this.$router.push({name:'TicketsDetail',params: {id: id}})
+      }
     },
   }
 </script>
