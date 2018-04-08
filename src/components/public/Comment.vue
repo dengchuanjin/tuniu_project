@@ -315,11 +315,6 @@
       'isLoading',
       'showFixedComment'
     ]),
-    watch: {
-      '$route'(to, from) {
-        this.$store.commit('hideLoading')
-      }
-    },
     data() {
       return {
         showQuit: false,
@@ -430,8 +425,16 @@
       }
     },
     created() {
-      let user = JSON.parse(sessionStorage.getItem('user'))
-      if (user) {
+      let href = window.location.href
+      if(href.toLocaleLowerCase().includes('hotel')){
+        sessionStorage.setItem('commentNavNum', 2);
+      }else if(href.toLocaleLowerCase().includes('ticket')){
+        sessionStorage.setItem('commentNavNum', 1);
+      }else if(href.toLocaleLowerCase().includes('agencies')){
+        sessionStorage.setItem('commentNavNum', 0);
+      }
+      let user = JSON.parse(sessionStorage.getItem('user'));
+      if(user){
         this.showQuit = true;
       }
       this.initData();

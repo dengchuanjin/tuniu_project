@@ -14,7 +14,12 @@ export default {
   theLobbyList:[],//酒店图片大堂
   restaurantList:[],//酒店图片餐厅
   publicAreasList:[],//公共区域
+  hotelIconList:[],//图标
+  hardServiceObj:{},//酒店设施服务基本信息
 
   searchHotelRoomFilterObj:{},//房间搜索条件
   hotelRoom:[],//酒店房间列表
+  hotelOrderDetail:{},//酒店订单详情
+  qLCityData:[],//青旅酒店南京
+  szCityData:[],//青旅酒店苏州
 }

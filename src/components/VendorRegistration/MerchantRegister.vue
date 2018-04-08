@@ -39,13 +39,13 @@
                 </el-form-item>
               </el-form>
             </el-col>
-            <el-col :span="24" class="formSearch">
-              <el-form :inline="true">
-                <el-form-item label="供应商密码:" :required="isOff">
-                  <el-input type="password" size="mini" v-model="insertAgentInfo.data.sm_ai_Password"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-col>
+            <!--<el-col :span="24" class="formSearch">-->
+              <!--<el-form :inline="true">-->
+                <!--<el-form-item label="供应商密码:" :required="isOff">-->
+                  <!--<el-input type="password" size="mini" v-model="insertAgentInfo.data.sm_ai_Password"></el-input>-->
+                <!--</el-form-item>-->
+              <!--</el-form>-->
+            <!--</el-col>-->
             <el-col :span="24" class="formSearch">
               <el-form :inline="true">
                 <el-form-item label="推广员ID:">
@@ -504,6 +504,9 @@
         insertAgentInfo: {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
           "data": {
             sm_ai_CompanyName:'',
             sm_ai_AgentID: '',
@@ -557,6 +560,9 @@
         let id = window.location.href.split('?')[1].split('=')[1];
         this.insertAgentInfo.data.sm_ai_ParentID = id;
       }
+      let user = JSON.parse(sessionStorage.getItem('user'));
+      this.insertAgentInfo.operateUserID = user.ui_ID;
+      this.insertAgentInfo.operateUserName = user.ui_Name;
 //      this.$store.commit('showLoading');
       this.initData().then(() => {
 //        this.$store.commit('hideLoading')
@@ -693,7 +699,7 @@
       //选择省
       changeProvince(v) {
         let getAreaProvice = {
-          "areaPid": 0
+          "areaPid": 3337
         }
         this.$store.dispatch('initProvinceData', getAreaProvice)
       },

@@ -15,6 +15,8 @@ import UpdatePassword from '@/components/PersonakCenterFolder/UpdatePassword'//�
 import PaymentPlatform from '@/components/public/PaymentPlatform'//订单支付的类型
 import MyOrderQRCode from '@/components/MyOrderQRCode'//二维码付款
 import MyOrderDetails from '@/components/PersonakCenterFolder/MyOrderDetails'//订单详情
+import TicketOrderDetails from '@/components/PersonakCenterFolder/TicketOrderDetails'//门票订单详情
+import HotelOrderDetails from '@/components/PersonakCenterFolder/HotelOrderDetails'//酒店订单详情
 import MyCollection from '@/components/PersonakCenterFolder/MyCollection' //我的收藏
 import CommentOnAComment from '@/components/Agencies/CommentOnAComment' //发表评论
 
@@ -107,11 +109,23 @@ export default [
     name: 'MyOrderQRCode',
     component: MyOrderQRCode
   },
-  //订单详情
+  //旅行社订单详情
   {
     path: '/myOrderDetails',
     name: 'MyOrderDetails',
     component: MyOrderDetails
+  },
+  //门票订单详情
+  {
+    path: '/ticketOrderDetails',
+    name: 'TicketOrderDetails',
+    component: TicketOrderDetails
+  },
+  //酒店订单详情
+  {
+    path: '/hotelOrderDetails',
+    name: 'HotelOrderDetails',
+    component: HotelOrderDetails
   },
   //供应商注册
   {
@@ -270,7 +284,7 @@ export default [
       },
       //更多门票
       {
-        path: 'admissionTicketMore',
+        path: 'admissionTicketMore/:id',
         components: {
           default: Comment,
           User: AdmissionTicketMore
@@ -287,6 +301,11 @@ export default [
   },
   {
     path: '/',
+    hidden: true,
+    redirect: {name: 'AgenciesHome'}
+  },
+  {
+    path: '*',
     hidden: true,
     redirect: {name: 'AgenciesHome'}
   },

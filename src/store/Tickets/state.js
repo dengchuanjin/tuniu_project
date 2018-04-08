@@ -19,4 +19,6 @@ export default {
   ticketsDetailData:{},//景点详情数据
   transportMessage:{},//交通指南
   ticketType_PriceMXList:[],//门票详情门票
+  ticketOrderDetail:{},//门票详情
+  admissionTicketMoreList:[],//景点列表页数据
 }

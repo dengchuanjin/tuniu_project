@@ -58,8 +58,8 @@
             <div class="admissionTicketContent clearfix" v-for="item in ticketType_PriceMXList">
               <a href="javascript:;" class="widthCommentA">{{item.tm_tt_Name}}</a>
               <span>当天{{item.tm_tt_BeforeTime}}点前	</span>
-              <span class="marketMoney">¥{{item.tm_tp_RealPrice}}</span>
-              <span class="myMoney">¥{{item.tm_tp_TicketPrice}}起</span>
+              <span class="marketMoney">¥{{item.tm_tt_TicketPrice}}</span>
+              <span class="myMoney">¥{{item.tm_tt_RealPrice}}起</span>
               <span class="quan">优惠券</span>
               <p class="payment" style="cursor: pointer" @click="clickPayment(item)">
                 <span>网上支付</span>
@@ -295,6 +295,7 @@
     methods: {
       //点击立即预订
       clickPayment(item){
+        sessionStorage.setItem('ticketsReserveDetail',JSON.stringify(item));
         this.$router.push({name:'TicketsReserve',params: {id: item.tm_tt_ID}})
       },
       async initData(id) {

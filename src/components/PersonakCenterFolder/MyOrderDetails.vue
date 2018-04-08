@@ -19,7 +19,7 @@
                 <h5>{{orderDetail.ts_to_GoodsListName}}</h5>
                 <div class="MyOrderDetailsWrapContentDetalisLeftParameter clearfix">
                   <!--<span>已选套餐: 江苏</span>-->
-                  <span>出发时间: {{orderDetail.ts_to_TravelDate}}</span>
+                  <span>出发时间: {{orderDetail.ts_to_TravelDate | getUseTime}}</span>
                   <span>出发城市: {{orderDetail.ts_to_FromPlace}}</span>
                   <span>成人: ￥ {{orderDetail.ts_to_FullPrice}}x{{orderDetail.ts_to_FullCount}}</span>
                   <span v-show="orderDetail.ts_to_ChildCount">儿童: ￥ {{orderDetail.ts_to_ChildPrice}}x{{orderDetail.ts_to_ChildCount}}</span>
@@ -94,13 +94,15 @@
       goPay(item){
         let orderInfo = {};
         orderInfo.oi_OrderName = item.ts_to_GoodsListName;
-        orderInfo.oi_OrderID = item.ts_to_OrderID;
+        orderInfo.OrderID = item.ts_to_OrderID;
         orderInfo.oi_SellMoney = item.ts_to_SumPrice;
+        orderInfo.oi_OrderTypeID = 0
         sessionStorage.setItem('orderInfo',JSON.stringify(orderInfo));
         this.$router.push({name:'PaymentPlatform'})
       },
       //取消订单
       cancelOrder(orderID){
+        sessionStorage.setItem('orderTypeID',0)
         let cancelOrderOptions = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
@@ -220,6 +222,7 @@
     font: 16px/60px "微软雅黑";
     background-color: #00da62;
     color: #fff;
+    word-break:break-all;
     position: relative;
   }
 

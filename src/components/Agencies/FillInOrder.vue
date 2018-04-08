@@ -224,10 +224,13 @@
             "ts_ot_Sex":arr[i]['sex'+i]
           })
         }
+        this.$store.commit('showLoading');
         this.$store.dispatch('submitOrder',submitOptions)
         .then((data)=>{
+          this.$store.commit('hideLoading');
           let orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'))
-          orderInfo.orderID = data.ts_to_OrderID
+          orderInfo.OrderID = data.ts_to_OrderID;
+          orderInfo.oi_OrderTypeID  = 0;
           sessionStorage.setItem('orderInfo',JSON.stringify(orderInfo))
           this.activeValue = 2;
           this.$notify({

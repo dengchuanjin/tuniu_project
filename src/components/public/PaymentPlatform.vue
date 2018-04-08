@@ -37,8 +37,8 @@
           <div class="productContentDetailsContent">
             <strong>产品名称: {{orderInfo.oi_OrderName}}</strong>
             <ul class="aboutPayment clearfix">
-              <li>订单号: {{orderInfo.oi_OrderID}} <span></span></li>
-              <li>订单金额: {{orderInfo.oi_SellMoney}}.00元 </li>
+              <li>订单号: {{orderInfo.OrderID}} <span></span></li>
+              <li>订单金额: {{orderInfo.oi_SellMoney+''}}.00元 </li>
               <!--<li>已支付: 3434.00元</li>-->
             </ul>
           </div>
@@ -119,15 +119,33 @@
     created(){
       let user = JSON.parse(sessionStorage.getItem('user'))
       let orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'))
+      orderInfo.oi_SellMoney = parseInt(orderInfo.oi_SellMoney)
+      orderInfo.adultPrice = parseInt(orderInfo.adultPrice)
+      orderInfo.childPrice = parseInt(orderInfo.childPrice)
+
       if(user){
         this.user = user
       }else{
         this.$router.push({name:'AdminLogin'})
+        return
       }
       if(orderInfo){
         this.orderInfo = orderInfo
       }else{
-        this.$router.push({name:'HueiLeYouTourHomePage'})
+        switch (orderInfo.oi_OrderTypeID){
+          case 0:
+            //旅行社
+            this.$router.push({name:'HueiLeYouTourHomePage'})
+            break;
+          case 2:
+            //门票
+            this.$router.push({name:'TicketsDetail'})
+            break;
+          case 4:
+            //酒店
+            this.$router.push({name:'HotelSearchMore'})
+            break;
+        }
       }
     },
     methods: {

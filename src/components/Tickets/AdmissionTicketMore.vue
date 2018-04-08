@@ -58,17 +58,27 @@
             <input type="text" placeholder="请输入价格"><em>-</em><input type="text" placeholder="请输入价格">
             <button>确定</button>
           </div>
+          <div class="block">
+            <el-pagination
+              @current-change="changeTotal"
+              :page-size="4"
+              layout="total, prev, pager, next"
+              :total="total"
+              v-show="total"
+            >
+            </el-pagination>
+          </div>
         </div>
         <!--数据-->
-        <ul class="admissionTicketList">
-          <li>
+        <ul class="admissionTicketList" v-loading="isLoading">
+          <li v-for="item in admissionTicketMoreList">
             <div class="scenicSpotDetils clearfix">
-              <img src="../../assets/img/homePageImage.jpg" width="90" height="50">
+              <img  width="90" height="50" v-lazy="item.tm_ts_ShowImage">
               <div class="scenicSpotAddress">
-                <h6 class="clearfix"><a href="javascript:;">峨眉山</a><span><em>[</em><a href="javascript:;">四川</a><a
-                  href="javascript:;">.乐山</a><em>]</em></span></h6>
+                <h6 class="clearfix"><a href="javascript:;">{{item.tm_ts_Name}}</a><span><em>[</em><a href="javascript:;">{{item.tm_ts_ProviceName.substring(0,item.tm_ts_ProviceName.length-1)}}</a><a
+                  href="javascript:;">.{{item.tm_ts_CityName.substring(0,item.tm_ts_CityName.length-1)}}</a><em>]</em></span></h6>
                 <div><strong>游客满意度：</strong><i>100%</i><span>,游客点评<em>132321</em>条</span></div>
-                <p>景点地址:四川省乐山市峨眉山市境内</p>
+                <p>景点地址:{{item.tm_ts_Address}}</p>
               </div>
               <div class="priceAndReserve">
                 <strong>￥<span>129</span>起</strong>
@@ -87,24 +97,28 @@
               <span>途牛价</span>
             </div>
             <ul class="reserveInformationList">
-              <li class="clearfix">
-                <div><a href="javacript:;">&lt;黄山风景区门票儿童票(旺季)(3.1-11.30)专项&gt;</a></div>
-                <span>¥115</span>
-                <strong>¥115</strong>
-                <a href="javascript:;">预订</a>
+              <li class="clearfix" v-for="v in item.tourSite_TicketTypeMXList">
+                <div><a href="javacript:;">{{v.tm_tt_Name}}</a></div>
+                <span>¥{{v.tm_tt_TicketPrice}}</span>
+                <strong>¥{{v.tm_tt_RealPrice}}</strong>
+                <a href="javascript:;" @click="clickPayment(v)">预订</a>
               </li>
             </ul>
-            <div class="reserveMore">
-              <a href="javascript:;">更多</a>
-            </div>
+            <!--<div class="reserveMore">-->
+              <!--<a href="javascript:;">更多</a>-->
+            <!--</div>-->
           </li>
         </ul>
         <!--分页-->
         <el-pagination
           style="text-align: right; margin-top: 20px;"
           background
+          @current-change="changeTotal"
           layout="prev, pager, next"
-          :total="1000">
+          :total="total"
+          :page-size="4"
+          v-show="total"
+        >
         </el-pagination>
       </div>
     </div>
@@ -114,9 +128,14 @@
   import {mapGetters} from 'vuex'
 
   export default {
-    computed: mapGetters([]),
+    computed: mapGetters([
+      'admissionTicketMoreList'
+    ]),
     data() {
       return {
+        isLoading:false,
+        total:0,
+        id:'',
         cityList: {
           scenicSpotTypeList: [
             '成都(35)',
@@ -300,12 +319,41 @@
         ]
       }
     },
+    created(){
+      let id = this.$route.params.id;
+      this.id = id;
+      this.initData(id)
+    },
     methods: {
-      initData() {
+      //分页
+      changeTotal(num){
+        this.initData(this.id,num)
       },
-      search() {
-        this.initData()
-      }
+      //预订
+      clickPayment(item){
+        sessionStorage.setItem('ticketsReserveDetail',JSON.stringify(item));
+        this.$router.push({name:'TicketsReserve',params: {id: item.tm_tt_ID}})
+      },
+      initData(id,page) {
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "sm_af_AreaID": id,
+          "page": page?page:1,
+          "rows": 4
+        };
+        this.isLoading = true;
+        this.$store.dispatch('initAdmissionTicketMore',options)
+        .then(total=>{
+          this.isLoading = false;
+          this.total = total;
+        },err=>{
+
+        })
+      },
     },
   }
 </script>

@@ -202,6 +202,8 @@ export const getOrderType = val=>{
       return '门票订单';
     case 3:
       return '美食订单';
+    case 4:
+      return '酒店订单';
     default:
       return '未知';
   }

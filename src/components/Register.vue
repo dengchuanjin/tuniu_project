@@ -21,14 +21,17 @@
             <div class="telephoneNumber">
               <span>电话号码:</span>
               <input type="text" v-model="addOptions.phone">
+              <span style="color: #f60">(必填)</span>
             </div>
             <div class="password">
               <span>密码:</span>
               <input type="password" v-model="addOptions.password">
+              <span style="color: #f60">(必填)</span>
             </div>
             <div class="repeatPassword">
               <span>确认密码:</span>
               <input type="password" v-model="addOptions.repeatPassword">
+              <span style="color: #f60">(必填)</span>
             </div>
             <div class="repeatPassword">
               <span>推广员ID:</span>
@@ -37,7 +40,7 @@
             <div class="verificationCode">
               <span>验证码:</span>
               <input type="text" v-model="addOptions.validateNo">
-              <a href="javascript:;" @click="getNumbers">{{getName}}</a>
+              <a href="javascript:;" @click="getNumbers" :style="{backgroundColor:isColor?'#666':'orange'}">{{getName}}</a>
             </div>
           </div>
           <div class="successContent" v-show="successShow">
@@ -67,6 +70,7 @@
         successShow: false,
         nextShow: true,
         getName: '获取动态验证码',
+        isColor:false,
         addOptions: {
           phone: '',
           password: '',
@@ -74,6 +78,12 @@
           validateNo: '',
           extensionID:''
         }
+      }
+    },
+    created(){
+      if(window.location.href.includes('?')){
+        let id = window.location.href.split('?')[1].split('=')[1];
+        this.addOptions.extensionID = id;
       }
     },
     methods: {
@@ -97,6 +107,7 @@
       },
       //获取动态验证码
       getNumbers() {
+
         if(typeof this.num=='number'&&this.num!=59){
 //          this.$notify({
 //            message: '请确认时间！',
@@ -126,11 +137,13 @@
         .then((data)=>{
           var data = data.data;
           if(Number(data.resultcode)==200){
+            this.isColor = true;
             let timer = setInterval(() => {
               this.getName = this.num + 's后重新获取'
               this.num--;
               if (this.num == 0) {
                 this.isDisabled = false;
+                this.isColor = false;
                 clearInterval(timer)
                 this.getName = '重新获取验证码';
                 this.num = 59
@@ -207,6 +220,11 @@
             this.successShow = true;
             this.nextShow = false;
           }
+        },err=>{
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
         })
 
 //        postPromise('http://114.55.248.116:1001/Service.asmx/RegByCode', {

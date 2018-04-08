@@ -4,7 +4,7 @@
       <div class="TicketsReserveLogoAndProgressBarWrap clearfix">
         <div class="TicketsReserveLogo">
           <img src="../../assets/img/huileyouLogo.jpg" width="200" height="60">
-          <router-link to="AgenciesHome"></router-link>
+          <router-link to="/Comment/agenciesHome"></router-link>
         </div>
         <!--进度条-->
         <div class="TicketsReserveProgressBar"></div>
@@ -19,8 +19,8 @@
             <div class="TicketsReserveContentLeftContent">
               <!--标题-->
               <div class="TicketsReserveContentLeftTitle">
-                <h2><【途牛】毕棚沟景区门票>（含观光车票）</h2>
-                <a href="javascript:;" class="active">预定须知<i></i></a>
+                <h2>{{ticketsReserveDetail.tm_tt_Name}}</h2>
+                <a href="javascript:;">预定须知<i></i></a>
                 <div class="reserveDetails">
                   <div class="reserveDetailsReserve clearfix">
                     <strong>预定须知</strong>
@@ -88,9 +88,9 @@
                         <span style="color: #333; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item}}</span>
                         <!--<strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;">1</strong>-->
                       </li>
-                      <li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item in arr3">
-                        <span style="color: #333; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item.n==day.d?"今天":item.n}}</span>
-                        <strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;"  v-show="item.tm_tp_RealPrice">¥{{item.tm_tp_RealPrice}}</strong>
+                      <li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item,index in arr3" :class="{active:index==n}" @click="clickDate(item,index)">
+                        <span :class="{spanActive:index==n}" style="padding-left: 10px; font: 14px/2 '微软雅黑';" class="spanClass">{{item.n==day.d?"今天":item.n}}</span>
+                        <strong :class="{spanActive:index==n}" class="strongActive" style=" font: 14px/2 '微软雅黑'; display: block; text-align: center;"  v-show="item.tm_tp_RealPrice">¥{{item.tm_tp_RealPrice}}</strong>
                       </li>
                       <!--<li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item in arr5" v-show="arr5.length">-->
                         <!--<span style="color: #333; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item.n}}</span>-->
@@ -109,13 +109,13 @@
                     <strong><i>*</i>出游人数:</strong>
                     <el-input-number
                       v-model="peopleNumber"
-                      :min="1"
-                      :max="999"
-                      label="描述文字"
+                      :min="0"
+                      :max="dateObj.tm_tp_Limit"
+                      @change="handleChange"
                       size="mini"
                       class="accumulation"
                     ></el-input-number>
-                    <span>最多可预定999张</span>
+                    <span>最多可预定{{dateObj.tm_tp_Limit}}张</span>
                   </div>
                   <div class="distributionInformation clearfix">
                     <strong>配送信息:</strong>
@@ -134,26 +134,26 @@
                 <div class="fillInTheTouristInfromationTitle">
                   <strong>常用出游人</strong>
                 </div>
-                <div class="fillInPeopleInfromation">
-                  <strong class="fillInPeopleInfromationTitle">暂无常用出游人</strong>
+                <div class="fillInPeopleInfromation" v-for="item in arr">
+                  <strong class="fillInPeopleInfromationTitle" v-show="peopleNumber.length==0">暂无常用出游人</strong>
                   <span class="ticketCollector">取票人</span>
                   <ul class="fillInInputList">
                     <li>
                       <strong><i>*</i>姓名:</strong>
-                      <input type="text" placeholder="请填写姓名">
+                      <input type="text" placeholder="请填写姓名" v-model="item.tm_oc_UserName">
                     </li>
                     <li>
                       <strong><i>*</i>身份证:</strong>
-                      <input type="text" placeholder="请填写证件号">
+                      <input type="text" placeholder="请填写证件号" v-model="item.tm_oc_CertNo">
                     </li>
                     <li>
                       <strong><i>*</i>手机号码:</strong>
-                      <input type="text" placeholder="用于接收出票短信">
+                      <input type="text" placeholder="用于接收出票短信" v-model="item.tm_oc_Phone">
                     </li>
-                    <li>
-                      <strong>邮箱:</strong>
-                      <input type="text" placeholder="请填写邮箱">
-                    </li>
+                    <!--<li>-->
+                      <!--<strong>邮箱:</strong>-->
+                      <!--<input type="text" placeholder="请填写邮箱">-->
+                    <!--</li>-->
                   </ul>
                 </div>
               </div>
@@ -164,8 +164,8 @@
               <a href="javascript:;">西岭雪山预订协议</a>
             </div>
             <div class="paymentOrder clearfix">
-              <span>订单金额:<em>￥</em><strong>280</strong></span>
-              <el-button class="paymentOrderSubmit">立即支付</el-button>
+              <span>订单金额:<em>￥</em><strong>{{dateObj.tm_tp_RealPrice*peopleNumber?dateObj.tm_tp_RealPrice*peopleNumber:0}}</strong></span>
+              <el-button class="paymentOrderSubmit" @click="ticketPay">立即支付</el-button>
             </div>
           </div>
           <!--内容右边-->
@@ -174,11 +174,11 @@
             <div class="TicketsReserveContentRightContent">
               <div class="detailsOfCharges">
                 <strong>费用明细 <em>(在线支付)</em></strong>
-                <span>门票价格:<em>￥132332</em></span>
+                <span>门票价格:<em>￥{{dateObj.tm_tp_RealPrice?dateObj.tm_tp_RealPrice:0}}</em></span>
               </div>
               <div class="orderMoney">
-                <strong>订单总金额:<em>￥<i>23232</i></em></strong>
-                <a href="javascript:;">立即支付</a>
+                <strong>订单总金额:<em>￥<i>{{dateObj.tm_tp_RealPrice*peopleNumber?dateObj.tm_tp_RealPrice*peopleNumber:0}}</i></em></strong>
+                <a href="javascript:;" @click="ticketPay">立即支付</a>
                 <div class="border"></div>
               </div>
             </div>
@@ -196,29 +196,42 @@
     computed: mapGetters([]),
     data() {
       return {
+        n:999,
         isLoading:false,
         day:{},
         str: '',
-        peopleNumber: '1',
+        peopleNumber: '0',
         pickUp: 1,
         date:'',
         id:'',
         checked: false,
         m:'',
+        arr:[],
+        user:{},
         arr1:[],
         arr2:[],
         arr3:[],
         arr4:[],
-        arr5:[]
+        arr5:[],
+        dateObj:{},
+        ticketsReserveDetail:{}
       }
     },
     created(){
+      //获取门票立即预订详情数据
+      this.ticketsReserveDetail = JSON.parse(sessionStorage.getItem('ticketsReserveDetail'));
+      this.user = JSON.parse(sessionStorage.getItem('user'))
+      if(!this.user){
+        this.$router.push({name:'AdminLogin'})
+        return
+      }
       this.day.d = new Date().getDate()
       this.id = this.$route.params.id;
       let month = this.getNum(new Date().getMonth()+1);
       this.m = new Date().getMonth()+1;
+      this.date = new Date().getFullYear()+'-'+month+'-'+this.getNum(new Date().getDate())
       this.isLoading = true;
-      this.initData(this.id,month).then((data)=>{
+      this.initData(this.id,month,this.getNum(new Date().getDate())).then((data)=>{
         var year = new Date().getFullYear();
         var month = new Date().getMonth();
         this.isLoading = false;
@@ -235,6 +248,78 @@
       })
     },
     methods: {
+      handleChange(value) {
+        this.arr = []
+        for(var i=0;i<value;i++){
+          this.arr.push({
+            tm_oc_UserName:'',
+            tm_oc_CertNo:'',
+            tm_oc_Phone:''
+          })
+        }
+
+      },
+      //立即支付
+      ticketPay(){
+        if(!this.arr.length){
+          this.$notify({
+            message: '取票人不能为空!',
+            type: 'error'
+          });
+          return
+        }
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "data": {
+            "tm_or_TourSiteCode": this.ticketsReserveDetail.tm_ts_Code,//景点编号
+            "tm_or_TicketTypeID": this.ticketsReserveDetail.tm_tt_ID,//商户票种编号
+            "tm_or_UserID": this.user.ui_UserCode,//用户编码
+            "tm_or_TradeInfoID": "23",//供应商商家编码
+            "tm_or_TicketCount": this.peopleNumber,//总张数
+            "tm_or_SumPrice": this.dateObj.tm_tp_RealPrice*this.peopleNumber,//总金额
+            "tm_or_SumService":"0",//总网售手续费
+            "tm_oc_PlayDate": this.dateObj.tm_tp_Date,
+            "tm_or_Remark": "",
+          },
+          "personInfo": this.arr
+        }
+        this.$store.commit('showLoading');
+        this.$store.dispatch('initTicketPay',options)
+        .then((data)=>{
+          this.$store.commit('hideLoading');
+          let newData = data.data;
+          let type = data.type;
+          newData.type = type;
+          newData.title = this.ticketsReserveDetail.tm_tt_Name;
+          newData.orderID = newData.tm_or_OrderID;
+          newData.adultNumber = this.peopleNumber;
+          newData.adultPrice = this.dateObj.tm_tp_RealPrice;
+          newData.childNumber = 0;
+          newData.childPrice = 0;
+          newData.oi_OrderName = this.ticketsReserveDetail.tm_tt_Name;
+          newData.OrderID = newData.tm_or_OrderID;
+          newData.oi_OrderTypeID = 2;
+          newData.oi_SellMoney = this.dateObj.tm_tp_RealPrice*this.peopleNumber;
+          sessionStorage.setItem('orderInfo',JSON.stringify(newData))
+          this.$router.push({name:'PaymentPlatform'})
+        },err=>{
+          this.$store.commit('hideLoading');
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+          this.$router.push({name:'PersonalDataDetails'})
+        })
+      },
+      //点击日期
+      clickDate(item,index){
+        this.dateObj = item
+        this.n = index
+      },
       getNum(num){
         return num<10?'0'+num:''+num
       },
@@ -297,7 +382,6 @@
             }else{
               this.arr5 = []
             }
-            console.log(this.arr5)
 //            this.arr5.push({
 //              n: newArr[j],
 //            })
@@ -308,22 +392,22 @@
             hash[next.n] ? '' : hash[next.n] = true && item.push(next);
             return item
           }, [])
-//          console.log(this.arr3)
           relove()
         })
       },
-      async initData(id,month) {
+      async initData(id,month,day) {
         let year = new Date().getFullYear();
-        let day = this.getNum(new Date().getDate());
-        this.date = year+'-'+month
+        if(!day){
+          day = this.getNum(new Date().getDate());
+        }
         let options = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "operateUserID": "",
           "operateUserName": "",
           "pcName": "",
-          "dateFrom":year+'-'+month,
-          "tm_tt_ID": '152',//商户票种编号
+          "dateFrom":year+'-'+month+'-'+day,
+          "tm_tt_ID": this.$route.params.id,//商户票种编号
         }
         let data = await this.$store.dispatch('initTicketsReserveDate',options)
         return data
@@ -341,6 +425,7 @@
       },
       //上个月
       prev(){
+        this.date = ''
         let month = this.getNum(new Date().getMonth()+1);
         let newM = this.date.split('-')[1];
         if(month===newM){
@@ -352,10 +437,10 @@
         }else{
           var year = new Date().getFullYear();
           this.m--;
-          this.date = year+'-'+this.getNum(this.m);
+          this.date = year+'-'+this.getNum(this.m)+'-01';
           let newM = this.getNum(this.m)
           let id = this.id
-          this.initData(id,newM).then((data)=>{
+          this.initData(id,newM,this.date).then((data)=>{
             var year = new Date().getFullYear();
             this.getDateList(year,newM,data)
           })
@@ -363,12 +448,13 @@
       },
       //下个月
       next(){
+        this.date = ''
         var year = new Date().getFullYear();
         this.m++;
-        this.date = year+'-'+this.getNum(this.m);
+        this.date = year+'-'+this.getNum(this.m)+'-01';
         let newM = this.getNum(this.m)
         let id = this.id
-        this.initData(id,newM).then((data)=>{
+        this.initData(id,newM,this.date).then((data)=>{
           var year = new Date().getFullYear();
           this.getDateList(year,newM,data)
         },err=>{
@@ -391,6 +477,19 @@
   }
 </script>
 <style scoped>
+  .strongActive{
+    color: #f60;
+  }
+  .spanClass{
+    color: #333;
+  }
+  .spanActive{
+    color: #fff;
+  }
+  .active{
+    color: #fff;
+    background: #ffa833;
+  }
   .TicketsReserveLogoAndProgressBar {
     width: 100%;
     background-color: #fff;

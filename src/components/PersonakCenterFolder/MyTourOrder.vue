@@ -19,6 +19,7 @@
                 <el-option key="1" label="车票订单" value="1"></el-option>
                 <el-option key="2" label="门票订单" value="2"></el-option>
                 <el-option key="3" label="美食订单" value="3"></el-option>
+                <el-option key="4" label="酒店订单" value="4"></el-option>
               </el-select>
             </dd>
             <dd>数量</dd>
@@ -46,17 +47,17 @@
               <dd class="money">￥{{item.oi_SellMoney?item.oi_SellMoney:0}}</dd>
               <dd class="ticketState">
                 <span>{{item.oi_OrderStatus | getTicketStatus}}</span>
-                <a href="javascript:;" @click="orderDetail(item.oi_OrderID)">订单详情</a>
+                <a href="javascript:;" @click="orderDetail(item)">订单详情</a>
               </dd>
               <dd class="outticket">{{item.oi_OutStatus | getOutStatus}}</dd>
-              <dd v-if="item.oi_OrderStatus!=0"><el-button size="small" type="danger" @click="deleteOrder(item.oi_OrderID)">删除</el-button></dd>
+              <dd v-if="item.oi_OrderStatus!=0"><el-button size="small" type="danger" @click="deleteOrder(item)">删除</el-button></dd>
               <dd class="ticketDelete" v-else><el-button size="small" type="primary" @click="goPay(item)">去支付</el-button></dd>
             </dl>
           </li>
         </ul>
         <ul  class="AllOrderInformtionContent" v-else><li style="text-align: center">暂无数据</li></ul>
         <!--分页-->
-        <div class="block" style="float: right;">
+        <div class="block" style="float: right;padding-bottom: 200px">
           <el-pagination
             @current-change="handleCurrentChange"
             :page-size="4"
@@ -86,12 +87,14 @@
       'myTourOrderList'
     ]),
     created(){
-      this.initData(1)
+      let orderTypeID = sessionStorage.getItem('orderTypeID')
+      this.orderType = orderTypeID
+      this.initData(1,orderTypeID)
     },
     methods: {
       //分页
       handleCurrentChange(num){
-        this.initData(num)
+        this.initData(num,this.orderType)
       },
       //选中订单类型
       changeOrderType(){
@@ -128,52 +131,153 @@
       },
       //去支付
       goPay(item){
+        item.OrderID = item.oi_OrderID
         sessionStorage.setItem('orderInfo',JSON.stringify(item))
         this.$router.push({name:'PaymentPlatform'})
       },
       //删除订单
-      deleteOrder(orderID){
-        let deleteOptions = {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "operateUserID": "",
-          "operateUserName": "",
-          "pcName": "",
-          "orderID": orderID
-        };
-        this.$store.dispatch('DeleteOrder',deleteOptions)
-        .then(()=>{
-          this.initData(1,this.orderType)
-        },err=>{
-          this.$notify({
-            message: err,
-            type: 'error'
-          });
-        })
+      deleteOrder(item){
+//        switch (item.oi_OrderTypeID){
+//          case 0:
+            //旅行社
+            let deleteOptions = {
+              "loginUserID": "huileyou",
+              "loginUserPass": "123",
+              "operateUserID": "",
+              "operateUserName": "",
+              "pcName": "",
+              "orderID": item.oi_OrderID
+            };
+            this.$store.dispatch('DeleteOrder',deleteOptions)
+            .then((suc)=>{
+              this.$notify({
+                message: suc,
+                type: 'success'
+              });
+              this.initData(1,0)
+            },err=>{
+              this.$notify({
+                message: err,
+                type: 'error'
+              });
+            });
+//            break;
+//          case 2:
+//            //门票
+//            let tOptions = {
+//              "loginUserID": "huileyou",
+//              "loginUserPass": "123",
+//              "operateUserID": "",
+//              "operateUserName": "",
+//              "orderID": item.oi_OrderID
+//            };
+//            this.$store.dispatch('DeleteTicketOrder',tOptions)
+//            .then(()=>{
+//              this.initData(1,2)
+//            },err=>{
+//              this.$notify({
+//                message: err,
+//                type: 'error'
+//              });
+//            });
+//            break;
+//        }
+
       },
       //订单详情
-      orderDetail(orderID){
-        let orderDeatilOptions = {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "operateUserID": "",
-          "operateUserName": "",
-          "pcName": "",
-          "orderID":orderID,
-          "page": 1,
-          "rows": 10
-        };
-        this.$store.dispatch('initOrderDetail',orderDeatilOptions)
-        .then((obj)=>{
-          let newObj = {isOff:false};
-          if( obj.ts_to_PayState==1|| obj.ts_to_PayState==2|| obj.ts_to_OutStatus==1){
-            newObj.isOff=  true
-          }else{
-            newObj.isOff =  false;
-          }
-          sessionStorage.setItem('payStatusObj',JSON.stringify(newObj))
-          this.$router.push({name:'MyOrderDetails'})
-        })
+      orderDetail(item){
+        switch (item.oi_OrderTypeID){
+          case 0:
+            sessionStorage.setItem('orderTypeID',0)
+            //旅行社
+            let orderDeatilOptions = {
+              "loginUserID": "huileyou",
+              "loginUserPass": "123",
+              "operateUserID": "",
+              "operateUserName": "",
+              "pcName": "",
+              "orderID":item.oi_OrderID,
+              "page": 1,
+              "rows": 10
+            };
+            this.$store.dispatch('initOrderDetail',orderDeatilOptions)
+            .then((obj)=>{
+              let newObj = {isOff:false};
+              if( obj.ts_to_PayState==1|| obj.ts_to_PayState==2|| obj.ts_to_OutStatus==1){
+                newObj.isOff=  true
+              }else{
+                newObj.isOff =  false;
+              }
+              sessionStorage.setItem('payStatusObj',JSON.stringify(newObj));
+              this.$router.push({name:'MyOrderDetails'})
+            },err=>{
+              this.$notify({
+                message: err,
+                type: 'error'
+              });
+            })
+            break;
+          case 2:
+            sessionStorage.setItem('orderTypeID',2)
+            //门票
+            let ticketOptions = {
+              "loginUserID": "huileyou",
+              "loginUserPass": "123",
+              "operateUserID": "",
+              "operateUserName": "",
+              "pcName": "",
+              // "userID": "18111729770",//用户编码
+              "orderID": item.oi_OrderID,//订单编号
+              "page": 1,
+              "rows": 10
+            };
+            this.$store.dispatch('initTicketOrderDetail',ticketOptions)
+            .then((obj)=>{
+              let newObj = {isOff:false};
+              if( obj.tm_or_PayState==1|| obj.tm_or_PayState==2|| obj.tm_or_PayState==1){
+                newObj.isOff=  true
+              }else{
+                newObj.isOff =  false;
+              }
+              sessionStorage.setItem('payStatusObj',JSON.stringify(newObj));
+              this.$router.push({name:'TicketOrderDetails'})
+            },err=>{
+              this.$notify({
+                message: err,
+                type: 'error'
+              });
+            })
+            break;
+          case 4:
+            sessionStorage.setItem('orderTypeID',4)
+            //酒店
+            let hOptions = {
+              "loginUserID": "huileyou",
+              "loginUserPass": "123",
+              "operateUserID": "",
+              "operateUserName": "",
+              "pcName": "",
+              "ht_or_OrderID": item.oi_OrderID, //订单Id
+            };
+            this.$store.dispatch('initHotelOrderDetail',hOptions)
+            .then((obj)=>{
+              let newObj = {isOff:false};
+              if( obj.ht_or_PayState==1|| obj.ht_or_PayState==2|| obj.ht_or_PayState==1){
+                newObj.isOff=  true
+              }else{
+                newObj.isOff =  false;
+              }
+              sessionStorage.setItem('payStatusObj',JSON.stringify(newObj));
+              this.$router.push({name:'HotelOrderDetails'})
+            },err=>{
+              this.$notify({
+                message: err,
+                type: 'error'
+              });
+            })
+            break;
+        }
+
       }
     },
     mounted(){

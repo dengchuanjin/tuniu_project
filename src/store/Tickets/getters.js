@@ -19,4 +19,6 @@ export default {
   ticketsDetailData: state => state.ticketsDetailData,
   transportMessage: state => state.transportMessage,
   ticketType_PriceMXList: state => state.ticketType_PriceMXList,
+  ticketOrderDetail: state => state.ticketOrderDetail,
+  admissionTicketMoreList: state => state.admissionTicketMoreList,
 }

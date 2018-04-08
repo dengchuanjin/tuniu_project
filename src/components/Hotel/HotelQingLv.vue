@@ -1,28 +1,37 @@
 <template>
   <div>
     <!--青旅酒店头部面板-->
-    <div class="header"></div>
+    <!--头部-->
+    <div class="parentChildHeaderWrap">
+      <div class="parentChildHeader clearfix">
+        <h2>
+          <img src="../../assets/img/center.png" height="60" width="60">
+          <strong>青旅酒店</strong>
+        </h2>
+        <router-link to="/Comment/HotelHomePage">返回首页</router-link>
+      </div>
+    </div>
     <!--内容部分-->
     <div class="content">
       <!--南京-->
       <div class="nanjing">
         <div class="HotelHouse">
-          <div class="house" v-for="house in Houses">
-            <img :src="image.houseimg" v-for="image in house">
-            <p class="houseName" v-for="name in house">{{name.housename}}</p>
-            <div class="houseValue" v-for="value in house">￥<span>{{value.housevalue}}</span>起<button>立即购买</button></div>
+          <div class="house" v-for="item in qLCityData" style="cursor: pointer" @click="clickQLCityData(item.ht_ht_hotelID)">
+            <img  v-lazy="item.ht_ht_ImageUrl">
+            <p class="houseName">{{item.ht_ht_HotelName}}</p>
+            <div class="houseValue">￥<span>{{item.ht_ht_RecommendPrice}}</span>起<button>立即购买</button></div>
           </div>
         </div>
       </div>
       <!--苏州-->
       <div class="suzhou">
         <div class="HotelHouse">
-          <div class="house" v-for="house in Houses">
-            <img :src="image.houseimg" v-for="image in house">
-            <p class="houseName" v-for="name in house">{{name.housename}}</p>
-            <div class="houseValue" v-for="value in house">￥<span>{{value.housevalue}}</span>起<button>立即购买</button></div>
+          <div class="house" v-for="item in szCityData">
+            <img  v-lazy="item.ht_ht_ImageUrl">
+            <p class="houseName">{{item.ht_ht_HotelName}}</p>
+            <div class="houseValue">￥<span>{{item.ht_ht_RecommendPrice}}</span>起<button>立即购买</button></div>
           </div>
-        </div>
+          </div>
         </div>
       <!--厦门-->
       <div class="xiamen">
@@ -65,6 +74,7 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
     export default {
       data(){
         return{
@@ -83,17 +93,116 @@
             {srcs:require('../../assets/img/house.jpg')}
             ]
         }
+      },
+      computed:mapGetters([
+        'qLCityData',
+        'szCityData'
+      ]),
+      created(){
+        this.initData().then(()=>{
+        },err=>{
+          this.$notify({
+            message:err,
+            type: 'error'
+          });
+        })
+      },
+      methods:{
+         async initData(){
+           //南京
+            let options = {
+              "loginUserID": "huileyou",
+              "loginUserPass": "123",
+              "operateUserID": "",
+              "operateUserName": "",
+              "pcName": "",
+              //"ht_it_ID":"1",//推荐类型
+//            "ht_tt_ID":"",//主题
+              //"ht_hd_ID":"1",//设施
+//            "ht_rh_ID":"",//房间设施
+              "sm_af_AreaID":'108', //城市
+              "page":"1", //页面编号  默认为 1
+              "rows":"6",//单页显示数据数量
+            };
+            await this.$store.dispatch('initCityData',options)
+           //苏州
+           let Soptions = {
+             "loginUserID": "huileyou",
+             "loginUserPass": "123",
+             "operateUserID": "",
+             "operateUserName": "",
+             "pcName": "",
+             //"ht_it_ID":"1",//推荐类型
+//            "ht_tt_ID":"",//主题
+             //"ht_hd_ID":"1",//设施
+//            "ht_rh_ID":"",//房间设施
+             "sm_af_AreaID":'112', //城市
+             "page":"1", //页面编号  默认为 1
+             "rows":"6",//单页显示数据数量
+           };
+           await this.$store.dispatch('initSzCityData',Soptions)
+        },
+        //点击南京下的酒店跳转
+        clickQLCityData(id){
+          this.$router.push({name:'HotelDetalis', params: {id: id}})
+        }
       }
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
+  /*头部*/
+  .parentChildHeaderWrap {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px 0;
+  }
+
+  .parentChildHeader {
+    width: 1000px;
+    margin: 0 auto;
+  }
+
+  .parentChildHeader > h2 {
+    float: left;
+  }
+
+  .parentChildHeader > h2:hover {
+    cursor: pointer;
+  }
+
+  .parentChildHeader strong {
+    font: bold 30px/1 "宋体";
+    vertical-align: bottom;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+
+
+  .parentChildHeader > a {
+    float: right;
+    font: 16px/2 "微软雅黑";
+    padding: 0 15px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    border: 1px solid #999;
+    color: #999;
+    margin-top: 10px;
+  }
+
+  .parentChildHeader > a:hover {
+    border-color: #f60;
+    color: #f60;
+  }
+
+  /*头部结束*/
   .header{
     background: url("../../assets/img/qinglv.jpg") no-repeat center;
     height: 722px;
   }
   .content{
-    //南京
     .nanjing{
       position: relative;
       background: url("../../assets/img/nanjing.jpg") no-repeat center;
@@ -145,7 +254,7 @@
         }
       }
     }
-    //苏州
+    /*//苏州*/
     .suzhou{
       position: relative;
       background: url("../../assets/img/suzhou.jpg") no-repeat center;
@@ -197,7 +306,7 @@
         }
       }
     }
-    //厦门
+    /*//厦门*/
     .xiamen{
       position: relative;
       background: url("../../assets/img/xiamen.jpg") no-repeat center;
@@ -249,7 +358,7 @@
         }
       }
     }
-    //北京
+    /*//北京*/
     .beijing{
       position: relative;
       background: url("../../assets/img/beijing.jpg") no-repeat center;
@@ -301,7 +410,7 @@
         }
       }
     }
-    //成都
+    /*//成都*/
     .chengdu{
       position: relative;
       background: url("../../assets/img/chengdu.jpg") no-repeat center;
@@ -353,7 +462,7 @@
         }
       }
     }
-    //更多
+    /*//更多*/
     .more{
       position: relative;
       background: url("../../assets/img/more.jpg") no-repeat center;

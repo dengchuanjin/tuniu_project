@@ -12,12 +12,12 @@
     <section>
       <div class="contentSectionWrap">
         <div class="contentTitle clearfix">
-          <strong>奥华·时尚精品酒店 - 南岸(Ovolo Southside – 64 Wong Chuk Hang Road)111111111</strong>
+          <strong>{{hotelOrderReservations.hotelName}}</strong>
           <span><i></i><em>惠乐游保障:</em> 承诺到店无房赔付首晚房费，请放心预订</span>
         </div>
         <div class="orderInfromation clearfix">
           <div class="myInfromation">
-            <p class="promptBar">您已经选择到了奥华·时尚精品酒店 - 南岸(Ovolo Southside – 64 Wong Chuk Hang Road)里最优惠的客房</p>
+            <p class="promptBar">您已经选择到了{{hotelOrderReservations.hotelName}}里最优惠的客房</p>
             <!--预定信息-->
             <div class="reservationInformation">
               <strong class="smallTitle "><i></i>预定信息</strong>
@@ -28,29 +28,33 @@
                   <div class="block">
                     <el-date-picker
                       v-model="value1"
-                      type="date"
-                      size="mini"
-                      placeholder="选择日期">
+                      type="daterange"
+                      @change="changeDate"
+                      range-separator="至"
+                      start-placeholder="开始日期"
+                      end-placeholder="结束日期"
+                      value-format="yyyy-MM-dd"
+                    >
                     </el-date-picker>
                   </div>
-                  <span>至</span>
-                  <div class="block">
-                    <el-date-picker
-                      v-model="value1"
-                      type="date"
-                      size="mini"
-                      placeholder="选择日期">
-                    </el-date-picker>
-                  </div>
-                  <span>共1晚</span>
+                  <!--<span>至</span>-->
+                  <!--<div class="block">-->
+                    <!--<el-date-picker-->
+                      <!--v-model="value1"-->
+                      <!--type="datetime"-->
+                      <!--size="mini"-->
+                      <!--placeholder="选择日期">-->
+                    <!--</el-date-picker>-->
+                  <!--</div>-->
+                  <!--<span>共1晚</span>-->
                 </div>
                 <!--预定间数-->
                 <div class="reservationNum clearfix">
                   <span>预定间数:</span>
-                  <el-input-number v-model="num1" @change="handleChange" :min="1" :max="Infinity" size="mini"
+                  <el-input-number v-model="num1" @change="handleChange" :min="0" :max="newNum" size="mini"
                                    label="描述文字"></el-input-number>
-                  <span class="surplus">剩余<em>4</em>间</span>
-                  <strong>￥812</strong>
+                  <span class="surplus">剩余<em>{{num}}</em>间</span>
+                  <strong>￥{{parseInt(hotelOrderReservations.ht_rpp_ProductPrice)}}</strong>
                 </div>
               </div>
             </div>
@@ -59,16 +63,16 @@
               <strong class="smallTitle"><i></i>个人信息</strong>
               <div>
                 <ul class="theGuestInformation">
-                  <li>
-                    <span><i class="improtent">*</i>住客姓名1：</span>
-                    <el-input placeholder="输入住客姓名" size="mini" style="width: 200px"></el-input>
+                  <li v-for="item,index in arr">
+                    <span><i class="improtent">*</i>住客姓名{{index+1}}：</span>
+                    <el-input :placeholder="'输入住客姓名'+(index+1)" size="mini" style="width: 200px" v-model="item.v"></el-input>
                   </li>
                 </ul>
                 <div class="userTelephoneNumber"><span><i class="improtent">*</i>手机号码： </span>
-                  <el-input placeholder="输入手机号码" size="mini" style="width: 200px"></el-input>
+                  <el-input placeholder="输入手机号码" size="mini" style="width: 200px" v-model="phone"></el-input>
                 </div>
                 <div class="userEMeil"><span>电子邮箱： </span>
-                  <el-input placeholder="输入电子邮箱" size="mini" style="width: 200px"></el-input>
+                  <el-input placeholder="输入电子邮箱" size="mini" style="width: 200px" v-model="email"></el-input>
                 </div>
               </div>
             </div>
@@ -80,30 +84,30 @@
             <!--到店须知-->
             <div class="noticeToTheStore">
               <strong class="smallTitle"><i></i>到店须知</strong>
-              <p>2017/10/30-2019/12/31 订单一经确认，不可更改或添加入住人姓名。 城市重要通知:未满18周岁的小孩需有成人陪同才可入住。</p>
+              <p>{{dateStr}} 订单一经确认，不可更改或添加入住人姓名。 城市重要通知:未满18周岁的小孩需有成人陪同才可入住。</p>
             </div>
             <!--提交订单-->
             <div class="submitOrder">
-              <el-button type="success">提交订单</el-button>
+              <el-button type="success" @click="submitOrder">提交订单</el-button>
             </div>
           </div>
           <!--订单信息-->
           <div class="hotelInfromation">
             <!--标题和地址-->
             <div class="title">
-              <strong>奥华·时尚精品酒店 - 南岸(Ovolo Southside – 64 Wong Chuk Hang Road)</strong>
-              <span>地址：南区香港仔黄竹坑道64号</span>
+              <strong>{{hotelOrderReservations.hotelName}}</strong>
+              <span>地址：{{hotelOrderReservations.hotelAddress}}</span>
             </div>
             <!--房间配置-->
             <dl class="roomToConfigure">
-              <dt>精致客房(外宾)[无早]</dt>
-              <dd><strong>床型： </strong>大床或双床</dd>
-              <dd><strong>楼层： </strong>5-22楼</dd>
-              <dd><strong>面积： </strong>20平米</dd>
-              <dd><strong>最多入住人数： </strong>2</dd>
-              <dd><strong>宽带： </strong>免费无线宽带</dd>
-              <dd><strong>窗户： </strong>有窗</dd>
-              <dd><strong>支付： </strong>途牛将预收全部费用</dd>
+              <dt>{{hotelOrderReservations.ht_rpp_Name}}</dt>
+              <dd><strong>床型： </strong>{{hotelOrderReservations.RoomInfo.ht_bt_BedType}}</dd>
+              <dd><strong>楼层： </strong>{{hotelOrderReservations.RoomInfo.ht_bt_Level}}</dd>
+              <dd><strong>面积： </strong>{{hotelOrderReservations.RoomInfo.ht_bt_Area}}平米</dd>
+              <dd><strong>最多入住人数： </strong>{{hotelOrderReservations.RoomInfo.ht_bt_MostIn}}</dd>
+              <dd><strong>宽带： </strong>{{hotelOrderReservations.ht_rpp_WafiType}}</dd>
+              <!--<dd><strong>窗户： </strong>有窗</dd>-->
+              <dd><strong>支付： </strong>惠乐游将预收全部费用</dd>
               <dd><strong>加床： </strong>请提前咨询酒店前台</dd>
             </dl>
             <!--订单金额确认-->
@@ -111,11 +115,11 @@
               <strong>网上支付</strong>
               <div class="priceDetils clearfix">
                 <strong>房费</strong>
-                <span>￥10000</span>
+                <span>￥{{parseInt(hotelOrderReservations.ht_rpp_ProductPrice)}}</span>
               </div>
               <div class="allMoney clearfix">
                 <strong>总计</strong>
-                <span>￥10000</span>
+                <span>￥{{parseInt(hotelOrderReservations.ht_rpp_ProductPrice*num1)}}</span>
               </div>
             </div>
           </div>
@@ -131,13 +135,141 @@
     computed: mapGetters([]),
     data() {
       return {
+        pickerOptions1:{
+//          disabledDate(time) {
+//            return time.getTime() <= Date.now();
+//          },
+        },
+        phone:'',
+        email:'',
+        num:0,//房间数
+        newNum:0,
         value1: '',
         num1: 1,
-        checked: true
+        checked: true,
+        user:{},
+        dateStr:'',
+        hotelOrderReservations:{},
+        arr:[]
       }
     },
+    created(){
+      let user = JSON.parse(sessionStorage.getItem('user'))
+      if(!user){
+        this.$router.push({name:'AgenciesHome'})
+        return
+      }
+      this.user = user;
+      this.hotelOrderReservations = JSON.parse(sessionStorage.getItem('hotelOrderReservations'));
+    },
     methods: {
+      //提交订单
+      submitOrder(){
+        if(!this.arr.length){
+          this.$notify({
+            message: '姓名不能为空!',
+            type: 'error'
+          });
+          return
+        }
+        this.$store.commit('showLoading')
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "data": {
+            "ht_or_OrderID": "",//订单ID
+            "ht_or_RoomProductID": this.hotelOrderReservations.ht_rpp_ID,//房间产品ID
+            "ht_or_UserID": this.user.ui_UserCode,//用户编码
+            "ht_or_UserName": this.user.ui_Name,//用户名称
+            "ht_or_TouristTraderID": this.hotelOrderReservations.sm_ai_AgentInfoID,//商户编码
+            "ht_or_TouristTraderName": "",//商户名称
+            "ht_or_TicketCount": this.num1,//总间数
+            "ht_or_SumPrice": parseInt(this.hotelOrderReservations.ht_rpp_ProductPrice*this.num1),//总金额
+            "ht_or_SumService": "0",//总的网售手续费
+            "ht_or_FullPrice": parseInt(this.hotelOrderReservations.ht_rpp_ProductPrice),//价格
+            "ht_or_InDate": this.value1[0],//入住日期
+            "ht_or_OutDate": this.value1[1],//离店日期
+            "ht_or_PayWay": "",//支付方式
+            "ts_to_Remark": "",//备注
+            "ht_od_Email":this.email,
+            "ht_od_Phone":this.phone
+          },
+          "personInfo": []
+        }
+        for(var i=0;i<this.arr.length;i++){
+          options.personInfo.push({
+            "ht_od_UserName": this.arr[i].v,//用户名称
+          })
+        }
+
+        this.$store.dispatch('initHotelMakeOrder',options)
+        .then(data=>{
+          this.$store.commit('hideLoading');
+          let newData = data;
+          newData.title = this.hotelOrderReservations.hotelName;
+          newData.orderID = newData.ht_or_OrderID;
+          newData.adultNumber = this.num1;
+          newData.adultPrice = this.hotelOrderReservations.ht_rpp_ProductPrice;
+          newData.childNumber = 0;
+          newData.childPrice = 0;
+          newData.oi_OrderName = this.hotelOrderReservations.hotelName;
+          newData.OrderID = newData.ht_or_OrderID;
+          newData.oi_OrderTypeID = 4;
+          newData.oi_SellMoney = this.hotelOrderReservations.ht_rpp_ProductPrice*this.num1;
+          sessionStorage.setItem('orderInfo',JSON.stringify(newData))
+          this.$router.push({name:'PaymentPlatform'})
+        },err=>{
+          this.$store.commit('hideLoading');
+          this.$notify({
+            message: err,
+            type: 'error'
+          });
+        })
+      },
+      //选中日期
+      changeDate(){
+        this.dateStr = '';
+        if(this.value1){
+          for(var i=0;i<this.value1.length;i++){
+            if(i==0){
+              this.dateStr=this.value1[i]+'~'+this.dateStr
+            }else{
+              this.dateStr=this.dateStr+this.value1[i]
+            }
+          }
+          let options = {
+            "loginUserID": "huileyou",
+            "loginUserPass": "123",
+            "operateUserID": "",
+            "operateUserName": "",
+            "pcName": "",
+            "ht_rpp_ID": this.hotelOrderReservations.ht_rpp_ID,//房间产品ID
+            "inDate": this.value1[0],//入住日期
+            "outDate": this.value1[1],//离店日期
+          };
+          this.$store.dispatch('initRoomNumber',options)
+          .then(num=>{
+            this.newNum = num;
+            this.num = num
+          },err=>{
+            this.$notify({
+              message: err,
+              type: 'error'
+            });
+          })
+        }
+      },
       handleChange(value) {
+        this.num = this.newNum-value;
+        this.arr = [];
+        for(var i=0;i<value;i++){
+          this.arr.push({
+            v:''
+          })
+        }
       },
       goHomePage() {
         this.$router.push({name: 'HotelHomePage'})

@@ -52,6 +52,21 @@ export default {
   },
   setSearchHotelRoomFilter(state,data){
     state.hotelRoom = data;
+  },
+  initHotelOrderDetail(state,obj){
+    state.hotelOrderDetail = obj;
+  },
+  initQLCityData(state,data){
+    state.qLCityData = data;
+  },
+  initSzCityData(state,data){
+    state.szCityData = data;
+  },
+  initHotelIcon(state,data){
+    state.hotelIconList = data;
+  },
+  initHardServiceObj(state,obj){
+    state.hardServiceObj = obj;
   }
 
 

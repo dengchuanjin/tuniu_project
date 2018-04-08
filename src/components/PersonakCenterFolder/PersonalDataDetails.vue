@@ -238,16 +238,16 @@
       if(user){
         this.userInfo = user;
         if(user){
-          this.saveUser = user
+          user.ts_ui_Sex = user.ts_ui_Sex+'';
+          this.saveUser = user;
           if(user.ui_Birthday){
             this.yearValue = user.ui_Birthday.split('-')[0]
             this.monthValue = Number(user.ui_Birthday.split('-')[1])
             this.dateValue = Number(user.ui_Birthday.split('-')[2])
           }
         }else{
-          this.saveUser.ui_Name =this.userInfo.ui_Name
-          this.saveUser.ui_ID =  this.userInfo.ui_ID
-          this.saveUser.ui_CertNo =this.userInfo.ui_CertNo
+
+          this.saveUser =this.userInfo
         }
 
 //        this.saveUser.ui_Name =this.userInfo.ui_Name
@@ -261,7 +261,7 @@
       //选择省
       changeProvince(v) {
         let getAreaProvice = {
-          "areaPid": 0
+          "areaPid": 3337
         }
         this.$store.dispatch('initProvinceData', getAreaProvice)
       },
@@ -350,6 +350,7 @@
           sessionStorage.setItem('user',JSON.stringify(user))
 
           this.isLoading = false;
+          this.$router.push({name:'AdminLogin'})
         },err=>{
           this.$notify({
             message: err,

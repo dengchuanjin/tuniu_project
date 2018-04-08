@@ -178,19 +178,26 @@
               <li v-for="item,index in searchData">
                 <a href="javascript:;" class="HotelRecommendDetalisListImgBox">
                   <img  width="262" height="175" v-lazy="item.ht_ht_ImageUrl">
-                  <em class="HotelRecommendDetalisListImgBoxsMask">查看更多图片</em>
+                  <em class="HotelRecommendDetalisListImgBoxsMask"  @click="goHotelDetails(item)">查看更多图片</em>
                 </a>
                 <div class="HotelRecommendDetalisListIntroduceBox">
                   <div class="HotelRecommendDetalisListIntroduceBoxTitle clearfix">
                     <span class="HotelRecommendDetalisListIntroduceBoxTitleNum">{{index+1}}</span>
                     <h4><a href="javascript:;" @click="goHotelDetails(item)">{{item.ht_ht_HotelName}}</a></h4>
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>
-                    <span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>
+                    <!--<span class="HotelRecommendDetalisListIntroduceBoxTitleType"> 豪华型</span>-->
+                    <!--<span class="HotelRecommendDetalisListIntroduceBoxTitleRenovation">2005年装修</span>-->
                   </div>
                   <p class="HotelRecommendDetalisListIntroduceBoxDescribe">
                     {{item.ht_ht_HotelAddress}}
                   </p>
-                  <a href="javascript:;">查看地图</a>
+
+                  <el-popover
+                    placement="right"
+                    trigger="click">
+                    <a href="javascript:;" slot="reference" style="padding: 10px 0 ;color: green;width: 60px" @click="lookMap(item)">查看地图</a>
+                    <div id="allmap"></div>
+
+                  </el-popover>
                   <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
                     <i class="Restaurant" title="餐厅"></i>
                     <i class="ParkingLot" title="停车场"></i>
@@ -204,7 +211,7 @@
                   </div>
                 </div>
                 <div class="HotelRecommendPrice">
-                  <strong class="HotelRecommendPriceMoney">¥<span>1642</span>起</strong>
+                  <strong class="HotelRecommendPriceMoney">¥<span>{{item.ht_ht_RecommendPrice}}</span>起</strong>
                   <div class="scoreDetails clearfix">
                     <span class="score">4.7/5分</span>
                     <div class="scoreDetailsContent">
@@ -218,7 +225,7 @@
                     </div>
                   </div>
                   <span class="commentNumber">来自<em>1111</em>条评论</span>
-                  <a href="javascript:;">查看详情</a>
+                  <a href="javascript:;"  @click="goHotelDetails(item)">查看详情</a>
                 </div>
               </li>
             </ul>
@@ -322,6 +329,7 @@
           //"ht_it_ID":"1",//推荐类型
           "ht_tt_ID":"",//主题
           //"ht_hd_ID":"1",//设施
+          sm_af_AreaID:'',
           "ht_rh_ID":"",//房间设施
           "page":"1", //页面编号  默认为 1
           "rows":"5",//单页显示数据数量
@@ -329,6 +337,8 @@
       }
     },
     created(){
+      let id= this.$route.params.id;
+      this.searchOptions.sm_af_AreaID = id;
       //初始化数据
       this.$store.commit('showLoading')
       this.initData().then(()=>{
@@ -337,6 +347,33 @@
       })
     },
     methods: {
+      //查询地图
+      searchMap(hotelModel) {
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(hotelModel.ht_ht_Longitude, hotelModel.ht_ht_Latitude);
+        var marker = new BMap.Marker(point);  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+        map.centerAndZoom(point, 20);
+        setTimeout(function(){
+          map.setZoom(14);
+        }, 2000);  //2秒后放大到14级
+        map.enableScrollWheelZoom(true);
+        var opts = {
+          width : 200,     // 信息窗口宽度
+          height: 100,     // 信息窗口高度
+          title : hotelModel.ht_ht_HotelName , // 信息窗口标题
+          enableMessage:true,//设置允许信息窗发送短息
+          message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
+        };
+        var infoWindow = new BMap.InfoWindow(`地址：${hotelModel.ht_ht_HotelAddress}`, opts);  // 创建信息窗口对象
+        marker.addEventListener("click", function(){
+          map.openInfoWindow(infoWindow,point); //开启信息窗口
+        });
+      },
+      //查看地图
+      lookMap(item){
+        this.searchMap(item)
+      },
       //分页
       handleCurrentChange(num){
         this.searchOptions.page = num;
@@ -717,13 +754,13 @@
     background-color: rgba(0, 0, 0, .5);
   }
 
-  .HotelRecommendDetalisListIntroduceBoxIconList > i {
-    float: left;
-    width: 24px;
-    height: 24px;
-    background: url("../../assets/img/hotel-facility.png") no-repeat;
-    margin-right: 5px;
-  }
+  /*.HotelRecommendDetalisListIntroduceBoxIconList > i {*/
+    /*float: left;*/
+    /*width: 24px;*/
+    /*height: 24px;*/
+    /*background: url("../../assets/img/hotel-facility.png") no-repeat;*/
+    /*margin-right: 5px;*/
+  /*}*/
 
   .HotelRecommendDetalisListIntroduceBox {
     width: 426px;
@@ -779,70 +816,19 @@
     margin-bottom: 8px;
   }
 
-  /*餐厅*/
-  .HotelRecommendDetalisListIntroduceBoxIconList > .Restaurant {
-    background-position: -432px 0;
-  }
 
-  /*停车场*/
-
-  .HotelRecommendDetalisListIntroduceBoxIconList > .ParkingLot {
-    background-position: -192px 0;
-  }
-
-  /*接机服务*/
-
-  .HotelRecommendDetalisListIntroduceBoxIconList > .meetPlaneService {
-    background-position: -240px 0;
-  }
-
-  /*洗衣服务*/
-
-  .HotelRecommendDetalisListIntroduceBoxIconList > .laundryService {
-    background-position: -312px 0;
-  }
-
-  /*游泳池*/
-
-  .HotelRecommendDetalisListIntroduceBoxIconList > .swimmingPool {
-    background-position: -336px 0;
-  }
-
-  /*健身房*/
-
-  .HotelRecommendDetalisListIntroduceBoxIconList > .Gym {
-    background-position: -96px 0;
-  }
-
-  /*会议室*/
-
-  .HotelRecommendDetalisListIntroduceBoxIconList > .ConferenceRoom {
-    background-position: -552px 0;
-  }
-
-  /*24小时热水*/
-
-  .HotelRecommendDetalisListIntroduceBoxIconList > .hotWater {
-    background-position: -504px 0;
-  }
-
-  /*WIFI*/
-
-  .HotelRecommendDetalisListIntroduceBoxIconList > .WiFi {
-    background-position: -168px 0;
-  }
 
   /*spa*/
 
-  .HotelRecommendDetalisListIntroduceBoxIconList > .spa {
-    background-position: -72px 0;
-  }
+  /*.HotelRecommendDetalisListIntroduceBoxIconList > .spa {*/
+    /*background-position: -72px 0;*/
+  /*}*/
 
-  /*公交*/
+  /*!*公交*!*/
 
-  .HotelRecommendDetalisListIntroduceBoxIconList > .transit {
-    background-position: -408px 0;
-  }
+  /*.HotelRecommendDetalisListIntroduceBoxIconList > .transit {*/
+    /*background-position: -408px 0;*/
+  /*}*/
 
   .HotelRecommendPrice {
     padding-top:3px;

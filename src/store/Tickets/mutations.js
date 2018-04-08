@@ -60,5 +60,11 @@ export default {
   },
   initTicketType_PriceMX(state,data){
     state.ticketType_PriceMXList = data;
+  },
+  initTicketOrderDetail(state,obj){
+    state.ticketOrderDetail = obj
+  },
+  initAdmissionTicketMore(state,data){
+    state.admissionTicketMoreList = data;
   }
 }

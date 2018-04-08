@@ -3,12 +3,16 @@
     <div class="wrapContent">
       <div class="titleTop clearfix">
         <div class="title">
-          <h4>{{hotelModel.ht_ht_HotelName}}<span>豪华型</span></h4>
+          <h4>{{hotelModel.ht_ht_HotelName}}</h4>
+          <!--<span>豪华型</span>-->
           <strong>{{hotelModel.ht_ht_HotelAddress}}</strong>
+          <div class="HotelRecommendDetalisListIntroduceBoxIconList clearfix">
+            <i :class="item.className" :title="item.title" v-for="item in hotelIconList"></i>
+          </div>
         </div>
         <div class="priceAndSubmit">
           <strong>￥<span>2156</span> 起</strong>
-          <a href="javascript:;">开始预订</a>
+          <a href="#h1">开始预订</a>
         </div>
       </div>
       <div class="content clearfix">
@@ -33,7 +37,7 @@
             <!--</div>-->
           </div>
           <!--酒店介绍-->
-          <div class="hotelInfromation">
+          <div class="hotelInfromation"  id="h1">
             <!--导航-->
             <div class="hotelInfromationNav clearfix">
               <a v-for="item,index in hotelInfromationNav" href="javascript:;" @click="menuClick(index)"
@@ -161,14 +165,14 @@
                             trigger="hover"
                             class="cancelPolicy">
                             <div slot>
-                              订单提交后可随时取消，途牛不收取任何费用。
+                              订单提交后可随时取消，惠乐游不收取任何费用。
                             </div>
                             <span  slot="reference"><span>{{v.ht_rpp_CancelType}}</span><a href="javascript:;">立即确认</a></span>
                           </el-popover>
                           <!--<span class="cancelPolicy"><span>不可取消</span><a href="javascript:;">立即确认</a></span>-->
                           <span class="price">￥<em>{{v.ht_rpp_ProductPrice}}</em></span>
                           <span class="submit"><a href="javascript:;"
-                                                  @click="goHotelOrder">预定</a><em>在线付(少量)</em></span>
+                                                  @click="goHotelOrder(v,item)">预定</a><em>在线付(少量)</em></span>
                         </div>
                       </li>
                       <!--<li class="more">-->
@@ -242,6 +246,28 @@
             <div class="facilitiesServices" v-show="showList[1].isShow">
               <strong class="strongFont">设施服务</strong>
               <ul>
+                <li>
+                  <div class="couponsActive clearfix">
+                    <span></span>
+                    <h5>基本信息</h5>
+                  </div>
+                  <p>{{hardServiceObj.ht_hs_BasicInfo}}</p>
+                </li>
+                <li>
+                  <div class="couponsActive clearfix">
+                    <span></span>
+                    <h5>酒店特色</h5>
+                  </div>
+                  <p>{{hardServiceObj.ht_hs_HotelSpecial}}</p>
+                </li>
+                <li>
+                  <div class="couponsActive clearfix">
+                    <span></span>
+                    <h5>停车服务</h5>
+                  </div>
+                  <p v-if="hardServiceObj.ht_hs_StopService">{{hardServiceObj.ht_hs_StopService}}</p>
+                  <p v-else>暂无数据</p>
+                </li>
                 <li  v-for="item in hotelDetalis.HardServiceHard">
                   <div class="couponsActive clearfix">
                     <span></span>
@@ -363,6 +389,17 @@
         <div class="pricePlace"></div>
       </div>
     </div>
+    <el-dialog
+      title="温馨提示"
+      :visible.sync="centerDialogVisible"
+      width="30%"
+      center>
+      <span style="color: #f60">请先登录!</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="centerDialogVisibleSubmit">确 定</el-button>
+  </span>
+    </el-dialog>
 
   </div>
 </template>
@@ -373,11 +410,19 @@
 
     data() {
       return {
+        centerDialogVisible:false,
         total:0,
         begin:'',
         end:'',
         isLoading:false,
         value:'',
+        icons:[
+          {
+            id:'',
+            name:'',
+            className:''
+          }
+        ],
         showList: [
           {
             id: 0,
@@ -430,13 +475,15 @@
       'hotelDetalis',
       'hotelModel',
       'hotelPolicy',
+      'hardServiceObj',
       'hotelRoom',
       'hotelImage',
       'exteriorList',
       'publicAreasList',
       'theLobbyList',
       'restaurantList',
-      'searchHotelRoomFilterObj'
+      'searchHotelRoomFilterObj',
+      'hotelIconList'
     ]),
     created(){
       let id= this.$route.params.id;
@@ -448,6 +495,10 @@
       })
     },
     methods:{
+      //登录确定
+      centerDialogVisibleSubmit() {
+        this.$router.push({name: 'AdminLogin'});
+      },
       //分页
       handleCurrentChange(num){
         this.searchRoomInfo({
@@ -582,14 +633,24 @@
           title : hotelModel.ht_ht_HotelName , // 信息窗口标题
           enableMessage:true,//设置允许信息窗发送短息
           message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
-        }
+        };
         var infoWindow = new BMap.InfoWindow(`地址：${hotelModel.ht_ht_HotelAddress}`, opts);  // 创建信息窗口对象
         marker.addEventListener("click", function(){
           map.openInfoWindow(infoWindow,point); //开启信息窗口
         });
       },
       //跳转到酒店订单页面
-      goHotelOrder() {
+      goHotelOrder(v,item) {
+        let user = sessionStorage.getItem('user');
+        if(!user){
+          this.centerDialogVisible = true;
+          return;
+        }
+        v.RoomInfo = item.RoomInfo;
+        v.hotelName = this.hotelModel.ht_ht_HotelName;
+        v.hotelAddress = this.hotelModel.ht_ht_HotelAddress;
+        v.sm_ai_AgentInfoID=this.hotelModel.sm_ai_AgentInfoID;
+        sessionStorage.setItem('hotelOrderReservations',JSON.stringify(v));
         this.$router.push({name: 'HotelOrder'})
       }
     },

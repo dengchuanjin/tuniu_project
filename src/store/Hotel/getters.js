@@ -16,4 +16,9 @@ export default {
   searchHotelRoomFilterObj: state => state.searchHotelRoomFilterObj,
   hotelRoom: state => state.hotelRoom,
   publicAreasList: state => state.publicAreasList,
+  hotelOrderDetail: state => state.hotelOrderDetail,
+  qLCityData: state => state.qLCityData,
+  szCityData: state => state.szCityData,
+  hotelIconList: state => state.hotelIconList,
+  hardServiceObj: state => state.hardServiceObj,
 }

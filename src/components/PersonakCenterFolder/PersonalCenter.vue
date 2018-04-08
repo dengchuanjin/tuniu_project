@@ -6,7 +6,7 @@
         <div class="personakCenterWrapHeaderContent clearfix">
           <div class="personakCenterWrapHeaderContentLogo">
             <img src="../../assets/img/center.png" width="60" height="60">
-            <router-link to="AgenciesHome" tag="strong" style="cursor: pointer">惠乐游个人中心</router-link>
+            <router-link to="/Comment/agenciesHome" tag="strong" style="cursor: pointer">惠乐游个人中心</router-link>
           </div>
           <ul class="personakCenterWrapHeaderContentNav">
             <li>
@@ -17,7 +17,7 @@
             </li>
           </ul>
           <div class="goHomePage">
-            <router-link to="HueiLeYouTourHomePage">返回首页</router-link>
+            <router-link to="/Comment/agenciesHome">返回首页</router-link>
           </div>
         </div>
       </div>

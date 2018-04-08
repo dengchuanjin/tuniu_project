@@ -58,4 +58,63 @@ export default {
   .el-loading-spinner .circular {
     margin-left: 50%;
   }
+  .HotelRecommendDetalisListIntroduceBoxIconList > i {
+    float: left;
+    width: 24px;
+    height: 24px;
+    background: url("./assets/img/hotel-facility.png") no-repeat;
+    margin-right: 5px;
+  }
+  /*餐厅*/
+  .HotelRecommendDetalisListIntroduceBoxIconList > .Restaurant {
+    background-position: -432px 0;
+  }
+
+  /*停车场*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .ParkingLot {
+    background-position: -192px 0;
+  }
+
+  /*接机服务*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .meetPlaneService {
+    background-position: -240px 0;
+  }
+
+  /*洗衣服务*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .laundryService {
+    background-position: -312px 0;
+  }
+
+  /*游泳池*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .swimmingPool {
+    background-position: -336px 0;
+  }
+
+  /*健身房*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .Gym {
+    background-position: -96px 0;
+  }
+
+  /*会议室*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .ConferenceRoom {
+    background-position: -552px 0;
+  }
+
+  /*24小时热水*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .hotWater {
+    background-position: -504px 0;
+  }
+
+  /*WIFI*/
+
+  .HotelRecommendDetalisListIntroduceBoxIconList > .WiFi {
+    background-position: -168px 0;
+  }
 </style>

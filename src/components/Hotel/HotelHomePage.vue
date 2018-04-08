@@ -7,8 +7,8 @@
         <div class="HotelHomePageWrapHeaderCarouselFigure">
           <div class="block">
             <el-carousel height="550px">
-              <el-carousel-item v-for="item in 4" :key="item">
-                <a href="javascript:;"></a>
+              <el-carousel-item v-for="item in images" :key="item">
+                <a href="javascript:;" :style="{background:'url('+item+')'}"></a>
               </el-carousel-item>
             </el-carousel>
           </div>
@@ -123,7 +123,7 @@
               <strong>HOT DESTINATION</strong>
             </div>
             <ul class="exploreSeasonHotPictureList clearfix">
-              <li v-for="item,index in hotDestinationList">
+              <li v-for="item,index in hotDestinationList" @click="changeHotDestination(item)">
                 <img v-lazy="item.ht_hl_HotelImage"
                      :class="{one:index==0,two:index==1,three:index==2,four:index==3,five:index==4,six:index==5,seven:index==6 }"
                      height="250">
@@ -154,6 +154,7 @@
     ]),
     data() {
       return {
+        images:['https://m2.tuniucdn.com/fb2/t1/G5/M00/97/93/Cii-tFqyZUKII51oAAzZeQoA-DEAAEjjAGU224ADNmR40.jpeg','http://img4.tuniucdn.com/hotelnewpc/banner/guilin.jpg','http://img4.tuniucdn.com/hotelnewpc/banner/chongqing.jpg','https://m.tuniucdn.com/fb2/t1/G5/M00/99/15/Cii-tFqzo6qIJU2FAArGQ_6bDWIAAEmkQFbJpEACsZb91.jpeg'],
         radio: '1',
         hotPlayNum: 0,
       }
@@ -161,7 +162,7 @@
     methods: {
       //鼠标移入
       hoverRecommendType(index){
-        let thisLi = this.$refs.recommendType.children[index]
+        let thisLi = this.$refs.recommendType.children[index];
         let selectedCharacteristicRecommendImageMask = this.$refs.recommendType.children[index].querySelector('.selectedCharacteristicRecommendImageMask');
         selectedCharacteristicRecommendImageMask.style.display = 'none';
         thisLi.style.width = '390px';
@@ -218,7 +219,14 @@
       changeHotlImg(item) {
         this.$router.push({name: 'HotelSearchMore', params: {id: item.sm_af_AreaID}})
       },
+      //点击当季热门
+      changeHotDestination(item){
+        this.$router.push({name:'HotelDetalis', params: {id: item.ht_ht_hotelID}})
+      },
       changeRecommendType(index) {
+        if (index == 0) {
+          this.$router.push({name: 'HotelQingLv'})
+        }
         if (index == 1) {
           this.$router.push({name: 'HotelAncientTown'})
         }
@@ -230,9 +238,9 @@
         }
         if (index == 5) {
           this.$router.push({name: 'HotelLovers'})
-          if (index == 4) {
-            this.$router.push({name: 'HotelInn'})
-          }
+        }
+        if (index == 4) {
+          this.$router.push({name: 'HotelInn'})
         }
       },
     },

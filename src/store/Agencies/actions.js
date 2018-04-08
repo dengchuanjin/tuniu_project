@@ -534,7 +534,7 @@ export default {
       .then(data => {
         var data = data.data;
         if (Number(data.resultcode) == 200) {
-          relove(data.data)
+          relove(data.resultcontent)
         } else {
           reject(data.resultcontent)
         }

@@ -58,7 +58,7 @@
               </li>
             </ul>
             <div class="AdmissionTickeAsightsAroundTitelMore">
-              <router-link to="TicketsDetail">更多景点</router-link>
+              <a href="javascript:;" @click="MoreSite">更多景点</a>
             </div>
           </div>
           <!--类型与展示-->
@@ -141,10 +141,11 @@
           <div class="overseasScenicSpotsTitle clearfix">
             <h2>境外景点</h2>
             <ul class="overseasScenicSpotsTitleNavList">
-              <li @mouseover="clickOutList(item,index)" v-for="item,index in outList"><a href="javascript:;" :class="{active:index==m}">{{item.greatName}}</a></li>
+              <li @mouseover="clickOutList(item,index)" v-for="item,index in outList"><a href="javascript:;" :class="{active:index==m}">{{item.tm_ts_GreatName}}</a></li>
             </ul>
             <div class="overseasScenicSpotsTitleMore">
-              <a href="javascript:;">更多景点></a>
+              <a href="javascript:;" @click="OutsideSite">更多景点</a>
+              <!--<router-link to="/comment/AdmissionTicketMore">更多景点</router-link>-->
             </div>
           </div>
           <!--境外景点展示-->
@@ -203,6 +204,7 @@
     ]),
     data() {
       return {
+        id:'',
         m:0,
         n:0,
         images:[
@@ -216,7 +218,7 @@
     created(){
       //获取所有省
       let options = {
-        "areaPid": 0
+        "areaPid": 3337
       };
 
 //      this.$store.commit('showLoading')
@@ -230,6 +232,10 @@
             }
             return false
           })[0].sm_af_AreaID
+          this.id = id
+          this.initData(id).then(() => {
+//          this.$store.commit('hideLoading');
+          })
           let cityOptions = {
             "areaPid": id
           };
@@ -238,25 +244,27 @@
             this.$store.commit('initCityList',data)
           })
         })
-
-
-        this.initData(name).then(() => {
-//          this.$store.commit('hideLoading');
-        })
       })
     },
     methods: {
+      //点击更多景点
+      MoreSite(){
+        this.$router.push({name: 'AdmissionTicketMore', params: {id: this.id}})
+      },
+      OutsideSite(){
+        this.$router.push({name: 'AdmissionTicketMore', params: {id: 32}})
+      },
       //点击上面的周边城市
       clickCityList(item){
-        this.$router.push({name: 'AdmissionTicketMore'})
+        this.$router.push({name: 'AdmissionTicketMore', params: {id: item.sm_af_AreaID}})
       },
       //点击上面的热门城市
       clickHotCityList(item){
-        this.$router.push({name: 'AdmissionTicketMore'})
+        this.$router.push({name: 'AdmissionTicketMore', params: {id: item.sm_af_AreaID}})
       },
       //点击上面的游玩主题
       clickThemeTypeNameList(item){
-        this.$router.push({name: 'AdmissionTicketMore'})
+        this.$router.push({name: 'AdmissionTicketMore', params: {id: item.sm_af_AreaID}})
       },
       //点击轮播图
       clickTopBigImageList(item){
@@ -295,14 +303,14 @@
           });
         })
       },
-      async initData(name) {
+      async initData(id) {
         let initOptions = {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "operateUserID": "",
           "operateUserName": "",
           "pcName": "",
-          "provice": name
+          "tm_ts_ProviceID": id
         };
         await this.$store.dispatch('initAdmissionTicketHomePage',initOptions)
       },
