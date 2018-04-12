@@ -340,6 +340,11 @@
   padding-left: 20px;
 }
 
+.detailsOfTheScenicSpots > div {
+  margin-top:10px;
+  font: 14px/1.5 "微软雅黑";
+}
+
 /*交通信息*/
 .trafficInformation {
   padding: 20px;

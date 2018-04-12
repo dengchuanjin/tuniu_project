@@ -85,7 +85,7 @@
                         <!--<strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;">1</strong>-->
                       </li>
                       <li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item in arr4">
-                        <span style="color: #333; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item}}</span>
+                        <span style="color: #333; padding-left: 10px; font: 14px/2 '微软雅黑';">{{item==day.d?"今天":item}}</span>
                         <!--<strong style="color: #f60; font: 14px/2 '微软雅黑'; display: block; text-align: center;">1</strong>-->
                       </li>
                       <li style="float: left;width:88px;height:62px;box-shadow: 0 0 1px #ccc inset;" v-for="item,index in arr3" :class="{active:index==n}" @click="clickDate(item,index)">
@@ -225,7 +225,7 @@
         this.$router.push({name:'AdminLogin'})
         return
       }
-      this.day.d = new Date().getDate()
+      this.day.d = new Date().getDate();
       this.id = this.$route.params.id;
       let month = this.getNum(new Date().getMonth()+1);
       this.m = new Date().getMonth()+1;
@@ -246,6 +246,7 @@
         }
 
       })
+      //获取票板信息
     },
     methods: {
       handleChange(value) {
@@ -286,7 +287,8 @@
             "tm_or_Remark": "",
           },
           "personInfo": this.arr
-        }
+        };
+        console.log(options)
         this.$store.commit('showLoading');
         this.$store.dispatch('initTicketPay',options)
         .then((data)=>{
@@ -353,10 +355,9 @@
               this.arr1.push(topMonth - (this.getWeek(newYear, newMonth) - i))
             } else if (v > this.getDates(newYear, newMonth)) {
               this.arr2.push(v - this.getDates(newYear, newMonth))
-            } else if (v == new Date().getDate() && newYear == new Date().getFullYear() && newMonth == new Date().getMonth()) {
+            } else if (v == new Date().getDate() && newYear == new Date().getFullYear() && newMonth == (new Date().getMonth()+1)) {
               newArr.push(v)
-            }
-            else {
+            }else {
               if(data.length){
                 if (v < data[0].day) {
                   this.arr4.push(v)
@@ -411,9 +412,6 @@
         }
         let data = await this.$store.dispatch('initTicketsReserveDate',options)
         return data
-      },
-      search() {
-        this.initData()
       },
       //获取周数
       getWeek(year, month) {

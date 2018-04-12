@@ -54,7 +54,6 @@
             <ul class="AdmissionTickeAsightsAroundTitelList">
               <li v-show="nearList.length" v-for="item,index in nearList" @mouseover="clickTourSiteMXList(item,index)">
                 <a href="javascript:;" :class="{active:index==n}">{{item.hotcity}}</a>
-
               </li>
             </ul>
             <div class="AdmissionTickeAsightsAroundTitelMore">
@@ -104,7 +103,7 @@
                     <span>￥{{item.tm_ts_SuggestPrice}}起</span>
                   </div>
                 </router-link>
-                <!--<li v-for="item in adminNearTickeFilterObj.hcTourSiteList">-->
+                <!--<li v-for="item in admAdmissionTickeAsightsAroundTitel inNearTickeFilterObj.hcTourSiteList">-->
                   <!--&lt;!&ndash;img部分&ndash;&gt;-->
                   <!--<div class="AdmissionTickeAsightsAroundContentShowImgBox">-->
                     <!--<img  width="188" height="110" v-lazy="item.tm_ts_ShowImage[0]">-->
@@ -206,13 +205,7 @@
       return {
         id:'',
         m:0,
-        n:0,
-        images:[
-          'https://m4.tuniucdn.com/fb2/t1/G5/M00/73/0F/Cii-slqRLoKIPikTAAMQgvrp_I8AADocAJjRFMAAxCa93.jpeg',
-          'https://m3.tuniucdn.com/fb2/t1/G5/M00/82/35/Cii-slqfkUOITMiUAAMTI0E7wUIAAD94AGHIycAAxM718.jpeg',
-          'https://m4.tuniucdn.com/fb2/t1/G5/M00/78/99/Cii-tFqWXo-Ib6cEAAMKGxjhV-AAADvkwBj05UAAwoz83.jpeg',
-          'https://m.tuniucdn.com/fb2/t1/G5/M00/5F/05/Cii-s1p9EzuID3bDAAPTV0ruXhQAADTPQEqPtYAA9Nv34.jpeg'
-        ]
+        n:0
       }
     },
     created(){

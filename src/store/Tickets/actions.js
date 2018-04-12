@@ -13,7 +13,6 @@ export default {
       .then(data => {
         var data = data.data;
         if (Number(data.resultcode) == 200) {
-
           // 身边景点
           let arr = data.data.nearList;
           for (var i = 0; i < arr.length; i++) {

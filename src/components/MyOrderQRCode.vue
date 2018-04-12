@@ -13,7 +13,7 @@
         <!--内容-->
         <section class="huiLeYouCashierWrapContent">
           <!--logo-->
-          <div class="huiLeYouCashierWrapContentTitle clearfix">
+          <div class="huiLeYouCashierWrapContentTitle clearfix" @click="goHomePage">
             <img src="../assets/img/center.png" width="70" height="50">
             <strong>收银台</strong>
           </div>
@@ -105,6 +105,10 @@
       changePay(){
         this.$router.push({name:'AgenciesHome'})
         window.location.reload()
+      },
+      //返回首页
+      goHomePage(){
+        this.$router.push({name:'AgenciesHome'})
       }
     },
     mounted(){
